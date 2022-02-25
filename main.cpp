@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 11:19:06 by tomartin          #+#    #+#             */
-/*   Updated: 2022/02/25 11:34:19 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:53:06 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(void)
 {
 	stack<int>	num;
 
-	std::cout << "empy = " << num.empy() << std::endl;
+	std::cout << "empy = " << num.empty() << std::endl;
 
 	for(int i = 0; i < 10; i++)
 	{
@@ -31,6 +31,9 @@ int main(void)
 	std::cout << "size = " << num.size() << std::endl;
 	std::cout << "top = " << num.top() << std::endl;
 	stack<int> other(num);
-	for (int i = 0; i < other.size(); i++)
-		std::cout << "other = " << num[i] << std::endl;
+	for (; !other.empty(); )
+	{
+		std::cout << "other.top = " << other.top() << std::endl;
+		other.pop();
+	}
 }
