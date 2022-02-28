@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2022/02/25 11:30:51 by tomartin         ###   ########.fr        #
+#    Updated: 2022/02/28 09:39:56 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,13 @@ FLAGS = -Wall -Wextra -Werror -O3 -g3 -fsanitize=address
 # Folders
 OBJ_DIR = ./obj/
 SCR_DIR = ./
-INC_DIR = ./stak/
+STACK_DIR = ./stak/ 
+VECTOR_DIR = ./vector/
 
 # Source files and includes
 SRC_FILES = main.cpp
-INC_FILES = stack.hpp
+STACK_FILES = stack.hpp
+VECTOR_FILES = 
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.cpp=.o)
@@ -44,6 +46,8 @@ OBJ_FILES = $(SRC_FILES:.cpp=.o)
 # Paths
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+STACK = $(addprefix $(STACK_DIR), $(STACK_FILES))
+VECTOR = $(addprefix $(VECTOR_DIR), $(VECTOR_FILES))
 
 # all rule
 all: obj $(NAME) 
@@ -52,7 +56,12 @@ obj:
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp 
-	@$(CXX) -I $(INC_DIR) -o $@ -c $<
+	@$(CXX) -o $@ -c $<
+	#@$(CXX) -I $(INC_DIR) -o $@ -c $<
+$(OBJ_DIR)%.o: $(STACK_DIR)%.cpp 
+	@$(CXX) -o $@ -c $<
+$(OBJ_DIR)%.o: $(VECTOR_DIR)%.cpp 
+	@$(CXX) -o $@ -c $<
 
 # Compiling
 $(NAME): $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:24:43 by tomartin          #+#    #+#             */
-/*   Updated: 2022/02/25 11:55:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/02/28 09:53:26 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ class stack
 		//Member Functions
 		bool			empty() const {return _c.empty();}
 		size_type		size() const {return _c.size();}
-		reference		top() {return _c.begin();}
-		const_reference	top() const {return _c.begin();}
-		void			push(const value_type &e) {_c.push_back(&e);}
+		reference		top() {return _c.back();}
+		const_reference	top() const {return _c.back();}
+		void			push(const value_type &e) {_c.push_back(e);}
 		void			pop() {_c.pop_back();}
-
-
 };
 
 #endif
