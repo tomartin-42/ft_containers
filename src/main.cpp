@@ -6,11 +6,11 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 11:19:06 by tomartin          #+#    #+#             */
-/*   Updated: 2022/02/25 11:53:06 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/02/28 10:47:57 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./stack/stack.hpp"
+#include "stack.hpp"
 #include <iostream>
 
 int main(void)
