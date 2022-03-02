@@ -33,7 +33,7 @@ class vector
 		{
 		}
 
-		//fill 
+/*		//fill 
 		explicit vector (size_type n, const value_type& val = value_type(),
                  const allocator_type& alloc = allocator_type())
 
