@@ -3,12 +3,12 @@
 
 #include "nullptr.hpp"
 
-template <class T, class alloc = allocator<T>i > 
+template <class T, class alloc = allocator<T> > 
 class vector
 {
 	public:
-		typedef	alloc														allocator_type;
 		typedef T															value_type;
+		typedef	alloc														allocator_type;
 		typedef typename alloc_type::reference								reference;
 		typedef typename alloc_type::const_eference							const_reference;
 		typedef typename alloc_type::pointer								pointer;
@@ -21,10 +21,10 @@ class vector
 		typedef typename allocator_type::size_type							size_type;
 
 	private:
-		pointer     						_begin;
+		allocator_type						_alloc;
+		pointer     						_start;
 		pointer     						_end;
-		size_type   						_size;
-		std::pair<pointer, allocator_type> 	_end_cap;
+		pointer								_end_capacity;
 		
 		//constructors
 		//empty
@@ -33,13 +33,25 @@ class vector
 		{
 		}
 
-/*		//fill 
+		//fill 
 		explicit vector (size_type n, const value_type& val = value_type(),
                  const allocator_type& alloc = allocator_type())
+			: _start(ft::nullptr_t), _end(_start), _size(n)
+		{
+			this->_start = _alloc.allocate(n);
+			this->_end_capacity = this->_start + n;
+			for(int i = 0; i < n; i++)
+			{
+				_alloc.construct((this->_start + i), val);
+				this->_end++;
+			}
+		}
 
-		//range
+/*		//range
 		vector (InputIterator first, InputIterator last, 
 				const allocator_type& alloc = allocator_type())
+		{
+
 
 		//copy
 		vector (const vector& x)
