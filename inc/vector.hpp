@@ -25,6 +25,7 @@ class vector
 		pointer     						_start;
 		pointer     						_end;
 		pointer								_end_capacity;
+
 		
 		//constructors
 		//empty
@@ -34,8 +35,8 @@ class vector
 		}
 
 		//fill 
-		explicit vector (size_type n, const value_type& val = value_type(),
-                 const allocator_type& alloc = allocator_type())
+		explicit vector (size_type n, const value_type& val = value_type(), 
+				const allocator_type& alloc = allocator_type())
 			: _start(ft::nullptr_t), _end(_start), _size(n)
 		{
 			this->_start = _alloc.allocate(n);
@@ -48,8 +49,7 @@ class vector
 		}
 
 /*		//range
-		vector (InputIterator first, InputIterator last, 
-				const allocator_type& alloc = allocator_type())
+		vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
 		{
 
 

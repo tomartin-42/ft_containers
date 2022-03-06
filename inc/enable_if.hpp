@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 10:29:57 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/05 18:21:16 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:03:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ namespace ft
 	{
 		typedef T type;
 	}
+
 } // end namespace ft
+
 #endif

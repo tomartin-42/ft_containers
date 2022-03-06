@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 17:45:44 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/05 18:19:42 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/06 15:49:12 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 namespace ft
 {
 	//Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2)
-	//
 	template <class InputIterator1, class InputIterator2>
  	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, 
 			InputIterator2 first2, InputIterator2 last2)
