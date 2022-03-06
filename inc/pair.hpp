@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 19:18:34 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/05 20:14:53 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/06 14:57:52 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,49 @@ namespace ft
 			}
 	};
 
+	//creates a pair object of type, defined by the argument types
 	template <class T1,class T2>
 	pair<T1,T2> make_pair (T1 x, T2 y)
 	{
 		return (pair<T1,T2>(x,y));
 	}
+	
+	//operators
+	template <class T1, class T2>
+	bool operator == (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
+	{
+		return x.first == y.first && x.second == y.second;
+	}
 
+	template <class T1, class T2>
+	bool operator != (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
+	{
+		return !(x == y);
+	}
+
+	template <class T1, class T2>
+	bool operator < (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
+	{
+		return (x.first < y.first || (!(y.first < x.first) && x.second < y.second));
+	}
+
+	template <class T1, class T2>
+	bool operator > (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
+	{
+		return (x.first > y.first || (!(y.first > x.first) && x.second > y.second));
+	}
+
+	template <class T1, class T2>
+	bool operator <= (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
+	{
+		return !(x > y); 
+	}
+
+	template <class T1, class T2>
+	bool operator >= (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
+	{
+		return !(x < y); 
+	}
 
 } //end namespace ft
 #endif
