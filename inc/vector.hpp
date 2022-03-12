@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
+/*   Updated: 2022/03/12 19:52:09 by tomartin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
@@ -15,8 +27,8 @@ class vector
 		typedef typename alloc_type::const_pointer							const_pointer;
 		typedef std::random_access_iterator<value_type>						iterator;
 		typedef std::random_access_iterator<const value_type>				const_iterator;
-		typedef std::random_access_iterator<iterator>						reverse_iterator;
-		typedef std::random_access_iterator<const iterator>					const_reverse_iterator;
+		typedef std::reverse_iterator<iterator>								reverse_iterator;
+		typedef std::reverse_iterator<const iterator>						const_reverse_iterator;
 		typedef typename std::iterator_traits<iterator>::difference_type 	difference_type;
 		typedef typename allocator_type::size_type							size_type;
 
@@ -35,8 +47,7 @@ class vector
 		}
 
 		//fill 
-		explicit vector (size_type n, const value_type& val = value_type(), 
-				const allocator_type& alloc = allocator_type())
+		explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 			: _start(ft::nullptr_t), _end(_start), _size(n)
 		{
 			this->_start = _alloc.allocate(n);
@@ -48,8 +59,9 @@ class vector
 			}
 		}
 
-/*		//range
-		vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+		//range
+/*		template <class InputIterator>
+        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
 		{
 
 
