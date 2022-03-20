@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/19 18:46:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/20 20:22:26 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ namespace ft
 			typedef T															value_type;
 			typedef	alloc														alloc_type;
 			typedef typename alloc_type::reference								reference;
-			//typedef typename alloc_type::const_eference							const_reference;
+			typedef typename alloc_type::const_reference							const_reference;
 			typedef typename alloc_type::pointer								pointer;
 			typedef typename alloc_type::const_pointer							const_pointer;
 			typedef std::iterator<std::random_access_iterator_tag, value_type>		iterator;
@@ -49,7 +49,7 @@ namespace ft
 			//constructors==============================================================================
 		public:
 			//empty
-			//explicit vector (const alloc_type& alloc = alloc_type()) 
+		//	explicit vector (const alloc_type& _alloc = alloc_type()) 
 			explicit vector () 
 				: _start(ft::nullptr_t), _end(_start), _size(0)
 			{}
@@ -60,7 +60,7 @@ namespace ft
 			{
 				this->_start = _alloc.allocate(n);
 				this->_end_capacity = this->_start + n;
-				for(int i = 0; i < n; i++)
+				for(unsigned long i = 0; i < n; i++)
 				{
 					_alloc.construct((this->_start + i), val);
 					this->_end++;
@@ -71,7 +71,6 @@ namespace ft
 	/*		template <class InputIterator>
 	        vector (InputIterator first, InputIterator last, const alloc_type& alloc = alloc_type())
 			{
-	
 	
 			//copy
 			vector (const vector& x)
