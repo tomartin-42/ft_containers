@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/21 13:20:22 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:28:45 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,15 @@ namespace ft
 			//constructors==============================================================================
 		public:
 			//empty
-			explicit vector (const alloc_type& _alloc = alloc_type()) 
+			explicit vector (const alloc_type& alloc_t = alloc_type()) 
 		//	explicit vector () 
-				: _start(ft::nullptr_t), _end(_start), _size(0)
-			{
-				(void)_alloc;
-			}
+				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(0)
+			{}
 	
 			//fill 
 			explicit vector (size_type n, const value_type& val = value_type(), const alloc_type& alloc_t = alloc_type())
-				: _start(ft::nullptr_t), _end(_start), _size(n)
+				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(n) 
 			{
-				(void)alloc_t;
 				this->_start = _alloc.allocate(n);
 				this->_end_capacity = this->_start + n;
 				for(unsigned long i = 0; i < n; i++)
