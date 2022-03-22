@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/21 13:28:45 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:46:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,16 @@ namespace ft
 			pointer								_end_capacity;	// where end the prealocate data //
 			size_type							_size;			// number of alocate data //
 			
-			//constructors==============================================================================
+			//*********************************constructors***********************************
 		public:
-			//empty
+			//=========================empty=========================
 			explicit vector (const alloc_type& alloc_t = alloc_type()) 
-		//	explicit vector () 
-				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(0)
-			{}
-	
-			//fill 
+				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(0), _end_capacity(_end)
+			{
+			}
+
+
+			//=========================fill========================= 
 			explicit vector (size_type n, const value_type& val = value_type(), const alloc_type& alloc_t = alloc_type())
 				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(n) 
 			{
@@ -67,12 +68,12 @@ namespace ft
 				}
 			}
 	
-			//range
-	/*		template <class InputIterator>
-	        vector (InputIterator first, InputIterator last, const alloc_type& alloc = alloc_type())
-			{
+			//=========================range=========================
+			template <class InputIterator>
+	        vector (InputIterator first, InputIterator last, const alloc_type& alloc_t = alloc_type())
+			{}
 	
-			//copy
+	/*		//copy
 			vector (const vector& x)
 	*/
 	};// end vector class
