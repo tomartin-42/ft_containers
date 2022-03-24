@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/22 11:46:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/24 13:51:33 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "nullptr.hpp"
 #include <memory>
+#include <iterator>
 
 namespace ft
 {
@@ -25,11 +26,13 @@ namespace ft
 			typedef T															value_type;
 			typedef	alloc														alloc_type;
 			typedef typename alloc_type::reference								reference;
-			typedef typename alloc_type::const_reference							const_reference;
+			typedef typename alloc_type::const_reference						const_reference;
 			typedef typename alloc_type::pointer								pointer;
 			typedef typename alloc_type::const_pointer							const_pointer;
-			typedef std::iterator<std::random_access_iterator_tag, value_type>		iterator;
-			typedef std::iterator<std::random_access_iterator_tag, const value_type>	const_iterator;
+			//typedef std::iterator<std::random_access_iterator_tag, value_type>		iterator;
+			//typedef std::iterator<std::random_access_iterator_tag, const value_type>	const_iterator;
+			typedef std::iterator<std::random_access_iterator_tag, pointer>		iterator;
+			typedef std::iterator<std::random_access_iterator_tag, const_pointer>	const_iterator;
 			typedef std::reverse_iterator<iterator>								reverse_iterator;
 			typedef std::reverse_iterator<const iterator>						const_reverse_iterator;
 			//typedef ft::random_access_iterator<value_type>					iterator;
@@ -45,17 +48,18 @@ namespace ft
 			pointer     						_end;			// where init empty data //
 			pointer								_end_capacity;	// where end the prealocate data //
 			size_type							_size;			// number of alocate data //
+
+
+			//************************************************************************************************************	
+			//********************************************constructors****************************************************
 			
-			//*********************************constructors***********************************
 		public:
-			//=========================empty=========================
+//=========================empty=========================
 			explicit vector (const alloc_type& alloc_t = alloc_type()) 
-				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(0), _end_capacity(_end)
-			{
-			}
+				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _end_capacity(_end), _size(0)
+			{}
 
-
-			//=========================fill========================= 
+//=========================fill========================= 
 			explicit vector (size_type n, const value_type& val = value_type(), const alloc_type& alloc_t = alloc_type())
 				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(n) 
 			{
@@ -68,14 +72,38 @@ namespace ft
 				}
 			}
 	
-			//=========================range=========================
-			template <class InputIterator>
+//=========================range=========================
+	/*		template <class InputIterator>
 	        vector (InputIterator first, InputIterator last, const alloc_type& alloc_t = alloc_type())
-			{}
-	
-	/*		//copy
-			vector (const vector& x)
+				: _alloc(alloc_t) 
+			{
+				this->_size(std::distance(first, last));
+			}
 	*/
+//=========================copy=========================
+			vector (const vector& other)
+				: _alloc(other._alloc), _start(other._start), _end(other._end), _end_capacity(other._end_capacity), _size(other._size)
+			{}
+
+//=========================destructor=========================
+			~vector ()
+			{
+				this->_alloc.deallocate(this->_start, this->_size);
+			}
+
+			//************************************************************************************************************//	
+			//*****************************************member fuctions****************************************************//	
+			
+//==========================iterators==========================	
+			iterator begin() {return this->_start;}
+
+			const_iterator begin() const {return const_iterator(this->_start);}
+
+			iterator end() {return iterator(this->_end);}
+
+			const_iterator end() const {return const_iterator(this->_end);}
+
+
 	};// end vector class
 } // end namespace ft
 #endif
