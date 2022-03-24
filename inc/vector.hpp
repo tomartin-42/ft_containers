@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/24 13:51:33 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/24 13:53:24 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include "nullptr.hpp"
 #include <memory>
-#include <iterator>
 
 namespace ft
 {
@@ -97,11 +96,11 @@ namespace ft
 //==========================iterators==========================	
 			iterator begin() {return this->_start;}
 
-			const_iterator begin() const {return const_iterator(this->_start);}
+			const_iterator begin() const {return this->_start;}
 
-			iterator end() {return iterator(this->_end);}
+			iterator end() {return this->_end;}
 
-			const_iterator end() const {return const_iterator(this->_end);}
+			const_iterator end() const {return this->_end;}
 
 
 	};// end vector class
