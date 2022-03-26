@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/26 19:39:05 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/26 19:40:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ namespace ft
 //==========================
 //constructors
 //==========================
-			random_access_iterator() : _ptr(nullptr) {}
+			random_access_iterator() : _ptr(ft::nullptr_t) {}
 			random_access_iterator(pointer ptr) : _ptr(ptr) {}
 
 
