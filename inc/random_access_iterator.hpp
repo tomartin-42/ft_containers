@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/29 12:20:23 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:44:59 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ namespace ft
 	class random_access_iterator
 	{
 		public:
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::iterator_category	iterator_category;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::iterator_category		iterator_category;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::difference_type		difference_type;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference			reference;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference				reference;
 
 		private:
 			pointer	_ptr;
@@ -50,7 +50,7 @@ namespace ft
 				return *this;
 			}
 
-			reference operator * () const {return this->*_ptr;}
+			reference operator * () const {return *(this->_ptr);}
 			pointer operator -> () const {return this->_ptr;}
 
 	};
