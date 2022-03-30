@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/30 13:36:45 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:44:04 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,18 @@ namespace ft
 			{
 				random_access_iterator	aux(this->_ptr - i);
 				return aux;
+			}
+
+			random_access_iterator& operator += (difference_type i)
+			{
+				this->_ptr += i;
+				return (*this);
+			}
+
+			random_access_iterator& operator -= (difference_type i)
+			{
+				this->_ptr -= i;
+				return (*this);
 			}
 	};
 }
