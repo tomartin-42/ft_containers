@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/29 12:46:27 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/30 09:01:49 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	main (void)
 	ft::random_access_iterator<int> at;
 
 	at = it;
+	at++;
+	++at;
 	return 0;
 }

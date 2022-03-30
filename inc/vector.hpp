@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/29 12:00:35 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:54:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ namespace ft
 		//	typedef std::iterator<std::random_access_iterator_tag, const_pointer>	const_iterator;
 		//	typedef std::reverse_iterator<iterator>								reverse_iterator;
 		//	typedef std::reverse_iterator<const iterator>						const_reverse_iterator;
-		//	typedef ft::random_access_iterator<value_type>						iterator;
-		//	typedef ft::random_access_iterator<const value_type>				const_iterator;
-			typedef ft::random_access_iterator<pointer>						iterator;
-			typedef ft::random_access_iterator<const_pointer>				const_iterator;
+			typedef ft::random_access_iterator<value_type>						iterator;
+			typedef ft::random_access_iterator<const value_type>				const_iterator;
+		//	typedef ft::random_access_iterator<pointer>						iterator;
+		//	typedef ft::random_access_iterator<const_pointer>				const_iterator;
 	//		typedef ft::reverse_iterator<iterator>							reverse_iterator;
 	//		typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_trails<iterator>::difference_type 	difference_type;

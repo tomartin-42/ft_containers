@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/29 12:44:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/30 09:02:04 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ namespace ft
 			reference operator * () const {return *(this->_ptr);}
 			pointer operator -> () const {return this->_ptr;}
 
+			random_access_iterator operator ++ (int)
+			{
+				random_access_iterator	tmp;
+				tmp = *this;
+				++(this->_ptr);
+				return tmp;
+			}
+
+			random_access_iterator& operator ++ ()
+			{
+				++(this->_ptr);
+				return *this;
+			}
 	};
 }
 

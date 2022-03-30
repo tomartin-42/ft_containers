@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:39:13 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/29 12:15:29 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:54:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 namespace ft
 {
+	//Need to pass type category to iterator_trails
+	//Is a s a kind of selector to setup correct type and pass to iterator_trails
 	template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
 	struct Iter
 	{
