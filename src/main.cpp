@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/30 13:44:26 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/31 12:47:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@ int	main (void)
 	at++;
 	++at;
 
+//	it = 2 - at;
 	it = at - 2;
 	it += 2;
 	it -= 3;
 
+	bool a;
+	a = it != at;
+	std::cout << "it1 != it2 -> " << a << std::endl;
+	
 	return 0;
 }

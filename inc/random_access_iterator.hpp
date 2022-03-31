@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/30 13:44:04 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/31 12:43:59 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ namespace ft
 				this->_ptr = other.get_ptr();
 				return *this;
 			}
-
-			pointer get_ptr() const {return this->_ptr;}
 */
+			pointer get_ptr() const {return this->_ptr;}
+
 //==========================
 //operators
 //==========================
@@ -107,7 +107,47 @@ namespace ft
 				this->_ptr -= i;
 				return (*this);
 			}
-	};
+	}; //end random_access_iterator class
+
+//===================================
+//No member functions
+//===================================
+
+	template <typename T, typename V>
+	bool	operator == (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	{
+		return left.get_ptr() == rigth.get_ptr();
+	}
+
+	template <typename T, typename V>
+	bool	operator != (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	{
+		return !(left.get_ptr() == rigth.get_ptr());
+	}
+
+	template <typename T, typename V>
+	bool	operator < (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	{
+		return left.get_ptr() < rigth.get_ptr();
+	}
+
+	template <typename T, typename V>
+	bool	operator > (random_access_iterator<T>& left, random_access_iterator<V>& rigth)
+	{
+		return left.get_ptr() > rigth.get_ptr();
+	}
+
+	template <typename T, typename V>
+	bool	operator <= (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	{
+		return !(left.get_ptr() > rigth.get_ptr());
+	}
+
+	template <typename T, typename V>
+	bool	operator >= (random_access_iterator<T>& left, random_access_iterator<V>& rigth)
+	{
+		return !(left.get_ptr() < rigth.get_ptr());
+	}
 }
 
 #endif
