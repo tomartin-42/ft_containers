@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/31 12:43:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:04:05 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,15 @@ namespace ft
 //operators
 //==========================
 
-			reference operator * () const {return *(this->_ptr);}
-			pointer operator -> () const {return this->_ptr;}
+			reference	operator * () const {return *(this->_ptr);}
+			pointer		operator -> () const {return this->_ptr;}
 
-			random_access_iterator operator ++ (int)
+			reference	operator [] (difference_type i)
+			{
+				return *(this->_ptr + i);
+			}
+
+			random_access_iterator	operator ++ (int)
 			{
 				random_access_iterator	tmp;
 				tmp = *this;
@@ -64,13 +69,13 @@ namespace ft
 				return tmp;
 			}
 
-			random_access_iterator& operator ++ ()
+			random_access_iterator&	operator ++ ()
 			{
 				++(this->_ptr);
 				return *this;
 			}
 
-			random_access_iterator operator -- (int)
+			random_access_iterator	operator -- (int)
 			{
 				random_access_iterator	tmp;
 				tmp = *this;
@@ -78,31 +83,31 @@ namespace ft
 				return tmp;
 			}
 
-			random_access_iterator& operator -- ()
+			random_access_iterator&	operator -- ()
 			{
 				--(this->_ptr);
 				return *this;
 			}
 
-			random_access_iterator operator + (difference_type i) const
+			random_access_iterator	operator + (difference_type i) const
 			{
 				random_access_iterator	aux(this->_ptr + i);
 				return aux;
 			}
 
-			random_access_iterator operator - (difference_type i) const
+			random_access_iterator	operator - (difference_type i) const
 			{
 				random_access_iterator	aux(this->_ptr - i);
 				return aux;
 			}
 
-			random_access_iterator& operator += (difference_type i)
+			random_access_iterator&	operator += (difference_type i)
 			{
 				this->_ptr += i;
 				return (*this);
 			}
 
-			random_access_iterator& operator -= (difference_type i)
+			random_access_iterator&	operator -= (difference_type i)
 			{
 				this->_ptr -= i;
 				return (*this);
@@ -147,6 +152,25 @@ namespace ft
 	bool	operator >= (random_access_iterator<T>& left, random_access_iterator<V>& rigth)
 	{
 		return !(left.get_ptr() < rigth.get_ptr());
+	}
+
+//====================================
+//Overload n + it and n - it because can not implement as member function
+//====================================
+	template <typename T>
+	random_access_iterator<T> operator + (typename ft::random_access_iterator<T>::difference_type i, random_access_iterator<T> it)
+	{
+		random_access_iterator<T>	aux;
+		aux = it + i;
+		return aux;
+	}
+
+	template <typename T>
+	random_access_iterator<T> operator - (typename ft::random_access_iterator<T>::difference_type i, random_access_iterator<T> it)
+	{
+		random_access_iterator<T>	aux;
+		aux = it - i;
+		return aux;
 	}
 }
 
