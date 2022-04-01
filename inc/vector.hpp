@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/01 12:56:16 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/01 13:28:07 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "nullptr.hpp" //to ft::nullptr
 #include "random_access_iterator.hpp"
-#include <memory>
+#include <memory> //for allocate
 
 namespace ft
 {
@@ -29,16 +29,10 @@ namespace ft
 			typedef typename alloc_type::const_reference						const_reference;
 			typedef typename alloc_type::pointer								pointer;
 			typedef typename alloc_type::const_pointer							const_pointer;
-		//	typedef std::iterator<std::random_access_iterator_tag, value_type>		iterator;
-		//	typedef std::iterator<std::random_access_iterator_tag, const value_type>	const_iterator;
-		//	typedef std::iterator<std::random_access_iterator_tag, pointer>		iterator;
-		//	typedef std::iterator<std::random_access_iterator_tag, const_pointer>	const_iterator;
 		//	typedef std::reverse_iterator<iterator>								reverse_iterator;
 		//	typedef std::reverse_iterator<const iterator>						const_reverse_iterator;
 			typedef ft::random_access_iterator<value_type>						iterator;
 			typedef ft::random_access_iterator<const value_type>				const_iterator;
-		//	typedef ft::random_access_iterator<pointer>						iterator;
-		//	typedef ft::random_access_iterator<const_pointer>				const_iterator;
 	//		typedef ft::reverse_iterator<iterator>							reverse_iterator;
 	//		typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_trails<iterator>::difference_type 	difference_type;
@@ -56,7 +50,6 @@ namespace ft
 //********************************************constructors****************************************************
 			
 		public:
-
 //empty====================================
 			explicit vector (const alloc_type& alloc_t = alloc_type()) 
 				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _end_capacity(_end), _size(0)
@@ -76,18 +69,27 @@ namespace ft
 			}
 	
 //range=======================================
-	/*		template <class InputIterator>
+			template <class InputIterator>
 	        vector (InputIterator first, InputIterator last, const alloc_type& alloc_t = alloc_type())
 				: _alloc(alloc_t) 
 			{
 				this->_size(std::distance(first, last));
+				this->_start = _alloc.allocate(this->_size);
+				this->_end_capacity	= this->_start + this->_size;
+				this->_end = this->_end_capacity;
+				for (unsigned long i = 0; first != last; i++)
+				{
+					_alloc.construct((this->_start + i), first);
+					first++;
+				}
 			}
-	*/
+	
 //copy========================================
 			vector (const vector& other)
 				: _alloc(other._alloc), _start(other._start), _end(other._end), _end_capacity(other._end_capacity), _size(other._size)
 			{}
 
+//= operator===================================
 			vector& operator = (const vector& other)
 			{
 				this->_alloc = other._alloc;
@@ -97,6 +99,7 @@ namespace ft
 				this->_size = other._size;
 				return *this;
 			}
+
 //destructor==================================
 			virtual ~vector ()
 			{
