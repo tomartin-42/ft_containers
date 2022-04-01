@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/31 14:04:53 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/01 13:03:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ namespace ft
 			random_access_iterator() : _ptr(ft::nullptr_t) {}
 			random_access_iterator(pointer ptr) : _ptr(ptr) {}
 			
-			/*random_access_iterator& operator = (random_access_iterator& other)
+			random_access_iterator& operator = (const random_access_iterator& other)
 			{
 				if (this == &other)
 					return *this;
 				this->_ptr = other.get_ptr();
 				return *this;
 			}
-*/
+
+			~random_access_iterator() {}
+
 			pointer get_ptr() const {return this->_ptr;}
 
 //==========================

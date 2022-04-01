@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/01 12:55:32 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/01 13:06:36 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	main (void)
 
 	l = i;
 
-	ft::random_access_iterator<int> it;
-	ft::random_access_iterator<int> at;
+	ft::random_access_iterator<const int> it;
+	ft::random_access_iterator<const int> at;
 
-//	it = j.begin();
-//	at = j.end();
+	it = j.begin();
+	at = j.end();
 	
 	bool a;
 
-	a = (it == at);
+	a = (it != at);
 
-//	std::cout << "it == at ->" << a << std::endl;
+	std::cout << "it == at ->" << a << std::endl;
 
 	return 0;
 }
