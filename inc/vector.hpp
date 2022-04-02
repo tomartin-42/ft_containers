@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/01 13:31:04 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:19:52 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define VECTOR_HPP
 
 #include "nullptr.hpp" //to ft::nullptr
+#include <cstddef> // to ptrdiff_t
 #include "random_access_iterator.hpp"
-#include <memory> //for allocate
+#include "utils.hpp"
+#include <memory> //to allocate
+#include <iostream>
 
 namespace ft
 {
@@ -43,7 +46,8 @@ namespace ft
 			pointer     						_start;			// where init data //
 			pointer     						_end;			// where init empty data //
 			pointer								_end_capacity;	// where end the prealocate data //
-			size_type							_size;			// number of alocate data //
+			difference_type						_size;			// number of alocate data //
+			//size_type							_size;			// number of alocate data //
 
 
 //************************************************************************************************************	
@@ -59,6 +63,7 @@ namespace ft
 			explicit vector (size_type n, const value_type& val = value_type(), const alloc_type& alloc_t = alloc_type())
 				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(n) 
 			{
+				std::cout << "HOLA\n";
 				this->_start = _alloc.allocate(n);
 				this->_end_capacity = this->_start + n;
 				for(unsigned long i = 0; i < n; i++)
@@ -70,10 +75,10 @@ namespace ft
 	
 //range=======================================
 			template <class InputIterator>
-	        vector (InputIterator first, InputIterator last, const alloc_type& alloc_t = alloc_type())
+	        vector (InputIterator first, InputIterator last, const alloc_type& alloc_t = iterator)
 				: _alloc(alloc_t) 
 			{
-				this->_size(std::distance(first, last));
+				this->_size(ft::distance(first, last));
 				this->_start = _alloc.allocate(this->_size);
 				this->_end_capacity	= this->_start + this->_size;
 				this->_end = this->_end_capacity;
@@ -123,4 +128,5 @@ namespace ft
 
 	};// end vector class
 } // end namespace ft
+
 #endif

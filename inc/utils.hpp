@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/02 18:46:36 by tomartin         ###   ########.fr       */
+/*   Created: 2022/04/02 17:50:07 by tomartin          #+#    #+#             */
+/*   Updated: 2022/04/02 18:59:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.hpp"
-#include "random_access_iterator.hpp"
-#include <iostream>
+#ifndef UITILS_HPP
+# define UITILS_HPP
 
-int	main (void)
+#include "iterator_trails.hpp"
+
+namespace ft
 {
-	ft::vector<int>	i;
-	ft::vector<int>	j(4, 100);
-	ft::vector<int> l;
+	template<class Iter>
+	typename ft::iterator_trails<Iter>::difference_type	distance(Iter it1, Iter it2)
+	{
+		typename ft::iterator_trails<Iter>::difference_type	i = 0;
+		while (it1 != it2)
+		{
+			it1++;
+			i++;
+		}
+		return i;
+	}
+} //end namespace ft
 
-	l = i;
-
-	ft::random_access_iterator<int> it;
-	ft::random_access_iterator<int> at;
-
-	it = j.begin();
-	at = j.end();
-	
-	bool a;
-
-	a = (it == at);
-
-	std::cout << "it == at ->" << a << std::endl;
-
-	return 0;
-}
+#endif
