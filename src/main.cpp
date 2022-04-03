@@ -27,8 +27,21 @@ int	main (void)
 
 	it = j.begin();
 	at = j.end();
-	
+
+    at--;
+    at--;
+    at--;
+    
 	ft::vector<int> x(it, at);
+    ft::random_access_iterator<int> ax;
+    ft::random_access_iterator<int> bx;
+    ax = x.begin();
+    bx = x.end();
+    while (ax != bx)
+    {
+      std::cout << " ax(iterator) " << *ax << "\n";
+      ax++;
+    }
 	bool a;
 
 	a = (it == at);

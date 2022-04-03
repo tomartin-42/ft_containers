@@ -27,7 +27,8 @@ NAME = ft_container
 
 # Compiling and flags
 #CXX = clang++ --std=c++98
-CXX = clang++ 
+#CXX = clang++ -stdlib=libc++
+CXX = g++ -std=c++98
 CXXFLAGS = -Wall -Wextra -Werror -Iinc -MD -O3 -g3 -fsanitize=address
 LDFLAGS = -fsanitize=address
 

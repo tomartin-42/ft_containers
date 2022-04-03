@@ -14,6 +14,7 @@
 # define UITILS_HPP
 
 #include "iterator_trails.hpp"
+#include <iostream>
 
 namespace ft
 {

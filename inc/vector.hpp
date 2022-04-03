@@ -63,15 +63,14 @@ namespace ft
 
 //fill======================================
 			explicit vector (size_type n, const value_type& val = value_type(), const alloc_type& alloc_t = alloc_type())
-				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start), _size(n) 
+				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start + n), _size(n) 
 			{
-				std::cout << "HOLA\n";
 				this->_start = _alloc.allocate(n);
 				this->_end_capacity = this->_start + n;
+                this->_end = this->_end_capacity;
 				for(unsigned long i = 0; i < n; i++)
 				{
 					_alloc.construct((this->_start + i), val);
-					this->_end++;
 				}
 			}
 	
@@ -81,13 +80,13 @@ namespace ft
 				const alloc_type& alloc_t = alloc_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 				: _alloc(alloc_t)
 			{
-				this->_size(ft::distance(first, last));
-				this->_start = _alloc.allocate(this->_size);
+				this->_size = ft::distance(first, last);
+                this->_start = _alloc.allocate(this->_size);
 				this->_end_capacity	= this->_start + this->_size;
 				this->_end = this->_end_capacity;
 				for (unsigned long i = 0; first != last; i++)
 				{
-					_alloc.construct((this->_start + i), first);
+					_alloc.construct((this->_start + i), *first);
 					first++;
 				}
 			}
