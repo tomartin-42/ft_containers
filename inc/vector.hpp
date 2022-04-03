@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/02 20:19:52 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/03 13:35:21 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <cstddef> // to ptrdiff_t
 #include "random_access_iterator.hpp"
 #include "utils.hpp"
+#include "enable_if.hpp"
+#include "is_integral.hpp"
 #include <memory> //to allocate
 #include <iostream>
 
@@ -75,8 +77,9 @@ namespace ft
 	
 //range=======================================
 			template <class InputIterator>
-	        vector (InputIterator first, InputIterator last, const alloc_type& alloc_t = iterator)
-				: _alloc(alloc_t) 
+			vector(InputIterator first, InputIterator last,
+				const alloc_type& alloc_t = alloc_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+				: _alloc(alloc_t)
 			{
 				this->_size(ft::distance(first, last));
 				this->_start = _alloc.allocate(this->_size);

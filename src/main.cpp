@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/02 18:46:36 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/03 13:34:55 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main (void)
 	it = j.begin();
 	at = j.end();
 	
+	ft::vector<int> x(it, at);
 	bool a;
 
 	a = (it == at);
