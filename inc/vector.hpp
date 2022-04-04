@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/04 10:21:57 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/04 13:08:09 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ namespace ft
 			pointer     						_start;			// where init data //
 			pointer     						_end;			// where init empty data //
 			pointer								_end_capacity;	// where end the prealocate data //
-			difference_type						_size;			// number of alocate data //
-			//size_type							_size;			// number of alocate data //
+			//difference_type						_size;			// number of alocate data //
+			size_type							_size;			// number of alocate data //
 
 
 //************************************************************************************************************	
@@ -119,19 +119,40 @@ namespace ft
 //iterators
 //==========================	
 			iterator begin() {return iterator(this->_start);}
+
 			const_iterator begin() const {return const_iterator(this->_start);}
+			
 			iterator end() {return iterator(this->_end);}
+			
 			const_iterator end() const {return const_iterator(this->_end);}
+			
 			reverse_iterator rbegin() {return reverse_iterator(this->_end);}
+			
 			const_reverse_iterator rbegin() const {return const_reverse_iterator(this->_end);}
+			
 			reverse_iterator rend() {return reverse_iterator(this->_start);}
+			
 			const_reverse_iterator rend() const {return const_reverse_iterator(this->_start);}
 
 //==========================
 //capacity
 //==========================
-			difference_type	size() {return this->_size;}
-
+			difference_type	size() const {return this->_size;}
+			
+			difference_type	max_size() const {return _alloc.max_size();}
+			
+			void	resize(size_type n, value_type val = value_type())
+			{
+				val();
+				if (n < this->_size)
+				{
+					pointer	aux_end;
+					aux_end = this->_start + n;
+					this->_alloc.deallocate(aux_end, ft::distance(aux_end, this->_end));
+					this->_end = aux_end;
+					this->size = this->size - n;
+				}
+			}
 
 	};// end vector class
 } // end namespace ft
