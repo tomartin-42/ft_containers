@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/04 09:42:35 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:16:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "nullptr.hpp" //to ft::nullptr
 #include <cstddef> // to ptrdiff_t
 #include "random_access_iterator.hpp"
+#include "reverse_iterator.hpp"
 #include "utils.hpp"
 #include "enable_if.hpp"
 #include "is_integral.hpp"
@@ -36,8 +37,8 @@ namespace ft
 			typedef typename alloc_type::const_pointer							const_pointer;
 			typedef typename ft::random_access_iterator<value_type>				iterator; 			//random_access_iterator
 			typedef typename ft::random_access_iterator<const value_type>		const_iterator;		//const random_access_iterator
-	//		typedef ft::reverse_iterator<iterator>							reverse_iterator;
-	//		typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
+			typedef ft::reverse_iterator<iterator>								reverse_iterator;
+			typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_trails<iterator>::difference_type 	difference_type;
 			typedef typename alloc_type::size_type								size_type;
 	
@@ -118,12 +119,17 @@ namespace ft
 //iterators
 //==========================	
 			iterator begin() {return iterator(this->_start);}
-
 			const_iterator begin() const {return const_iterator(this->_start);}
-
 			iterator end() {return iterator(this->_end);}
-
 			const_iterator end() const {return const_iterator(this->_end);}
+			reverse_iterator rbegin() {return reverse_iterator(this->_end);}
+			const_reverse_iterator rbegin() const {return const_reverse_iterator(this->_end);}
+			reverse_iterator rend() {return reverse_iterator(this->_start);}
+			const_reverse_iterator rend() const {return const_reverse_iterator(this->_start);}
+
+//==========================
+//capacity
+//==========================
 
 
 	};// end vector class

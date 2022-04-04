@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/04 09:46:41 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:09:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define REVERSE_ITERATOR_HPP
 
 #include "iterator_trails.hpp" 
+#include "random_access_iterator.hpp"
 #include "nullptr.hpp"// to ft::nullptr
 #include <cstddef> // to ptrdiff_t
 
@@ -23,11 +24,11 @@ namespace ft
 	class reverse_iterator
 	{
 		public:
-			typedef typename ft::Iter<ft::reverse_iterator_tag, T>::iterator_category	iterator_category;
-			typedef typename ft::Iter<ft::reverse_iterator_tag, T>::value_type			value_type;
-			typedef typename ft::Iter<ft::reverse_iterator_tag, T>::difference_type		difference_type;
-			typedef typename ft::Iter<ft::reverse_iterator_tag, T>::pointer				pointer;
-			typedef typename ft::Iter<ft::reverse_iterator_tag, T>::reference			reference;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::iterator_category	iterator_category;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::value_type			value_type;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::difference_type		difference_type;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference			reference;
 
 		private:
 			pointer	_ptr;
@@ -67,13 +68,13 @@ namespace ft
 			{
 				reverse_iterator	tmp;
 				tmp = *this;
-				++(this->_ptr);
+				--(this->_ptr);
 				return tmp;
 			}
 
 			reverse_iterator&	operator ++ ()
 			{
-				++(this->_ptr);
+				--(this->_ptr);
 				return *this;
 			}
 
@@ -81,43 +82,43 @@ namespace ft
 			{
 				reverse_iterator	tmp;
 				tmp = *this;
-				--(this->_ptr);
+				++(this->_ptr);
 				return tmp;
 			}
 
 			reverse_iterator&	operator -- ()
 			{
-				--(this->_ptr);
+				++(this->_ptr);
 				return *this;
 			}
 
 			reverse_iterator	operator + (difference_type i) const
 			{
-				reverse_iterator	aux(this->_ptr + i);
+				reverse_iterator	aux(this->_ptr - i);
 				return aux;
 			}
 
 			reverse_iterator	operator - (difference_type i) const
 			{
-				reverse_iterator	aux(this->_ptr - i);
+				reverse_iterator	aux(this->_ptr + i);
 				return aux;
 			}
 
 			reverse_iterator&	operator += (difference_type i)
 			{
-				this->_ptr += i;
+				this->_ptr -= i;
 				return (*this);
 			}
 
 			reverse_iterator&	operator -= (difference_type i)
 			{
-				this->_ptr -= i;
+				this->_ptr += i;
 				return (*this);
 			}
 	}; //end reverse_iterator class
 
 //===================================
-//No member functions
+//No member functions (compair operators)
 //===================================
 
 	template <typename T, typename V>
@@ -163,7 +164,7 @@ namespace ft
 	reverse_iterator<T> operator + (typename ft::reverse_iterator<T>::difference_type i, reverse_iterator<T> it)
 	{
 		reverse_iterator<T>	aux;
-		aux = it + i;
+		aux = it - i;
 		return aux;
 	}
 
@@ -171,7 +172,7 @@ namespace ft
 	reverse_iterator<T> operator - (typename ft::reverse_iterator<T>::difference_type i, reverse_iterator<T> it)
 	{
 		reverse_iterator<T>	aux;
-		aux = it - i;
+		aux = it + i;
 		return aux;
 	}
 } //end ft namespace

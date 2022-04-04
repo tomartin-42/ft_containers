@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/04 09:41:11 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:10:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main (void)
 
 	ft::random_access_iterator<int> it;
 	ft::random_access_iterator<int> at;
-	ft::vector<int>::iterator xx;
+	ft::vector<int>::reverse_iterator xx;
 
 	it = j.begin();
 	at = j.end();
