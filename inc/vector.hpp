@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/04 13:08:09 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:35:35 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ namespace ft
 				{
 					_alloc.construct((this->_start + i), val);
 				}
+				pre_asig_memory();
 			}
 	
 //range=======================================
@@ -88,6 +89,7 @@ namespace ft
 					_alloc.construct((this->_start + i), *first);
 					first++;
 				}
+				pre_asig_memory();
 			}
 	
 //copy========================================
@@ -115,6 +117,18 @@ namespace ft
 //************************************************************************************************************//	
 //*****************************************member fuctions****************************************************//	
 			
+			//To preasignate memory to go fast
+			void	pre_asig_memory() 
+			{
+				if (this->_end == this->_end_capacity)
+				{
+					unsigned int	i;
+					i = this->_size * 0.2;
+					this->_end = _alloc.allocate(i, this->_end_capacity); 
+					this->_end_capacity += i;
+				}
+			}
+
 //==========================
 //iterators
 //==========================	
@@ -143,17 +157,25 @@ namespace ft
 			
 			void	resize(size_type n, value_type val = value_type())
 			{
-				val();
 				if (n < this->_size)
 				{
 					pointer	aux_end;
 					aux_end = this->_start + n;
-					this->_alloc.deallocate(aux_end, ft::distance(aux_end, this->_end));
+					this->_alloc.deallocate(aux_end, ft::distance(aux_end, this->_end_capacity));
 					this->_end = aux_end;
-					this->size = this->size - n;
+					this->_size = n;
+					this->_end_capacity = this->_end;
+					pre_asig_memory();
 				}
+				else if (n > this->_size)
+				{
+					pointer	aux_end;
+					aux_end = this->_start + n;
+					if (ft::distance(aux_end, this->_end_capacity))
+					{
+						
 			}
-
+		
 	};// end vector class
 } // end namespace ft
 

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/04 13:06:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:36:05 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	main (void)
 
     at--;
     
-	ft::vector<int> x(it, at);
-	x.resize(2); 
+	//ft::vector<int> x(it, at);
+	//x.resize(2); 
     ft::random_access_iterator<int> ax;
     ft::random_access_iterator<int> bx;
-    ax = x.begin();
-    bx = x.end();
+    //ax = x.begin();
+    //bx = x.end();
     while (ax != bx)
     {
       std::cout << " ax(iterator) " << *ax << "\n";
