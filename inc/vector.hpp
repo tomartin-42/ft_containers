@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/06 13:35:35 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/07 09:49:45 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft
 			typedef ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_trails<iterator>::difference_type 	difference_type;
-			typedef typename alloc_type::size_type								size_type;
+			typedef typename alloc_type::size_type								size_type;			//When we refer to numbers of elemente
 	
 		private:
 			alloc_type							_alloc;			// data type //
@@ -89,7 +89,6 @@ namespace ft
 					_alloc.construct((this->_start + i), *first);
 					first++;
 				}
-				pre_asig_memory();
 			}
 	
 //copy========================================
@@ -117,15 +116,29 @@ namespace ft
 //************************************************************************************************************//	
 //*****************************************member fuctions****************************************************//	
 			
+//==========================
+//Aux functions
+//==========================	
 			//To preasignate memory to go fast
 			void	pre_asig_memory() 
 			{
 				if (this->_end == this->_end_capacity)
 				{
-					unsigned int	i;
+					size_type	i;
 					i = this->_size * 0.2;
 					this->_end = _alloc.allocate(i, this->_end_capacity); 
 					this->_end_capacity += i;
+				}
+			}
+			
+			//Preasignate memory: Add n elements to asignate memory to the vector plus 20%	
+			void	pre_asig_memory(size_type	n);
+			{
+				if (this->_end == this->_end_capacity)
+				{
+					n = n * 0.2;
+					this->_end = _alloc.allocate(n, this->_end_capacity); 
+					this->_end_capacity += n;
 				}
 			}
 
@@ -171,9 +184,15 @@ namespace ft
 				{
 					pointer	aux_end;
 					aux_end = this->_start + n;
-					if (ft::distance(aux_end, this->_end_capacity))
+					if (ft::distance(this->_start, this->_end_capacity) < ft::distance(this->_start, aux_end))
 					{
-						
+						pre_asig_memory (ft::distance(this->_start, aux_end))
+						//crear hasta aux_end
+					{
+					else
+					{
+						//rellenar con value_type
+					}
 			}
 		
 	};// end vector class
