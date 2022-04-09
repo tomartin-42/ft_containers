@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/09 19:16:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/09 20:30:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ namespace ft
 			pointer     						_start;			// where init data //
 			pointer     						_end;			// where init empty data //
 			pointer								_end_capacity;	// where end the prealocate data //
-			//difference_type						_size;			// number of alocate data //
+			//difference_type					_size;			// number of alocate data //
 			size_type							_size;			// number of alocate data //
 
 
@@ -182,7 +182,8 @@ namespace ft
 
 			difference_type capacity() const
 			{
-				return ft::distance(this->_start, this->_end_size);
+				std::cout << "p1 =" << this->_start << std::endl << "p2 =" << this->_end_capacity << std::endl;
+				return ft::distance(this->_start, this->_end_capacity);
 			}
 
 			bool	empty() const
@@ -194,8 +195,9 @@ namespace ft
 
 			void	reserve(size_type n)
 			{
-				if(this->capacity <= n)
-					this->_end_capacity = _alloc.allocate(n, this->_end_capacity);
+				if(static_cast<unsigned long>(this->capacity()) < n)
+					_alloc.allocate(n - this->capacity(), this->_end_capacity);
+				this->_end_capacity += n - this->capacity();
 			}
 
 	};// end vector class

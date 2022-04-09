@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/09 19:15:36 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/09 20:27:55 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	main (void)
 {
 	ft::vector<int>	i;
-	ft::vector<int>	j(4, 100);
+	ft::vector<int>	j(80, 100);
 	ft::vector<int> l;
 
 	l = i;
@@ -28,6 +28,11 @@ int	main (void)
 
 	it = j.begin();
 	at = j.end();
+
+	std::cout << "Size = " << j.size() << std::endl;
+	std::cout << "Capacity = " << j.capacity() << std::endl;
+	j.reserve(100);
+	std::cout << "Capacity post= " << j.capacity() << std::endl;
 
     at--;
     
