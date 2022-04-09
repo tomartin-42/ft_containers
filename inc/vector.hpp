@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/07 09:49:45 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/09 19:16:47 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,14 @@ namespace ft
 			}
 			
 			//Preasignate memory: Add n elements to asignate memory to the vector plus 20%	
-			void	pre_asig_memory(size_type	n);
+			void	pre_asig_memory(size_type	n)
 			{
-				if (this->_end == this->_end_capacity)
+				size_type	aux;
+
+				if (ft::distance(this->_start, this->_end_capacity) < n)
 				{
 					n = n * 0.2;
-					this->_end = _alloc.allocate(n, this->_end_capacity); 
+					this->_end = _alloc.allocate(n, this->_end_capacity);
 					this->_end_capacity += n;
 				}
 			}
@@ -168,33 +170,34 @@ namespace ft
 			
 			difference_type	max_size() const {return _alloc.max_size();}
 			
-			void	resize(size_type n, value_type val = value_type())
+			/*void	resize(size_type n, value_type val = value_type())
 			{
 				if (n < this->_size)
 				{
-					pointer	aux_end;
-					aux_end = this->_start + n;
-					this->_alloc.deallocate(aux_end, ft::distance(aux_end, this->_end_capacity));
-					this->_end = aux_end;
-					this->_size = n;
-					this->_end_capacity = this->_end;
-					pre_asig_memory();
 				}
 				else if (n > this->_size)
 				{
-					pointer	aux_end;
-					aux_end = this->_start + n;
-					if (ft::distance(this->_start, this->_end_capacity) < ft::distance(this->_start, aux_end))
-					{
-						pre_asig_memory (ft::distance(this->_start, aux_end))
-						//crear hasta aux_end
-					{
-					else
-					{
-						//rellenar con value_type
-					}
+				}
+			}*/
+
+			difference_type capacity() const
+			{
+				return ft::distance(this->_start, this->_end_size);
 			}
-		
+
+			bool	empty() const
+			{
+				if (this->_size == 0)
+					return 1;
+				return 0;
+			}
+
+			void	reserve(size_type n)
+			{
+				if(this->capacity <= n)
+					this->_end_capacity = _alloc.allocate(n, this->_end_capacity);
+			}
+
 	};// end vector class
 } // end namespace ft
 
