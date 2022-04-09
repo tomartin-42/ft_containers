@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/09 20:30:11 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/09 20:40:28 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,13 +182,12 @@ namespace ft
 
 			difference_type capacity() const
 			{
-				std::cout << "p1 =" << this->_start << std::endl << "p2 =" << this->_end_capacity << std::endl;
 				return ft::distance(this->_start, this->_end_capacity);
 			}
 
 			bool	empty() const
 			{
-				if (this->_size == 0)
+				if(this->_size == 0)
 					return 1;
 				return 0;
 			}
@@ -200,6 +199,10 @@ namespace ft
 				this->_end_capacity += n - this->capacity();
 			}
 
+//==========================
+//Element access
+//==========================
+		
 	};// end vector class
 } // end namespace ft
 
