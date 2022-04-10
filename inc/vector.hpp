@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/09 20:40:28 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/10 19:50:06 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ namespace ft
 			}
 	
 //copy========================================
-			vector (const vector& other)
+			vector(const vector& other)
 				: _alloc(other._alloc), _start(other._start), _end(other._end), _end_capacity(other._end_capacity), _size(other._size)
 			{}
 
@@ -126,7 +126,8 @@ namespace ft
 				{
 					size_type	i;
 					i = this->_size * 0.2;
-					this->_end = _alloc.allocate(i, this->_end_capacity); 
+					//this->_end = _alloc.allocate(i, this->_end_capacity); 
+					_alloc.allocate(i, this->_end_capacity); 
 					this->_end_capacity += i;
 				}
 			}
@@ -139,7 +140,8 @@ namespace ft
 				if (ft::distance(this->_start, this->_end_capacity) < n)
 				{
 					n = n * 0.2;
-					this->_end = _alloc.allocate(n, this->_end_capacity);
+					_alloc.allocate(n, this->_end_capacity);
+					//this->_end = _alloc.allocate(n, this->_end_capacity);
 					this->_end_capacity += n;
 				}
 			}
@@ -202,7 +204,47 @@ namespace ft
 //==========================
 //Element access
 //==========================
-		
+			reference	operator[](size_type i)
+			{
+				return *(this->_start + i);
+			}
+
+			const_reference operator[](size_type i) const
+			{
+				return *(this->_start + i);
+			}
+
+			reference	at(size_type i)
+			{
+				if (i >= this->_size)
+					throw std::out_of_range("vector");
+				return *(this->_start + i);
+			}
+
+			const_reference	at(size_type i) const
+			{
+				if (i >= this->_size)
+					throw std::out_of_range("vector");
+				return *(this->_start + i);
+			}
+
+			reference	front() {return *(this->_start);}
+
+			const_reference	front() const {return *(this->_start);}
+			
+			reference	back() {return *(this->_end - 1);}
+
+			const_reference	back() const {return *(this->_end - 1);}
+
+//==========================
+//Modifiers
+//==========================
+
+
+
+
+
+			
 	};// end vector class
 } // end namespace ft
 

@@ -6,13 +6,14 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/09 20:27:55 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/10 19:49:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.hpp"
 #include "random_access_iterator.hpp"
 #include <iostream>
+#include <vector>
 
 int	main (void)
 {
@@ -20,6 +21,7 @@ int	main (void)
 	ft::vector<int>	j(80, 100);
 	ft::vector<int> l;
 
+	std::cout << "std::vector front & back " << j.front() << " " << j.back() << std::endl;
 	l = i;
 
 	ft::random_access_iterator<int> it;
@@ -33,6 +35,8 @@ int	main (void)
 	std::cout << "Capacity = " << j.capacity() << std::endl;
 	j.reserve(100);
 	std::cout << "Capacity post= " << j.capacity() << std::endl;
+	j[42] = 42;
+	std::cout << "Overload [42] = " << j.at(42) << std::endl;
 
     at--;
     
