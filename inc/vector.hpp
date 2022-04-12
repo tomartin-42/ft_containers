@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/10 19:50:06 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/12 19:37:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ namespace ft
                 this->_start = _alloc.allocate(this->_size);
 				this->_end_capacity	= this->_start + this->_size;
 				this->_end = this->_end_capacity;
-				for (unsigned long i = 0; first != last; i++)
+			//	for (unsigned long i = 0; first != last; i++)
+				for (size_type i = 0; first != last; i++)
 				{
 					_alloc.construct((this->_start + i), *first);
 					first++;
@@ -110,7 +111,7 @@ namespace ft
 //destructor==================================
 			virtual ~vector ()
 			{
-				this->_alloc.deallocate(this->_start, this->_size);
+				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity));
 			}
 
 //************************************************************************************************************//	
@@ -126,7 +127,6 @@ namespace ft
 				{
 					size_type	i;
 					i = this->_size * 0.2;
-					//this->_end = _alloc.allocate(i, this->_end_capacity); 
 					_alloc.allocate(i, this->_end_capacity); 
 					this->_end_capacity += i;
 				}
@@ -141,10 +141,12 @@ namespace ft
 				{
 					n = n * 0.2;
 					_alloc.allocate(n, this->_end_capacity);
-					//this->_end = _alloc.allocate(n, this->_end_capacity);
 					this->_end_capacity += n;
 				}
 			}
+
+			//Return amount prereserve free space
+			size_type	remained_space() {return (ft::distance(this->_end, this->_end_capacity));}
 
 //==========================
 //iterators
@@ -239,12 +241,40 @@ namespace ft
 //==========================
 //Modifiers
 //==========================
+			template <class InputIterator>
+			void	assing(InputIterator first, InputIterator last)
+			{
+				size_type	long_needed;
 
+				long_needed = ft::distance(first, last);
+				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity));
+				this->_size = long_needed;
+                this->_start = _alloc.allocate(this->_size);
+				this->_end_capacity	= this->_start + this->_size;
+				this->_end = this->_end_capacity;
+				for (size_type i = 0; first != last; i++)
+				{
+					_alloc.construct((this->_start + i), *first);
+					first++;
+				}
+				pre_asig_memory();
+			}
 
-
-
-
-			
+			void	assing(size_type n, const value_type& val)
+			{
+				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity));
+				this->_size = n;
+                this->_start = _alloc.allocate(this->_size);
+				this->_end_capacity	= this->_start + this->_size;
+				this->_end = this->_end_capacity;
+				for (size_type i = 0; i < this->_size; i++)
+				{
+					_alloc.construct((this->_start + i), val);
+				}
+				pre_asig_memory();
+			}
+				
+				
 	};// end vector class
 } // end namespace ft
 

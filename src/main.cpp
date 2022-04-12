@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/10 19:49:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/12 19:19:05 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main (void)
 	ft::vector<int> l;
 
 	std::cout << "std::vector front & back " << j.front() << " " << j.back() << std::endl;
-	l = i;
 
 	ft::random_access_iterator<int> it;
 	ft::random_access_iterator<int> at;
@@ -30,6 +29,8 @@ int	main (void)
 
 	it = j.begin();
 	at = j.end();
+
+	i.assing(it, at);
 
 	std::cout << "Size = " << j.size() << std::endl;
 	std::cout << "Capacity = " << j.capacity() << std::endl;
