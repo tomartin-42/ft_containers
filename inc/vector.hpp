@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/15 20:12:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/15 20:42:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,19 +170,30 @@ namespace ft
 //==========================
 //capacity
 //==========================
-			difference_type	size() const {return this->_size;}
+			//difference_type	size() const {return this->_size;}
+			size_type	size() const {return this->_size;}
 			
 			difference_type	max_size() const {return _alloc.max_size();}
 			
-			/*void	resize(size_type n, value_type val = value_type())
+			void	resize(size_type n, value_type val = value_type())
 			{
+				size_type	aux;
+
 				if (n < this->_size)
 				{
+					aux = this->_size - n;
+					this->_end -= aux;
+					this->_size -= aux;
 				}
 				else if (n > this->_size)
 				{
+					aux = n - this->_size;
+					this->_size += aux;
+					while (aux-- > 0)
+						this->push_back(val);
+						
 				}
-			}*/
+			}
 
 			difference_type capacity() const
 			{
@@ -201,7 +212,7 @@ namespace ft
 				if (this->_start == ft::nullptr_t)
 				{
 					this->_start = _alloc.allocate(1, 0);
-					this->_end = this->_start + 1;
+					this->_end = this->_start;
 					this->_end_capacity = this->_end;
 				}
 				if(static_cast<unsigned long>(this->capacity()) < n)
