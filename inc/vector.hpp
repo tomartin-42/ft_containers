@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/12 19:37:34 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/15 20:12:59 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ namespace ft
 				: _alloc(alloc_t), _start(ft::nullptr_t), _end(_start + n), _size(n) 
 			{
 				this->_start = _alloc.allocate(n);
-				this->_end_capacity = this->_start + n;
+				this->_end_capacity = (this->_start + n);
                 this->_end = this->_end_capacity;
 				for(unsigned long i = 0; i < n; i++)
 				{
@@ -198,8 +198,14 @@ namespace ft
 
 			void	reserve(size_type n)
 			{
+				if (this->_start == ft::nullptr_t)
+				{
+					this->_start = _alloc.allocate(1, 0);
+					this->_end = this->_start + 1;
+					this->_end_capacity = this->_end;
+				}
 				if(static_cast<unsigned long>(this->capacity()) < n)
-					_alloc.allocate(n - this->capacity(), this->_end_capacity);
+					_alloc.allocate(n - this->capacity(), (this->_end_capacity + 1));
 				this->_end_capacity += n - this->capacity();
 			}
 
@@ -272,6 +278,23 @@ namespace ft
 					_alloc.construct((this->_start + i), val);
 				}
 				pre_asig_memory();
+			}
+			
+			void push_back (const value_type& val)
+			{
+				if (ft::distance(this->_start, this->_end_capacity) == 0)
+				{
+					this->reserve(1);
+				}
+				this->_alloc.construct((this->_end - 1), val);
+				this->_end += 1;
+				this->_size += 1;
+				pre_asig_memory();
+			}
+
+			void pop_back()
+			{
+				this->_end -= 1;
 			}
 				
 				
