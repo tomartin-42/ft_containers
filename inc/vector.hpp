@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/15 20:42:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/16 20:02:20 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ namespace ft
 
 				if (n < this->_size)
 				{
+					std::cout << "HOLAHOLA\n";
 					aux = this->_size - n;
 					this->_end -= aux;
 					this->_size -= aux;
