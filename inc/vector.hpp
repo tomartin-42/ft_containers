@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/16 20:02:20 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/17 20:44:17 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,6 @@ namespace ft
 
 				if (n < this->_size)
 				{
-					std::cout << "HOLAHOLA\n";
 					aux = this->_size - n;
 					this->_end -= aux;
 					this->_size -= aux;
@@ -189,10 +188,8 @@ namespace ft
 				else if (n > this->_size)
 				{
 					aux = n - this->_size;
-					this->_size += aux;
 					while (aux-- > 0)
 						this->push_back(val);
-						
 				}
 			}
 
@@ -210,6 +207,7 @@ namespace ft
 
 			void	reserve(size_type n)
 			{
+					std::cout << "RESERVE\n";
 				if (this->_start == ft::nullptr_t)
 				{
 					this->_start = _alloc.allocate(1, 0);
@@ -217,7 +215,9 @@ namespace ft
 					this->_end_capacity = this->_end;
 				}
 				if(static_cast<unsigned long>(this->capacity()) < n)
-					_alloc.allocate(n - this->capacity(), (this->_end_capacity + 1));
+				{
+					_alloc.allocate(n - this->capacity(), (this->_end_capacity));
+				}
 				this->_end_capacity += n - this->capacity();
 			}
 
@@ -292,13 +292,15 @@ namespace ft
 				pre_asig_memory();
 			}
 			
-			void push_back (const value_type& val)
+			void push_back(const value_type& val)
 			{
+				std::cout << "Pre memory asignate= " << ft::distance(this->_start, this->_end_capacity) << std::endl;
 				if (ft::distance(this->_start, this->_end_capacity) == 0)
 				{
 					this->reserve(1);
 				}
-				this->_alloc.construct((this->_end - 1), val);
+				this->_alloc.construct((this->_end + 1), val);
+				std::cout << "HOLA\n";
 				this->_end += 1;
 				this->_size += 1;
 				pre_asig_memory();
@@ -308,8 +310,6 @@ namespace ft
 			{
 				this->_end -= 1;
 			}
-				
-				
 	};// end vector class
 } // end namespace ft
 

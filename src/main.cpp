@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/16 20:02:12 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/17 20:44:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 int	main (void)
 {
 	ft::vector<int>	i;
-	ft::vector<int>	j(80, 100);
+	ft::vector<int>	j(109, 100);
 	ft::vector<int> l;
 
-	j.resize(50);
-	j.resize(90, 100);
+//	j.resize(50);
+	j.resize(100, 100);
+	j.push_back(100);
 
 	ft::random_access_iterator<int> it;
 	ft::random_access_iterator<int> at;
