@@ -323,6 +323,8 @@ namespace ft
 				while(insert_it != it)
 					*(insert_it--) = *(end_it--);
 				*it = val;
+				this->_size += 1;
+				this->_end += 1;
 				return it;
 			}
 
