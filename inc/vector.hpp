@@ -111,7 +111,7 @@ namespace ft
 //destructor==================================
 			virtual ~vector ()
 			{
-				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity));
+				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity) + 1);
 			}
 
 //************************************************************************************************************//	
@@ -127,7 +127,7 @@ namespace ft
 				{
 					size_type	i;
 					i = this->_size * 0.2;
-					_alloc.allocate(i, this->_end_capacity); 
+					_alloc.allocate(i, this->_end_capacity + 1); 
 					this->_end_capacity += i;
 				}
 			}
@@ -140,7 +140,7 @@ namespace ft
 				if (ft::distance(this->_start, this->_end_capacity) < n)
 				{
 					n = n * 0.2;
-					_alloc.allocate(n, this->_end_capacity);
+					_alloc.allocate(n, this->_end_capacity + 1);
 					this->_end_capacity += n;
 				}
 			}
@@ -216,7 +216,7 @@ namespace ft
 				}
 				if(static_cast<unsigned long>(this->capacity()) < n)
 				{
-					_alloc.allocate(n - this->capacity(), (this->_end_capacity));
+					_alloc.allocate(n - this->capacity(), (this->_end_capacity + 1));
 				}
 				this->_end_capacity += n - this->capacity();
 			}

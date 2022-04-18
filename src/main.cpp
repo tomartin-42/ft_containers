@@ -21,7 +21,7 @@ int	main (void)
 	ft::vector<int>	j(109, 100);
 	ft::vector<int> l;
 
-//	j.resize(50);
+	j.resize(50);
 	j.resize(100, 100);
 	j.push_back(100);
 
