@@ -320,8 +320,8 @@ namespace ft
 					reserve(this->_size);
 				end_it = this->_back();
 				insert_it = ++this->_back();
-				while(end_it != it)
-					*insert_it-- = *end_it--;
+				while(insert_it != it)
+					*(insert_it--) = *(end_it--);
 				*it = val;
 				return it;
 			}
