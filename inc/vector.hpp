@@ -300,7 +300,6 @@ namespace ft
 					this->reserve(1);
 				}
 				this->_alloc.construct((this->_end + 1), val);
-				std::cout << "HOLA\n";
 				this->_end += 1;
 				this->_size += 1;
 				pre_asig_memory();
@@ -310,6 +309,23 @@ namespace ft
 			{
 				this->_end -= 1;
 			}
+		
+			//Single Element-------------------------------------
+			iterator    insert(iterator it, const value_type& val)
+			{
+				iterator end_it;
+				iterator insert_it;
+
+				if(this->remained_space() == 0)
+					reserve(this->_size);
+				end_it = this->_back();
+				insert_it = ++this->_back();
+				while(end_it != it)
+					*insert_it-- = *end_it--;
+				*it = val;
+				return it;
+			}
+
 	};// end vector class
 } // end namespace ft
 
