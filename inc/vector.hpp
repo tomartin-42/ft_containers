@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/17 20:44:17 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:08:10 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,10 +207,9 @@ namespace ft
 
 			void	reserve(size_type n)
 			{
-					std::cout << "RESERVE\n";
 				if (this->_start == ft::nullptr_t)
 				{
-					this->_start = _alloc.allocate(1, 0);
+					this->_start = _alloc.allocate(n, 0);
 					this->_end = this->_start;
 					this->_end_capacity = this->_end;
 				}
@@ -294,7 +293,6 @@ namespace ft
 			
 			void push_back(const value_type& val)
 			{
-				std::cout << "Pre memory asignate= " << ft::distance(this->_start, this->_end_capacity) << std::endl;
 				if (ft::distance(this->_start, this->_end_capacity) == 0)
 				{
 					this->reserve(1);
@@ -313,9 +311,10 @@ namespace ft
 			//Single Element-------------------------------------
 			iterator    insert(iterator it, const value_type& val)
 			{
-				iterator end_it;
-				iterator insert_it;
+				iterator	end_it;
+				iterator	insert_it;
 
+				this->_size += 1;
 				if(this->remained_space() == 0)
 					reserve(this->_size);
 				end_it = this->_back();
@@ -323,10 +322,37 @@ namespace ft
 				while(insert_it != it)
 					*(insert_it--) = *(end_it--);
 				*it = val;
-				this->_size += 1;
 				this->_end += 1;
 				return it;
 			}
+
+			//Fill---------------------------------------------
+			void insert(iterator position, size_type n, const value_type& val)
+			{
+				iterator	end_it;
+				iterator	insert_it;
+
+				this->_size += n;
+				this->_end += n; 
+				if (remained_space() < n)
+					this->reserve(n - remained_space());
+				end_it = this->back();
+				insert_it = this->back() + n;
+				for (size_type aux = n; aux > 0; aux--)
+					*(insert_it--) = *(end_it--);
+				while(n-- > 0)
+				{
+					*position = val;
+					position++;
+				}
+			}
+
+			//Range-------------------------------------------
+			/*template <class InputIterator>
+			void insert (iterator position, InputIterator first, InputIterator last)
+			{
+
+			}*/
 
 	};// end vector class
 } // end namespace ft
