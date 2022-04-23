@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/20 13:08:10 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/04/23 20:32:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,7 +308,7 @@ namespace ft
 				this->_end -= 1;
 			}
 		
-			//Single Element-------------------------------------
+			//Single Element insert-------------------------------------
 			iterator    insert(iterator it, const value_type& val)
 			{
 				iterator	end_it;
@@ -326,7 +326,7 @@ namespace ft
 				return it;
 			}
 
-			//Fill---------------------------------------------
+			//Fill insert---------------------------------------------
 			void insert(iterator position, size_type n, const value_type& val)
 			{
 				iterator	end_it;
@@ -347,12 +347,58 @@ namespace ft
 				}
 			}
 
-			//Range-------------------------------------------
-			/*template <class InputIterator>
+			//Range insert-------------------------------------------
+			template <class InputIterator>
 			void insert (iterator position, InputIterator first, InputIterator last)
 			{
+				size_type	add;
+				iterator	aux_it;
+				iterator	end_it;
+				iterator	insert_it;
 
-			}*/
+				add = ft::distance(first, last);
+				this->_size += add;
+				this->_end += add;
+				if(remained_space() < add)
+					this->reserve(add - remained_space());
+				aux_it = position;
+				end_it = this->back();
+				insert_it = this->back() + add;
+				for (size_type aux = add; aux > 0; aux--)
+					*(insert_it--) = *(end_it--);
+				while(add-- > 0)
+				{
+					*position = *first;
+					position++;
+					first++;
+				}
+			}
+
+			//One erase---------------------------------------------
+			iterator erase	(iterator position)
+			{
+				iterator	next_it;
+				iterator	ret_it;
+
+				next_it = position + 1;
+				ret_it = position;
+				while (next_it != this->back())
+					*position++ = *next_it++;
+				this->_size--;
+				this->_end--;
+				return ret_it;
+			}
+
+			//Fill erase-----------------------------------------
+			iterator erase	(iterator first, iterator last)
+			{
+				size_type	aux;
+
+				aux = ft::distance(first, last);
+				while (last != this->back)
+					*first++ = *last++;
+				return first;
+			}
 
 	};// end vector class
 } // end namespace ft
