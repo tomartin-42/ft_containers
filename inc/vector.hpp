@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/04 17:21:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/04 18:04:56 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ namespace ft
 				const alloc_type& alloc_t = alloc_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 				: _alloc(alloc_t)
 			{
-				this->_size = ft::distance(first, last);
+				this->_size = ft::dist(first, last);
                 this->_start = _alloc.allocate(this->_size);
 				this->_end_capacity	= this->_start + this->_size;
 				this->_end = this->_end_capacity;
@@ -112,7 +112,7 @@ namespace ft
 //destructor==================================
 			virtual ~vector ()
 			{
-				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity) + 1);
+				this->_alloc.deallocate(this->_start, ft::dist (this->_start, this->_end_capacity) + 1);
 			}
 
 //************************************************************************************************************//	
@@ -138,7 +138,7 @@ namespace ft
 			{
 				size_type	aux;
 
-				if (ft::distance(this->_start, this->_end_capacity) < n)
+				if (ft::dist(this->_start, this->_end_capacity) < n)
 				{
 					n = n * 0.2;
 					_alloc.allocate(n, this->_end_capacity + 1);
@@ -147,7 +147,7 @@ namespace ft
 			}
 
 			//Return amount prereserve free space
-			size_type	remained_space() {return (ft::distance(this->_end, this->_end_capacity));}
+			size_type	remained_space() {return (ft::dist(this->_end, this->_end_capacity));}
 
 //==========================
 //iterators
@@ -196,7 +196,7 @@ namespace ft
 
 			difference_type capacity() const
 			{
-				return ft::distance(this->_start, this->_end_capacity);
+				return ft::dist(this->_start, this->_end_capacity);
 			}
 
 			bool	empty() const
@@ -260,12 +260,12 @@ namespace ft
 //Modifiers
 //==========================
 			template <class InputIterator>
-			void	assing(InputIterator first, InputIterator last)
+			void	assign(InputIterator first, InputIterator last)
 			{
 				size_type	long_needed;
 
-				long_needed = ft::distance(first, last);
-				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity));
+				long_needed = ft::dist(first, last);
+				this->_alloc.deallocate(this->_start, ft::dist (this->_start, this->_end_capacity));
 				this->_size = long_needed;
                 this->_start = _alloc.allocate(this->_size);
 				this->_end_capacity	= this->_start + this->_size;
@@ -278,9 +278,9 @@ namespace ft
 				pre_asig_memory();
 			}
 
-			void	assing(size_type n, const value_type& val)
+			void	assign(size_type n, const value_type& val)
 			{
-				this->_alloc.deallocate(this->_start, ft::distance (this->_start, this->_end_capacity));
+				this->_alloc.deallocate(this->_start, ft::dist (this->_start, this->_end_capacity));
 				this->_size = n;
                 this->_start = _alloc.allocate(this->_size);
 				this->_end_capacity	= this->_start + this->_size;
@@ -294,7 +294,7 @@ namespace ft
 			
 			void push_back(const value_type& val)
 			{
-				if (ft::distance(this->_start, this->_end_capacity) == 0)
+				if (ft::dist(this->_start, this->_end_capacity) == 0)
 				{
 					this->reserve(1);
 				}
@@ -357,7 +357,7 @@ namespace ft
 				iterator	end_it;
 				iterator	insert_it;
 
-				add = ft::distance(first, last);
+				add = ft::dist(first, last);
 				this->_size += add;
 				this->_end += add;
 				if(remained_space() < add)
@@ -395,7 +395,7 @@ namespace ft
 			{
 				size_type	aux;
 
-				aux = ft::distance(first, last);
+				aux = ft::dist(first, last);
 				while (last != this->back)
 					*first++ = *last++;
 				return first;
