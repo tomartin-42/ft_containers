@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/23 20:47:36 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/04 17:21:47 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "nullptr.hpp" //to ft::nullptr
 #include <cstddef> // to ptrdiff_t
 #include "random_access_iterator.hpp"
+#include "lexicographical_compare.hpp"
 #include "reverse_iterator.hpp"
 #include "utils.hpp"
 #include "enable_if.hpp"
@@ -349,7 +350,7 @@ namespace ft
 
 			//Range insert-------------------------------------------
 			template <class InputIterator>
-			void insert (iterator position, InputIterator first, InputIterator last)
+			void insert(iterator position, InputIterator first, InputIterator last)
 			{
 				size_type	add;
 				iterator	aux_it;
@@ -400,7 +401,82 @@ namespace ft
 				return first;
 			}
 
-	};// end vector class
-} // end namespace ft
+			void	swap(vector& x)
+			{
+				pointer   	aux_start(x._start);
+				pointer   	aux_end(x._end);
+				pointer		aux_end_capacity(x._end_capacity);
+				size_type	aux_size(x.size);	
 
+				x._start = this->_start;
+				x._end = this->_end;
+				x._end_capacity = this->_end_capacity;
+				x._size = this->size;
+				this->_start = aux_start;
+				this->_end = aux_end;
+				this->_end_capacity = aux_end_capacity;
+				this->size = aux_size;
+			}
+
+			void	clear(void)
+			{
+				while (this->_size != 0)
+					this->pop_back();
+			}
+
+	};// end vector class
+	
+	template <typename T, typename U, class alloc>
+	bool operator == (const vector<T, alloc> vf, const vector<U, alloc> vl)
+	{
+		if(vf.size() != vl.size())
+			return false;
+		for(typename ft::vector<T>::size_type i = 0; i < vf.size(); i++)
+		{
+			if(vf[i] != vl[i])
+				return false;
+		}
+		return true;
+	}
+
+	template <typename T, typename U, class alloc>
+	bool operator != (const vector<T, alloc> vf, const vector<U, alloc> vl)
+	{
+		return !(vf == vl);
+	}
+
+	template <typename T, typename U, class alloc>
+	bool operator < (const vector<T, alloc> vf, const vector<U, alloc> vl)
+	{
+		return (ft::lexicographical_compare(vf.begin(), vf.end(), vl.begin(), vl.end()));
+	}
+
+	template <typename T, typename U, class alloc>
+	bool operator <= (const vector<T, alloc> vf, const vector<U, alloc> vl)
+	{
+		return (vf < vl || vf == vl);
+	}
+
+	template <typename T, typename U, class alloc>
+	bool operator > (const vector<T, alloc> vf, const vector<U, alloc> vl)
+	{
+		return !(vf < vl);
+	}
+
+	template <typename T, typename U, class alloc>
+	bool operator >= (const vector<T, alloc> vf, const vector<U, alloc> vl)
+	{
+		return !(vf <= vl);
+	}
+
+	template <typename T, class alloc>
+	void	swap(vector<T, alloc> & x, vector<T, alloc> & y)
+	{
+		vector<T, alloc>	aux;
+
+		aux = x;
+		x = y;
+		y = aux;
+	}	
+} // end namespace ft
 #endif

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 17:45:44 by tomartin          #+#    #+#             */
-/*   Updated: 2022/03/20 19:32:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/04 17:22:25 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,5 @@ namespace ft
 		return (first2!=last2);
 	}
 } // end namespace ft
+
+#endif
