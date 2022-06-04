@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/04 18:04:56 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/04 20:01:47 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
 			typedef typename ft::random_access_iterator<value_type>				iterator; 			//random_access_iterator
 			typedef typename ft::random_access_iterator<const value_type>		const_iterator;		//const random_access_iterator
 			typedef ft::reverse_iterator<iterator>								reverse_iterator;
-			typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_trails<iterator>::difference_type 	difference_type;
 			typedef typename alloc_type::size_type								size_type;			//When we refer to numbers of elemente
 	
@@ -426,6 +426,10 @@ namespace ft
 
 	};// end vector class
 	
+//=======================================
+//No member functions (vompair operators)
+//=======================================
+
 	template <typename T, typename U, class alloc>
 	bool operator == (const vector<T, alloc> vf, const vector<U, alloc> vl)
 	{

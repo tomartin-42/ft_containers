@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/04 18:27:38 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/04 19:38:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main (void)
 {
 	ft::vector<int>	i;
 	ft::vector<int>	j(109, 100);
-	ft::vector<int>::reverse_iterator l = j.end();
+	ft::vector<int>::reverse_iterator l = j.rbegin();
 
 
 	return 0;
