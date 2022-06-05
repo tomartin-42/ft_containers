@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:39:13 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/04 20:04:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/05 20:48:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define ITERATOR_TRAILS_HPP
 
 #include <cstddef> //to ptrdiff_t
+#include <iostream>
 
 namespace ft
 {
+	
 	//Need to pass type category to iterator_trails
 	//Is a s a kind of selector to setup correct type and pass to iterator_trails
 	template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
@@ -28,7 +30,7 @@ namespace ft
 		typedef Pointer		pointer;
 		typedef Reference	reference;
 	};
-
+	
 	struct input_iterator_tag {};
 	struct output_iterator_tag {};
 	struct forward_iterator_tag : public input_iterator_tag {};

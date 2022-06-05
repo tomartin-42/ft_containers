@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/04 10:09:08 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/05 17:35:47 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 
 namespace ft
 {
-	template <class T>
+	template <class Iter>
 	class reverse_iterator
 	{
 		public:
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::iterator_category	iterator_category;
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::value_type			value_type;
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::difference_type		difference_type;
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference			reference;
+			typedef Iter													iterator;
+			typedef typename ft::iterator_trails<Iter>::iterator_category	iterator_category;
+			typedef typename ft::iterator_trails<Iter>::value_type			value_type;
+			typedef typename ft::iterator_trails<Iter>::difference_type		difference_type;
+			typedef typename ft::iterator_trails<Iter>::pointer				pointer;
+			typedef typename ft::iterator_trails<Iter>::reference			reference;
 
 		private:
 			pointer	_ptr;
@@ -48,7 +49,7 @@ namespace ft
 				return *this;
 			}
 
-			~reverse_iterator() {}
+			//~reverse_iterator() {}
 
 			pointer get_ptr() const {return this->_ptr;}
 

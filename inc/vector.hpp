@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/04 20:01:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/05 20:29:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #include "is_integral.hpp"
 #include <memory> //to allocate
 #include <iostream>
+
+#pragma once
 
 namespace ft
 {
@@ -280,16 +282,9 @@ namespace ft
 
 			void	assign(size_type n, const value_type& val)
 			{
-				this->_alloc.deallocate(this->_start, ft::dist (this->_start, this->_end_capacity));
-				this->_size = n;
-                this->_start = _alloc.allocate(this->_size);
-				this->_end_capacity	= this->_start + this->_size;
-				this->_end = this->_end_capacity;
-				for (size_type i = 0; i < this->_size; i++)
-				{
-					_alloc.construct((this->_start + i), val);
-				}
-				pre_asig_memory();
+				this->clear();
+				for(size_type i = 0; i < n; i++)
+					this->push_back(val);
 			}
 			
 			void push_back(const value_type& val)
@@ -396,7 +391,7 @@ namespace ft
 				size_type	aux;
 
 				aux = ft::dist(first, last);
-				while (last != this->back)
+				while (last != this->back())
 					*first++ = *last++;
 				return first;
 			}
