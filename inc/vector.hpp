@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/06 11:56:23 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:44:20 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ namespace ft
 				{
 					aux = n - this->_size;
 					while (aux-- > 0)
-						this->push_back(val);
+						this->push_end(val);
 				}
 			}
 
@@ -284,16 +284,13 @@ namespace ft
 			{
 				this->clear();
 				std::cout << n << std::endl;
-				std::cout << "HOLA\n";
 				for(size_type i = 0; i < n; i++)
 				{
-					std::cout << "HOLA1\n";
-					this->push_back(val);
+					this->push_end(val);
 				}
-				std::cout << "HOLA2\n";
 			}
 			
-			void push_back(const value_type& val)
+			void push_end(const value_type& val)
 			{
 				if (ft::dist(this->_start, this->_end_capacity) == 0)
 				{
@@ -305,7 +302,7 @@ namespace ft
 				pre_asig_memory();
 			}
 
-			void pop_back()
+			void pop_end()
 			{
 				this->_end -= 1;
 				this->_size -= 1;
@@ -320,8 +317,8 @@ namespace ft
 				this->_size += 1;
 				if(this->remained_space() == 0)
 					reserve(this->_size);
-				end_it = this->_back();
-				insert_it = ++this->_back();
+				end_it = this->end();
+				insert_it = ++this->end();
 				while(insert_it != it)
 					*(insert_it--) = *(end_it--);
 				*it = val;
@@ -339,8 +336,8 @@ namespace ft
 				this->_end += n; 
 				if (remained_space() < n)
 					this->reserve(n - remained_space());
-				end_it = this->back();
-				insert_it = this->back() + n;
+				end_it = this->end();
+				insert_it = this->end() + n;
 				for (size_type aux = n; aux > 0; aux--)
 					*(insert_it--) = *(end_it--);
 				while(n-- > 0)
@@ -362,11 +359,16 @@ namespace ft
 				add = ft::dist(first, last);
 				this->_size += add;
 				this->_end += add;
-				if(remained_space() < add)
+				std::cout << "HOLA\n";
+				if(this->remained_space() < add)
+				{
+					std::cout << "HOLA1\n";
 					this->reserve(add - remained_space());
+				}
+				std::cout << "HOLA2\n";
 				aux_it = position;
-				end_it = this->back();
-				insert_it = this->back() + add;
+				end_it = this->end();
+				insert_it = this->end() + add;
 				for (size_type aux = add; aux > 0; aux--)
 					*(insert_it--) = *(end_it--);
 				while(add-- > 0)
@@ -423,7 +425,7 @@ namespace ft
 			void	clear(void)
 			{
 				while (this->_size != 0)
-					this->pop_back();
+					this->pop_end();
 			}
 
 	};// end vector class
