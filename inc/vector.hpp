@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/05 20:29:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/06 11:56:23 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ namespace ft
 //Modifiers
 //==========================
 			template <class InputIterator>
-			void	assign(InputIterator first, InputIterator last)
+			void	assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
 				size_type	long_needed;
 
@@ -283,8 +283,14 @@ namespace ft
 			void	assign(size_type n, const value_type& val)
 			{
 				this->clear();
+				std::cout << n << std::endl;
+				std::cout << "HOLA\n";
 				for(size_type i = 0; i < n; i++)
+				{
+					std::cout << "HOLA1\n";
 					this->push_back(val);
+				}
+				std::cout << "HOLA2\n";
 			}
 			
 			void push_back(const value_type& val)
@@ -302,6 +308,7 @@ namespace ft
 			void pop_back()
 			{
 				this->_end -= 1;
+				this->_size -= 1;
 			}
 		
 			//Single Element insert-------------------------------------
@@ -386,7 +393,7 @@ namespace ft
 			}
 
 			//Fill erase-----------------------------------------
-			iterator erase	(iterator first, iterator last)
+			iterator erase(iterator first, iterator last)
 			{
 				size_type	aux;
 
