@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/07 11:03:54 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:04:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,7 @@ namespace ft
 				this->_end -= 1;
 				this->_size -= 1;
 			}
-		/
+		
 			//Single Element insert-------------------------------------
 			iterator    insert(iterator it, const value_type& val)
 			{
@@ -383,7 +383,7 @@ namespace ft
 
 				next_it = position + 1;
 				ret_it = position;
-				while (next_it != this->back())
+				while (next_it != this->end())
 					*position++ = *next_it++;
 				this->_size--;
 				this->_end--;
@@ -396,7 +396,7 @@ namespace ft
 				size_type	aux;
 
 				aux = ft::dist(first, last);
-				while (_last != this->back())
+				while (last != this->end())
 					*first++ = *last++;
 				return first;
 			}

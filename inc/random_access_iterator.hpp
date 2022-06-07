@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/07 11:02:32 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:51:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ namespace ft
 				this->_ptr -= i;
 				return (*this);
 			}
+
+			bool	operator == (const random_access_iterator &b) const { return this->_ptr == b._ptr; }
+
+			bool	operator != (const random_access_iterator &b) const { return this->_ptr != b._ptr; }
 	}; //end random_access_iterator class
 
 //===================================
@@ -125,7 +129,7 @@ namespace ft
 	}
 
 	template <typename T, typename V>
-	bool	operator != (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	bool	operator != (random_access_iterator<T> & left, random_access_iterator<V> & rigth) 
 	{
 		return !(left.get_ptr() == rigth.get_ptr());
 	}
