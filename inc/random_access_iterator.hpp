@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/04/02 12:26:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/07 11:02:32 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,12 @@ namespace ft
 
 			random_access_iterator	operator + (difference_type i) const
 			{
-				random_access_iterator	aux(this->_ptr + i);
-				return aux;
+				return (this->_ptr + i);
 			}
 
 			random_access_iterator	operator - (difference_type i) const
 			{
-				random_access_iterator	aux(this->_ptr - i);
-				return aux;
+				return (this->_ptr - i);
 			}
 
 			random_access_iterator&	operator += (difference_type i)
@@ -170,9 +168,13 @@ namespace ft
 	template <typename T>
 	random_access_iterator<T> operator - (typename ft::random_access_iterator<T>::difference_type i, random_access_iterator<T> it)
 	{
-		random_access_iterator<T>	aux;
-		aux = it - i;
-		return aux;
+		return (it - i);
+	}
+	
+	template <typename T>
+	typename ft::random_access_iterator<T>::difference_type operator - (const ft::random_access_iterator<T> itf, const ft::random_access_iterator<T> itl)
+	{
+		return (itf.get_ptr() - itl.get_ptr());
 	}
 }
 

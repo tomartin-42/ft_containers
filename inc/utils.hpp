@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 17:50:07 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/06 12:57:06 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/07 09:04:23 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ namespace ft
 	{
 		typename ft::iterator_trails<Iter>::difference_type	i = 0;
 
+		std::cout << "#dist#\n";
 		while (it1 != it2)
 		{
-			std::cout << "X1\n" << &it1 << "-" << &it2 << std::endl;
+			//std::cout << "X1\n" << *it1 << "-" << *it2 << std::endl;
 			it1++;
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/06 12:44:20 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/07 11:03:54 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ namespace ft
                 this->_start = _alloc.allocate(this->_size);
 				this->_end_capacity	= this->_start + this->_size;
 				this->_end = this->_end_capacity;
-			//	for (unsigned long i = 0; first != last; i++)
 				for (size_type i = 0; first != last; i++)
 				{
 					_alloc.construct((this->_start + i), *first);
 					first++;
 				}
+				pre_asig_memory();
 			}
 	
 //copy========================================
@@ -136,7 +136,7 @@ namespace ft
 			}
 			
 			//Preasignate memory: Add n elements to asignate memory to the vector plus 20%	
-			void	pre_asig_memory(size_type	n)
+			void	pre_asig_memory(size_type n)
 			{
 				size_type	aux;
 
@@ -192,7 +192,7 @@ namespace ft
 				{
 					aux = n - this->_size;
 					while (aux-- > 0)
-						this->push_end(val);
+						this->push_back(val);
 				}
 			}
 
@@ -283,14 +283,13 @@ namespace ft
 			void	assign(size_type n, const value_type& val)
 			{
 				this->clear();
-				std::cout << n << std::endl;
 				for(size_type i = 0; i < n; i++)
 				{
-					this->push_end(val);
+					this->push_back(val);
 				}
 			}
 			
-			void push_end(const value_type& val)
+			void push_back(const value_type& val)
 			{
 				if (ft::dist(this->_start, this->_end_capacity) == 0)
 				{
@@ -307,7 +306,7 @@ namespace ft
 				this->_end -= 1;
 				this->_size -= 1;
 			}
-		
+		/
 			//Single Element insert-------------------------------------
 			iterator    insert(iterator it, const value_type& val)
 			{
@@ -358,14 +357,11 @@ namespace ft
 
 				add = ft::dist(first, last);
 				this->_size += add;
-				this->_end += add;
-				std::cout << "HOLA\n";
 				if(this->remained_space() < add)
 				{
-					std::cout << "HOLA1\n";
 					this->reserve(add - remained_space());
 				}
-				std::cout << "HOLA2\n";
+				this->_end += add;
 				aux_it = position;
 				end_it = this->end();
 				insert_it = this->end() + add;
@@ -380,7 +376,7 @@ namespace ft
 			}
 
 			//One erase---------------------------------------------
-			iterator erase	(iterator position)
+			iterator erase(iterator position)
 			{
 				iterator	next_it;
 				iterator	ret_it;
@@ -400,7 +396,7 @@ namespace ft
 				size_type	aux;
 
 				aux = ft::dist(first, last);
-				while (last != this->back())
+				while (_last != this->back())
 					*first++ = *last++;
 				return first;
 			}
