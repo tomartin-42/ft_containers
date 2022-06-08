@@ -26,8 +26,10 @@ namespace ft
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::iterator_category		iterator_category;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::difference_type		difference_type;
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
-			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference				reference;
+			//typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
+			//typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference				reference;
+			typedef T*		pointer;
+			typedef T&		reference;
 
 		private:
 			pointer	_ptr;
@@ -41,6 +43,8 @@ namespace ft
 
 			template <class U>
 			random_access_iterator(const random_access_iterator<U> &other) : _ptr(other.base()) {}
+
+			random_access_iterator(const random_access_iterator &other) : _ptr(other.base()) {}
 
 			random_access_iterator& operator = (const random_access_iterator& other)
 			{
