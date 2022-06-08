@@ -6,14 +6,14 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/07 12:51:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:00:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RANDOM_ACCESS_ITERATOR_HPP
 # define RANDOM_ACCESS_ITERATOR_HPP
 
-#include "iterator_trails.hpp" 
+#include "iterator_traits.hpp" 
 #include "nullptr.hpp"// to ft::nullptr
 #include <cstddef> // to ptrdiff_t
 
@@ -38,7 +38,10 @@ namespace ft
 //==========================
 			random_access_iterator() : _ptr(ft::nullptr_t) {}
 			random_access_iterator(pointer ptr) : _ptr(ptr) {}
-			
+
+			template <class U>
+			random_access_iterator(const random_access_iterator<U> &other) : _ptr(other.get_ptr()) {}
+
 			random_access_iterator& operator = (const random_access_iterator& other)
 			{
 				if (this == &other)
@@ -164,9 +167,13 @@ namespace ft
 	template <typename T>
 	random_access_iterator<T> operator + (typename ft::random_access_iterator<T>::difference_type i, random_access_iterator<T> it)
 	{
-		random_access_iterator<T>	aux;
-		aux = it + i;
-		return aux;
+		return (it + i);
+	}
+
+	template <typename T, typename U>
+	typename ft::random_access_iterator<T>::difference_type operator + (const ft::random_access_iterator<T> itf, const ft::random_access_iterator<U> itl)
+	{
+		return (itf.get_ptr() + itl.get_ptr());
 	}
 
 	template <typename T>
@@ -175,8 +182,8 @@ namespace ft
 		return (it - i);
 	}
 	
-	template <typename T>
-	typename ft::random_access_iterator<T>::difference_type operator - (const ft::random_access_iterator<T> itf, const ft::random_access_iterator<T> itl)
+	template <typename T, typename U>
+	typename ft::random_access_iterator<T>::difference_type operator - (const ft::random_access_iterator<T> itf, const ft::random_access_iterator<U> itl)
 	{
 		return (itf.get_ptr() - itl.get_ptr());
 	}

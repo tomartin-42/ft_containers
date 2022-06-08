@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/07 12:04:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:11:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ namespace ft
 			typedef typename ft::random_access_iterator<const value_type>		const_iterator;		//const random_access_iterator
 			typedef ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
-			typedef typename ft::iterator_trails<iterator>::difference_type 	difference_type;
+			typedef typename ft::iterator_traits<iterator>::difference_type 	difference_type;
 			typedef typename alloc_type::size_type								size_type;			//When we refer to numbers of elemente
 	
 		private:
@@ -301,7 +301,7 @@ namespace ft
 				pre_asig_memory();
 			}
 
-			void pop_end()
+			void pop_back()
 			{
 				this->_end -= 1;
 				this->_size -= 1;
@@ -348,7 +348,7 @@ namespace ft
 
 			//Range insert-------------------------------------------
 			template <class InputIterator>
-			void insert(iterator position, InputIterator first, InputIterator last)
+			void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
 				size_type	add;
 				iterator	aux_it;
@@ -406,22 +406,22 @@ namespace ft
 				pointer   	aux_start(x._start);
 				pointer   	aux_end(x._end);
 				pointer		aux_end_capacity(x._end_capacity);
-				size_type	aux_size(x.size);	
+				size_type	aux_size(x.size());	
 
 				x._start = this->_start;
 				x._end = this->_end;
 				x._end_capacity = this->_end_capacity;
-				x._size = this->size;
+				x._size = this->size();
 				this->_start = aux_start;
 				this->_end = aux_end;
 				this->_end_capacity = aux_end_capacity;
-				this->size = aux_size;
+				this->_size = aux_size;
 			}
 
 			void	clear(void)
 			{
 				while (this->_size != 0)
-					this->pop_end();
+					this->pop_back();
 			}
 
 	};// end vector class

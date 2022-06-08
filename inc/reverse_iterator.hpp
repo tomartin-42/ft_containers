@@ -6,14 +6,14 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/05 17:35:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/08 08:15:09 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REVERSE_ITERATOR_HPP
 # define REVERSE_ITERATOR_HPP
 
-#include "iterator_trails.hpp" 
+#include "iterator_traits.hpp" 
 #include "random_access_iterator.hpp"
 #include "nullptr.hpp"// to ft::nullptr
 #include <cstddef> // to ptrdiff_t
@@ -25,11 +25,11 @@ namespace ft
 	{
 		public:
 			typedef Iter													iterator;
-			typedef typename ft::iterator_trails<Iter>::iterator_category	iterator_category;
-			typedef typename ft::iterator_trails<Iter>::value_type			value_type;
-			typedef typename ft::iterator_trails<Iter>::difference_type		difference_type;
-			typedef typename ft::iterator_trails<Iter>::pointer				pointer;
-			typedef typename ft::iterator_trails<Iter>::reference			reference;
+			typedef typename ft::iterator_traits<Iter>::iterator_category	iterator_category;
+			typedef typename ft::iterator_traits<Iter>::value_type			value_type;
+			typedef typename ft::iterator_traits<Iter>::difference_type		difference_type;
+			typedef typename ft::iterator_traits<Iter>::pointer				pointer;
+			typedef typename ft::iterator_traits<Iter>::reference			reference;
 
 		private:
 			pointer	_ptr;
