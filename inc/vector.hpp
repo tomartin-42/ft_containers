@@ -393,9 +393,6 @@ namespace ft
 			//Fill erase-----------------------------------------
 			iterator erase(iterator first, iterator last)
 			{
-				size_type	aux;
-
-				aux = ft::dist(first, last);
 				while (last != this->end())
 					*first++ = *last++;
 				return first;

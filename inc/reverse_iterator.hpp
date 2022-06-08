@@ -39,19 +39,23 @@ namespace ft
 //constructors
 //==========================
 			reverse_iterator() : _ptr(ft::nullptr_t) {}
-			reverse_iterator(pointer ptr) : _ptr(ptr) {}
+			//reverse_iterator(pointer ptr) : _ptr(ptr) {}
+			reverse_iterator(iterator it) : _ptr(it.base()) {}
+
+			template <class U>
+			reverse_iterator(const reverse_iterator<U> &other) : _ptr(other.base()) {}
 			
 			reverse_iterator& operator = (const reverse_iterator& other)
 			{
 				if (this == &other)
 					return *this;
-				this->_ptr = other.get_ptr();
+				this->_ptr = other.base();
 				return *this;
 			}
 
 			//~reverse_iterator() {}
 
-			pointer get_ptr() const {return this->_ptr;}
+			pointer base() const {return this->_ptr;}
 
 //==========================
 //operators
@@ -116,6 +120,9 @@ namespace ft
 				this->_ptr += i;
 				return (*this);
 			}
+
+			bool	operator == (const reverse_iterator &b) const {return this->_ptr == b._ptr;}
+			bool	operator != (const reverse_iterator &b) const {return this->_ptr != b._ptr;}
 	}; //end reverse_iterator class
 
 //===================================
@@ -125,56 +132,65 @@ namespace ft
 	template <typename T, typename V>
 	bool	operator == (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
 	{
-		return left.get_ptr() == rigth.get_ptr();
+		return left.base() == rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator != (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
 	{
-		return !(left.get_ptr() == rigth.get_ptr());
+		return !(left.base() == rigth.base());
 	}
 
 	template <typename T, typename V>
 	bool	operator < (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
 	{
-		return left.get_ptr() < rigth.get_ptr();
+		return left.base() < rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator > (reverse_iterator<T>& left, reverse_iterator<V>& rigth)
 	{
-		return left.get_ptr() > rigth.get_ptr();
+		return left.base() > rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator <= (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
 	{
-		return !(left.get_ptr() > rigth.get_ptr());
+		return !(left.base() > rigth.base());
 	}
 
 	template <typename T, typename V>
 	bool	operator >= (reverse_iterator<T>& left, reverse_iterator<V>& rigth)
 	{
-		return !(left.get_ptr() < rigth.get_ptr());
+		return !(left.base() < rigth.base());
 	}
 
 //====================================
 //Overload n + it and n - it because can not implement as member function
 //====================================
-	template <typename T>
-	reverse_iterator<T> operator + (typename ft::reverse_iterator<T>::difference_type i, reverse_iterator<T> it)
+
+	template <typename T, typename U>
+	typename ft::reverse_iterator<T>::difference_type operator - (const ft::reverse_iterator<T> itf, const ft::reverse_iterator<U> itl)
 	{
-		reverse_iterator<T>	aux;
-		aux = it - i;
-		return aux;
+		return (itf.base() - itl.base());
 	}
 
 	template <typename T>
 	reverse_iterator<T> operator - (typename ft::reverse_iterator<T>::difference_type i, reverse_iterator<T> it)
 	{
-		reverse_iterator<T>	aux;
-		aux = it + i;
-		return aux;
+		return (it - i);
+	}
+
+	template <typename T, typename U>
+	typename ft::reverse_iterator<T>::difference_type operator + (const ft::reverse_iterator<T> itf, const ft::reverse_iterator<U> itl)
+	{
+		return (itf.base() + itl.base());
+	}
+
+	template <typename T>
+	reverse_iterator<T> operator + (typename ft::reverse_iterator<T>::difference_type i, reverse_iterator<T> it)
+	{
+		return (it - i);
 	}
 } //end ft namespace
 

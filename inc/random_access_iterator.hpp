@@ -40,19 +40,19 @@ namespace ft
 			random_access_iterator(pointer ptr) : _ptr(ptr) {}
 
 			template <class U>
-			random_access_iterator(const random_access_iterator<U> &other) : _ptr(other.get_ptr()) {}
+			random_access_iterator(const random_access_iterator<U> &other) : _ptr(other.base()) {}
 
 			random_access_iterator& operator = (const random_access_iterator& other)
 			{
 				if (this == &other)
 					return *this;
-				this->_ptr = other.get_ptr();
+				_ptr = other.base();
 				return *this;
 			}
 
 			~random_access_iterator() {}
 
-			pointer get_ptr() const {return this->_ptr;}
+			pointer base() const {return this->_ptr;}
 
 //==========================
 //operators
@@ -116,9 +116,8 @@ namespace ft
 				return (*this);
 			}
 
-			bool	operator == (const random_access_iterator &b) const { return this->_ptr == b._ptr; }
-
-			bool	operator != (const random_access_iterator &b) const { return this->_ptr != b._ptr; }
+			bool	operator == (const random_access_iterator &b) const {return this->_ptr == b._ptr;}
+			bool	operator != (const random_access_iterator &b) const {return this->_ptr != b._ptr;}
 	}; //end random_access_iterator class
 
 //===================================
@@ -128,37 +127,37 @@ namespace ft
 	template <typename T, typename V>
 	bool	operator == (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
 	{
-		return left.get_ptr() == rigth.get_ptr();
+		return left.base() == rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator != (random_access_iterator<T> & left, random_access_iterator<V> & rigth) 
 	{
-		return !(left.get_ptr() == rigth.get_ptr());
+		return !(left.base() == rigth.base());
 	}
 
 	template <typename T, typename V>
 	bool	operator < (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
 	{
-		return left.get_ptr() < rigth.get_ptr();
+		return left.base() < rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator > (random_access_iterator<T>& left, random_access_iterator<V>& rigth)
 	{
-		return left.get_ptr() > rigth.get_ptr();
+		return left.base() > rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator <= (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
 	{
-		return !(left.get_ptr() > rigth.get_ptr());
+		return !(left.base() > rigth.base());
 	}
 
 	template <typename T, typename V>
 	bool	operator >= (random_access_iterator<T>& left, random_access_iterator<V>& rigth)
 	{
-		return !(left.get_ptr() < rigth.get_ptr());
+		return !(left.base() < rigth.base());
 	}
 
 //====================================
@@ -173,7 +172,7 @@ namespace ft
 	template <typename T, typename U>
 	typename ft::random_access_iterator<T>::difference_type operator + (const ft::random_access_iterator<T> itf, const ft::random_access_iterator<U> itl)
 	{
-		return (itf.get_ptr() + itl.get_ptr());
+		return (itf.base() + itl.base());
 	}
 
 	template <typename T>
@@ -185,7 +184,7 @@ namespace ft
 	template <typename T, typename U>
 	typename ft::random_access_iterator<T>::difference_type operator - (const ft::random_access_iterator<T> itf, const ft::random_access_iterator<U> itl)
 	{
-		return (itf.get_ptr() - itl.get_ptr());
+		return (itf.base() - itl.base());
 	}
 }
 
