@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/08 12:11:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/09 12:38:21 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "nullptr.hpp" //to ft::nullptr
 #include <cstddef> // to ptrdiff_t
 #include "random_access_iterator.hpp"
-#include "lexicographical_compare.hpp"
 #include "reverse_iterator.hpp"
+#include "lexicographical_compare.hpp"
 #include "utils.hpp"
 #include "enable_if.hpp"
 #include "is_integral.hpp"

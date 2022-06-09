@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:39:13 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/08 08:13:27 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/09 12:39:26 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 namespace ft
 {
+	struct input_iterator_tag {};
+	struct output_iterator_tag {};
+	struct forward_iterator_tag : public input_iterator_tag {};
+	struct bidirectional_iterator_tag : public forward_iterator_tag {};
+	struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 	
 	//Need to pass type category to iterator_traits
 	//Is a s a kind of selector to setup correct type and pass to iterator_traits
@@ -31,11 +36,6 @@ namespace ft
 		typedef Reference	reference;
 	};
 	
-	struct input_iterator_tag {};
-	struct output_iterator_tag {};
-	struct forward_iterator_tag : public input_iterator_tag {};
-	struct bidirectional_iterator_tag : public forward_iterator_tag {};
-	struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 
 	template<class Iter>
 	struct iterator_traits
