@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/09 13:30:17 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/07 11:38:45 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
 
 template <typename Ite_1, typename Ite_2>
 void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
@@ -48,11 +47,12 @@ int		main(void)
 	cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
 
 	std::cout << std::boolalpha;
-	std::cout << ((it_0 + 3) == (cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
-
+	std::cout << (it_0 == cit_0 ) << std::endl;
+	//std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
+/*
 	std::cout << "\t\tft_eq_ope:" << std::endl;
 	// regular it
-	/*ft_eq_ope(it_0 + 3, it_mid);
+	ft_eq_ope(it_0 + 3, it_mid);
 	ft_eq_ope(it_0, it_1);
 	ft_eq_ope(it_1 - 3, it_mid);
 	// const it
@@ -66,7 +66,6 @@ int		main(void)
 	ft_eq_ope(it_1, cit_0);
 	ft_eq_ope(it_1 - 3, cit_mid);
 	ft_eq_ope(it_mid, cit_1 - 3);
-
-	return (0);
 */
+	return (0);
 }

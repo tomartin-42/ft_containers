@@ -41,10 +41,10 @@ namespace ft
 			random_access_iterator() : _ptr(ft::nullptr_t) {}
 			random_access_iterator(pointer ptr) : _ptr(ptr) {}
 
-			//template <class U>
-			//random_access_iterator(const random_access_iterator<U> &other) : _ptr(other._ptr) {}
+			template <class U>
+			random_access_iterator(const random_access_iterator<U> &other) : _ptr(other.base()) {}
 
-			random_access_iterator(const random_access_iterator &other) : _ptr(other._ptr) {}
+			random_access_iterator(const random_access_iterator &other) : _ptr(other.base()) {}
 
 			random_access_iterator& operator = (const random_access_iterator& other)
 			{
