@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/09 13:31:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:00:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ namespace ft
 //constructors
 //==========================
 			random_access_iterator() : _ptr(ft::nullptr_t) {}
-
 			random_access_iterator(pointer ptr) : _ptr(ptr) {}
 
-			template <class U>
-			random_access_iterator(const random_access_iterator<U> &other) : _ptr(other.base()) {}
+			//template <class U>
+			//random_access_iterator(const random_access_iterator<U> &other) : _ptr(other._ptr) {}
+
+			random_access_iterator(const random_access_iterator &other) : _ptr(other._ptr) {}
 
 			random_access_iterator& operator = (const random_access_iterator& other)
 			{
@@ -55,10 +56,7 @@ namespace ft
 
 			~random_access_iterator() {}
 
-			pointer base() const 
-			{
-				return this->_ptr;
-			}
+			pointer base() const {return this->_ptr;}
 
 //==========================
 //operators
@@ -172,9 +170,7 @@ namespace ft
 	template <typename T>
 	random_access_iterator<T> operator + (typename ft::random_access_iterator<T>::difference_type i, random_access_iterator<T> it)
 	{
-		random_access_iterator<T> aux;
-		aux = *it + i;
-		return (aux);
+		return (it + i);
 	}
 
 	template <typename T, typename U>
