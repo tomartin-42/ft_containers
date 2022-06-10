@@ -114,7 +114,7 @@ namespace ft
 //destructor==================================
 			virtual ~vector ()
 			{
-				this->_alloc.deallocate(this->_start, ft::dist (this->_start, this->_end_capacity) + 1);
+			//	this->_alloc.deallocate(this->_start, ft::dist (this->_start, this->_end_capacity) + 1);
 			}
 
 //************************************************************************************************************//	
@@ -129,7 +129,7 @@ namespace ft
 				if (this->_end == this->_end_capacity)
 				{
 					size_type	i;
-					i = this->_size * 0.2;
+					i = this->_size * 2;
 					_alloc.allocate(i, this->_end_capacity + 1); 
 					this->_end_capacity += i;
 				}
@@ -295,7 +295,7 @@ namespace ft
 				{
 					this->reserve(1);
 				}
-				this->_alloc.construct((this->_end + 1), val);
+				this->_alloc.construct((this->_end), val);
 				this->_end += 1;
 				this->_size += 1;
 				pre_asig_memory();
