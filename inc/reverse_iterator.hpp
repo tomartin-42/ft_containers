@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/08 08:15:09 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/10 10:32:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,37 +130,37 @@ namespace ft
 //===================================
 
 	template <typename T, typename V>
-	bool	operator == (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
+	bool	operator == (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth) 
 	{
 		return left.base() == rigth.base();
 	}
 
 	template <typename T, typename V>
-	bool	operator != (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
+	bool	operator != (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth) 
 	{
 		return !(left.base() == rigth.base());
 	}
 
 	template <typename T, typename V>
-	bool	operator < (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
+	bool	operator < (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth) 
 	{
 		return left.base() < rigth.base();
 	}
 
 	template <typename T, typename V>
-	bool	operator > (reverse_iterator<T>& left, reverse_iterator<V>& rigth)
+	bool	operator > (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth)
 	{
 		return left.base() > rigth.base();
 	}
 
 	template <typename T, typename V>
-	bool	operator <= (reverse_iterator<T>& left, reverse_iterator<V>& rigth) 
+	bool	operator <= (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth) 
 	{
 		return !(left.base() > rigth.base());
 	}
 
 	template <typename T, typename V>
-	bool	operator >= (reverse_iterator<T>& left, reverse_iterator<V>& rigth)
+	bool	operator >= (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth)
 	{
 		return !(left.base() < rigth.base());
 	}

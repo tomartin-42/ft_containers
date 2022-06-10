@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/08 12:00:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/10 10:30:58 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ namespace ft
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::iterator_category		iterator_category;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::difference_type		difference_type;
-			//typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
-			//typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference				reference;
-			typedef T*		pointer;
-			typedef T&		reference;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
+			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference				reference;
+			//typedef T*		pointer;
+			//typedef T&		reference;
 
 		private:
 			pointer	_ptr;
@@ -129,37 +129,37 @@ namespace ft
 //===================================
 
 	template <typename T, typename V>
-	bool	operator == (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	bool	operator == (const random_access_iterator<T>& left, const random_access_iterator<V>& rigth) 
 	{
 		return left.base() == rigth.base();
 	}
 
 	template <typename T, typename V>
-	bool	operator != (random_access_iterator<T> & left, random_access_iterator<V> & rigth) 
+	bool	operator != (const random_access_iterator<T> & left, const random_access_iterator<V> & rigth) 
 	{
 		return !(left.base() == rigth.base());
 	}
 
 	template <typename T, typename V>
-	bool	operator < (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	bool	operator < (const random_access_iterator<T>& left, const random_access_iterator<V>& rigth) 
 	{
 		return left.base() < rigth.base();
 	}
 
 	template <typename T, typename V>
-	bool	operator > (random_access_iterator<T>& left, random_access_iterator<V>& rigth)
+	bool	operator > (const random_access_iterator<T>& left, const random_access_iterator<V>& rigth)
 	{
 		return left.base() > rigth.base();
 	}
 
 	template <typename T, typename V>
-	bool	operator <= (random_access_iterator<T>& left, random_access_iterator<V>& rigth) 
+	bool	operator <= (const random_access_iterator<T>& left, const random_access_iterator<V>& rigth) 
 	{
 		return !(left.base() > rigth.base());
 	}
 
 	template <typename T, typename V>
-	bool	operator >= (random_access_iterator<T>& left, random_access_iterator<V>& rigth)
+	bool	operator >= (const random_access_iterator<T>& left, const random_access_iterator<V>& rigth)
 	{
 		return !(left.base() < rigth.base());
 	}

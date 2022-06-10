@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/07 11:38:45 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/10 10:27:23 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		main(void)
 	std::cout << std::boolalpha;
 	std::cout << (it_0 == cit_0 ) << std::endl;
 	//std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
+	std::cout << (it_0 + 3 == cit_0);
 /*
 	std::cout << "\t\tft_eq_ope:" << std::endl;
 	// regular it
