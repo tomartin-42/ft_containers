@@ -359,6 +359,7 @@ namespace ft
 				this->_size += add;
 				if(this->remained_space() < add)
 				{
+					std::cout << add << " " << this->_size << " " << remained_space() << std::endl;
 					this->reserve(add - remained_space());
 				}
 				this->_end += add;

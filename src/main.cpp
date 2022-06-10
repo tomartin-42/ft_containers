@@ -16,57 +16,26 @@
 #include <vector>
 #include <string>
 
-template <typename Ite_1, typename Ite_2>
-void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
-{
-	std::cout << (first < second) << std::endl;
-	std::cout << (first <= second) << std::endl;
-	std::cout << (first > second) << std::endl;
-	std::cout << (first >= second) << std::endl;
-	if (redo)
-		ft_eq_ope(second, first, 0);
-}
+#define TESTED_TYPE int
 
 int		main(void)
 {
-	const int size = 5;
-	ft::vector<int> vct(size);
-	ft::vector<int>::iterator it_0(vct.begin());
-	ft::vector<int>::iterator it_1(vct.end());
-	ft::vector<int>::iterator it_mid;
+	ft::vector<TESTED_TYPE> vct(5);
+	ft::vector<TESTED_TYPE> vct2;
+	const int cut = 3;
 
-	ft::vector<int>::const_iterator cit_0 = vct.begin();
-	ft::vector<int>::const_iterator cit_1;
-	ft::vector<int>::const_iterator cit_mid;
+	for (unsigned long int i = 0; i < vct.size(); ++i)
+		vct[i] = (vct.size() - i) * 7;
+	
+	vct2.insert(vct2.begin(), vct.begin(), vct.begin() + cut);
+	vct2.insert(vct2.begin(), vct.begin() + cut, vct.end());
+	vct2.insert(vct2.end(), vct.begin(), vct.begin() + cut);
 
-	for (int i = size; it_0 != it_1; --i)
-		*it_0++ = i;
-	it_0 = vct.begin();
-	cit_1 = vct.end();
-	it_mid = it_0 + 3;
-	cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
+	std::cout << "insert return:" << std::endl;
 
-	std::cout << std::boolalpha;
-	std::cout << (it_0 == cit_0 ) << std::endl;
-	//std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
-	std::cout << (it_0 + 3 == cit_0);
-/*
-	std::cout << "\t\tft_eq_ope:" << std::endl;
-	// regular it
-	ft_eq_ope(it_0 + 3, it_mid);
-	ft_eq_ope(it_0, it_1);
-	ft_eq_ope(it_1 - 3, it_mid);
-	// const it
-	ft_eq_ope(cit_0 + 3, cit_mid);
-	ft_eq_ope(cit_0, cit_1);
-	ft_eq_ope(cit_1 - 3, cit_mid);
-	// both it
-	ft_eq_ope(it_0 + 3, cit_mid);
-	ft_eq_ope(it_mid, cit_0 + 3);
-	ft_eq_ope(it_0, cit_1);
-	ft_eq_ope(it_1, cit_0);
-	ft_eq_ope(it_1 - 3, cit_mid);
-	ft_eq_ope(it_mid, cit_1 - 3);
-*/
+	std::cout << *vct2.insert(vct2.end(), 42) << std::endl;
+	std::cout << *vct2.insert(vct2.begin() + 5, 84) << std::endl;
+	std::cout << "----------------------------------------" << std::endl;
+
 	return (0);
 }
