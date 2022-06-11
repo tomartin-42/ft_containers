@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/09 12:38:21 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:00:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,11 +216,12 @@ namespace ft
 					this->_end = this->_start;
 					this->_end_capacity = this->_end;
 				}
-				if(static_cast<unsigned long>(this->capacity()) < n)
+			//	if(static_cast<unsigned long>(this->capacity()) < n)
+				if(static_cast<size_type>(this->capacity()) < n)
 				{
 					_alloc.allocate(n - this->capacity(), (this->_end_capacity + 1));
+					this->_end_capacity += n - this->capacity();
 				}
-				this->_end_capacity += n - this->capacity();
 			}
 
 //==========================
@@ -308,72 +309,92 @@ namespace ft
 			}
 		
 			//Single Element insert-------------------------------------
-			iterator    insert(iterator it, const value_type& val)
+			iterator    insert(iterator position, const value_type& val)
 			{
-				iterator	end_it;
-				iterator	insert_it;
+				size_type	i = 0;
+				size_type	offset;
+				vector		tmp(this->size() + 1);
+				iterator	insert_it = this->begin();
 
-				this->_size += 1;
-				if(this->remained_space() == 0)
-					reserve(this->_size);
-				end_it = this->end();
-				insert_it = ++this->end();
-				while(insert_it != it)
-					*(insert_it--) = *(end_it--);
-				*it = val;
-				this->_end += 1;
-				return it;
+				while(insert_it != position)
+				{
+					tmp[i] = *insert_it;
+					i++;
+					insert_it++;
+				}
+				offset = i;
+				tmp[i] = val;
+				i++;
+
+				while(insert_it != this->end())
+				{
+					tmp[i] = *insert_it;
+					i++;
+					insert_it++;
+				}
+				this->swap(tmp);
+				tmp.clear();
+				return this->begin() + offset;
 			}
 
 			//Fill insert---------------------------------------------
 			void insert(iterator position, size_type n, const value_type& val)
 			{
-				iterator	end_it;
-				iterator	insert_it;
+				size_type	i = 0;
+				vector		tmp(this->size() + n);
+				iterator	insert_it = this->begin();
 
-				this->_size += n;
-				this->_end += n; 
-				if (remained_space() < n)
-					this->reserve(n - remained_space());
-				end_it = this->end();
-				insert_it = this->end() + n;
-				for (size_type aux = n; aux > 0; aux--)
-					*(insert_it--) = *(end_it--);
-				while(n-- > 0)
+				while(insert_it != position)
 				{
-					*position = val;
-					position++;
+					tmp[i] = *insert_it;
+					i++;
+					insert_it++;
 				}
+				while(n > 0)
+				{
+					tmp[i] = val;
+					i++;
+					n--;
+				}
+				while(insert_it != this->end())
+				{
+					tmp[i] = *insert_it;
+					i++;
+					insert_it++;
+				}
+				this->swap(tmp);
+				tmp.clear();
 			}
 
 			//Range insert-------------------------------------------
 			template <class InputIterator>
 			void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
-				size_type	add;
-				iterator	aux_it;
-				iterator	end_it;
-				iterator	insert_it;
+				size_type	new_capacity = (ft::dist(first, last)) + this->_size;
+				vector		temp(new_capacity);
+				iterator	it = this->begin();
+				size_type	pos = 0;
 
-				add = ft::dist(first, last);
-				this->_size += add;
-				if(this->remained_space() < add)
+				while (it != position)
 				{
-					std::cout << add << " " << this->_size << " " << remained_space() << std::endl;
-					this->reserve(add - remained_space());
+					temp[pos] = *it;
+					it++;
+					pos++;
 				}
-				this->_end += add;
-				aux_it = position;
-				end_it = this->end();
-				insert_it = this->end() + add;
-				for (size_type aux = add; aux > 0; aux--)
-					*(insert_it--) = *(end_it--);
-				while(add-- > 0)
+				while (first != last)
 				{
-					*position = *first;
-					position++;
+					temp[pos] = *first;
 					first++;
+					pos++;
 				}
+				while (pos < new_capacity)
+				{
+					temp[pos] = *it;
+					it++;
+					pos++;
+				}
+				this->swap(temp);
+				temp.clear();
 			}
 
 			//One erase---------------------------------------------
