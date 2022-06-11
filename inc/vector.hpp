@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/11 19:00:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:55:36 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,14 +292,8 @@ namespace ft
 			
 			void push_back(const value_type& val)
 			{
-				if (ft::dist(this->_start, this->_end_capacity) == 0)
-				{
-					this->reserve(1);
-				}
-				this->_alloc.construct((this->_end), val);
-				this->_end += 1;
-				this->_size += 1;
 				pre_asig_memory();
+				this->insert(this->end(), val);
 			}
 
 			void pop_back()
