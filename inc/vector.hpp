@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/11 19:55:36 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:12:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,16 @@ namespace ft
 	
 //copy========================================
 			vector(const vector& other)
-				: _alloc(other._alloc), _start(other._start), _end(other._end), _end_capacity(other._end_capacity), _size(other._size)
-			{}
+				: _alloc(other._alloc), _start(ft::nullptr_t), _end(_start), _end_capacity(_end), _size(0)
+			{
+					iterator it = other._start;
+					
+					while(it != other._end)
+					{
+						this->push_back(*it);
+						it++;
+					}
+			}
 
 //= operator===================================
 			vector& operator = (const vector& other)
@@ -409,9 +417,13 @@ namespace ft
 			//Fill erase-----------------------------------------
 			iterator erase(iterator first, iterator last)
 			{
+				iterator	ret_it = first;
+
 				while (last != this->end())
 					*first++ = *last++;
-				return first;
+				this->_size -= ft::dist(first, last);
+				this->_end -= ft::dist(first, last);
+				return ret_it;
 			}
 
 			void	swap(vector& x)
@@ -477,7 +489,7 @@ namespace ft
 	template <typename T, typename U, class alloc>
 	bool operator > (const vector<T, alloc> vf, const vector<U, alloc> vl)
 	{
-		return !(vf < vl);
+		return !(vf > vl);
 	}
 
 	template <typename T, typename U, class alloc>
