@@ -61,13 +61,13 @@ namespace ft
 //operators
 //==========================
 
-			reference	operator * () const {return *(this->_ptr - 1)};
-			}
+			reference	operator * () const {return *(this->_ptr - 1);}
+			
 			pointer		operator -> () const {return this->_ptr - 1;}
 
 			reference	operator [] (difference_type i)
 			{
-				return *(this->_ptr + i);
+				return *((this->_ptr - i) - 1);
 			}
 
 			reverse_iterator	operator ++ (int)
