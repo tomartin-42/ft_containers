@@ -61,8 +61,9 @@ namespace ft
 //operators
 //==========================
 
-			reference	operator * () const {return *(this->_ptr);}
-			pointer		operator -> () const {return this->_ptr;}
+			reference	operator * () const {return *(this->_ptr - 1)};
+			}
+			pointer		operator -> () const {return this->_ptr - 1;}
 
 			reference	operator [] (difference_type i)
 			{
