@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/13 10:12:34 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/13 11:45:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,13 +489,13 @@ namespace ft
 	template <typename T, typename U, class alloc>
 	bool operator > (const vector<T, alloc> vf, const vector<U, alloc> vl)
 	{
-		return !(vf > vl);
+		return !(vf <= vl);
 	}
 
 	template <typename T, typename U, class alloc>
 	bool operator >= (const vector<T, alloc> vf, const vector<U, alloc> vl)
 	{
-		return !(vf <= vl);
+		return !(vf < vl);
 	}
 
 	template <typename T, class alloc>

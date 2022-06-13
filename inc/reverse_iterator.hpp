@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/10 10:32:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/13 11:21:39 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
 //constructors
 //==========================
 			reverse_iterator() : _ptr(ft::nullptr_t) {}
-			//reverse_iterator(pointer ptr) : _ptr(ptr) {}
+			reverse_iterator(pointer ptr) : _ptr(ptr) {}
 			reverse_iterator(iterator it) : _ptr(it.base()) {}
 
 			template <class U>
@@ -99,14 +99,16 @@ namespace ft
 
 			reverse_iterator	operator + (difference_type i) const
 			{
-				reverse_iterator	aux(this->_ptr - i);
-				return aux;
+				return(this->_ptr - i);
+				//reverse_iterator	aux(this->_ptr - i);
+				//return aux;
 			}
 
 			reverse_iterator	operator - (difference_type i) const
 			{
-				reverse_iterator	aux(this->_ptr + i);
-				return aux;
+				return(this->_ptr + i);
+				//reverse_iterator	aux(this->_ptr + i);
+				//return aux;
 			}
 
 			reverse_iterator&	operator += (difference_type i)
