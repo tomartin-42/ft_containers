@@ -67,7 +67,7 @@ namespace ft
 
 			reference	operator [] (difference_type i)
 			{
-				return *((this->_ptr - i) - 1);
+				return (this->base()[-i - 1]);
 			}
 
 			reverse_iterator	operator ++ (int)
@@ -193,7 +193,13 @@ namespace ft
 	template <typename T>
 	reverse_iterator<T> operator + (typename ft::reverse_iterator<T>::difference_type i, reverse_iterator<T> it)
 	{
-		return (it - i);
+		return (it + i);
+	}
+
+		template <typename T>
+	reverse_iterator<T> operator-(const reverse_iterator<T> &a, typename reverse_iterator<T>::difference_type &b)
+	{
+		return a.base() - b;
 	}
 } //end ft namespace
 

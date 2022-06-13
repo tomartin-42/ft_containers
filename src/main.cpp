@@ -16,28 +16,34 @@
 #include <vector>
 #include <string>
 
-#define TESTED_TYPE std::string
+#define TESTED_TYPE int
+
 int		main(void)
 {
-	ft::vector<TESTED_TYPE> vct(8);
-	ft::vector<TESTED_TYPE> vct2;
-	ft::vector<TESTED_TYPE>::iterator it = vct.begin();
+	const int size = 5;
+	ft::vector<TESTED_TYPE> vct(size);
+	ft::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
+	ft::vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
 
-	for (unsigned long int i = 0; i < vct.size(); ++i)
-		it[i] = std::string((vct.size() - i), i + 65);
+	for (int i = 0; i < size; ++i)
+		it[i] = (size - i) * 5;
 
-	std::cout << "push_back():\n" << std::endl;
+	it = it + 5;
+	it = 1 + it;
+	it = it - 4;
+//	std::cout << *it << std::endl;
+	std::cout << *(it += 2) << std::endl;
+	std::cout << *(it -= 1) << std::endl;
 
-	std::cout << "HOLA1\n";
-	vct.push_back("One long string");
-	std::cout << "HOLA2\n";
-	vct2.push_back("Another long string");
-	std::cout << "HOLA3\n";
+	*(it -= 2) = 42;
+	*(it += 2) = 21;
 
-	vct.pop_back();
-	std::cout << "HOLA4\n";
-	vct2.pop_back();
-	std::cout << "HOLA5\n";
+	std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
 
+	std::cout << "(it == const_it): " << (ite == it) << std::endl;
+	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+
+	//printSize(vct, true);
 	return (0);
 }
