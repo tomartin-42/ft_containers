@@ -175,7 +175,7 @@ namespace ft
 	template <typename T, typename U>
 	typename ft::reverse_iterator<T>::difference_type operator - (const ft::reverse_iterator<T> itf, const ft::reverse_iterator<U> itl)
 	{
-		return (itf.base() - itl.base());
+		return (itl.base() - itf.base());
 	}
 
 	template <typename T>
@@ -196,7 +196,7 @@ namespace ft
 		return (it + i);
 	}
 
-		template <typename T>
+	template <typename T>
 	reverse_iterator<T> operator-(const reverse_iterator<T> &a, typename reverse_iterator<T>::difference_type &b)
 	{
 		return a.base() - b;
