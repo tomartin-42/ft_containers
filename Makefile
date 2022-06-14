@@ -34,7 +34,7 @@ LDFLAGS = -fsanitize=address
 # Folders
 OBJ_DIR = obj/
 SRC_DIR = src/
-STACK_DIR = stack/
+#STACK_DIR = stack/
 #VECTOR_DIR = vector/
 
 # Source files and includes
