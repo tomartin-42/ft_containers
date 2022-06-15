@@ -12,6 +12,8 @@
 
 #include "vector.hpp"
 #include "stack.hpp"
+#include "stack.hpp"
+#include "node.hpp"
 #include "random_access_iterator.hpp"
 #include <iostream>
 #include <vector>
@@ -37,6 +39,9 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 
 int		main(void)
 {
+
+	ft::node<int>	alfa;
+
 	const int size = 5;
 	TEST::vector<TESTED_TYPE> vct(size);
 	TEST::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
