@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/11 19:43:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/15 10:22:33 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,43 @@
 #include <vector>
 #include <string>
 
+
 #define TESTED_TYPE int
+#define TEST ft
+
 
 template <typename Ite_1, typename Ite_2>
 void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 {
+	std::cout << "*************************\n";
 	std::cout << (first < second) << std::endl;
 	std::cout << (first <= second) << std::endl;
 	std::cout << (first > second) << std::endl;
 	std::cout << (first >= second) << std::endl;
 	if (redo)
-		ft_eq_ope(second, first, 0);
+	//	ft_eq_ope(second, first, 0);
+	std::cout << "*************************\n";
 }
 
 int		main(void)
 {
 	const int size = 5;
-	std::vector<TESTED_TYPE > vct(size);
-	std::vector<TESTED_TYPE >::reverse_iterator it_0(vct.rbegin());
-	std::vector<TESTED_TYPE >::reverse_iterator it_1(vct.rend());
-	std::vector<TESTED_TYPE >::reverse_iterator it_mid;
+	TEST::vector<TESTED_TYPE> vct(size);
+	TEST::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
+	TEST::vector<TESTED_TYPE>::reverse_iterator it_1(vct.rend());
+	TEST::vector<TESTED_TYPE>::reverse_iterator it_mid;
 
-	std::vector<TESTED_TYPE >::const_reverse_iterator cit_0 = vct.rbegin();
-	std::vector<TESTED_TYPE >::const_reverse_iterator cit_1;
-	std::vector<TESTED_TYPE >::const_reverse_iterator cit_mid;
+	TEST::vector<TESTED_TYPE>::const_reverse_iterator cit_0 = vct.rbegin();
+	TEST::vector<TESTED_TYPE>::const_reverse_iterator cit_1;
+	TEST::vector<TESTED_TYPE>::const_reverse_iterator cit_mid;
 
 	for (int i = size; it_0 != it_1; --i)
+	{
 		*it_0++ = i;
-//	printSize(vct, 1);
+		std::cout << "it_0 = " << *(it_0 - 1)<< std::endl;
+	}
+
+	//printSize(vct, 1);
 	it_0 = vct.rbegin();
 	cit_1 = vct.rend();
 	it_mid = it_0 + 3;
@@ -54,21 +63,21 @@ int		main(void)
 	std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
 
 	std::cout << "\t\tft_eq_ope:" << std::endl;
-	// regular it
-	ft_eq_ope(it_0 + 3, it_mid);
+	std::cout << "*****regular it\n";
+//	ft_eq_ope(it_0 + 3, it_mid);
 	ft_eq_ope(it_0, it_1);
-	ft_eq_ope(it_1 - 3, it_mid);
-	// const it
-	ft_eq_ope(cit_0 + 3, cit_mid);
-	ft_eq_ope(cit_0, cit_1);
-	ft_eq_ope(cit_1 - 3, cit_mid);
-	// both it
-	ft_eq_ope(it_0 + 3, cit_mid);
-	ft_eq_ope(it_mid, cit_0 + 3);
-	ft_eq_ope(it_0, cit_1);
-	ft_eq_ope(it_1, cit_0);
-	ft_eq_ope(it_1 - 3, cit_mid);
-	ft_eq_ope(it_mid, cit_1 - 3);
+//	ft_eq_ope(it_1 - 3, it_mid);
+//	std::cout << "*****const it\n";
+//	ft_eq_ope(cit_0 + 3, cit_mid);
+//	ft_eq_ope(cit_0, cit_1);
+//	ft_eq_ope(cit_1 - 3, cit_mid);
+//	std::cout << "*****both it\n";
+//	ft_eq_ope(it_0 + 3, cit_mid);
+//	ft_eq_ope(it_mid, cit_0 + 3);
+//	ft_eq_ope(it_0, cit_1);
+//	ft_eq_ope(it_1, cit_0);
+//	ft_eq_ope(it_1 - 3, cit_mid);
+//	ft_eq_ope(it_mid, cit_1 - 3);
 
 	return (0);
 }

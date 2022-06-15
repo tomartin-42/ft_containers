@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/13 11:21:39 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/15 10:24:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,25 +147,25 @@ namespace ft
 	template <typename T, typename V>
 	bool	operator < (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth) 
 	{
-		return left.base() < rigth.base();
+		return left.base() > rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator > (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth)
 	{
-		return left.base() > rigth.base();
+		return left.base() < rigth.base();
 	}
 
 	template <typename T, typename V>
 	bool	operator <= (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth) 
 	{
-		return !(left.base() > rigth.base());
+		return !(left.base() < rigth.base());
 	}
 
 	template <typename T, typename V>
 	bool	operator >= (const reverse_iterator<T>& left, const reverse_iterator<V>& rigth)
 	{
-		return !(left.base() < rigth.base());
+		return !(left.base() > rigth.base());
 	}
 
 //====================================
