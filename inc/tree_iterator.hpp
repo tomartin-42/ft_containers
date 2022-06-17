@@ -46,7 +46,7 @@ namespace ft
 //==========================
 
 			reference	operator * () const {return *(this->_ptr);}
-			reference	operator -> () const {return this->_ptr;}
+			pointer		operator -> () const {return this->_ptr;}
 
 
 
