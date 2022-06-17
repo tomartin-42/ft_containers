@@ -3,6 +3,11 @@
 
 #include <memory>
 #include "tree_iterator.hpp"
+#include "lexicographical_compare.hpp"
+#include "utils.hpp"
+#include "enable_if.hpp"
+#include "is_integral.hpp"
+#include "nullptr.hpp" //to ft::nullptr
 
 namespace ft
 {
@@ -22,8 +27,8 @@ namespace ft
 			typedef typename alloc_node::const_pointer								const_pointer;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			typedef typename ft::iterator_tree<value_type>							iterator;
-			typedef typename ft::iterator_tree<const value_type>					const iterator;
+			typedef typename ft::tree_iterator<value_type>							iterator;
+			typedef typename ft::tree_iterator<const value_type>					const_iterator;
 
 		private:
 			pointer		_root;

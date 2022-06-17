@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/16 13:45:38 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:41:30 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include "stack.hpp"
 #include "node.hpp"
 #include "tree.hpp"
+#include "tree_iterator.hpp"
 #include "random_access_iterator.hpp"
-#include "iterator_tree.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -44,7 +44,8 @@ int		main(void)
 
 	ft::node<int>	alfa;
 	ft::tree<int, std::less<int> >	treea;
-	ft::tree<int, std::less<int> >::iterator_tree	treeb;
+	ft::tree_iterator<int>	itt;
+	ft::tree_iterator<int>	itb(itt);
 
 	const int size = 5;
 	TEST::vector<TESTED_TYPE> vct(size);
