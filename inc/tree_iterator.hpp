@@ -10,16 +10,17 @@ namespace ft
 	class tree_iterator
 	{
 		public:
-			typedef typename ft::Iter<ft::tree_iterator_tag, T>::iterator_category		iterator_category;
-			typedef typename ft::Iter<ft::tree_iterator_tag, T>::value_type			value_type;
-			typedef typename ft::Iter<ft::tree_iterator_tag, T>::difference_type		difference_type;
-			typedef typename ft::Iter<ft::tree_iterator_tag, T>::pointer				pointer;
-			typedef typename ft::Iter<ft::tree_iterator_tag, T>::reference				reference;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::pointer				pointer;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::reference				reference;
+			typedef typename ft::node<value_type> *												nod_pointer;
 		//	typedef	T*																	pointer;
 		//	typedef T&																	reference;
 
 		private:
-			pointer	_ptr;
+			nod_pointer	_ptr;
 
 		public:
 			tree_iterator() : _ptr(ft::nullptr_t) {}
@@ -27,9 +28,27 @@ namespace ft
 
 			tree_iterator(const tree_iterator & other) : _ptr(other.base()) {}
 
-			pointer	base() const {return this->_ptr;}
+			nod_pointer	base() const {return this->_ptr;}
 
-			
+			tree_iterator & operator = (const tree_iterator& other)
+			{
+				if(this == &other)
+					return *this;
+				_ptr = other.base();
+				return *this;
+			}
+
+			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
+			//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//==========================
+//operators
+//==========================
+
+			reference	operator * () const {return *(this->_ptr);}
+			reference	operator -> () const {return this->_ptr;}
+
+
 
 	};
 
