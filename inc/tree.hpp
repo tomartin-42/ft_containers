@@ -2,6 +2,7 @@
 # define _TREE_HPP_
 
 #include <memory>
+#include "tree_iterator.hpp"
 
 namespace ft
 {
@@ -21,14 +22,18 @@ namespace ft
 			typedef typename alloc_node::const_pointer								const_pointer;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			//_________ITERATORS______________________//////
+			typedef typename ft::iterator_tree<value_type>							iterator;
+			typedef typename ft::iterator_tree<const value_type>					const iterator;
 
 		private:
 			pointer		_root;
-			pointer		_nill;
+			node		_nill;
 			size_type	_size;
 			value_comp	_comp;
-
-
-
+		
+		public:
+			tree() {}
+	};
 }//end ft namespace
+
+#endif
