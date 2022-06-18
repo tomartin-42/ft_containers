@@ -38,6 +38,7 @@ namespace ft
 				return *this;
 			}
 
+			nod_pointer get_ptr() {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
 			//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -45,11 +46,15 @@ namespace ft
 //operators
 //==========================
 
-			reference	operator * () const {return *(this->_ptr);}
-			pointer		operator -> () const {return this->_ptr;}
+			reference	operator * () const {return *(this->_ptr.data);}
+			pointer		operator -> () const {return &(this->_ptr.data);}
+
+		//	tree_iterator operator ++ ()
+		//	{
+		//		if(this->_ptr.rigth != _
 
 
-
+			
 	};
 
 } //end namespace ft
