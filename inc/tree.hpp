@@ -47,8 +47,16 @@ namespace ft
 //==========================
 //Aux functions
 //==========================
+			void assig_nill_values()
+			{
+				this->_nill.prev = this->root; 
+				this->_nill.left = this->minimun(this->_root);
+				this->_nill.right = this->maximun(this->_root);
+			}
 
-			//maybe implement with const_pointer
+			pointer get_nill() {return this->_nill;}
+
+			//maybe implement with const_pointer too
 			pointer minimum(const pointer n) const
 			{
 				pointer aux = n;
@@ -67,11 +75,23 @@ namespace ft
 				return aux;
 			}
 
-			void assig_nill_values()
+			pointer	next_node(const pointer n) const
 			{
-				this->_nill.prev = this->root; 
-				this->_nill.left = this->minimun(this->_root);
-				this->_nill.right = this->maximun(this->_root);
+				if (n->right != this->_nill)
+					return minimun(n->right);
+				while (n == n->prev->left)
+					n = n->prev;
+				return n->prev;
+			}
+
+			pointer	prev_node(const pointer n) const
+			{
+				if (n->left != this->_nill)
+					return maximun(n->left);
+				while (n == n->prev->left)
+				//while (n == n->prev->rigth)
+					n = n->prev;
+				return n->prev;
 			}
 	};
 }//end ft namespace

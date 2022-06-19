@@ -18,21 +18,32 @@ namespace ft
 		node*							left;
 		node*							right;
 		node*							prev;
+		bool							nill;
 		bool							black;
 
-		node() {}
+		node() : nill(true) {}
 
 		~node() {}
 
 		node(const T & _data, node * _nill) 
-		: data(_data), left(_nill), right(_nill), prev(_nill), black(false) {}
+		: data(_data), left(_nill), right(_nill), prev(_nill), nill(false), black(false) {}
 
 		node(node const & other)
 		: data(other.data), left(other.left), right(other.right), prev(other.prev), black(other.black) {}
 
-		void set_prev(node* _prev)
+		void	set_prev(node* _prev)
 		{
 			this->prev = _prev;
+		}
+		
+		void	set_nill(bool set)
+		{
+			this->nill = set;
+		}
+
+		bool get_nill()
+		{
+			return this->nill;
 		}
 
 		//Return true if is black and false if is red
