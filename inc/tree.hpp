@@ -93,7 +93,30 @@ namespace ft
 					n = n->prev;
 				return n->prev;
 			}
-	};
+//==========================
+//Iterators
+//==========================
+
+			iterator		begin() {return iterator(this->minimum(this->_root));}
+
+			const_iterator	begin() const {return const_iterator(this->minmum(this->_root));}
+
+			iterator		end() {return iterator(this->maximum(this->_root));}
+			
+			const_iterator	end() const {return const_iterator(this->maximum(this->_root));}
+
+//==========================
+//Capacity
+//==========================
+
+			bool	empty() const
+			{
+				if(this->_size == 0)
+					return true;
+				return false;
+			}
+
+	};//end tree class
 }//end ft namespace
 
 #endif

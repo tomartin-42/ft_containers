@@ -25,7 +25,7 @@ namespace ft
 			pointer	_ptr;
 
 		public:
-			tree_iterator() {}
+			tree_iterator() : _ptr(NULL){}
 
 			explicit tree_iterator(pointer ptr) : _ptr(ptr) {}
 
@@ -41,7 +41,7 @@ namespace ft
 				return *this;
 			}
 
-			pointer get_ptr() {return this->_ptr;}
+			pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
 			//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //==========================
@@ -113,8 +113,15 @@ namespace ft
 				return tmp;
 			}
 
-			bool	operator == (const tree_iterator &b) const {return this->_ptr == b._ptr;}
-			bool	operator != (const tree_iterator &b) const {return this->_ptr != b._ptr;}
+			bool	operator == (const tree_iterator &b) const 
+			{
+				return this->get_ptr() == b.get_ptr();
+			}
+
+			bool	operator != (const tree_iterator &b) const 
+			{
+				return this->get_ptr() != b.get_ptr();
+			}
 	};//end tree_iterator class
 
 //===================================
@@ -122,15 +129,15 @@ namespace ft
 //===================================
 //
 	template <typename T, typename V>
-	bool	operator == (const tree_iterator<T>& left, const tree_iterator<V>& rigth)
+	bool	operator == (const tree_iterator<T>& itf, const tree_iterator<V>& itl)
 	{
-		return left.base() == rigth.base();
+		return itf.base() == itl.base();
 	}
 
 	template <typename T, typename V>
-	bool	operator != (const tree_iterator<T> & left, const tree_iterator<V> & rigth)
+	bool	operator != (const tree_iterator<T> & itf, const tree_iterator<V> & itl)
 	{
-		return !(left.base() == rigth.base());
+		return !(itf.base() == itl.base());
 	}
 
 } //end namespace ft

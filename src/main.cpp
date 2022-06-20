@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/20 10:50:18 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:04:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 template <typename Ite_1, typename Ite_2>
 void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
+
 {
 	std::cout << "*************************\n";
 	std::cout << (first < second) << std::endl;
@@ -48,15 +49,13 @@ int		main(void)
 	ft::tree_iterator<ft::node<int> >	itb(itt);
 	ft::tree_iterator<ft::node<int> >	itc = itb;
 
-	if(itt == itb)
-		std::cout << "==\n";
+	std::cout << itt.get_ptr() << std::endl;
+	std::cout << itb.get_ptr() << std::endl;
+
 	if(itt != itb)
 		std::cout << "!=\n";
-
-	++itt;
-	itt++;
-	--itt;
-	itt--;
+	if(itt == itb)
+		std::cout << "==\n";
 
 	const int size = 5;
 	TEST::vector<TESTED_TYPE> vct(size);
