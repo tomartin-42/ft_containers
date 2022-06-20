@@ -25,7 +25,7 @@ namespace ft
 			pointer	_ptr;
 
 		public:
-			tree_iterator() : _ptr(NULL){}
+			tree_iterator() : _ptr(ft::nullptr_t){}
 
 			explicit tree_iterator(pointer ptr) : _ptr(ptr) {}
 

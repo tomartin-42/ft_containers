@@ -32,7 +32,7 @@ namespace ft
 			typedef typename ft::tree_iterator<const value_type>					const_iterator;
 
 		private:
-			alloc_type	_alloc;
+			alloc_node	_alloc;
 			pointer		_root;
 			node		_nill;
 			size_type	_size;
@@ -115,6 +115,34 @@ namespace ft
 					return true;
 				return false;
 			}
+
+			size_type	size() const {return this->_size;}
+
+			size_type	max_size() const {return this->_alloc.max.size();}
+
+//==========================
+//Operations
+//==========================
+
+
+//==========================
+//Modifiers
+//==========================
+			value_type insert(const value_type & nod)
+			{
+				if(this->_size == 0)
+				{
+					pointer p_node = this->_alloc.allocate(1);
+					this->_alloc.construct(p_node, ft::node<T>(nod));
+					this->_root = p_node;
+					this->_nill->prev = this->_root;
+					this->_size += 1;
+					return this->_root->get_data();
+				}
+				return this->_root->get_data();
+			}
+
+
 
 	};//end tree class
 }//end ft namespace

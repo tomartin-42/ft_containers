@@ -43,19 +43,12 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 int		main(void)
 {
 
-	ft::node<int>	alfa;
-	ft::tree<ft::node<int>, std::less<int> >	treea;
+	ft::tree<int, std::less<int> >	treea;
 	ft::tree<ft::node<int>, std::less<int> >::iterator	itt;
 	ft::tree_iterator<ft::node<int> >	itb(itt);
-	ft::tree_iterator<ft::node<int> >	itc = itb;
+//	ft::tree_iterator<ft::node<int> >	itc = itb;
 
-	std::cout << itt.get_ptr() << std::endl;
-	std::cout << itb.get_ptr() << std::endl;
-
-	if(itt != itb)
-		std::cout << "!=\n";
-	if(itt == itb)
-		std::cout << "==\n";
+	treea.insert(10);
 
 	const int size = 5;
 	TEST::vector<TESTED_TYPE> vct(size);

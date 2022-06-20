@@ -23,6 +23,8 @@ namespace ft
 
 		node() : nill(true) {}
 
+		node(const T val) : data(val) {}
+
 		~node() {}
 
 		node(const T & _data, node * _nill) 
@@ -30,6 +32,12 @@ namespace ft
 
 		node(node const & other)
 		: data(other.data), left(other.left), right(other.right), prev(other.prev), black(other.black) {}
+
+		
+		value_type & get_data() const
+		{
+			return data;
+		}
 
 		void	set_prev(node* _prev)
 		{
