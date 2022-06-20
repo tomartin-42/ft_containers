@@ -3,6 +3,7 @@
 
 #include "iterator_traits.hpp"
 #include "nullptr.hpp"// to ft::nullptr
+#include "node.hpp"// to ft::nullptr
 #include <iostream>
 
 namespace ft
@@ -14,17 +15,18 @@ namespace ft
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::reference				reference;
 		//	typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::pointer				pointer;
-		//	typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::reference				reference;
-			//typedef typename ft::node<value_type> *												nod_pointer;
-			typedef	T*																	pointer;
-			typedef T&																	reference;
+			typedef typename ft::node<value_type> *												pointer;
+		//	typedef	T*																	pointer;
+		//	typedef T&																	reference;
 
 		private:
 			pointer	_ptr;
 
 		public:
-			tree_iterator() : _ptr(ft::nullptr_t) {}
+			tree_iterator() {}
+
 			explicit tree_iterator(pointer ptr) : _ptr(ptr) {}
 
 			tree_iterator(const tree_iterator & other) : _ptr(other.base()) {}
@@ -74,20 +76,62 @@ namespace ft
 			tree_iterator& operator ++ ()
 			{
 				if (this->_ptr->right->get_nill() != true)
-					return tree_iterator(this->minimum(this->_ptr));
+				{
+					this->_ptr = minimum(this->_ptr);
+					return *this;
+				}
 				while(this->_ptr == this->_ptr->prev->left)
 					this->_ptr = this->_ptr->prev;
-				return tree_iterator(this->_ptr);
-			}
-
-			tree_iterator operator -- ()
-			{
-				this->_ptr = this->_ptr->prev_node(this->ptr);
 				return *this;
 			}
 
-			
-	};
+			tree_iterator operator ++ (int)
+			{
+				tree_iterator	tmp = *this;
+
+				++(this->_ptr);
+				return tmp;
+			}
+
+			tree_iterator& operator -- ()
+			{
+				if (this->_ptr->right->get_nill() != true)
+				{
+					this->_ptr = maximum(this->_ptr);
+					return *this;
+				}
+				while(this->_ptr == this->_ptr->prev->left)
+					this->_ptr = this->_ptr->prev;
+				return *this;
+			}
+
+			tree_iterator operator -- (int)
+			{
+				tree_iterator	tmp = *this;
+
+				--(this->_ptr);
+				return tmp;
+			}
+
+			bool	operator == (const tree_iterator &b) const {return this->_ptr == b._ptr;}
+			bool	operator != (const tree_iterator &b) const {return this->_ptr != b._ptr;}
+	};//end tree_iterator class
+
+//===================================
+//No member functions
+//===================================
+//
+	template <typename T, typename V>
+	bool	operator == (const tree_iterator<T>& left, const tree_iterator<V>& rigth)
+	{
+		return left.base() == rigth.base();
+	}
+
+	template <typename T, typename V>
+	bool	operator != (const tree_iterator<T> & left, const tree_iterator<V> & rigth)
+	{
+		return !(left.base() == rigth.base());
+	}
 
 } //end namespace ft
 

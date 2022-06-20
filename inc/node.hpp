@@ -43,6 +43,7 @@ namespace ft
 
 		bool get_nill()
 		{
+			std::cout << "QUEEEEEE!!!!\n";
 			return this->nill;
 		}
 
