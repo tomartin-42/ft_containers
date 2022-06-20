@@ -21,6 +21,7 @@ namespace ft
 			typedef compare															value_comp;
 			typedef alloc															alloc_type;
 			typedef ft::node<T>														node;
+			typedef ft::node<T>*													node_pointer;
 			typedef typename alloc::template rebind<ft::node<value_type> >::other	alloc_node;
 			typedef typename alloc_node::reference									reference;
 			typedef typename alloc_node::const_reference							const_reference;
@@ -32,11 +33,11 @@ namespace ft
 			typedef typename ft::tree_iterator<const value_type>					const_iterator;
 
 		private:
-			alloc_node	_alloc;
-			pointer		_root;
-			node		_nill;
-			size_type	_size;
-			value_comp	_comp;
+			alloc_node		_alloc;
+			node_pointer	_root;
+			node			_nill;
+			size_type		_size;
+			value_comp		_comp;
 		
 		public:
 			tree(const alloc_type & alloc_t = alloc_type()) : 
@@ -135,7 +136,7 @@ namespace ft
 					pointer p_node = this->_alloc.allocate(1);
 					this->_alloc.construct(p_node, ft::node<T>(nod));
 					this->_root = p_node;
-					this->_nill->prev = this->_root;
+					_nill.set_prev(p_node);
 					this->_size += 1;
 					return this->_root->get_data();
 				}
