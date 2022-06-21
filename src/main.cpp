@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/20 13:04:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/21 13:12:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ int		main(void)
 {
 
 	ft::tree<int, std::less<int> >	treea;
-	ft::tree<ft::node<int>, std::less<int> >::iterator	itt;
+	ft::tree<int, std::less<int> >::iterator	itt;
 	ft::tree_iterator<ft::node<int> >	itb(itt);
 //	ft::tree_iterator<ft::node<int> >	itc = itb;
 
 	treea.insert(10);
+	itt = treea.begin();
 
 	const int size = 5;
 	TEST::vector<TESTED_TYPE> vct(size);

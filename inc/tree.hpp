@@ -21,16 +21,18 @@ namespace ft
 			typedef compare															value_comp;
 			typedef alloc															alloc_type;
 			typedef ft::node<T>														node;
-			typedef ft::node<T>*													node_pointer;
+			typedef const node														const_node;
+			typedef node*															node_pointer;
+			typedef const node*														const_node_pointer;
 			typedef typename alloc::template rebind<ft::node<value_type> >::other	alloc_node;
-			typedef typename alloc_node::reference									reference;
-			typedef typename alloc_node::const_reference							const_reference;
-			typedef typename alloc_node::pointer									pointer;
-			typedef typename alloc_node::const_pointer								const_pointer;
+		//	typedef typename alloc_node::reference									reference;
+		//	typedef typename alloc_node::const_reference							const_reference;
+			//typedef typename alloc_node::pointer									pointer;
+			//typedef typename alloc_node::const_pointer								const_pointer;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			typedef typename ft::tree_iterator<value_type>							iterator;
-			typedef typename ft::tree_iterator<const value_type>					const_iterator;
+			typedef typename ft::tree_iterator<node>							iterator;
+			typedef typename ft::tree_iterator<node>					const_iterator;
 
 		private:
 			alloc_node		_alloc;
@@ -48,35 +50,47 @@ namespace ft
 //==========================
 //Aux functions
 //==========================
-			void assig_nill_values()
-			{
-				this->_nill.prev = this->root; 
-				this->_nill.left = this->minimun(this->_root);
-				this->_nill.right = this->maximun(this->_root);
-			}
 
-			pointer get_nill() {return this->_nill;}
+			node_pointer get_nill() {return &this->_nill;}
 
 			//maybe implement with const_pointer too
-			pointer minimum(const pointer n) const
+			node_pointer minimum(const node_pointer n) const
 			{
-				pointer aux = n;
+				node_pointer aux = n;
 
 				while(aux->left != &this->_nill)
 					aux = aux->left;
 				return aux;
 			}
 
-			pointer maximun(const pointer n) const
+			node_pointer minimum(node_pointer n) 
 			{
-				pointer aux = n;
+				node_pointer aux = n;
+
+				while(aux->left != &this->_nill)
+					aux = aux->left;
+				return aux;
+			}
+
+			node_pointer maximum(const node_pointer n) const
+			{
+				node_pointer aux = n;
 
 				while(aux->left != &this->_nill)
 					aux = aux->right;
 				return aux;
 			}
 
-			pointer	next_node(const pointer n) const
+			node_pointer maximum(node_pointer n) 
+			{
+				node_pointer aux = n;
+
+				while(aux->left != &this->_nill)
+					aux = aux->right;
+				return aux;
+			}
+
+			node_pointer	next_node(const node_pointer n) const
 			{
 				if (n->right != this->_nill)
 					return minimun(n->right);
@@ -85,7 +99,7 @@ namespace ft
 				return n->prev;
 			}
 
-			pointer	prev_node(const pointer n) const
+			node_pointer	prev_node(const node_pointer n) const
 			{
 				if (n->left != this->_nill)
 					return maximun(n->left);
@@ -104,16 +118,14 @@ namespace ft
   					y->left->prev = x;
   				y->prev = x->prev;
  				if(x->prev == &this->_nill) 	//x is root
-				{
   					this->_root = y;
-					this->_nill.prev = y;
-				}
-				else if(x == x->prev->left)	// x is left child
+				else if(x == x->prev->left)		// x is left child
 					x->prev->left = y;
 				else							// x is right child
  					x->prev->right = y;
 				y->left = x;
 				x->prev = y;
+				this->assig_nill_values();
 			}
 
 			void	right_rotate(node_pointer& x)
@@ -125,22 +137,25 @@ namespace ft
   					y->right->prev = x;
   				y->prev = x->prev;
  				if(x->prev == &this->_nill) 	//x is root
-				{
   					this->_root = y;
-					this->_nill.prev = y;
-				}
 				else if(x == x->prev->right)	// x is left child
 					x->prev->right = y;
 				else							// x is right child
  					x->prev->left = y;
 				y->right = x;
 				x->prev = y;
+				this->assig_nill_values();
 			}
 
+			void assig_nill_values()
+			{
+				this->_nill.prev = this->_root; 
+				this->_nill.left = this->minimum(this->_root);
+				this->_nill.right = this->maximum(this->_root);
+			}
 //==========================
 //Iterators
 //==========================
-
 			iterator		begin() {return iterator(this->minimum(this->_root));}
 
 			const_iterator	begin() const {return const_iterator(this->minmum(this->_root));}
@@ -149,6 +164,15 @@ namespace ft
 			
 			const_iterator	end() const {return const_iterator(this->maximum(this->_root));}
 
+
+		/*	iterator		begin() {return (this->minimum(this->_root));}
+
+			const_iterator	begin() const {return (this->minmum(this->_root));}
+
+			iterator		end() {return (this->maximum(this->_root));}
+			
+			const_iterator	end() const {return (this->maximum(this->_root));}
+*/
 //==========================
 //Capacity
 //==========================
@@ -176,12 +200,13 @@ namespace ft
 			{
 				if(this->_size == 0)
 				{
-					pointer p_node = this->_alloc.allocate(1);
+					node_pointer p_node = this->_alloc.allocate(1);
+
 					this->_alloc.construct(p_node, ft::node<T>(nod));
 					this->_root = p_node;
 					_nill.set_prev(p_node);
 					this->_size += 1;
-					this->right_rotate(p_node);
+					this->assig_nill_values();
 					return this->_root->get_data();
 				}
 				return this->_root->get_data();
