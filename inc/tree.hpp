@@ -94,6 +94,49 @@ namespace ft
 					n = n->prev;
 				return n->prev;
 			}
+
+			void	left_rotate(node_pointer& x)
+			{
+				node_pointer y = x->right;
+  				
+				x->right = y->left;
+ 				if(y->left != &this->_nill)
+  					y->left->prev = x;
+  				y->prev = x->prev;
+ 				if(x->prev == &this->_nill) 	//x is root
+				{
+  					this->_root = y;
+					this->_nill.prev = y;
+				}
+				else if(x == x->prev->left)	// x is left child
+					x->prev->left = y;
+				else							// x is right child
+ 					x->prev->right = y;
+				y->left = x;
+				x->prev = y;
+			}
+
+			void	right_rotate(node_pointer& x)
+			{
+				node_pointer y = x->left;
+
+  				x->left = y->right;
+ 				if(y->right != &this->_nill)
+  					y->right->prev = x;
+  				y->prev = x->prev;
+ 				if(x->prev == &this->_nill) 	//x is root
+				{
+  					this->_root = y;
+					this->_nill.prev = y;
+				}
+				else if(x == x->prev->right)	// x is left child
+					x->prev->right = y;
+				else							// x is right child
+ 					x->prev->left = y;
+				y->right = x;
+				x->prev = y;
+			}
+
 //==========================
 //Iterators
 //==========================
@@ -138,6 +181,7 @@ namespace ft
 					this->_root = p_node;
 					_nill.set_prev(p_node);
 					this->_size += 1;
+					this->right_rotate(p_node);
 					return this->_root->get_data();
 				}
 				return this->_root->get_data();

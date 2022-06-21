@@ -34,7 +34,12 @@ namespace ft
 		: data(other.data), left(other.left), right(other.right), prev(other.prev), black(other.black) {}
 
 		
-		value_type & get_data() const
+		value_type& get_data() 
+		{
+			return data;
+		}
+
+		const value_type& get_data() const 
 		{
 			return data;
 		}
@@ -51,7 +56,6 @@ namespace ft
 
 		bool get_nill()
 		{
-			std::cout << "QUEEEEEE!!!!\n";
 			return this->nill;
 		}
 
