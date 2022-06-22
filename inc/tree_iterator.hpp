@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tree_iterator.hpp                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
+/*   Updated: 2022/06/22 11:45:01 by tomartin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef _TREE_ITERATOR_HPP_
 # define _TREE_ITERATOR_HPP_
 
@@ -15,9 +27,6 @@ namespace ft
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
-		//	typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::reference				reference;
-		//	typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::pointer				pointer;
-		//	typedef typename ft::node<value_type> *												pointer;
 			typedef	T*																	pointer;
 			typedef T&																	reference;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tree.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
+/*   Updated: 2022/06/22 12:13:22 by tomartin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef _TREE_HPP_
 # define _TREE_HPP_
 
@@ -25,10 +37,6 @@ namespace ft
 			typedef node*															node_pointer;
 			typedef const node*														const_node_pointer;
 			typedef typename alloc::template rebind<ft::node<value_type> >::other	alloc_node;
-		//	typedef typename alloc_node::reference									reference;
-		//	typedef typename alloc_node::const_reference							const_reference;
-			//typedef typename alloc_node::pointer									pointer;
-			//typedef typename alloc_node::const_pointer								const_pointer;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
 			typedef typename ft::tree_iterator<node>								iterator;
@@ -45,9 +53,10 @@ namespace ft
 			tree(const alloc_type & alloc_t = alloc_type()) : 
 			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(compare()) 
 			{
+				this->_nill.prev = &this->_nill;
+				this->_nill.left = &this->_nill;
+				this->_nill.right = &this->_nill;
 			}
-
-			//tree() : _nill.left(ft::nullptr_t), _nill.right(ft::nullptr_t), _nill.prev(ft::nullptr_t), _root(ft::nullptr_t), _size(0) {}
 
 //==========================
 //Aux functions
@@ -162,6 +171,7 @@ namespace ft
 				p_n->left = &this->_nill;
 				p_n->right = &this->_nill;
 			}
+
 //==========================
 //Iterators
 //==========================
@@ -174,19 +184,9 @@ namespace ft
 			const_iterator	end() const {return const_iterator(this->maximum(this->_root));}
 
 
-		/*	iterator		begin() {return (this->minimum(this->_root));}
-			typedef node*															node_pointer;
-
-			const_iterator	begin() const {return (this->minmum(this->_root));}
-
-			iterator		end() {return (this->maximum(this->_root));}
-			
-			const_iterator	end() const {return (this->maximum(this->_root));}
-*/
 //==========================
 //Capacity
 //==========================
-
 			bool	empty() const
 			{
 				if(this->_size == 0)
@@ -259,6 +259,9 @@ namespace ft
 				return iterator(ft::nullptr_t);
 			}
 
+			//size_type	count(const value_type& val) const
+			//{
+			//}
 
 
 
