@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/22 08:35:27 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/22 10:17:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		main(void)
 
 	treea.insert(10);
 	itt = treea.begin();
+	treea.find(10);
 
 	const int size = 5;
 	TEST::vector<TESTED_TYPE> vct(size);

@@ -31,8 +31,8 @@ namespace ft
 			//typedef typename alloc_node::const_pointer								const_pointer;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			typedef typename ft::tree_iterator<node>							iterator;
-			typedef typename ft::tree_iterator<node>					const_iterator;
+			typedef typename ft::tree_iterator<node>								iterator;
+			typedef typename ft::tree_iterator<const_node>							const_iterator;
 
 		private:
 			alloc_node		_alloc;
@@ -222,6 +222,43 @@ namespace ft
 				}
 				return this->_root->get_data();
 			}
+
+//==========================
+//Operations
+//==========================
+
+			iterator	find(const value_type& val)
+			{
+				node_pointer	aux = this->_root;
+
+				while(aux != &this->_nill)
+				{
+					if(this->_comp(val, aux->get_data()))
+						aux = aux->left;
+					if(this->_comp(aux->get_data(), val))
+						aux = aux->right;
+					else
+						return iterator(aux);
+				}
+				return iterator(ft::nullptr_t);
+			}
+
+			const_iterator	find(const value_type& val) const
+			{
+				node_pointer	aux = this->_root;
+
+				while(aux != &this->_nill)
+				{
+					if(this->_comp(val, aux->get_data()))
+						aux = aux->left;
+					if(this->_comp(aux->get_data(), val))
+						aux = aux->right;
+					else
+						return iterator(aux);
+				}
+				return iterator(ft::nullptr_t);
+			}
+
 
 
 
