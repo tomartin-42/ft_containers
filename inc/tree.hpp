@@ -43,7 +43,9 @@ namespace ft
 		
 		public:
 			tree(const alloc_type & alloc_t = alloc_type()) : 
-			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(compare()) {}
+			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(compare()) 
+			{
+			}
 
 			//tree() : _nill.left(ft::nullptr_t), _nill.right(ft::nullptr_t), _nill.prev(ft::nullptr_t), _root(ft::nullptr_t), _size(0) {}
 
@@ -147,11 +149,18 @@ namespace ft
 				this->assig_nill_values();
 			}
 
-			void assig_nill_values()
+			void	assig_nill_values()
 			{
 				this->_nill.prev = this->_root; 
 				this->_nill.left = this->minimum(this->_root);
 				this->_nill.right = this->maximum(this->_root);
+			}
+
+			void	assig_to_nill(node_pointer& p_n)
+			{
+				p_n->prev = &this->_nill;
+				p_n->left = &this->_nill;
+				p_n->right = &this->_nill;
 			}
 //==========================
 //Iterators
@@ -166,6 +175,7 @@ namespace ft
 
 
 		/*	iterator		begin() {return (this->minimum(this->_root));}
+			typedef node*															node_pointer;
 
 			const_iterator	begin() const {return (this->minmum(this->_root));}
 
@@ -204,6 +214,7 @@ namespace ft
 
 					this->_alloc.construct(p_node, ft::node<T>(nod));
 					this->_root = p_node;
+					this->assig_to_nill(this->_root);
 					_nill.set_prev(p_node);
 					this->_size += 1;
 					this->assig_nill_values();
