@@ -46,10 +46,11 @@ int		main(void)
 	ft::tree<int, std::less<int> >	treea;
 	ft::tree<int, std::less<int> >::iterator	itt;
 	ft::tree_iterator<ft::node<int> >	itb(itt);
-	ft::tree_iterator<ft::node<int> >	itc = itb;
+//	ft::tree_iterator<ft::node<int> >	itc = itb;
 
 	treea.insert(10);
 	itt = treea.begin();
+	treea.insert(15);
 	treea.find(10);
 
 	const int size = 5;

@@ -206,21 +206,39 @@ namespace ft
 //==========================
 //Modifiers
 //==========================
-			value_type insert(const value_type & nod)
+			value_type insert(const value_type& nod)
 			{
-				if(this->_size == 0)
-				{
-					node_pointer p_node = this->_alloc.allocate(1);
+				node_pointer p_node = this->_alloc.allocate(1);
 
-					this->_alloc.construct(p_node, ft::node<T>(nod));
+				this->_alloc.construct(p_node, ft::node<T>(nod, &_nill));
+				if(this->_size == 0)							//When new node is root
+				{
 					this->_root = p_node;
 					this->assig_to_nill(this->_root);
 					_nill.set_prev(p_node);
 					this->_size += 1;
-					this->assig_nill_values();
-					return this->_root->get_data();
+					p_node->black = true;
+					return (p_node->get_data());
 				}
-				return this->_root->get_data();
+				node_pointer y = ft::nullptr_t;
+			    node_pointer x = this->_root;
+				
+				while (x != &_nill)
+				{
+					y = x;
+					if (this->_comp(p_node->get_data(), x->get_data()))
+						x = x->left;
+					else 
+						x = x->right;
+			    }
+			    p_node->prev = y;
+				if (this->_comp(p_node->get_data(), y->get_data()))
+			      y->left = p_node;
+				else
+			      y->right = p_node;
+				
+			   // insertFix(node);
+			return (p_node->get_data());
 			}
 
 //==========================

@@ -23,14 +23,14 @@ namespace ft
 
 		node() : nill(true) {}
 
-		node(const T val) : data(val) {}
+		node(const T val) : data(val), nill(false) {}
 
 		~node() {}
 
-		node(const T & _data, node * _nill) 
+		node(const T& _data, node* _nill) 
 		: data(_data), left(_nill), right(_nill), prev(_nill), nill(false), black(false) {}
 
-		node(node const & other)
+		node(node const& other)
 		: data(other.data), left(other.left), right(other.right), prev(other.prev), black(other.black) {}
 
 		
