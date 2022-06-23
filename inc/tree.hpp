@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/22 12:13:22 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:43:04 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ namespace ft
 			{
 				if (n->left != this->_nill)
 					return maximun(n->left);
-				while (n == n->prev->left)
-				//while (n == n->prev->rigth)
+				//while (n == n->prev->left)
+				while (n == n->prev->rigth)
 					n = n->prev;
 				return n->prev;
 			}
@@ -172,6 +172,62 @@ namespace ft
 				p_n->right = &this->_nill;
 			}
 
+			void	insert_fix(node_pointer& p_node)
+			{
+				node_pointer	u;
+
+				while (p_node->prev->black == true) 
+				{
+					std::cout << "*\n";
+      				if (p_node->prev == p_node->prev->prev->right)
+					{
+        				u = p_node->prev->prev->left;
+        				if (u->black == true)
+						{
+         					u->black = false;
+         					p_node->prev->black = false;
+          					p_node->prev->prev->black = true;
+          					p_node = p_node->prev->prev;
+        				} 
+						else 
+						{
+          					if (p_node == p_node->prev->left)
+							{
+            					p_node = p_node->prev;
+            					right_rotate(p_node);
+          					}
+          					p_node->prev->black = false;
+          					p_node->prev->prev->black = true;
+          					left_rotate(p_node->prev->prev);
+        				}
+      				} 
+					else 
+					{
+        				u = p_node->prev->prev->right;
+				        if (u->black == true)
+						{
+          					u->black = false;
+          					p_node->prev->black = false;
+          					p_node->prev->prev->black = true;
+          					p_node = p_node->prev->prev;
+        				} 
+						else 
+						{
+          					if (p_node == p_node->prev->right)
+							{
+            					p_node = p_node->prev;
+            					left_rotate(p_node);
+          					}
+          					p_node->prev->black = false;
+          					p_node->prev->prev->black = true;
+							right_rotate(p_node->prev->prev);
+        				}
+      				}
+      				if (p_node == this->_root)
+        				break;
+    			}
+    			this->_root->black = false;
+  			}
 //==========================
 //Iterators
 //==========================
@@ -215,12 +271,13 @@ namespace ft
 				{
 					this->_root = p_node;
 					this->assig_to_nill(this->_root);
-					_nill.set_prev(p_node);
+					this->_nill.set_prev(p_node);
 					this->_size += 1;
-					p_node->black = true;
+			    	//p_node->black = true;
+			    	insert_fix(p_node);
 					return (p_node->get_data());
 				}
-				node_pointer y = ft::nullptr_t;
+				node_pointer y = &this->_nill;
 			    node_pointer x = this->_root;
 				
 				while (x != &_nill)
@@ -232,13 +289,24 @@ namespace ft
 						x = x->right;
 			    }
 			    p_node->prev = y;
+				//std::cout << p_node->get_data() << "===" << y->get_data() << std::endl;
 				if (this->_comp(p_node->get_data(), y->get_data()))
-			      y->left = p_node;
+					y->left = p_node;
 				else
-			      y->right = p_node;
-				
-			   // insertFix(node);
-			return (p_node->get_data());
+					y->right = p_node;
+				if (p_node->prev == &this->_nill) 
+				{
+      				p_node->black = false;
+					//return (p_node->get_data());
+				}
+
+				if (p_node->prev->prev == &this->_nill)
+					//return (p_node->get_data());
+
+			    insert_fix(p_node);
+				std::cout << this->_root->left->get_data() << " " << this->_root->right->get_data() << std::endl;
+				std::cout << this->_root->left->get_color() << " " << this->_root->right->get_color() << std::endl;
+				return (p_node->get_data());
 			}
 
 //==========================
@@ -280,8 +348,31 @@ namespace ft
 			//size_type	count(const value_type& val) const
 			//{
 			//}
+			void printBT(const std::string& prefix, const node_pointer node, bool isLeft)
+			{
+    			if(node != &this->_nill)
+    			{
+        			std::cout << prefix;
+			        std::cout << (isLeft ? "├──" : "└──" );
 
+        			// print the value of the node
+        			std::cout << node->get_data() << std::endl;
 
+        			// enter the next tree level - left and right branch
+        			printBT( prefix + (isLeft ? "│   " : "    "), node->left, false);
+        			printBT( prefix + (isLeft ? "│   " : "    "), node->right, true);
+    			}
+			}
+			
+			void printBT(const node_pointer node)
+			{
+    			printBT("", node, false);
+			}
+
+			void printBT()
+			{
+				printBT(this->_root);
+			}
 
 	};//end tree class
 }//end ft namespace

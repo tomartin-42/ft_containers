@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/22 12:51:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:43:27 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,52 +48,14 @@ int		main(void)
 	ft::tree_iterator<ft::node<int> >	itb(itt);
 //	ft::tree_iterator<ft::node<int> >	itc = itb;
 
-	treea.insert(10);
 	itt = treea.begin();
-	treea.insert(15);
-	treea.find(10);
+	treea.insert(3);
+	treea.insert(5);
+	treea.insert(4);
+	treea.insert(1);
+	treea.insert(6);
+	treea.insert(2);
+	treea.insert(7);
+	treea.printBT(); 
 
-	const int size = 5;
-	TEST::vector<TESTED_TYPE> vct(size);
-	TEST::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
-	TEST::vector<TESTED_TYPE>::reverse_iterator it_1(vct.rend());
-	TEST::vector<TESTED_TYPE>::reverse_iterator it_mid;
-
-	TEST::vector<TESTED_TYPE>::const_reverse_iterator cit_0 = vct.rbegin();
-	TEST::vector<TESTED_TYPE>::const_reverse_iterator cit_1;
-	TEST::vector<TESTED_TYPE>::const_reverse_iterator cit_mid;
-
-	for (int i = size; it_0 != it_1; --i)
-	{
-		*it_0++ = i;
-		std::cout << "it_0 = " << *(it_0 - 1)<< std::endl;
-	}
-
-	//printSize(vct, 1);
-	it_0 = vct.rbegin();
-	cit_1 = vct.rend();
-	it_mid = it_0 + 3;
-	cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
-
-	std::cout << std::boolalpha;
-	std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
-
-	std::cout << "\t\tft_eq_ope:" << std::endl;
-	std::cout << "*****regular it\n";
-//	ft_eq_ope(it_0 + 3, it_mid);
-	ft_eq_ope(it_0, it_1);
-//	ft_eq_ope(it_1 - 3, it_mid);
-//	std::cout << "*****const it\n";
-//	ft_eq_ope(cit_0 + 3, cit_mid);
-//	ft_eq_ope(cit_0, cit_1);
-//	ft_eq_ope(cit_1 - 3, cit_mid);
-//	std::cout << "*****both it\n";
-//	ft_eq_ope(it_0 + 3, cit_mid);
-//	ft_eq_ope(it_mid, cit_0 + 3);
-//	ft_eq_ope(it_0, cit_1);
-//	ft_eq_ope(it_1, cit_0);
-//	ft_eq_ope(it_1 - 3, cit_mid);
-//	ft_eq_ope(it_mid, cit_1 - 3);
-
-	return (0);
 }
