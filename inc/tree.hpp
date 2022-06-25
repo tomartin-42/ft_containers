@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/24 18:27:33 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/25 17:14:47 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ namespace ft
 				return n->prev;
 			}*/
 
-			void	left_rotate(node_pointer& x)
+			void	left_rotate(node_pointer x)
 			{
 				node_pointer y = x->right;
   				
@@ -137,10 +137,10 @@ namespace ft
  					x->prev->right = y;
 				y->left = x;
 				x->prev = y;
-				//this->assig_nill_values();
+				this->assig_nill_values();
 			}
 
-			void	right_rotate(node_pointer& x)
+			void	right_rotate(node_pointer x)
 			{
 				node_pointer y = x->left;
 
@@ -156,7 +156,7 @@ namespace ft
  					x->prev->left = y;
 				y->right = x;
 				x->prev = y;
-				//this->assig_nill_values();
+				this->assig_nill_values();
 			}
 
 			void	assig_nill_values()
@@ -173,111 +173,70 @@ namespace ft
 				p_n->right = &this->_nill;
 			}
 
-			void	insert_fix(node_pointer& p_node)
+			void	insert_fix(node_pointer p_node)
 			{
-			//	node_pointer	u;
-				
-				std::cout << "node " << p_node->get_data() << " prev node " <<p_node->prev->get_data() << " prev color " << p_node->prev->get_color() << std::endl;
-				while (p_node->prev->black && p_node->prev != &this->_nill) 
-				{
-					std::cout << "HOLA\n";
-					node_pointer current;
+				node_pointer u;
 
-					if(p_node->prev == p_node->prev->prev->left)
+				while (p_node->prev->black == false)
+				{
+					if (p_node->prev == p_node->prev->prev->right)
 					{
-						if(p_node->prev->prev->right->get_color() == false)
+						if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+							p_node->prev->prev->left == p_node->prev ? u = p_node->prev->prev->right 
+								: u = p_node->prev->prev->left;
+						if (u && u->black == false)
 						{
-							p_node->prev->prev->right->black = true;
-							p_node->prev->prev->left->black = true;
+							if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+								p_node->prev->prev->left == p_node->prev ? p_node->prev->prev->right->black = true
+									: p_node->prev->prev->left->black = true;
+							p_node->prev->black = true;
 							p_node->prev->prev->black = false;
-							current = p_node->prev->prev;
-							if(current->prev->get_color() == false)
-								break;
-							else if(current == current->prev->right)
-							{
-								current = current->prev;
-								left_rotate(current);
-								if(current->prev->get_color() == false)
-									break;
-								current->prev->black = true;
-								current->prev->prev->black = false;
-								right_rotate(current);
-							}
-							else
-							{
-								if(current->prev->prev->get_color() == false)
-								{
-									current->prev->prev->left->black = true;
-									current->prev->prev->right->black = true;
-									current->prev->prev->black = false;
-									current = current->prev->prev;
-								}
-								else if(current == current->prev->left)
-								{
-									current = current->prev;
-									right_rotate(current);
-									current->prev->black = true;
-									current->prev->prev->black = false;
-									current = current->prev->prev;
-									left_rotate(current);
-								}
-							}
-							this->_root->black = true;
+							p_node = p_node->prev->prev;
 						}
-							
-					/*std::cout << "*\n";
-      				if (p_node->prev == p_node->prev->prev->right)
-					{
-        				u = p_node->prev->prev->left;
-        				if (u->black == true)
+						else
 						{
-         					u->black = false;
-         					p_node->prev->black = false;
-          					p_node->prev->prev->black = true;
-          					p_node = p_node->prev->prev;
-        				} 
-						else 
-						{
-          					if (p_node == p_node->prev->left)
+							if (p_node == p_node->prev->left)
 							{
-            					p_node = p_node->prev;
-            					right_rotate(p_node);
-          					}
-          					p_node->prev->black = false;
-          					p_node->prev->prev->black = true;
-          					left_rotate(p_node->prev->prev);
-        				}
-      				} 
-					else 
-					{
-        				u = p_node->prev->prev->right;
-				        if (u->black == true)
-						{
-          					u->black = false;
-          					p_node->prev->black = false;
-          					p_node->prev->prev->black = true;
-          					p_node = p_node->prev->prev;
-        				} 
-						else 
-						{
-          					if (p_node == p_node->prev->right)
-							{
-            					p_node = p_node->prev;
-            					left_rotate(p_node);
-          					}
-          					p_node->prev->black = false;
-          					p_node->prev->prev->black = true;
-							right_rotate(p_node->prev->prev);
-        				}
-      				}
-      				if (p_node == this->_root)
-        				break;*/
+								p_node = p_node->prev;
+								right_rotate(p_node);
+							}
+							p_node->prev->black = true;
+							p_node->prev->prev->black = false;
+							left_rotate(p_node->prev->prev);
+						}
 					}
-    			}
-    			//this->_root->black = false;
-				//this->_nill.black = true;
-				std::cout << "node " << p_node->get_data() << " prev node " <<p_node->prev->get_data() << " prev color " << p_node->prev->get_color() << std::endl;
-				std::cout << "==============" << std::endl;
+					else
+					{
+						if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+							p_node->prev->prev->left == p_node->prev ? u = p_node->prev->prev->right 
+								: u = p_node->prev->prev->left;
+
+						if (u && u->black == false)
+						{
+							if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+								p_node->prev->prev->left == p_node->prev ? p_node->prev->prev->right->black = false
+									: p_node->prev->prev->left->black = false;
+							p_node->prev->black = true;
+							p_node->prev->prev->black = false;
+							p_node = p_node->prev->prev;
+						}
+						else
+						{
+							if (p_node == p_node->prev->right)
+							{
+								p_node = p_node->prev;
+								left_rotate(p_node);
+							}
+							p_node->prev->black = true;
+							p_node->prev->prev->black = false;
+							right_rotate(p_node->prev->prev);
+						}
+					}
+					if (p_node == this->_root)
+						break ;
+				}
+				this->_root->black = true;
+			//	std::cout << "node " << p_node->get_data() << " prev node " <<p_node->prev->get_data() << " prev color " << p_node->prev->get_color() << std::endl;
   			}
 //==========================
 //Iterators
@@ -324,9 +283,8 @@ namespace ft
 					this->assig_to_nill(this->_root);
 					this->_nill.set_prev(p_node);
 					this->_size += 1;
-			    	//p_node->black = true;
-			    	//insert_fix(p_node);
-					std::cout << "Node= " << p_node->get_data() << " color " << p_node->black << std::endl;
+			    //	p_node->black = true;
+			    	insert_fix(p_node);
 					return (p_node->get_data());
 				}
 				node_pointer y = &this->_nill;
@@ -351,8 +309,7 @@ namespace ft
 				//	return (p_node->get_data());
 
 				this->_root->black = true;
-			    //insert_fix(p_node);
-				std::cout << "Node= " << p_node->get_data() << " color " << p_node->black << std::endl;
+			    insert_fix(p_node);
 				return (p_node->get_data());
 			}
 
@@ -403,7 +360,7 @@ namespace ft
 			        std::cout << (isLeft ? "├──" : "└──" );
 
         			// print the value of the node
-        			std::cout << node->get_data() << std::endl;
+        			std::cout << node->get_data() << " " << node->black << std::endl;
 
         			// enter the next tree level - left and right branch
         			printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
