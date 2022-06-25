@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/25 17:14:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/25 19:23:28 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ namespace ft
 				return aux;
 			}
 
-			/*node_pointer	next_node(const node_pointer n) const
+			node_pointer	next_node(const node_pointer n) const
 			{
 				if (n->right != this->_nill)
 					return minimun(n->right);
@@ -115,11 +115,10 @@ namespace ft
 			{
 				if (n->left != this->_nill)
 					return maximun(n->left);
-				//while (n == n->prev->left)
 				while (n == n->prev->rigth)
 					n = n->prev;
 				return n->prev;
-			}*/
+			}
 
 			void	left_rotate(node_pointer x)
 			{
@@ -236,7 +235,6 @@ namespace ft
 						break ;
 				}
 				this->_root->black = true;
-			//	std::cout << "node " << p_node->get_data() << " prev node " <<p_node->prev->get_data() << " prev color " << p_node->prev->get_color() << std::endl;
   			}
 //==========================
 //Iterators
