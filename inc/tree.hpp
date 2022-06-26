@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/26 18:18:37 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:35:50 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,17 @@ namespace ft
 				b->data = aux;
 			}
 
-			void	transplant(node_poiter& a, node_pointer& b)
+			void	transplant(node_pointer& a, node_pointer& b)
 			{
  				if(this->is_nill(a->prev))
 				{
       				this->_root = b;
-					this->_nill->prev = b;
+					this->_nill.prev = b;
 				}
 				else if(a == a->prev->left) 
 					a->prev->left = b;
 				else
-					a->parent->right = b;
+					a->prev->right = b;
 				b->prev = a->prev;
 			}
 				
@@ -279,35 +279,78 @@ namespace ft
 				this->_root->black = true;
   			}
 
-			void erase_fix(node_pointer d_node, node_pointer prev, node_pointer branch)
+			void erase_fix(node_pointer x)
 			{
-				node_pointer	x(ft::nullptr_t);
-				node_pointer	y(ft::nullptr_t);
+				node_pointer	s;
 
-				if(this->is_no_nill(branch))
+				while(x != this->_root && x->black == true)
 				{
-					branch = prev->left ? x = branch->right : x = branch->left;
-					branch = prev->right ? y = branch->left : y = branch->right;
-				}
-				while(this->is_nill(prev) && (this->is_no_nill(d_node) || branch->black == true))
-				{
-					if(this->is_no_nill(branch) && branch->black == false)
+					std::cout << "HOLA\n";
+					if(x == x->prev->left)
 					{
-						d_node = prev->left ? left_rotate(prev) : right_rotate(prev);
-						prev->black = false;
-						branch->black = true;
-						branch = x;
+						s = x->prev->right;
+						if(s->black == false)
+						{
+							s->black = true;
+							x->prev->black = false;
+							left_rotate(x->prev);
+							s = x->prev->right;
+						}
+						if(s->left->black == true && s->right->black == true)
+						{
+							s->black = false;
+							x = x->prev;
+						}
+						else
+						{
+							if(s->right->black == true)
+							{
+								s->left->black = true;
+								s->black = false;
+								right_rotate(s);
+								s = x->prev->right;
+							}
+							s->black = x->prev->black;
+							x->prev->black = true;
+							s->right->black = true;
+							left_rotate(x->prev);
+							x = this->_root;
+						}
 					}
-					else if(prev->black == true && (this->is_no_nill(branch) || branch->black == ture))
-						&& ((this->is_no_null(x) || x->black == true) && (is_no_nill(y) || y->black == true))
+					else
 					{
-						if(this->is_no_null(branch))
-							branch->black = false;
-						p_node = prev;
-						prev = p_node->prev;
-						branch = (d_node->prev->right = d_node ? d_node->prev->left : d_node->prev->right);
-
-
+						s = x->prev->left;
+						if(s->black == false)
+						{
+							s->black = true;
+							x->prev->black = false;
+							right_rotate(x->prev);
+							s = x->prev->left;
+						}
+						if(s->right->black == true && s->left->black == true)
+						{
+							s->black = false;
+							x = x->prev;
+						}
+						else
+						{
+							if(s->left->black == true)
+							{
+								s->right->black = true;
+								s->black = false;
+								left_rotate(s);
+								s = x->prev->left;
+							}
+							s->black = x->prev->black;
+							x->prev->black = true;
+							s->left->black = true;
+							right_rotate(x->prev);
+							x = this->_root;
+						}
+					}
+					x->black = true;
+				}
+			}
 
 //==========================
 //Iterators
@@ -388,6 +431,59 @@ namespace ft
 			size_type	erase(const value_type& val)
 			{
 				node_pointer	d_node(this->find(val));
+				node_pointer	aux = d_node;
+				node_pointer	x;
+				node_pointer	y;
+				bool			save_color;
+
+				y = aux;
+				save_color = y->black;
+				if(this->is_nill(aux->left))
+				{
+					std::cout << "A1 " << d_node->get_data() << std::endl;
+					x = aux->right;
+					this->transplant(aux, aux->right);
+				}
+				else if(this->is_nill(aux->right))
+				{
+					std::cout << "A2 " << d_node->get_data() << std::endl;
+					x = aux->left;
+					this->transplant(aux, aux->left);
+				}
+				else
+				{
+					std::cout << "A3 " << d_node->get_data() << std::endl;
+					y = minimum(aux->right);
+					save_color = aux->black;
+					x = aux->right;
+					if(y->prev == aux)
+						x->prev = y;
+					else
+					{
+						this->transplant(y, y->right);
+						y->right = aux->right;
+						y->right->prev = y;
+					}
+					transplant(aux, y);
+					y->left = aux->left;
+					y->left->prev = y;
+					y->black = aux->black;
+				}
+				kill_node(aux);
+				if(save_color == true)
+					erase_fix(x);
+				return (1);
+			}
+						
+
+
+
+
+
+
+
+
+				/*node_pointer	d_node(this->find(val));
 				node_pointer	prev(d_node->prev);
 				node_pointer	aux(d_node);
 				node_pointer	branch(d_node->prev->right == d_node ? d_node->prev->left : d_node->prev->right);
@@ -441,9 +537,7 @@ namespace ft
 				if(save_color == true)
 					erase_fix(d_node, prev, branch);
 				return (0);
-			}
-
-			//}
+			}*/
 
 //==========================
 //Operations
