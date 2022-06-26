@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/26 17:20:44 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 18:18:37 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,20 @@ namespace ft
 
 				a->data = b->data;
 				b->data = aux;
+			}
+
+			void	transplant(node_poiter& a, node_pointer& b)
+			{
+ 				if(this->is_nill(a->prev))
+				{
+      				this->_root = b;
+					this->_nill->prev = b;
+				}
+				else if(a == a->prev->left) 
+					a->prev->left = b;
+				else
+					a->parent->right = b;
+				b->prev = a->prev;
 			}
 				
 		public:
@@ -292,6 +306,7 @@ namespace ft
 						p_node = prev;
 						prev = p_node->prev;
 						branch = (d_node->prev->right = d_node ? d_node->prev->left : d_node->prev->right);
+
 
 
 //==========================
