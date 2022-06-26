@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/26 16:08:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:20:44 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,36 @@ namespace ft
 				}
 				this->_root->black = true;
   			}
+
+			void erase_fix(node_pointer d_node, node_pointer prev, node_pointer branch)
+			{
+				node_pointer	x(ft::nullptr_t);
+				node_pointer	y(ft::nullptr_t);
+
+				if(this->is_no_nill(branch))
+				{
+					branch = prev->left ? x = branch->right : x = branch->left;
+					branch = prev->right ? y = branch->left : y = branch->right;
+				}
+				while(this->is_nill(prev) && (this->is_no_nill(d_node) || branch->black == true))
+				{
+					if(this->is_no_nill(branch) && branch->black == false)
+					{
+						d_node = prev->left ? left_rotate(prev) : right_rotate(prev);
+						prev->black = false;
+						branch->black = true;
+						branch = x;
+					}
+					else if(prev->black == true && (this->is_no_nill(branch) || branch->black == ture))
+						&& ((this->is_no_null(x) || x->black == true) && (is_no_nill(y) || y->black == true))
+					{
+						if(this->is_no_null(branch))
+							branch->black = false;
+						p_node = prev;
+						prev = p_node->prev;
+						branch = (d_node->prev->right = d_node ? d_node->prev->left : d_node->prev->right);
+
+
 //==========================
 //Iterators
 //==========================
@@ -394,7 +424,7 @@ namespace ft
 					this->kill_node(d_node);
 				}
 				if(save_color == true)
-					std::cout << "SAVE COLOR BLACK\n";
+					erase_fix(d_node, prev, branch);
 				return (0);
 			}
 
@@ -412,13 +442,10 @@ namespace ft
 				{
 					if(this->_comp(val, aux->get_data()))
 						aux = aux->right;
-					if(this->_comp(aux->get_data(), val))
+					else if(this->_comp(aux->get_data(), val))
 						aux = aux->left;
 					else
-					{
-						std::cout << aux->get_data() << " FIND" << std::endl;
 						return aux;
-					}
 				}
 				return ft::nullptr_t;
 			}
@@ -426,18 +453,15 @@ namespace ft
 			const_node_pointer	find(const value_type& val) const
 			{
 				node_pointer	aux = this->_root;
-
+				
 				while(is_no_nill(aux))
 				{
 					if(this->_comp(val, aux->get_data()))
 						aux = aux->right;
-					if(this->_comp(aux->get_data(), val))
+					else if(this->_comp(aux->get_data(), val))
 						aux = aux->left;
 					else
-					{
-						std::cout << aux->get_data() << " FIND" << std::endl;
 						return aux;
-					}
 				}
 				return ft::nullptr_t;
 			}
