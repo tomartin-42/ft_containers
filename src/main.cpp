@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/26 19:20:37 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:08:20 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,8 @@ int		main(void)
 	treea.insert(4);
 	treea.insert(7);
 	treea.printBT(); 
-	treea.erase(0);
-	treea.erase(4);
-	treea.printBT(); 
 	treea.erase(7);
 	treea.printBT(); 
-//	treea.erase(2);
-//	treea.printBT(); 
+	treea.erase(5);
+	treea.printBT(); 
 }

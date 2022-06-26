@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/26 19:35:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:07:50 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -452,9 +452,8 @@ namespace ft
 				}
 				else
 				{
-					std::cout << "A3 " << d_node->get_data() << std::endl;
 					y = minimum(aux->right);
-					save_color = aux->black;
+					save_color = y->black;
 					x = aux->right;
 					if(y->prev == aux)
 						x->prev = y;
