@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/22 11:45:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:55:15 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ namespace ft
 //==========================
 
 		public:
-			reference	operator * () const {return *(this->_ptr.data);}
-			pointer		operator -> () const {return &(this->_ptr.data);}
+			reference	operator * () const {return (this->_ptr->data);}
+			pointer		operator -> () const {return &(this->_ptr->data);}
 
 			tree_iterator& operator ++ ()
 			{

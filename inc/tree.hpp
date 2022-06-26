@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/25 19:23:28 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:08:50 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,26 @@ namespace ft
 //Aux functions
 //==========================
 
+		protected:
+			bool is_nill(node_pointer& check)
+			{
+				return (check == &this->_nill ? true : false);
+			}
+
+			bool is_no_nill(node_pointer& check)
+			{
+				return (check == &this->_nill ? false : true);
+			}
+
+			void	swap_nodes(node_pointer a, node_pointer b)
+			{
+				value_type aux(a->get_data());
+
+				a->data = b->data;
+				b->data = aux;
+			}
+				
+		public:
 			node_pointer get_nill() {return &this->_nill;}
 
 			//maybe implement with const_pointer too
@@ -170,6 +190,14 @@ namespace ft
 				p_n->prev = &this->_nill;
 				p_n->left = &this->_nill;
 				p_n->right = &this->_nill;
+			}
+
+			void	kill_node(node_pointer& node)
+			{
+				this->_alloc.destroy(node);
+				this->_alloc.deallocate(node, 1);
+				node = ft::nullptr_t;
+				this->_size -= 1;
 			}
 
 			void	insert_fix(node_pointer p_node)
@@ -308,43 +336,110 @@ namespace ft
 
 				this->_root->black = true;
 			    insert_fix(p_node);
+				this->_size += 1;
 				return (p_node->get_data());
 			}
+
+			size_type	erase(const value_type& val)
+			{
+				node_pointer	d_node(this->find(val));
+				node_pointer	prev(d_node->prev);
+				node_pointer	aux(d_node);
+				node_pointer	branch(d_node->prev->right == d_node ? d_node->prev->left : d_node->prev->right);
+				bool			save_color = d_node->black;
+
+				if(is_nill(d_node->left) && is_nill(d_node->right))
+				{
+					if(d_node == this->_root)
+					{
+						this->_root = &this->_nill;
+						kill_node(d_node);
+						return (1);
+					}
+					else
+						prev->left == d_node ? prev->right = &this->_nill : prev->left = &this->_nill;
+					save_color = d_node->black;
+					kill_node(d_node);
+				}
+				else if((is_nill(d_node->left) && is_no_nill(d_node->right)) || (is_no_nill(d_node->left) && is_nill(d_node->right)))
+				{
+					is_no_nill(d_node->right) ? aux = d_node->right : aux = d_node->left;
+					if (d_node == this->_root)
+					{
+						this->_root = aux;
+						this->_nill.prev = aux;
+					}
+					else
+						d_node == prev->right ? prev->right = aux : prev->left = aux;
+					aux->prev = prev;
+					kill_node(d_node);
+					return (1);
+				}
+				else
+				{
+					aux = maximum(d_node->left);
+					save_color = aux->black;
+					swap_nodes(d_node, aux);
+					prev = aux->prev;
+					branch = (aux->prev->right == aux ? aux->prev->left : aux->prev->right);
+					d_node = aux;
+					if(is_no_nill(d_node->left))
+					{
+						d_node == d_node->prev->right ? d_node->prev->right = d_node->left : d_node->prev->left = d_node->left;
+						d_node->left->prev = d_node->prev;
+						save_color = false;
+					}
+					else
+						d_node->prev->left == d_node ? d_node->prev->left = &this->_nill : d_node->prev->right = &this->_nill;
+					this->kill_node(d_node);
+				}
+				if(save_color == true)
+					std::cout << "SAVE COLOR BLACK\n";
+				return (0);
+			}
+
+			//}
 
 //==========================
 //Operations
 //==========================
 
-			iterator	find(const value_type& val)
+			node_pointer	find(const value_type& val)
 			{
 				node_pointer	aux = this->_root;
 
-				while(aux != &this->_nill)
+				while(is_no_nill(aux))
 				{
 					if(this->_comp(val, aux->get_data()))
-						aux = aux->left;
-					if(this->_comp(aux->get_data(), val))
 						aux = aux->right;
+					if(this->_comp(aux->get_data(), val))
+						aux = aux->left;
 					else
-						return iterator(aux);
+					{
+						std::cout << aux->get_data() << " FIND" << std::endl;
+						return aux;
+					}
 				}
-				return iterator(ft::nullptr_t);
+				return ft::nullptr_t;
 			}
 
-			const_iterator	find(const value_type& val) const
+			const_node_pointer	find(const value_type& val) const
 			{
 				node_pointer	aux = this->_root;
 
-				while(aux != &this->_nill)
+				while(is_no_nill(aux))
 				{
 					if(this->_comp(val, aux->get_data()))
-						aux = aux->left;
-					if(this->_comp(aux->get_data(), val))
 						aux = aux->right;
+					if(this->_comp(aux->get_data(), val))
+						aux = aux->left;
 					else
-						return iterator(aux);
+					{
+						std::cout << aux->get_data() << " FIND" << std::endl;
+						return aux;
+					}
 				}
-				return iterator(ft::nullptr_t);
+				return ft::nullptr_t;
 			}
 
 			//size_type	count(const value_type& val) const
