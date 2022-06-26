@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/26 20:07:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:16:05 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,6 @@ namespace ft
 
 				while(x != this->_root && x->black == true)
 				{
-					std::cout << "HOLA\n";
 					if(x == x->prev->left)
 					{
 						s = x->prev->right;
@@ -440,13 +439,11 @@ namespace ft
 				save_color = y->black;
 				if(this->is_nill(aux->left))
 				{
-					std::cout << "A1 " << d_node->get_data() << std::endl;
 					x = aux->right;
 					this->transplant(aux, aux->right);
 				}
 				else if(this->is_nill(aux->right))
 				{
-					std::cout << "A2 " << d_node->get_data() << std::endl;
 					x = aux->left;
 					this->transplant(aux, aux->left);
 				}
@@ -473,70 +470,6 @@ namespace ft
 					erase_fix(x);
 				return (1);
 			}
-						
-
-
-
-
-
-
-
-
-				/*node_pointer	d_node(this->find(val));
-				node_pointer	prev(d_node->prev);
-				node_pointer	aux(d_node);
-				node_pointer	branch(d_node->prev->right == d_node ? d_node->prev->left : d_node->prev->right);
-				bool			save_color = d_node->black;
-
-				if(is_nill(d_node->left) && is_nill(d_node->right))
-				{
-					if(d_node == this->_root)
-					{
-						this->_root = &this->_nill;
-						kill_node(d_node);
-						return (1);
-					}
-					else
-						prev->left == d_node ? prev->right = &this->_nill : prev->left = &this->_nill;
-					save_color = d_node->black;
-					kill_node(d_node);
-				}
-				else if((is_nill(d_node->left) && is_no_nill(d_node->right)) || (is_no_nill(d_node->left) && is_nill(d_node->right)))
-				{
-					is_no_nill(d_node->right) ? aux = d_node->right : aux = d_node->left;
-					if (d_node == this->_root)
-					{
-						this->_root = aux;
-						this->_nill.prev = aux;
-					}
-					else
-						d_node == prev->right ? prev->right = aux : prev->left = aux;
-					aux->prev = prev;
-					kill_node(d_node);
-					return (1);
-				}
-				else
-				{
-					aux = maximum(d_node->left);
-					save_color = aux->black;
-					swap_nodes(d_node, aux);
-					prev = aux->prev;
-					branch = (aux->prev->right == aux ? aux->prev->left : aux->prev->right);
-					d_node = aux;
-					if(is_no_nill(d_node->left))
-					{
-						d_node == d_node->prev->right ? d_node->prev->right = d_node->left : d_node->prev->left = d_node->left;
-						d_node->left->prev = d_node->prev;
-						save_color = false;
-					}
-					else
-						d_node->prev->left == d_node ? d_node->prev->left = &this->_nill : d_node->prev->right = &this->_nill;
-					this->kill_node(d_node);
-				}
-				if(save_color == true)
-					erase_fix(d_node, prev, branch);
-				return (0);
-			}*/
 
 //==========================
 //Operations
