@@ -19,8 +19,11 @@ namespace ft
 	struct pair
 	{
 		public:
-			typedef T1	first;
-			typedef T2	second;
+			typedef T1	first_t;
+			typedef T2	second_t;
+
+			first_t		first;
+			second_t	second;
 	
 			//default constructor
 			pair() : first(), second() {}
@@ -30,7 +33,7 @@ namespace ft
 			pair (const pair<U,V>& other) : first(other.first), second(other.second) {} 
 			
 			//initialization constructor
-			pair(const first& a, const second& b) : first(a), second(b) {}
+			pair(const first_t& a, const second_t& b) : first(a), second(b) {}
 	
 			pair& operator = (const pair& other)
 			{

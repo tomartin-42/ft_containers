@@ -15,6 +15,8 @@
 #include "stack.hpp"
 #include "node.hpp"
 #include "tree.hpp"
+#include "map.hpp"
+#include "pair.hpp"
 #include "tree_iterator.hpp"
 #include "random_access_iterator.hpp"
 #include <iostream>
@@ -42,6 +44,7 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 
 int		main(void)
 {
+	ft::map<int, int>	mapa;
 
 	ft::tree<int, std::less<int> >	treea;
 	ft::tree<int, std::less<int> >::iterator	itt;

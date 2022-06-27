@@ -58,6 +58,11 @@ namespace ft
 				this->_nill.right = &this->_nill;
 				this->_nill.black = true;
 			}
+			
+			~tree()
+			{
+			}
+
 
 //==========================
 //Aux functions
@@ -216,7 +221,7 @@ namespace ft
 
 			void	insert_fix(node_pointer p_node)
 			{
-				node_pointer u;
+				node_pointer u(ft::nullptr_t);
 
 				while (p_node->prev->black == false)
 				{
