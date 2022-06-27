@@ -12,7 +12,7 @@ namespace ft
 		public:
 			typedef	Key														key_type;
 			typedef T														data_type;
-			typedef Compare													comp;
+			typedef Compare													value_comp;
 			typedef Alloc													alloc_type;
 			typedef typename ft::pair<const key_type, data_type>			value_type;	
 			typedef typename alloc_type::pointer							pointer;
@@ -29,10 +29,10 @@ namespace ft
 			class	value_compare : public std::binary_function<value_type, value_type, bool>
 			{
 			protected:
-				comp	comp_t;
+				value_comp	comp_t;
 
 			public:
-				value_compare(comp c) : comp_t(c) {}
+				value_compare(value_comp c) : comp_t(c) {}
 
 				bool	operator()(const value_type& x, const value_type& y) const
 				{
@@ -40,16 +40,18 @@ namespace ft
 				}
 			};
 //********************************************************************************************************//	
+		
 		private:
-			alloc_type					_alloc;
+			alloc_type										_alloc;
 			ft::tree<value_type, value_compare, alloc_type>	_btree;
 
 //********************************************************************************************************//	
 //********************************************constructors************************************************//
 
 		public:
-			explicit map(const comp& comp_t = comp(), const alloc_type& alloc_t = alloc_type()) :
-				_alloc(alloc_t), _btree(comp_t) {}
+			explicit map(const value_comp& comp_t = value_comp(), const alloc_type& alloc_t = alloc_type()) 
+				: _alloc(alloc_t), _btree(alloc_t, comp_t) {}
+
 
 	}; //end map class
 }//end namespace ft

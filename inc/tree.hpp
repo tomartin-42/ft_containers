@@ -50,15 +50,23 @@ namespace ft
 			value_comp		_comp;
 		
 		public:
-			tree(const alloc_type & alloc_t = alloc_type()) : 
-			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(compare()) 
+			/*tree(const alloc_type & alloc_t = alloc_type()) : 
+			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(value_comp()) 
+			{
+				this->_nill.prev = &this->_nill;
+				this->_nill.left = &this->_nill;
+				this->_nill.right = &this->_nill;
+				this->_nill.black = true;
+			}*/
+
+			tree(const alloc_type & alloc_t = alloc_type(), const value_comp& comp_t = value_comp()) : 
+			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(comp_t) 
 			{
 				this->_nill.prev = &this->_nill;
 				this->_nill.left = &this->_nill;
 				this->_nill.right = &this->_nill;
 				this->_nill.black = true;
 			}
-			
 			~tree()
 			{
 			}
