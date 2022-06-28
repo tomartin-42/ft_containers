@@ -2,6 +2,7 @@
 #include <iostream>
 #include <functional>
 #include "tree.hpp"
+#include "tree_iterator.hpp"
 #include "pair.hpp"
 
 namespace ft
@@ -25,7 +26,7 @@ namespace ft
 			typedef typename ft::tree_iterator<const value_type>			const_iterator;
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
-//********************************************************************************************************//	
+					//**********************************************//	
 			class	value_compare : public std::binary_function<value_type, value_type, bool>
 			{
 			protected:
@@ -39,26 +40,25 @@ namespace ft
 					return comp_t(x.first, y.first);
 				}
 			};
-//********************************************************************************************************//	
-		
+
+				//***************************************************//
 		private:
 			alloc_type										_alloc;
 			ft::tree<value_type, value_compare, alloc_type>	_btree;
 
 //********************************************************************************************************//	
 //********************************************constructors************************************************//
-
 		public:
 			explicit map(const value_comp& comp_t = value_comp(), const alloc_type& alloc_t = alloc_type()) 
 				: _alloc(alloc_t), _btree(alloc_t, comp_t) {}
 
-			/*
+		/*	
 			map(InputIterator first, InputIterator last, 
-				const value_comp& comp_t = value_comp(), const allocator_type& alloc_t = alloc_type());
+				const value_comp& comp_t = value_comp(), const allocator_type& alloc_t = alloc_type())
 				: _alloc(alloc_t), _btree(alloc_t, comp_t)
 				{
 				}
-			*/
+		*/	
 			map(const map& other) : _alloc(other._alloc), _btree(other._btree)
 			{
 				*this = other;
@@ -71,7 +71,6 @@ namespace ft
 //==============================
 //iterators
 //==============================
-
 			iterator	begin()
 			{}
 
@@ -88,7 +87,6 @@ namespace ft
 //==============================
 //capacity
 //==============================
-
 			bool	empty()
 			{
 				if(this->_btree.size() == 0)
@@ -109,11 +107,27 @@ namespace ft
 //=============================
 //element access
 //=============================
-
 			data_type	&operator[](const key_type &i) 
 			{
 			}
 
+//===============================
+//modifiers
+//===============================
+
+
+//===============================
+//observers
+//===============================
+
+//===============================
+//operations
+//===============================
+
+
+//===============================
+//allocator
+//===============================
 
 
 	}; //end map class
