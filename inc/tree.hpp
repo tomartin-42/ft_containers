@@ -517,7 +517,7 @@ namespace ft
 					else
 						return aux;
 				}
-				return ft::nullptr_t;
+				return &this->_nill;
 			}
 
 			const_node_pointer	find(const value_type& val) const
@@ -533,7 +533,7 @@ namespace ft
 					else
 						return aux;
 				}
-				return ft::nullptr_t;
+				return &this->_nill;
 			}
 
 			//size_type	count(const value_type& val) const

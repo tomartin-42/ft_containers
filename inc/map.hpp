@@ -69,6 +69,19 @@ namespace ft
 //*************************************member fuctions****************************************************//
 
 //==============================
+//aux functions
+//==============================
+
+			iterator	find_by_value_type(const value_type& f)
+			{
+				return (this->find(f.first));
+			}
+
+			const_iterator	find_by_value_type(const value_type& f) const
+			{
+				return (this->find(f.first));
+			}
+//==============================
 //iterators
 //==============================
 			iterator	begin()
@@ -125,10 +138,10 @@ namespace ft
 //===============================
 			ft::pair<iterator, bool>	insert(const value_type& val)
 			{
-				if(this->_btree.find(val) == ft::nullptr_t)
+				if(this->find_by_value_type(val) != iterator(this->_btree.get_nill()))
 					return (ft::make_pair(this->end(), false));
 				this->_btree.insert(val);
-				iterator it = this->find(val);
+				iterator it = this->find(val.first);
 				return ft::make_pair(it, true);
 			}
 
@@ -155,7 +168,17 @@ namespace ft
 //allocator
 //===============================
 
+//===============================
+//debug
+//===============================
 
+			void print()
+			{
+				iterator it = this->begin();
+				std::cout << *(it)->first << std::endl;
+				it++;
+				std::cout << &it << std::endl;
+			}
 	}; //end map class
 }//end namespace ft
 
