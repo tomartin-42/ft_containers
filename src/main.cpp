@@ -45,7 +45,10 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 int		main(void)
 {
 	ft::map<int, int>	mapa;
+	ft::map<int, int>::iterator it = mapa.begin();
 
+	mapa.insert(ft::make_pair(2, 3));
+	mapa.find(2);
 	ft::tree<int, std::less<int> >	treea;
 	ft::tree<int, std::less<int> >::iterator	itt;
 	ft::tree_iterator<ft::node<int> >	itb(itt);

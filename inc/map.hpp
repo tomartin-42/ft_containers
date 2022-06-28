@@ -15,15 +15,15 @@ namespace ft
 			typedef T														data_type;
 			typedef Compare													value_comp;
 			typedef Alloc													alloc_type;
-			typedef typename ft::pair<const key_type, data_type>			value_type;	
+			typedef typename ft::pair<const key_type, data_type>			value_type;
 			typedef typename alloc_type::pointer							pointer;
 			typedef typename alloc_type::const_pointer						const_pointer;
 			typedef typename alloc_type::reference							reference;
 			typedef typename alloc_type::const_reference					const_reference;
 			typedef typename alloc_type::size_type							size_type;
 			typedef typename alloc_type::difference_type					difference_type;
-			typedef typename ft::tree_iterator<value_type>					iterator;
-			typedef typename ft::tree_iterator<const value_type>			const_iterator;
+			typedef typename ft::tree_iterator<ft::node<value_type> >		iterator;
+			typedef typename ft::tree_iterator<ft::node<const value_type> >	const_iterator;
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
@@ -72,16 +72,25 @@ namespace ft
 //iterators
 //==============================
 			iterator	begin()
-			{}
+			{
+				return this->_btree.begin();
+			}
+
 
 			const_iterator begin() const
-			{}
+			{
+				return this->_btree.begin();
+			}
 
 			iterator	end()
-			{}
+			{
+				return this->_btree.end();
+			}
 
 			const_iterator end() const
-			{}
+			{
+				return this->_btree.end();
+			}
 
 
 //==============================
@@ -114,7 +123,14 @@ namespace ft
 //===============================
 //modifiers
 //===============================
-
+			ft::pair<iterator, bool>	insert(const value_type& val)
+			{
+				if(this->_btree.find(val) == ft::nullptr_t)
+					return (ft::make_pair(this->end(), false));
+				this->_btree.insert(val);
+				iterator it = this->find(val);
+				return ft::make_pair(it, true);
+			}
 
 //===============================
 //observers
@@ -123,6 +139,16 @@ namespace ft
 //===============================
 //operations
 //===============================
+
+			iterator	find(const key_type& key)
+			{
+				return iterator(this->_btree.find(ft::make_pair(key, data_type())));
+			}
+
+			const_iterator	find(const key_type& key) const
+			{
+				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
+			}
 
 
 //===============================
