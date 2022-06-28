@@ -58,7 +58,8 @@ namespace ft
 				this->_nill.right = &this->_nill;
 				this->_nill.black = true;
 			}*/
-
+			
+			//-------------default constructor---------------------------------//
 			tree(const alloc_type & alloc_t = alloc_type(), const value_comp& comp_t = value_comp()) : 
 			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(comp_t) 
 			{
@@ -67,6 +68,21 @@ namespace ft
 				this->_nill.right = &this->_nill;
 				this->_nill.black = true;
 			}
+
+			//-----------------copy constructor---------------------------------//
+			tree(const tree& other) : _alloc(other._alloc), _root(&other._nill), _nill(other._nill),
+				_size(other._size), _comp(other._comp)
+			{
+				iterator	it = other.begin();
+
+				while(it != other.end())
+				{
+					this->insert(*it);
+					it++;
+				}
+				this->insert(*it);
+			}
+
 			~tree()
 			{
 			}

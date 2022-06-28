@@ -52,6 +52,69 @@ namespace ft
 			explicit map(const value_comp& comp_t = value_comp(), const alloc_type& alloc_t = alloc_type()) 
 				: _alloc(alloc_t), _btree(alloc_t, comp_t) {}
 
+			/*
+			map(InputIterator first, InputIterator last, 
+				const value_comp& comp_t = value_comp(), const allocator_type& alloc_t = alloc_type());
+				: _alloc(alloc_t), _btree(alloc_t, comp_t)
+				{
+				}
+			*/
+			map(const map& other) : _alloc(other._alloc), _btree(other._btree)
+			{
+				*this = other;
+			}
+
+
+//********************************************************************************************************//
+//*************************************member fuctions****************************************************//
+
+//==============================
+//iterators
+//==============================
+
+			iterator	begin()
+			{}
+
+			const_iterator begin() const
+			{}
+
+			iterator	end()
+			{}
+
+			const_iterator end() const
+			{}
+
+
+//==============================
+//capacity
+//==============================
+
+			bool	empty()
+			{
+				if(this->_btree.size() == 0)
+					return true;
+				return false;
+			}
+
+			size_type	size()
+			{
+				return this->btree.size();
+			}
+
+			size_type	max_size()
+			{
+			}
+
+
+//=============================
+//element access
+//=============================
+
+			data_type	&operator[](const key_type &i) 
+			{
+			}
+
+
 
 	}; //end map class
 }//end namespace ft
