@@ -7,7 +7,7 @@
 
 namespace ft
 {
-	template<class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > > 
+	template<class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
 		public:
@@ -22,8 +22,8 @@ namespace ft
 			typedef typename alloc_type::const_reference					const_reference;
 			typedef typename alloc_type::size_type							size_type;
 			typedef typename alloc_type::difference_type					difference_type;
-			typedef typename ft::tree_iterator<ft::node<value_type> >		iterator;
-			typedef typename ft::tree_iterator<ft::node<const value_type> >	const_iterator;
+			typedef typename ft::tree_iterator<value_type>		iterator;
+			typedef typename ft::tree_iterator<const value_type>	const_iterator;
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
@@ -172,13 +172,13 @@ namespace ft
 //debug
 //===============================
 
-			void print()
+	/*		void print()
 			{
 				iterator it = this->begin();
-				std::cout << *(it)->first << std::endl;
+				std::cout << it->first << std::endl;
 				it++;
 				std::cout << &it << std::endl;
-			}
+			} */
 	}; //end map class
 }//end namespace ft
 
