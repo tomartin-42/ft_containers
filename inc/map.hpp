@@ -7,6 +7,21 @@
 
 namespace ft
 {
+	template<class Pair>
+	struct	key : public std::unary_function<Pair, typename Pair::first_t>
+
+	{
+		typename Pair::first_t&	operator()(Pair& pair) const
+		{
+			return pair.first;
+		}
+
+		const typename Pair::first_t&	operator()(const Pair& pair) const
+		{
+			return pair.first;
+		}
+	};
+
 	template<class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
@@ -16,7 +31,8 @@ namespace ft
 			typedef Compare													value_comp;
 			typedef Alloc													alloc_type;
 			typedef typename ft::pair<const key_type, data_type>			value_type;
-			typedef typename ft::tree<value_type, value_comp, alloc_type> rb_tree;
+			typedef ft::key<value_type>										key_of_value;
+			typedef typename ft::tree<value_type, value_comp, key_of_value, alloc_type> rb_tree;
 			typedef typename alloc_type::pointer							pointer;
 			typedef typename alloc_type::const_pointer						const_pointer;
 			typedef typename alloc_type::reference							reference;
@@ -133,6 +149,7 @@ namespace ft
 //=============================
 			data_type	&operator[](const key_type &i) 
 			{
+				(void)i;
 			}
 
 //===============================

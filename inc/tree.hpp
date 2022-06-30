@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/26 20:16:05 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:15:58 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 #include "enable_if.hpp"
 #include "is_integral.hpp"
 #include "nullptr.hpp" //to ft::nullptr
+#include "pair.hpp"
 
 namespace ft
 {
-
-	template<class T, class compare, class alloc = std::allocator<T> >
+	template<class T, class compare, class KeyOfValue, class alloc = std::allocator<T> >
 	class tree
 	{
 		public:
@@ -41,6 +41,7 @@ namespace ft
 			typedef typename alloc_type::difference_type							diference_type;
 			typedef typename ft::tree_iterator<node>								iterator;
 			typedef typename ft::tree_iterator<const_node>							const_iterator;
+			typedef KeyOfValue														key_value;
 
 		private:
 			alloc_node		_alloc;
@@ -435,14 +436,14 @@ namespace ft
 				while (x != &_nill)
 				{
 					y = x;
-					if (this->_comp(p_node->get_data(), x->get_data()))
+					if (this->_comp(p_node->get_data().first, x->get_data().first))
 						x = x->right;
 					else 
 						x = x->left;
 			    }
 			    p_node->prev = y;
 				//std::cout << p_node->get_data() << "===" << y->get_data() << std::endl;
-				if (this->_comp(p_node->get_data(), y->get_data()))
+				if (this->_comp(p_node->get_data().first, y->get_data().first))
 					y->right = p_node;
 				else
 					y->left = p_node;
@@ -510,9 +511,9 @@ namespace ft
 
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(val, aux->get_data()))
+					if(this->_comp(key_value()(val), aux->get_data().first))
 						aux = aux->right;
-					else if(this->_comp(aux->get_data(), val))
+					else if(this->_comp(aux->get_data().first, val.first))
 						aux = aux->left;
 					else
 						return aux;
