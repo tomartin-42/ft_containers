@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/30 12:05:16 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:05:51 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,21 @@ int		main(void)
 	ft::map<int, int>::iterator it;
 
 	it = mapa.end();
+	mapa.insert(ft::make_pair(3, 8));
 	mapa.insert(ft::make_pair(5, 8));
+	mapa.insert(ft::make_pair(8, 8));
+	mapa.insert(ft::make_pair(1, 8));
+	mapa.insert(ft::make_pair(6, 8));
+	mapa.insert(ft::make_pair(2, 8));
+	mapa.insert(ft::make_pair(0, 8));
+	mapa.insert(ft::make_pair(4, 8));
+	mapa.insert(ft::make_pair(7, 8));
+	mapa.insert(ft::make_pair(8, 8));
+	mapa.insert(ft::make_pair(8, 8));
+	mapa.insert(ft::make_pair(8, 8));
 //	mapa.insert(ft::make_pair(2, 3));
-//	mapa.print();
-	mapa.find(2);
+	mapa.print();
+//	mapa.find(2);
 //	mapa.find(3);
 /*
 	ft::tree<int, std::less<int> >	treea;

@@ -191,13 +191,10 @@ namespace ft
 //debug
 //===============================
 
-	/*		void print()
+			void print()
 			{
-				iterator it = this->begin();
-				std::cout << it->first << std::endl;
-				it++;
-				std::cout << &it << std::endl;
-			} */
+				this->_btree.printBT();
+			} 
 	}; //end map class
 }//end namespace ft
 

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/30 12:15:58 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:01:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -511,9 +511,9 @@ namespace ft
 
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(key_value()(val), aux->get_data().first))
+					if(this->_comp(key_value()(val), key_value()(aux->get_data())))
 						aux = aux->right;
-					else if(this->_comp(aux->get_data().first, val.first))
+					else if(this->_comp(key_value()(aux->get_data()), key_value()(val)))
 						aux = aux->left;
 					else
 						return aux;
@@ -527,9 +527,9 @@ namespace ft
 				
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(val, aux->get_data()))
+					if(this->_comp(key_value()(val), key_value()(aux->get_data())))
 						aux = aux->right;
-					else if(this->_comp(aux->get_data(), val))
+					else if(this->_comp(key_value()(aux->get_data()), key_value()(val)))
 						aux = aux->left;
 					else
 						return aux;
@@ -548,7 +548,7 @@ namespace ft
 			        std::cout << (isLeft ? "├──" : "└──" );
 
         			// print the value of the node
-        			std::cout << node->get_data() << " " << node->black << std::endl;
+        			std::cout << key_value()(node->get_data()) << " " << node->black << std::endl;
 
         			// enter the next tree level - left and right branch
         			printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
