@@ -8,17 +8,27 @@
 namespace ft
 {
 	template<class Pair>
-	struct	key : public std::unary_function<Pair, typename Pair::first_t>
+	struct	key
 
 	{
-		typename Pair::first_t&	operator()(Pair& pair) const
+		typename Pair::first_t&	get_first(Pair& pair) const
 		{
 			return pair.first;
 		}
 
-		const typename Pair::first_t&	operator()(const Pair& pair) const
+		const typename Pair::first_t&	get_first(const Pair& pair) const
 		{
 			return pair.first;
+		}
+
+		typename Pair::second_t&	get_second(Pair& pair) const
+		{
+			return pair.second;
+		}
+
+		const typename Pair::second_t&	get_second(const Pair& pair) const
+		{
+			return pair.second;
 		}
 	};
 

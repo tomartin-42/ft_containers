@@ -511,9 +511,9 @@ namespace ft
 
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(key_value()(val), key_value()(aux->get_data())))
+					if(this->_comp(key_value().get_first(val), key_value().get_first(aux->get_data())))
 						aux = aux->right;
-					else if(this->_comp(key_value()(aux->get_data()), key_value()(val)))
+					else if(this->_comp(key_value().get_first(aux->get_data()), key_value().get_first(val)))
 						aux = aux->left;
 					else
 						return aux;
@@ -527,9 +527,9 @@ namespace ft
 				
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(key_value()(val), key_value()(aux->get_data())))
+					if(this->_comp(key_value().get_first(val), key_value().get_first(aux->get_data())))
 						aux = aux->right;
-					else if(this->_comp(key_value()(aux->get_data()), key_value()(val)))
+					else if(this->_comp(key_value().get_first(aux->get_data()), key_value().get_first(val)))
 						aux = aux->left;
 					else
 						return aux;
@@ -548,7 +548,7 @@ namespace ft
 			        std::cout << (isLeft ? "├──" : "└──" );
 
         			// print the value of the node
-        			std::cout << key_value()(node->get_data()) << " " << node->black << std::endl;
+        			std::cout << key_value().get_first(node->get_data()) << "-" << key_value().get_second(node->get_data()) << " " << node->black << std::endl;
 
         			// enter the next tree level - left and right branch
         			printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
