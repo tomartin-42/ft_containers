@@ -36,12 +36,12 @@ namespace ft
 			typedef const node														const_node;
 			typedef node*															node_pointer;
 			typedef const node*														const_node_pointer;
+			typedef KeyOfValue														key_value;
 			typedef typename alloc::template rebind<ft::node<value_type> >::other	alloc_node;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			typedef typename ft::tree_iterator<node>								iterator;
-			typedef typename ft::tree_iterator<const_node>							const_iterator;
-			typedef KeyOfValue														key_value;
+			typedef typename ft::tree_iterator<node, value_type>								iterator;
+			typedef typename ft::tree_iterator<const node, const value_type>							const_iterator;
 
 		private:
 			alloc_node		_alloc;

@@ -20,15 +20,17 @@
 
 namespace ft
 {
-	template<class T>
+	template<class T, class V>
 	class tree_iterator
 	{
 		public:
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
-			typedef	T*																	pointer;
-			typedef T&																	reference;
+			typedef	T*												pointer;
+			typedef T&														reference;
+			typedef V*														value_pointer;
+			typedef V&														value_reference;
 
 		private:
 			pointer	_ptr;
@@ -78,8 +80,8 @@ namespace ft
 //==========================
 
 		public:
-			reference	operator * () const {return (this->_ptr->data);}
-			pointer		operator -> () const {return &(this->_ptr->data);}
+			value_reference			operator * () const {return (this->_ptr);}
+			value_pointer		operator -> () const {return &(this->_ptr->get_data());}
 
 			tree_iterator& operator ++ ()
 			{
@@ -136,18 +138,18 @@ namespace ft
 //No member functions
 //===================================
 //
-	template <typename T, typename V>
-	bool	operator == (const tree_iterator<T>& itf, const tree_iterator<V>& itl)
+/*	template <typename T, typename R>
+	bool	operator == (const tree_iterator<T, V>& itf, const tree_iterator<R, V>& itl)
 	{
 		return itf.base() == itl.base();
 	}
 
-	template <typename T, typename V>
-	bool	operator != (const tree_iterator<T>& itf, const tree_iterator<V>& itl)
+	template <typename T, typename R>
+	bool	operator != (const tree_iterator<T, V>& itf, const tree_iterator<R, V>& itl)
 	{
 		return !(itf.base() == itl.base());
 	}
-
+*/
 } //end namespace ft
 
 #endif
