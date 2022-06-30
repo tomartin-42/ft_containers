@@ -130,25 +130,25 @@ namespace ft
 			node_pointer get_nill() {return &this->_nill;}
 
 			//maybe implement with const_pointer too
-			node_pointer minimum(const node_pointer n) const
-			{
-				node_pointer aux = n;
-
-				while(aux->left != &this->_nill)
-					aux = aux->left;
-				return aux;
-			}
-
-			node_pointer minimum(node_pointer n) 
-			{
-				node_pointer aux = n;
-
-				while(aux->left != &this->_nill)
-					aux = aux->left;
-				return aux;
-			}
-
 			node_pointer maximum(const node_pointer n) const
+			{
+				node_pointer aux = n;
+
+				while(aux->left != &this->_nill)
+					aux = aux->left;
+				return aux;
+			}
+
+			node_pointer maximum(node_pointer n) 
+			{
+				node_pointer aux = n;
+
+				while(aux->left != &this->_nill)
+					aux = aux->left;
+				return aux;
+			}
+
+			node_pointer minimum(const node_pointer n) const
 			{
 				node_pointer aux = n;
 
@@ -157,7 +157,7 @@ namespace ft
 				return aux;
 			}
 
-			node_pointer maximum(node_pointer n) 
+			node_pointer minimum(node_pointer n) 
 			{
 				node_pointer aux = n;
 
@@ -436,14 +436,16 @@ namespace ft
 				while (x != &_nill)
 				{
 					y = x;
-					if (this->_comp(p_node->get_data().first, x->get_data().first))
+					if (this->_comp(key_value().get_first(p_node->get_data()), 
+								key_value().get_first(x->get_data())))
 						x = x->right;
 					else 
 						x = x->left;
 			    }
 			    p_node->prev = y;
 				//std::cout << p_node->get_data() << "===" << y->get_data() << std::endl;
-				if (this->_comp(p_node->get_data().first, y->get_data().first))
+				if (this->_comp(key_value().get_first(p_node->get_data()), 
+							key_value().get_first(y->get_data())))
 					y->right = p_node;
 				else
 					y->left = p_node;

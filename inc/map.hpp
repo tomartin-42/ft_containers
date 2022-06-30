@@ -79,13 +79,19 @@ namespace ft
 			explicit map(const value_comp& comp_t = value_comp(), const alloc_type& alloc_t = alloc_type()) 
 				: _alloc(alloc_t), _btree(alloc_t, comp_t) {}
 
-		/*	
+			template<class InputIterator>			
 			map(InputIterator first, InputIterator last, 
-				const value_comp& comp_t = value_comp(), const allocator_type& alloc_t = alloc_type())
+				const value_comp& comp_t = value_comp(), const alloc_type& alloc_t = alloc_type())
 				: _alloc(alloc_t), _btree(alloc_t, comp_t)
 				{
+					while(first != last)
+					{
+						this->_btree.insert(*first);
+						first++;
+					}
+					this->_btree.insert(*first);
 				}
-		*/	
+			
 			map(const map& other) : _alloc(other._alloc), _btree(other._btree)
 			{
 				*this = other;
@@ -146,7 +152,7 @@ namespace ft
 
 			size_type	size()
 			{
-				return this->btree.size();
+				return this->_btree.size();
 			}
 
 			size_type	max_size()

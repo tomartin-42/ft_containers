@@ -80,7 +80,7 @@ namespace ft
 //==========================
 
 		public:
-			value_reference			operator * () const {return (this->_ptr);}
+			value_reference			operator * () const {return (this->_ptr->get_data());}
 			value_pointer		operator -> () const {return &(this->_ptr->get_data());}
 
 			tree_iterator& operator ++ ()
