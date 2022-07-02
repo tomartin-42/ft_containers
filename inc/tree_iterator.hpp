@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 13:15:35 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 14:20:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ namespace ft
 			{
 				pointer aux = n;
 
-				while(aux->right->get_nill() != true)
-					aux = aux->right;
+				while(aux->left->get_nill() != true)
+					aux = aux->left;
 				return aux;
 			}
 
@@ -71,8 +71,8 @@ namespace ft
 			{
 				pointer aux = n;
 
-				while(aux->left->get_nill() != true)
-					aux = aux->left;
+				while(aux->right->get_nill() != true)
+					aux = aux->right;
 				return aux;
 			}
 //==========================

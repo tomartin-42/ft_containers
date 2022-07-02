@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 13:42:05 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 14:19:32 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,8 +248,60 @@ namespace ft
 			void	insert_fix(node_pointer p_node)
 			{
 				node_pointer u(ft::nullptr_t);
+				
+				while(p_node->prev->black == false)
+				{
+					if(p_node->prev == p_node->prev->prev->right)
+					{
+						u = p_node->prev->prev->left;
+						if(u->black == false)
+						{
+							u->black = true;
+							p_node->prev->black = true;
+							p_node->prev->prev->black = false;
+							p_node = p_node->prev->prev;
+						}
+						else
+						{
+							if(p_node == p_node->prev->left)
+							{
+								p_node = p_node->prev;
+								right_rotate(p_node);
+							}
+							p_node->prev->black = true;
+							p_node->prev->prev->black = false;
+							left_rotate(p_node->prev->prev);
+						}
+					}
+					else
+					{
+						u = p_node->prev->prev->right;
+						if(u->black == false)
+						{
+							u->black = true;
+							p_node->prev->black = true;
+							p_node->prev->prev->black = false;
+							p_node = p_node->prev->prev;
+						}
+						else
+						{
+							if(p_node == p_node->prev->right)
+							{
+								p_node = p_node->prev;
+								left_rotate(p_node);
+							}
+							p_node->prev->black = true;
+							p_node->prev->prev->black = false;
+							right_rotate(p_node->prev->prev);
+						}
+					}
+					if(p_node == this->_root)
+						break;
+				}
+				this->_root->black = true;
+			}
 
-				while (p_node->prev->black == false)
+				/*while (p_node->prev->black == false)
 				{
 					if (p_node->prev == p_node->prev->prev->right)
 					{
@@ -308,7 +360,7 @@ namespace ft
 						break ;
 				}
 				this->_root->black = true;
-  			}
+  			*/
 
 			void erase_fix(node_pointer x)
 			{
@@ -455,7 +507,7 @@ namespace ft
 				//	return (p_node->get_data());
 
 				this->_root->black = true;
-			    //insert_fix(p_node);
+			    insert_fix(p_node);
 				this->_size += 1;
 				return (p_node->get_data());
 			}
