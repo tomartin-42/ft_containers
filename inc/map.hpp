@@ -81,17 +81,11 @@ namespace ft
 
 			template<class InputIterator>			
 			map(InputIterator first, InputIterator last, 
-				const value_comp& comp_t = value_comp(), const alloc_type& alloc_t = alloc_type())
+				const value_comp& comp_t = value_comp(), const alloc_type& alloc_t = alloc_type(),
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 				: _alloc(alloc_t), _btree(alloc_t, comp_t)
 				{
-					while(first != last)
-					{
-						this->_btree.insert(*first);
-						std::cout << first->first << " - " << first->second << std::endl;
-						std::cout << last->first << " - " << last->second << std::endl;
-						first++;
-					}
-					this->_btree.insert(*first);
+					this->_btree.insert(first, last);
 				}
 			
 			map(const map& other) : _alloc(other._alloc), _btree(other._btree)

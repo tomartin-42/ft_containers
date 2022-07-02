@@ -129,8 +129,7 @@ namespace ft
 		public:
 			node_pointer get_nill() {return &this->_nill;}
 
-			//maybe implement with const_pointer too
-			node_pointer maximum(const node_pointer n) const
+			node_pointer minimum(const node_pointer& n) const
 			{
 				node_pointer aux = n;
 
@@ -139,16 +138,18 @@ namespace ft
 				return aux;
 			}
 
-			node_pointer maximum(node_pointer n) 
+			node_pointer minimum(node_pointer& n) 
 			{
 				node_pointer aux = n;
 
 				while(aux->left != &this->_nill)
+				{
 					aux = aux->left;
+				}
 				return aux;
 			}
 
-			node_pointer minimum(const node_pointer n) const
+			node_pointer maximum(const node_pointer& n) const
 			{
 				node_pointer aux = n;
 
@@ -157,7 +158,7 @@ namespace ft
 				return aux;
 			}
 
-			node_pointer minimum(node_pointer n) 
+			node_pointer maximum(node_pointer& n) 
 			{
 				node_pointer aux = n;
 
@@ -457,6 +458,17 @@ namespace ft
 			    insert_fix(p_node);
 				this->_size += 1;
 				return (p_node->get_data());
+			}
+
+			void	insert(iterator first,	iterator last)
+			{
+				while(first != last)
+				{
+					this->insert(*first);
+					//std::cout << &first << std::endl;
+					first++;
+				}
+				this->insert(*first);
 			}
 
 			size_type	erase(const value_type& val)

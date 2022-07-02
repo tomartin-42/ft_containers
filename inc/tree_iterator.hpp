@@ -58,7 +58,7 @@ namespace ft
 //Aux fuctions			
 //==========================
 		private :
-			pointer maximum(pointer n)
+			pointer minimum(pointer n)
 			{
 				pointer aux = n;
 
@@ -67,7 +67,7 @@ namespace ft
 				return aux;
 			}
 
-			pointer minimum(pointer n)
+			pointer maximum(pointer n)
 			{
 				pointer aux = n;
 
@@ -85,13 +85,22 @@ namespace ft
 
 			tree_iterator& operator ++ ()
 			{
-				if (this->_ptr->left->get_nill() != true)
+				pointer	p;
+
+				if (this->_ptr->right->get_nill() != true)
 				{
-					this->_ptr = maximum(this->_ptr);
+					this->_ptr = this->minimum(this->_ptr);
 					return *this;
 				}
-				while(this->_ptr == this->_ptr->prev->left)
-					this->_ptr = this->_ptr->prev;
+				p = this->_ptr->prev;
+				while(this->_ptr == p->right)
+				{
+					this->_ptr = p;
+					p = p->prev;
+				}
+				std::cout << p << std::endl;
+				std::cout << _ptr << std::endl;
+				std::cout << "=============================\n";
 				return *this;
 			}
 
