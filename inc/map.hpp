@@ -96,6 +96,12 @@ namespace ft
 				*this = other;
 			}
 
+			map& operator= (const map& x)
+			{
+				this->clear();
+				this->insert(x.begin(), x.end());
+			}
+
 
 //********************************************************************************************************//
 //*************************************member fuctions****************************************************//
@@ -204,6 +210,42 @@ namespace ft
 				this->_btree.erase(*pos);
 			}
 
+			size_type	erase(const key_type& key)
+			{
+				if(this->find(key) != this->end())
+				{
+					this->_btree.erase(ft::make_pair(key, data_type()));
+					return 1;
+				}
+				return 0;
+			}
+
+			template<typename InputIterator>
+			void	erase(InputIterator first, InputIterator last)
+			{
+				while(first != last)
+				{
+					this->erase(first);
+					first++;
+				}
+			}
+
+			void swap(map& other)
+			{
+				(void)other;
+			}
+
+			void	clear()
+			{
+				iterator	it = this->begin();
+
+				while(it != this->end())
+				{
+					this->_btree.kill_node(*it);
+					it++;
+				}
+			}
+
 
 //===============================
 //observers
@@ -212,7 +254,6 @@ namespace ft
 //===============================
 //operations
 //===============================
-
 			iterator	find(const key_type& key)
 			{
 				return iterator(this->_btree.find(ft::make_pair(key, data_type())));
@@ -222,7 +263,6 @@ namespace ft
 			{
 				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
 			}
-
 
 //===============================
 //allocator

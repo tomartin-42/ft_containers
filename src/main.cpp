@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 18:11:49 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 18:16:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		main(void)
 	vitb = mapa.end();
 	ft::map<int, int>	mapb(vita, vitb);
 	mapb.print();
-	mapa.erase(mapa.find(9));
+	mapa.erase(9);
 	mapa.print();
 //	mapa.find(2);
 //	mapa.find(3);
