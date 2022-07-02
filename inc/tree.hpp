@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/30 13:01:08 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 13:42:05 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,7 @@ namespace ft
 		public:
 			node_pointer get_nill() {return &this->_nill;}
 
-			//maybe implement with const_pointer too
-			node_pointer maximum(const node_pointer n) const
+			node_pointer minimum(const node_pointer& n) const
 			{
 				node_pointer aux = n;
 
@@ -139,16 +138,18 @@ namespace ft
 				return aux;
 			}
 
-			node_pointer maximum(node_pointer n) 
+			node_pointer minimum(node_pointer& n) 
 			{
 				node_pointer aux = n;
 
 				while(aux->left != &this->_nill)
+				{
 					aux = aux->left;
+				}
 				return aux;
 			}
 
-			node_pointer minimum(const node_pointer n) const
+			node_pointer maximum(const node_pointer& n) const
 			{
 				node_pointer aux = n;
 
@@ -157,7 +158,7 @@ namespace ft
 				return aux;
 			}
 
-			node_pointer minimum(node_pointer n) 
+			node_pointer maximum(node_pointer& n) 
 			{
 				node_pointer aux = n;
 
@@ -213,9 +214,9 @@ namespace ft
   				y->prev = x->prev;
  				if(x->prev == &this->_nill) 	//x is root
   					this->_root = y;
-				else if(x == x->prev->right)	// x is left child
+				else if(x == x->prev->right)	// x is right child
 					x->prev->right = y;
-				else							// x is right child
+				else							// x is left child
  					x->prev->left = y;
 				y->right = x;
 				x->prev = y;
@@ -454,9 +455,20 @@ namespace ft
 				//	return (p_node->get_data());
 
 				this->_root->black = true;
-			    insert_fix(p_node);
+			    //insert_fix(p_node);
 				this->_size += 1;
 				return (p_node->get_data());
+			}
+
+			void	insert(iterator first,	iterator last)
+			{
+				while(first != last)
+				{
+					this->insert(*first);
+					//std::cout << &first << std::endl;
+					first++;
+				}
+				this->insert(*first);
 			}
 
 			size_type	erase(const value_type& val)

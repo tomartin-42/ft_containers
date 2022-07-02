@@ -31,7 +31,7 @@ namespace ft
 		: data(_data), left(_nill), right(_nill), prev(_nill), nill(false), black(false) {}
 
 		node(node const& other)
-		: data(other.data), left(other.left), right(other.right), prev(other.prev), black(other.black) {}
+		: data(other.data), left(other.left), right(other.right), prev(other.prev), nill(other.nill), black(other.black) {}
 
 		
 		value_type& get_data() 
@@ -65,6 +65,41 @@ namespace ft
 			return this->black;
 		}
 
+		void	print_pointer()
+		{
+			std::cout << "NODE========================" << std::endl;
+			if(this->get_nill())
+				print_nill(this);
+			else
+				std::cout << "NODE= " << this << std::endl;
+			
+			std::cout << "PREV========================" << std::endl;
+			if(this->prev->get_nill())
+				print_nill(this->prev);
+			else
+				std::cout << "PREV= " << this->prev << std::endl;
+			
+			std::cout << "LEFT========================" << std::endl;
+			if(this->left->get_nill())
+				print_nill(this->left);
+			else
+				std::cout << "LEFT= " << this->left << std::endl;
+			
+			std::cout << "RIGHT========================" << std::endl;
+			if(this->right->get_nill())
+				print_nill(this->right);
+			else
+				std::cout << "RIGHT= " << this->right << std::endl;
+		}
+
+		void 	print_nill(node* p)
+		{
+			std::cout << "!!!NILL_NODE!!!" << std::endl;
+			std::cout << "NODE= " << p << std::endl;
+			std::cout << "PREV= " << p->prev << std::endl;
+			std::cout << "LEFT= " << p->left << std::endl;
+			std::cout << "RIGHT= " << p->right << std::endl;
+		}
 	}; //End node class
 
 } //end namespace ft

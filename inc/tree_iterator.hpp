@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/01 12:59:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 13:15:35 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ namespace ft
 //Aux fuctions			
 //==========================
 		private :
-			pointer maximum(pointer n)
-			{
-				pointer aux = n;
-
-				while(aux->left->get_nill() != true)
-					aux = aux->left;
-				return aux;
-			}
-
 			pointer minimum(pointer n)
 			{
 				pointer aux = n;
 
 				while(aux->right->get_nill() != true)
 					aux = aux->right;
+				return aux;
+			}
+
+			pointer maximum(pointer n)
+			{
+				pointer aux = n;
+
+				while(aux->left->get_nill() != true)
+					aux = aux->left;
 				return aux;
 			}
 //==========================
@@ -85,14 +85,24 @@ namespace ft
 
 			tree_iterator& operator ++ ()
 			{
-				if (this->_ptr->left->get_nill() != true)
-				{
-					this->_ptr = maximum(this->_ptr);
-					return *this;
+    			if (this->_ptr->left->get_nill() != true)
+      			{
+       				this->_ptr = this->_ptr->left;
+
+       				while (this->_ptr->right->get_nill() != true)
+       					this->_ptr = this->_ptr->right;
+   				}
+   				else
+   				{
+       				pointer p = this->_ptr->prev;
+       				while (p->get_nill() != true && this->_ptr == p->left)
+       				{
+          				this->_ptr = p;
+           				p = p->prev;
+       				}
+       				this->_ptr = p;
 				}
-				while(this->_ptr == this->_ptr->prev->left)
-					this->_ptr = this->_ptr->prev;
-				return *this;
+  				return *this;
 			}
 
 			tree_iterator operator ++ (int)
@@ -105,14 +115,24 @@ namespace ft
 
 			tree_iterator& operator -- ()
 			{
-				if (this->_ptr->right->get_nill() != true)
-				{
-					this->_ptr = maximum(this->_ptr);
-					return *this;
+    			if (this->_ptr->right->get_nill() != true)
+      			{
+       				this->_ptr = this->_ptr->right;
+
+       				while (this->_ptr->left->get_nill() != true)
+       					this->_ptr = this->_ptr->left;
+   				}
+   				else
+   				{
+       				pointer p = this->_ptr->prev;
+       				while (p->get_nill() != true && this->_ptr == p->right)
+       				{
+          				this->_ptr = p;
+           				p = p->prev;
+       				}
+       				this->_ptr = p;
 				}
-				while(this->_ptr == this->_ptr->prev->left)
-					this->_ptr = this->_ptr->prev;
-				return *this;
+  				return *this;
 			}
 
 			tree_iterator operator -- (int)

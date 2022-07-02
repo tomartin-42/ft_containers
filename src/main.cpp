@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/01 11:19:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 13:20:06 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,34 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 
 int		main(void)
 {
-	ft::map<long, int>	mapa;
-	ft::map<long, int>::iterator it;
-	ft::map<long, int>::iterator	vita, vitb;
+	ft::map<int, int>	mapa;
+	ft::map<int, int>::iterator it;
+	ft::map<int, int>::iterator	vita, vitb;
 
-
+/*
 	mapa.insert(ft::make_pair(3, 8));
 	mapa.insert(ft::make_pair(5, 8));
 	mapa.insert(ft::make_pair(8, 8));
 	mapa.insert(ft::make_pair(1, 8));
-	it = mapa.begin();
 	mapa.insert(ft::make_pair(6, 8));
 	mapa.insert(ft::make_pair(2, 8));
 	mapa.insert(ft::make_pair(0, 7));
 	mapa.insert(ft::make_pair(4, 8));
 	mapa.insert(ft::make_pair(7, 8));
-	mapa.insert(ft::make_pair(8, 8));
-	mapa.insert(ft::make_pair(8, 8));
+*/
+	mapa.insert(ft::make_pair(0, 8));
+	mapa.insert(ft::make_pair(1, 8));
+	mapa.insert(ft::make_pair(2, 8));
+	mapa.insert(ft::make_pair(3, 8));
+	mapa.insert(ft::make_pair(4, 8));
+	mapa.insert(ft::make_pair(5, 8));
+	mapa.insert(ft::make_pair(6, 7));
+	mapa.insert(ft::make_pair(7, 8));
 	mapa.insert(ft::make_pair(8, 8));
 //	mapa.insert(ft::make_pair(2, 3));
 	mapa.print();
-	std::cout << it->first << "-" << it->second << std::endl;
-	std::cout << "SIZE= " << mapa.size() << std::endl;
+//	std::cout << it->first << "-" << it->second << std::endl;
+//	std::cout << "SIZE= " << mapa.size() << std::endl;
 	vita = mapa.begin();
 	vitb = mapa.end();
 	ft::map<int, int>	mapb(vita, vitb);

@@ -87,8 +87,6 @@ namespace ft
 					while(first != last)
 					{
 						this->_btree.insert(*first);
-						std::cout << first->first << " - " << first->second << std::endl;
-						std::cout << last->first << " - " << last->second << std::endl;
 						first++;
 					}
 					this->_btree.insert(*first);
