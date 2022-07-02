@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 14:19:32 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 17:55:30 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ namespace ft
 					this->insert(*it);
 					it++;
 				}
-				this->insert(*it);
 			}
 
 			~tree()
@@ -133,8 +132,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left != &this->_nill)
-					aux = aux->left;
+				while(aux->right != &this->_nill)
+					aux = aux->right;
 				return aux;
 			}
 
@@ -142,9 +141,9 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left != &this->_nill)
+				while(aux->right != &this->_nill)
 				{
-					aux = aux->left;
+					aux = aux->right;
 				}
 				return aux;
 			}
@@ -153,8 +152,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->right != &this->_nill)
-					aux = aux->right;
+				while(aux->left != &this->_nill)
+					aux = aux->left;
 				return aux;
 			}
 
@@ -162,8 +161,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->right != &this->_nill)
-					aux = aux->right;
+				while(aux->left != &this->_nill)
+					aux = aux->left;
 				return aux;
 			}
 
@@ -235,6 +234,11 @@ namespace ft
 				p_n->prev = &this->_nill;
 				p_n->left = &this->_nill;
 				p_n->right = &this->_nill;
+			}
+
+			node_pointer	get_nill_pointer()
+			{
+				return &this->_nill;
 			}
 
 			void	kill_node(node_pointer& node)
@@ -441,10 +445,9 @@ namespace ft
 
 			const_iterator	begin() const {return const_iterator(this->minmum(this->_root));}
 
-			iterator		end() {return iterator(this->maximum(this->_root));}
+			iterator		end() {return iterator(&this->_nill);}
 			
-			const_iterator	end() const {return const_iterator(this->maximum(this->_root));}
-
+			const_iterator	end() const {return const_iterator(&this->_nill);}
 
 //==========================
 //Capacity

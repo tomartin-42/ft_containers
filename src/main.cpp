@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 13:20:06 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/02 18:11:49 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		main(void)
 	mapa.insert(ft::make_pair(6, 7));
 	mapa.insert(ft::make_pair(7, 8));
 	mapa.insert(ft::make_pair(8, 8));
+	mapa[9] = 9;
 //	mapa.insert(ft::make_pair(2, 3));
 	mapa.print();
 //	std::cout << it->first << "-" << it->second << std::endl;
@@ -76,6 +77,8 @@ int		main(void)
 	vitb = mapa.end();
 	ft::map<int, int>	mapb(vita, vitb);
 	mapb.print();
+	mapa.erase(mapa.find(9));
+	mapa.print();
 //	mapa.find(2);
 //	mapa.find(3);
 /*

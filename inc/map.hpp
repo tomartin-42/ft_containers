@@ -89,7 +89,6 @@ namespace ft
 						this->_btree.insert(*first);
 						first++;
 					}
-					this->_btree.insert(*first);
 				}
 			
 			map(const map& other) : _alloc(other._alloc), _btree(other._btree)
@@ -157,15 +156,20 @@ namespace ft
 
 			size_type	max_size()
 			{
+				return this->_alloc.max_size();
 			}
 
 
 //=============================
 //element access
 //=============================
-			data_type	&operator[](const key_type &i) 
+			data_type	&operator[](const key_type& i) 
 			{
-				(void)i;
+				iterator it = this->find(i);
+
+				if(it == this->end())
+					this->insert(ft::make_pair(i, data_type()));
+				return it->second;
 			}
 
 //===============================
@@ -173,12 +177,33 @@ namespace ft
 //===============================
 			ft::pair<iterator, bool>	insert(const value_type& val)
 			{
-				if(this->find(val.first) != iterator(this->_btree.get_nill()))
+				if(this->find(val.first) != this->end())
 					return (ft::make_pair(this->end(), false));
 				this->_btree.insert(val);
 				iterator it = this->find(val.first);
 				return ft::make_pair(it, true);
 			}
+
+			iterator	insert(iterator pos, const value_type& val)
+			{
+				return (pos = this->insert(val));
+			}
+
+			template<typename InputIterator>
+			void	insert(InputIterator first, InputIterator last)
+			{
+				while(first != last)
+				{
+					this->_btree.insert(*first);
+					first++;
+				}
+			}
+
+			void erase(iterator pos)
+			{
+				this->_btree.erase(*pos);
+			}
+
 
 //===============================
 //observers
