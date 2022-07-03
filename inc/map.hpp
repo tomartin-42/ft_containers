@@ -3,6 +3,7 @@
 #include <functional>
 #include "tree.hpp"
 #include "tree_iterator.hpp"
+#include "reverse_iterator.hpp"
 #include "pair.hpp"
 
 namespace ft
@@ -51,6 +52,8 @@ namespace ft
 			typedef typename alloc_type::difference_type					difference_type;
 			typedef typename rb_tree::iterator								iterator;
 			typedef typename rb_tree::const_iterator						const_iterator;
+			typedef ft::reverse_iterator<iterator>							reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>					const_reverse_iterator;
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
@@ -108,42 +111,23 @@ namespace ft
 //*************************************member fuctions****************************************************//
 
 //==============================
-//aux functions
-//==============================
-
-		/*	iterator	find_by_value_type(const value_type& f)
-			{
-				return (this->find(f.first));
-			}
-
-			const_iterator	find_by_value_type(const value_type& f) const
-			{
-				return (this->find(f.first));
-			}
-			*/
-//==============================
 //iterators
 //==============================
-			iterator	begin()
-			{
-				return this->_btree.begin();
-			}
+			iterator	begin() {return this->_btree.begin();}
 
+			const_iterator begin() const {return this->_btree.begin();}
 
-			const_iterator begin() const
-			{
-				return this->_btree.begin();
-			}
+			iterator	end() {return this->_btree.end();}
 
-			iterator	end()
-			{
-				return this->_btree.end();
-			}
+			const_iterator end() const {return this->_btree.end();}
 
-			const_iterator end() const
-			{
-				return this->_btree.end();
-			}
+			iterator	rbegin() {return this->_btree.rbegin();}
+
+			const_iterator	rbegin() const {return this->_btree.rbegin();}
+
+			iterator	rend() {return this->_btree.rend();}
+
+			const_iterator	rend() const {return this->_btree.rend();}
 
 
 //==============================
@@ -251,6 +235,7 @@ namespace ft
 //===============================
 //observers
 //===============================
+			value_comp	key_comp() const {return value_comp();}
 
 //===============================
 //operations
@@ -265,19 +250,29 @@ namespace ft
 				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
 			}
 
+			size_type count(const key_type& key) const
+			{
+				if(this->find(key) != this->end())
+				   return 1;
+				return 0;
+			}	
+
 //===============================
 //allocator
 //===============================
+
+			alloc_type	get_allocator() const {return this->_alloc;}
 
 //===============================
 //debug
 //===============================
 
-			void print()
-			{
-				this->_btree.printBT();
-			} 
+			void print() {this->_btree.printBT();}
 	}; //end map class
+
+
+
+
 }//end namespace ft
 
 	

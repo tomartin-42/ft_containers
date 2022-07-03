@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/03 15:45:37 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/03 19:20:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ namespace ft
 			}
 
 			//-----------------copy constructor---------------------------------//
-			tree(const tree& other) : _alloc(other._alloc), _root(&other._nill), _nill(other._nill),
+			tree(const tree& other) : _alloc(other._alloc), _nill(other._nill),
 				_size(other._size), _comp(other._comp)
 			{
-				iterator	it = other.begin();
+				const_iterator	it = other.begin();
 
 				while(it != other.end())
 				{
@@ -93,12 +93,12 @@ namespace ft
 //==========================
 
 		protected:
-			bool is_nill(node_pointer& check)
+			bool is_nill(node_pointer& check) const
 			{
 				return (check == &this->_nill ? true : false);
 			}
 
-			bool is_no_nill(node_pointer& check)
+			bool is_no_nill(node_pointer& check) const
 			{
 				return (check == &this->_nill ? false : true);
 			}
@@ -449,6 +449,14 @@ namespace ft
 			
 			const_iterator	end() const {return const_iterator(&this->_nill);}
 
+			iterator		rbegin() {return iterator(this->maximum(this->_root));}
+
+			const_iterator	rbegin() const {return const_iterator(this->maximum(this->_root));}
+
+			iterator		rend() {return iterator(&this->_nill);}
+
+			iterator		rend() const {return const_iterator(&this->_nill);}
+
 //==========================
 //Capacity
 //==========================
@@ -523,7 +531,6 @@ namespace ft
 					//std::cout << &first << std::endl;
 					first++;
 				}
-				this->insert(*first);
 			}
 
 			size_type	erase(const value_type& val)
