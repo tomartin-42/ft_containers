@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 14:20:11 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/03 14:56:51 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,23 @@ namespace ft
 			{
 				tree_iterator	tmp = *this;
 
-				this->operator++();
+    			if (this->_ptr->left->get_nill() != true)
+      			{
+       				this->_ptr = this->_ptr->left;
+
+       				while (this->_ptr->right->get_nill() != true)
+       					this->_ptr = this->_ptr->right;
+   				}
+   				else
+   				{
+       				pointer p = this->_ptr->prev;
+       				while (p->get_nill() != true && this->_ptr == p->left)
+       				{
+          				this->_ptr = p;
+           				p = p->prev;
+       				}
+       				this->_ptr = p;
+				}
 				return tmp;
 			}
 
@@ -139,7 +155,7 @@ namespace ft
 			{
 				tree_iterator	tmp = *this;
 
-				this->operator--();
+				--this;
 				return tmp;
 			}
 

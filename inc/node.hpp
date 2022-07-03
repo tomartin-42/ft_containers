@@ -54,7 +54,12 @@ namespace ft
 			this->nill = set;
 		}
 
-		bool get_nill()
+		bool get_nill() const
+		{
+			return this->nill;
+		}
+
+		bool get_nill() 
 		{
 			return this->nill;
 		}

@@ -100,6 +100,7 @@ namespace ft
 			{
 				this->clear();
 				this->insert(x.begin(), x.end());
+				return *this;
 			}
 
 
@@ -148,19 +149,19 @@ namespace ft
 //==============================
 //capacity
 //==============================
-			bool	empty()
+			bool	empty() const
 			{
-				if(this->_btree.size() == 0)
+				if(this->_btree.empty() == 0)
 					return true;
 				return false;
 			}
 
-			size_type	size()
+			size_type	size() const
 			{
 				return this->_btree.size();
 			}
 
-			size_type	max_size()
+			size_type	max_size() const
 			{
 				return this->_alloc.max_size();
 			}
@@ -241,7 +242,7 @@ namespace ft
 
 				while(it != this->end())
 				{
-					this->_btree.kill_node(*it);
+					this->_btree.erase(*it);
 					it++;
 				}
 			}

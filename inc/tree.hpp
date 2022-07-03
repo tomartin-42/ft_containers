@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 17:55:30 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/03 15:45:37 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ namespace ft
 			typedef typename alloc::template rebind<ft::node<value_type> >::other	alloc_node;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			typedef typename ft::tree_iterator<node, value_type>								iterator;
-			typedef typename ft::tree_iterator<const node, const value_type>							const_iterator;
+			typedef typename ft::tree_iterator<node, value_type>					iterator;
+			typedef typename ft::tree_iterator<const node, const value_type>		const_iterator;
 
 		private:
 			alloc_node		_alloc;
@@ -443,7 +443,7 @@ namespace ft
 //==========================
 			iterator		begin() {return iterator(this->minimum(this->_root));}
 
-			const_iterator	begin() const {return const_iterator(this->minmum(this->_root));}
+			const_iterator	begin() const {return const_iterator(this->minimum(this->_root));}
 
 			iterator		end() {return iterator(&this->_nill);}
 			
