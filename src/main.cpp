@@ -45,8 +45,7 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 int		main(void)
 {
 	ft::map<int, int>	mapa;
-	ft::map<int, int>::iterator it;
-	ft::map<int, int>::iterator	vita, vitb;
+	ft::map<int, int>::const_iterator it = mapa.begin();
 
 /*
 	mapa.insert(ft::make_pair(3, 8));
@@ -58,7 +57,7 @@ int		main(void)
 	mapa.insert(ft::make_pair(0, 7));
 	mapa.insert(ft::make_pair(4, 8));
 	mapa.insert(ft::make_pair(7, 8));
-*/
+
 	mapa.insert(ft::make_pair(0, 8));
 	mapa.insert(ft::make_pair(1, 8));
 	mapa.insert(ft::make_pair(2, 8));
@@ -81,7 +80,7 @@ int		main(void)
 	mapa.print();
 //	mapa.find(2);
 //	mapa.find(3);
-/*
+
 	ft::tree<int, std::less<int> >	treea;
 	ft::tree<int, std::less<int> >::iterator	itt;
 	ft::tree_iterator<ft::node<int> >	itb(itt);

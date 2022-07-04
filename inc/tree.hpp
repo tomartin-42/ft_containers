@@ -15,6 +15,7 @@
 
 #include <memory>
 #include "tree_iterator.hpp"
+#include "tree_const_iterator.hpp"
 #include "lexicographical_compare.hpp"
 #include "utils.hpp"
 #include "node.hpp"
@@ -41,7 +42,7 @@ namespace ft
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
 			typedef typename ft::tree_iterator<node, value_type>					iterator;
-			typedef typename ft::tree_iterator<const node, const value_type>		const_iterator;
+			typedef typename ft::tree_const_iterator<node, value_type>		const_iterator;
 
 		private:
 			alloc_node		_alloc;
