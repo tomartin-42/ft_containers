@@ -47,7 +47,7 @@ namespace ft
 			tree_iterator& operator = (const tree_iterator& other)
 			{
 				if(this != &other)
-					this->_ptr = other.base();
+					this->_ptr = other.get_ptr();
 				return *this;
 			}
 
@@ -159,6 +159,16 @@ namespace ft
 				return tmp;
 			}
 
+			bool	operator == (tree_iterator &b) 
+			{
+				return this->get_ptr() == b.get_ptr();
+			}
+
+			bool	operator != (tree_iterator &b) 
+			{
+				return this->get_ptr() != b.get_ptr();
+			}
+
 			bool	operator == (const tree_iterator &b) const 
 			{
 				return this->get_ptr() == b.get_ptr();
@@ -173,7 +183,7 @@ namespace ft
 //===================================
 //No member functions
 //===================================
-//
+
 /*	template <typename T, typename R>
 	bool	operator == (const tree_iterator<T, V>& itf, const tree_iterator<R, V>& itl)
 	{
