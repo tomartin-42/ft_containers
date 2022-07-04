@@ -5,6 +5,7 @@
 #include "tree_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "pair.hpp"
+#include "utils.hpp"
 
 namespace ft
 {
@@ -237,6 +238,11 @@ namespace ft
 //===============================
 			value_comp	key_comp() const {return value_comp();}
 
+			value_comp	value_comp() const
+			{
+				return value_compare(this->tree.value_comp());
+			}
+
 //===============================
 //operations
 //===============================
@@ -250,13 +256,67 @@ namespace ft
 				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
 			}
 
+			iterator lower_bound (const key_type& k)
+			{
+				iterator it = this->find(k);
+
+				if(it != this->end())
+					return --it;
+				return it;
+
+			}
+
+			const_iterator lower_bound (const key_type& k) const
+			{
+				const_iterator it = this->find(k);
+
+				if(it != this->end())
+					return --it;
+				return it;
+			}
+
+			iterator upper_bound (const key_type& k)
+			{
+				iterator it = this->find(k);
+
+				if(it != this->end())
+					return ++it;
+				return it;
+			}
+
+			const_iterator upper_bound (const key_type& k) const
+			{
+				const_iterator it = this->find(k);
+
+				if(it != this->end())
+					return ++it;
+				return it;
+			}
+
 			size_type count(const key_type& key) const
 			{
 				if(this->find(key) != this->end())
 				   return 1;
 				return 0;
-			}	
+			}
 
+			ft::pair<iterator, iterator>	equal_range (const key_type& k)
+			{
+				iterator itf, itl;
+
+				itf = this->find(k);
+				itl = itf;
+				return	ft::make_pair<iterator, iterator>(itf, itl);
+			}
+
+			ft::pair<const_iterator, const_iterator>	equal_range (const key_type& k) const
+			{
+				const_iterator itf, itl;
+
+				itf = this->find(k);
+				itl = itf;
+				return	ft::make_pair<const_iterator, const_iterator>(itf, itl);
+			}
 //===============================
 //allocator
 //===============================
@@ -270,9 +330,51 @@ namespace ft
 			void print() {this->_btree.printBT();}
 	}; //end map class
 
+//=======================================
+//No member functions (vompair operators)
+//=======================================
 
+	template<class Key, class T, class Key_of_Value, class Alloc>
+	bool	operator == (const map<Key, T, Key_of_Value, Alloc> mf,
+			const map<Key, T, Key_of_Value, Alloc> ml)
+	{
+		return ft::equal(mf.begin(), mf.end(), ml.begin());
+	}
 
+	template<class Key, class T, class Key_of_Value, class Alloc>
+	bool	operator != (const map<Key, T, Key_of_Value, Alloc> mf,
+			const map<Key, T, Key_of_Value, Alloc> ml)
+	{
+		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+	}
 
+	template<class Key, class T, class Key_of_Value, class Alloc>
+	bool	operator < (const map<Key, T, Key_of_Value, Alloc> mf,
+			const map<Key, T, Key_of_Value, Alloc> ml)
+	{
+		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+	}
+
+	template<class Key, class T, class Key_of_Value, class Alloc>
+	bool	operator > (const map<Key, T, Key_of_Value, Alloc> mf,
+			const map<Key, T, Key_of_Value, Alloc> ml)
+	{
+		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+	}
+
+	template<class Key, class T, class Key_of_Value, class Alloc>
+	bool	operator <= (const map<Key, T, Key_of_Value, Alloc> mf,
+			const map<Key, T, Key_of_Value, Alloc> ml)
+	{
+		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+	}
+
+	template<class Key, class T, class Key_of_Value, class Alloc>
+	bool	operator >= (const map<Key, T, Key_of_Value, Alloc> mf,
+			const map<Key, T, Key_of_Value, Alloc> ml)
+	{
+		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+	}
 }//end namespace ft
 
 	
