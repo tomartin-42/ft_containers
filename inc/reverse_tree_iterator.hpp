@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_iterator.hpp                                  :+:      :+:    :+:   */
+/*   reverse_tree_iterator.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,6 +14,7 @@
 # define _REVERSE_TREE_ITERATOR_HPP_
 
 #include "iterator_traits.hpp"
+#include "tree_iterator.hpp"
 #include "nullptr.hpp"// to ft::nullptr
 #include "node.hpp"// to ft::nullptr
 #include <iostream>
@@ -24,6 +25,14 @@ namespace ft
 	class reverse_tree_iterator
 	{
 		public:
+			typedef typename Iter::iterator_category	iterator_category;
+			typedef typename Iter::value_type		value_type;
+			typedef typename Iter::difference_type	difference_type;
+			typedef typename Iter::pointer	pointer;
+			typedef typename Iter::reference	reference;
+			typedef typename Iter::value_reference	value_reference;
+			typedef typename Iter::value_pointer	value_pointer;
+			/*
 			typedef typename ft::iterator_traits<Iter>::iterator_category	iterator_category;
 			typedef typename ft::iterator_traits<Iter>::value_type			value_type;
 			typedef typename ft::iterator_traits<Iter>::difference_type		difference_type;
@@ -31,7 +40,7 @@ namespace ft
 			typedef typename ft::iterator_traits<Iter>::reference			reference;
 			typedef typename ft::iterator_traits<Iter>::value_reference		value_reference;
 			typedef typename ft::iterator_traits<Iter>::value_pointer		value_pointer;
-
+*/
 		private:
 			pointer	_ptr;
 
@@ -39,13 +48,12 @@ namespace ft
 			reverse_tree_iterator() : _ptr(ft::nullptr_t){}
 			
 			template<class Iterator>
-			explicit reverse_tree_iterator(const Iterator& I) : _ptr(I.base()) {}
+			explicit reverse_tree_iterator(const Iterator& I) : _ptr(I.get_ptr()) {}
 
 			explicit reverse_tree_iterator(pointer ptr) : _ptr(ptr) {}
 
-			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.base()) {}
 
-			pointer	base() const {return this->_ptr;}
+			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.base()) {}
 
 			reverse_tree_iterator& operator = (const reverse_tree_iterator& other)
 			{
@@ -54,7 +62,10 @@ namespace ft
 				return *this;
 			}
 
+			pointer	base() const {return this->_ptr;}
+
 			pointer get_ptr() const {return this->_ptr;}
+
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
 			//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //==========================
@@ -197,6 +208,7 @@ namespace ft
 			{
 				return this->get_ptr() != b.get_ptr();
 			}
+
 	};//end reverse_tree_iterator class
 
 } //end namespace ft

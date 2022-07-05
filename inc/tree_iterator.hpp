@@ -14,6 +14,7 @@
 # define _TREE_ITERATOR_HPP_
 
 #include "iterator_traits.hpp"
+#include "reverse_tree_iterator.hpp"
 #include "nullptr.hpp"// to ft::nullptr
 #include "node.hpp"// to ft::nullptr
 #include <iostream>
@@ -42,14 +43,14 @@ namespace ft
 
 			tree_iterator(const tree_iterator& other) : _ptr(other.base()) {}
 
-			pointer	base() const {return this->_ptr;}
-
 			tree_iterator& operator = (const tree_iterator& other)
 			{
 				if(this != &other)
 					this->_ptr = other.get_ptr();
 				return *this;
 			}
+
+			pointer	base() const {return this->_ptr;}
 
 			pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
@@ -195,6 +196,10 @@ namespace ft
 				return this->get_ptr() != b.get_ptr();
 			}
 	};//end tree_iterator class
+
+//===================================
+//No member functions
+//===================================
 
 } //end namespace ft
 

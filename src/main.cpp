@@ -45,7 +45,8 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 int		main(void)
 {
 	ft::map<int, int>	mapa;
-	ft::map<int, int>::const_iterator it = mapa.begin();
+	ft::map<int, int>::iterator it = mapa.begin();
+	ft::map<int, int>::reverse_iterator rit = mapa.begin();
 //	ft::map<int, int>::iterator	vita, vitb;
 
 /*
