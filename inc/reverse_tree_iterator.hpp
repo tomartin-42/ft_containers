@@ -6,12 +6,12 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/05 12:14:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/05 12:36:41 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _TREE_ITERATOR_HPP_
-# define _TREE_ITERATOR_HPP_
+#ifndef _REVERSE_TREE_ITERATOR_HPP_
+# define _REVERSE_TREE_ITERATOR_HPP_
 
 #include "iterator_traits.hpp"
 #include "nullptr.hpp"// to ft::nullptr
@@ -20,31 +20,29 @@
 
 namespace ft
 {
-	template<class T, class V>
-	class tree_iterator
+	template<class Iter>
+	class reverse_tree_iterator
 	{
 		public:
-			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
-			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
-			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
-			typedef	T*												pointer;
-			typedef T&														reference;
-			typedef V*														value_pointer;
-			typedef V&														value_reference;
+			typedef typename ft::iterator_traits<Iter>::iterator_category		iterator_category;
+			typedef typename ft::iterator_traits<Iter>::value_type			value_type;
+			typedef typename ft::iterator_traits<Iter>::difference_type		difference_type;
+			typedef typename ft::iterator_traits<Iter>::pointer				pointer;
+			typedef typename ft::iterator_traits<Iter>::reference			reference;
 
 		private:
 			pointer	_ptr;
 
 		public:
-			tree_iterator() : _ptr(ft::nullptr_t){}
+			reverse_tree_iterator() : _ptr(ft::nullptr_t){}
 
-			explicit tree_iterator(pointer ptr) : _ptr(ptr) {}
+			explicit reverse_tree_iterator(pointer ptr) : _ptr(ptr) {}
 
-			tree_iterator(const tree_iterator& other) : _ptr(other.base()) {}
+			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.base()) {}
 
 			pointer	base() const {return this->_ptr;}
 
-			tree_iterator& operator = (const tree_iterator& other)
+			reverse_tree_iterator& operator = (const reverse_tree_iterator& other)
 			{
 				if(this != &other)
 					this->_ptr = other.get_ptr();
@@ -80,10 +78,10 @@ namespace ft
 //==========================
 
 		public:
-			value_reference			operator * () const {return (this->_ptr->get_data());}
+			value_reference		operator * () const {return (this->_ptr->get_data());}
 			value_pointer		operator -> () const {return &(this->_ptr->get_data());}
 
-			tree_iterator& operator ++ ()
+			reverse_tree_iterator& operator ++ ()
 			{
     			if (this->_ptr->left->get_nill() != true)
       			{
@@ -105,9 +103,9 @@ namespace ft
   				return *this;
 			}
 
-			tree_iterator operator ++ (int)
+			reverse_tree_iterator operator ++ (int)
 			{
-				tree_iterator	tmp = *this;
+				reverse_tree_iterator	tmp = *this;
 
     			if (this->_ptr->left->get_nill() != true)
       			{
@@ -129,7 +127,7 @@ namespace ft
 				return tmp;
 			}
 
-			tree_iterator& operator -- ()
+			reverse_tree_iterator& operator -- ()
 			{
     			if (this->_ptr->right->get_nill() != true)
       			{
@@ -151,9 +149,9 @@ namespace ft
   				return *this;
 			}
 
-			tree_iterator operator -- (int)
+			reverse_tree_iterator operator -- (int)
 			{
-				tree_iterator	tmp = *this;
+				reverse_tree_iterator	tmp = *this;
 
     			if (this->_ptr->right->get_nill() != true)
       			{
@@ -175,26 +173,26 @@ namespace ft
 				return tmp;
 			}
 
-			bool	operator == (tree_iterator &b) 
+			bool	operator == (reverse_tree_iterator &b) 
 			{
 				return this->get_ptr() == b.get_ptr();
 			}
 
-			bool	operator != (tree_iterator &b) 
+			bool	operator != (reverse_tree_iterator &b) 
 			{
 				return this->get_ptr() != b.get_ptr();
 			}
 
-			bool	operator == (const tree_iterator &b) const 
+			bool	operator == (const reverse_tree_iterator &b) const 
 			{
 				return this->get_ptr() == b.get_ptr();
 			}
 
-			bool	operator != (const tree_iterator &b) const 
+			bool	operator != (const reverse_tree_iterator &b) const 
 			{
 				return this->get_ptr() != b.get_ptr();
 			}
-	};//end tree_iterator class
+	};//end reverse_tree_iterator class
 
 } //end namespace ft
 
