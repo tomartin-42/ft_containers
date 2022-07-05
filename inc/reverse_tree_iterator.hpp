@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/05 12:36:41 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:11:15 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,22 @@ namespace ft
 	class reverse_tree_iterator
 	{
 		public:
-			typedef typename ft::iterator_traits<Iter>::iterator_category		iterator_category;
+			typedef typename ft::iterator_traits<Iter>::iterator_category	iterator_category;
 			typedef typename ft::iterator_traits<Iter>::value_type			value_type;
 			typedef typename ft::iterator_traits<Iter>::difference_type		difference_type;
 			typedef typename ft::iterator_traits<Iter>::pointer				pointer;
 			typedef typename ft::iterator_traits<Iter>::reference			reference;
+			typedef typename ft::iterator_traits<Iter>::value_reference		value_reference;
+			typedef typename ft::iterator_traits<Iter>::value_pointer		value_pointer;
 
 		private:
 			pointer	_ptr;
 
 		public:
 			reverse_tree_iterator() : _ptr(ft::nullptr_t){}
+			
+			template<class Iterator>
+			explicit reverse_tree_iterator(const Iterator& I) : _ptr(I.base()) {}
 
 			explicit reverse_tree_iterator(pointer ptr) : _ptr(ptr) {}
 

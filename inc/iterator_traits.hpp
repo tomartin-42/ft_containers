@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:39:13 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/17 10:49:21 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:08:18 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ namespace ft
 		typedef typename Iter::pointer				pointer;
 		typedef typename Iter::reference			reference;
 		typedef typename Iter::iterator_category	iterator_category;
+		typedef typename Iter::value_reference		value_reference;
+		typedef typename Iter::value_pointer		value_pointer;
 	};
 	
 	template<class T>

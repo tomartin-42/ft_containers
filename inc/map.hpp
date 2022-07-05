@@ -3,6 +3,7 @@
 #include <functional>
 #include "tree.hpp"
 #include "tree_iterator.hpp"
+#include "tree_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "pair.hpp"
 #include "utils.hpp"
@@ -53,8 +54,8 @@ namespace ft
 			typedef typename alloc_type::difference_type					difference_type;
 			typedef typename rb_tree::iterator								iterator;
 			typedef typename rb_tree::const_iterator						const_iterator;
-			typedef ft::reverse_iterator<iterator>							reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>					const_reverse_iterator;
+			typedef typename rb_tree::reverse_iterator								reverse_iterator;
+			typedef typename rb_tree::const_reverse_iterator							const_reverse_iterator;
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
