@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/02 18:16:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/05 11:06:29 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		main(void)
 {
 	ft::map<int, int>	mapa;
 	ft::map<int, int>::const_iterator it = mapa.begin();
+//	ft::map<int, int>::iterator	vita, vitb;
 
 /*
 	mapa.insert(ft::make_pair(3, 8));

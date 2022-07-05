@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/03 14:56:51 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/05 11:27:07 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,23 @@ namespace ft
 			{
 				tree_iterator	tmp = *this;
 
-				--this;
+    			if (this->_ptr->right->get_nill() != true)
+      			{
+       				this->_ptr = this->_ptr->right;
+
+       				while (this->_ptr->left->get_nill() != true)
+       					this->_ptr = this->_ptr->left;
+   				}
+   				else
+   				{
+       				pointer p = this->_ptr->prev;
+       				while (p->get_nill() != true && this->_ptr == p->right)
+       				{
+          				this->_ptr = p;
+           				p = p->prev;
+       				}
+       				this->_ptr = p;
+				}
 				return tmp;
 			}
 

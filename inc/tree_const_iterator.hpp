@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/03 14:56:51 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/05 11:28:47 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ namespace ft
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
-			typedef	T*												pointer;
-			typedef T&														reference;
-			typedef V*														value_pointer;
-			typedef V&														value_reference;
+			typedef	const T*												pointer;
+			typedef const T&														reference;
+			typedef const V*														value_pointer;
+			typedef const V&														value_reference;
 
 		private:
 			pointer	_ptr;
@@ -164,7 +164,23 @@ namespace ft
 			{
 				tree_const_iterator	tmp = *this;
 
-				--this;
+    			if (this->_ptr->right->get_nill() != true)
+      			{
+       				this->_ptr = this->_ptr->right;
+
+       				while (this->_ptr->left->get_nill() != true)
+       					this->_ptr = this->_ptr->left;
+   				}
+   				else
+   				{
+       				pointer p = this->_ptr->prev;
+       				while (p->get_nill() != true && this->_ptr == p->right)
+       				{
+          				this->_ptr = p;
+           				p = p->prev;
+       				}
+       				this->_ptr = p;
+				}
 				return tmp;
 			}
 
