@@ -46,7 +46,7 @@ int		main(void)
 {
 	ft::map<int, int>	mapa;
 	ft::map<int, int>::iterator it = mapa.begin();
-	ft::map<int, int>::reverse_iterator rit = mapa.begin();
+	ft::map<int, int>::reverse_iterator rit = mapa.rbegin();
 //	ft::map<int, int>::iterator	vita, vitb;
 
 /*

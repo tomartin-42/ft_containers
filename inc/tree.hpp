@@ -453,13 +453,13 @@ namespace ft
 			
 			const_iterator	end() const {return const_iterator(&this->_nill);}
 
-			iterator		rbegin() {return iterator(this->maximum(this->_root));}
+			reverse_iterator		rbegin() {return reverse_iterator(this->maximum(this->_root));}
 
-			const_iterator	rbegin() const {return const_iterator(this->maximum(this->_root));}
+			const_reverse_iterator	rbegin() const {return const_reverse_iterator(this->maximum(this->_root));}
 
-			iterator		rend() {return iterator(&this->_nill);}
+			reverse_iterator		rend() {return reverse_iterator(&this->_nill);}
 
-			iterator		rend() const {return const_iterator(&this->_nill);}
+			const_reverse_iterator		rend() const {return const_reverse_iterator(&this->_nill);}
 
 //==========================
 //Capacity
