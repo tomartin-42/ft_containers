@@ -181,6 +181,12 @@ namespace ft
 				return this->get_ptr() == b.get_ptr();
 			}
 
+			template<typename Iterator>
+			bool	operator == (Iterator &b) 
+			{
+				return this->get_ptr() == b;
+			}
+
 			bool	operator != (tree_iterator &b) 
 			{
 				return this->get_ptr() != b.get_ptr();
@@ -189,6 +195,11 @@ namespace ft
 			bool	operator == (const tree_iterator &b) const 
 			{
 				return this->get_ptr() == b.get_ptr();
+			}
+			template<typename Iterator>
+			bool	operator == (const Iterator &b) const 
+			{
+				return this->get_ptr() == b;
 			}
 
 			bool	operator != (const tree_iterator &b) const 

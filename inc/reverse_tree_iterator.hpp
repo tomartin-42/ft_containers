@@ -52,7 +52,6 @@ namespace ft
 
 			explicit reverse_tree_iterator(pointer ptr) : _ptr(ptr) {}
 
-
 			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.base()) {}
 
 			reverse_tree_iterator& operator = (const reverse_tree_iterator& other)
