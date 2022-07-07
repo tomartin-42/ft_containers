@@ -30,6 +30,7 @@ namespace ft
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
 			typedef	T*												pointer;
 			typedef T&														reference;
+			typedef V														value;
 			typedef V*														value_pointer;
 			typedef V&														value_reference;
 
@@ -50,7 +51,7 @@ namespace ft
 				return *this;
 			}
 
-			V	base() const {return this->_ptr->get_data();}
+			value	base() const {return this->_ptr->get_data();}
 
 			pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
