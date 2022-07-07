@@ -26,7 +26,7 @@ namespace ft
 	{
 		public:
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
-			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, V>::value_type			value_type;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
 			typedef	T*												pointer;
 			typedef T&														reference;
@@ -183,9 +183,9 @@ namespace ft
 			}
 
 			template<typename Iterator>
-			bool	operator == (Iterator &b) 
+			bool	operator == (const Iterator &b) 
 			{
-				return this->get_ptr() == b;
+				return this->get_ptr()->get_data() == *b;
 			}
 
 			bool	operator != (tree_iterator &b) 
@@ -200,7 +200,7 @@ namespace ft
 			template<typename Iterator>
 			bool	operator == (const Iterator &b) const 
 			{
-				return this->get_ptr() == b;
+			 	return this->get_ptr()->get_data() == *b;
 			}
 
 			bool	operator != (const tree_iterator &b) const 

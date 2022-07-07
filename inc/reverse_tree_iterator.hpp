@@ -30,7 +30,7 @@ namespace ft
 			typedef typename Iter::difference_type	difference_type;
 			typedef typename Iter::pointer	pointer;
 			typedef typename Iter::reference	reference;
-			typedef typename Iter::value	value;
+			//typedef typename Iter::value	pair;
 			typedef typename Iter::value_reference	value_reference;
 			typedef typename Iter::value_pointer	value_pointer;
 			/*
@@ -62,7 +62,8 @@ namespace ft
 				return *this;
 			}
 
-			value	base() const {return this->_ptr->get_data();}
+			//value_type base() const {return this->_ptr->get_data();}
+			value_pointer base() const {return &this->_ptr->get_data();}
 
 			pointer get_ptr() const {return this->_ptr;}
 
