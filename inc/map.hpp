@@ -44,8 +44,7 @@ namespace ft
 			typedef Compare													value_compare;
 			typedef Alloc													alloc_type;
 			typedef typename ft::pair<const key_type, data_type>			value_type;
-			typedef ft::key<value_type>										key_of_value;
-			typedef typename ft::tree<value_type, value_compare, key_of_value, alloc_type> rb_tree;
+			typedef typename ft::tree<value_type, value_compare, alloc_type> rb_tree;
 			typedef typename alloc_type::pointer							pointer;
 			typedef typename alloc_type::const_pointer						const_pointer;
 			typedef typename alloc_type::reference							reference;

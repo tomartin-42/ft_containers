@@ -15,7 +15,7 @@
 
 #include <memory>
 #include "tree_iterator.hpp"
-#include "reverse_tree_iterator.hpp"
+#include "reverse_iterator.hpp"
 #include "tree_const_iterator.hpp"
 #include "lexicographical_compare.hpp"
 #include "utils.hpp"
@@ -27,51 +27,55 @@
 
 namespace ft
 {
-	template<class T, class compare, class KeyOfValue, class alloc = std::allocator<T> >
+	template<class T, class V, class compare, class alloc = std::allocator<T> >
 	class tree
 	{
 		public:
 			typedef T																value_type;
+			typedef V																mapped_type;
 			typedef compare															value_comp;
 			typedef alloc															alloc_type;
 			typedef ft::node<T>														node;
 			typedef const node														const_node;
 			typedef node*															node_pointer;
 			typedef const node*														const_node_pointer;
-			typedef KeyOfValue														key_value;
-			typedef typename alloc::template rebind<ft::node<value_type> >::other	alloc_node;
-			typedef typename alloc_type::size_type									size_type;
-			typedef typename alloc_type::difference_type							diference_type;
+			typedef typename alloc::template rebind<node>::other	alloc_node;
+			typedef typename alloc_node::size_type									size_type;
+			typedef typename alloc_node::difference_type							diference_type;
 			typedef typename ft::tree_iterator<node, value_type>					iterator;
 			typedef typename ft::tree_const_iterator<node, value_type>				const_iterator;
-			typedef ft::reverse_tree_iterator<iterator>								reverse_iterator;
-			typedef ft::reverse_tree_iterator<const_iterator>						const_reverse_iterator;
+			typedef ft::reverse_iterator<iterator>								reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 
 		private:
-			alloc_node		_alloc;
+			//alloc_node		_alloc;
 			node_pointer	_root;
-			node			_nill;
+			node_pointer	_nill;
 			size_type		_size;
 			value_comp		_comp;
+			ft::pair<node_pointer, alloc_node>	_alloc;
 		
 		public:
 			/*tree(const alloc_type & alloc_t = alloc_type()) : 
 			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(value_comp()) 
 			{
-				this->_nill.prev = &this->_nill;
-				this->_nill.left = &this->_nill;
-				this->_nill.right = &this->_nill;
+				this->_nill.prev = this->_nill;
+				this->_nill.left = this->_nill;
+				this->_nill.right = this->_nill;
 				this->_nill.black = true;
 			}*/
 			
 			//-------------default constructor---------------------------------//
-			tree(const alloc_type & alloc_t = alloc_type(), const value_comp& comp_t = value_comp()) : 
-			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(comp_t) 
+			tree(const value_comp& comp_t = value_comp(), const alloc_type & alloc_t = alloc_type()) : 
+			_alloc(ft::make_pair(ft::nullptr_t, alloc_t)), _root(_nill), _size(0), _comp(comp_t) 
 			{
-				this->_nill.prev = &this->_nill;
-				this->_nill.left = &this->_nill;
-				this->_nill.right = &this->_nill;
+				this->_nill =_alloc().allocate(1);
+				_alloc().construct(this->_nill, node(value_type(), this->_nill)); 
+				this->_nill.prev = this->_nill;
+				this->_nill.left = this->_nill;
+				this->_nill.right = this->_nill;
 				this->_nill.black = true;
+				this->_root = this->_nill;
 			}
 
 			//-----------------copy constructor---------------------------------//
@@ -99,12 +103,12 @@ namespace ft
 		protected:
 			bool is_nill(node_pointer& check) const
 			{
-				return (check == &this->_nill ? true : false);
+				return (check == this->_nill ? true : false);
 			}
 
 			bool is_no_nill(node_pointer& check) const
 			{
-				return (check == &this->_nill ? false : true);
+				return (check == this->_nill ? false : true);
 			}
 
 			void	swap_nodes(node_pointer a, node_pointer b)
@@ -130,13 +134,13 @@ namespace ft
 			}
 				
 		public:
-			node_pointer get_nill() {return &this->_nill;}
+			node_pointer get_nill() {return this->_nill;}
 
 			node_pointer minimum(const node_pointer& n) const
 			{
 				node_pointer aux = n;
 
-				while(aux->right != &this->_nill)
+				while(aux->right != this->_nill)
 					aux = aux->right;
 				return aux;
 			}
@@ -145,7 +149,7 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->right != &this->_nill)
+				while(aux->right != this->_nill)
 				{
 					aux = aux->right;
 				}
@@ -156,7 +160,7 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left != &this->_nill)
+				while(aux->left != this->_nill)
 					aux = aux->left;
 				return aux;
 			}
@@ -165,7 +169,7 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left != &this->_nill)
+				while(aux->left != this->_nill)
 					aux = aux->left;
 				return aux;
 			}
@@ -193,10 +197,10 @@ namespace ft
 				node_pointer y = x->right;
   				
 				x->right = y->left;
- 				if(y->left != &this->_nill)
+ 				if(y->left != this->_nill)
   					y->left->prev = x;
   				y->prev = x->prev;
- 				if(x->prev == &this->_nill) 	//x is root
+ 				if(x->prev == this->_nill) 	//x is root
   					this->_root = y;
 				else if(x == x->prev->left)		// x is left child
 					x->prev->left = y;
@@ -212,10 +216,10 @@ namespace ft
 				node_pointer y = x->left;
 
   				x->left = y->right;
- 				if(y->right != &this->_nill)
+ 				if(y->right != this->_nill)
   					y->right->prev = x;
   				y->prev = x->prev;
- 				if(x->prev == &this->_nill) 	//x is root
+ 				if(x->prev == this->_nill) 	//x is root
   					this->_root = y;
 				else if(x == x->prev->right)	// x is right child
 					x->prev->right = y;
@@ -228,21 +232,21 @@ namespace ft
 
 			void	assig_nill_values()
 			{
-				this->_nill.prev = this->_root; 
-				this->_nill.left = this->minimum(this->_root);
-				this->_nill.right = this->maximum(this->_root);
+				this->_nill->prev = this->_root; 
+				this->_nill->left = this->minimum(this->_root);
+				this->_nill->right = this->maximum(this->_root);
 			}
 
 			void	assig_to_nill(node_pointer& p_n)
 			{
-				p_n->prev = &this->_nill;
-				p_n->left = &this->_nill;
-				p_n->right = &this->_nill;
+				p_n->prev = this->_nill;
+				p_n->left = this->_nill;
+				p_n->right = this->_nill;
 			}
 
 			node_pointer	get_nill_pointer()
 			{
-				return &this->_nill;
+				return this->_nill;
 			}
 
 			void	kill_node(node_pointer& node)
@@ -313,12 +317,12 @@ namespace ft
 				{
 					if (p_node->prev == p_node->prev->prev->right)
 					{
-						if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+						if(p_node->prev != this->_nill || p_node->prev->prev != this->_nill)
 							p_node->prev->prev->left == p_node->prev ? u = p_node->prev->prev->right 
 								: u = p_node->prev->prev->left;
 						if (u && u->black == false)
 						{
-							if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+							if(p_node->prev != this->_nill || p_node->prev->prev != this->_nill)
 								p_node->prev->prev->left == p_node->prev ? p_node->prev->prev->right->black = true
 									: p_node->prev->prev->left->black = true;
 							p_node->prev->black = true;
@@ -339,13 +343,13 @@ namespace ft
 					}
 					else
 					{
-						if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+						if(p_node->prev != this->_nill || p_node->prev->prev != this->_nill)
 							p_node->prev->prev->left == p_node->prev ? u = p_node->prev->prev->right 
 								: u = p_node->prev->prev->left;
 
 						if (u && u->black == false)
 						{
-							if(p_node->prev != &this->_nill || p_node->prev->prev != &this->_nill)
+							if(p_node->prev != this->_nill || p_node->prev->prev != this->_nill)
 								p_node->prev->prev->left == p_node->prev ? p_node->prev->prev->right->black = false
 									: p_node->prev->prev->left->black = false;
 							p_node->prev->black = true;
@@ -449,17 +453,17 @@ namespace ft
 
 			const_iterator	begin() const {return const_iterator(this->minimum(this->_root));}
 
-			iterator		end() {return iterator(&this->_nill);}
+			iterator		end() {return iterator(this->_nill);}
 			
-			const_iterator	end() const {return const_iterator(&this->_nill);}
+			const_iterator	end() const {return const_iterator(this->_nill);}
 
 			reverse_iterator		rbegin() {return reverse_iterator(this->maximum(this->_root));}
 
 			const_reverse_iterator	rbegin() const {return const_reverse_iterator(this->maximum(this->_root));}
 
-			reverse_iterator		rend() {return reverse_iterator(&this->_nill);}
+			reverse_iterator		rend() {return reverse_iterator(this->_nill);}
 
-			const_reverse_iterator		rend() const {return const_reverse_iterator(&this->_nill);}
+			const_reverse_iterator		rend() const {return const_reverse_iterator(this->_nill);}
 
 //==========================
 //Capacity
@@ -487,7 +491,7 @@ namespace ft
 			{
 				node_pointer p_node = this->_alloc.allocate(1);
 
-				this->_alloc.construct(p_node, ft::node<T>(nod, &_nill));
+				this->_alloc.construct(p_node, ft::node<T>(nod));
 				if(this->_size == 0)							//When new node is root
 				{
 					this->_root = p_node;
@@ -498,27 +502,25 @@ namespace ft
 			    	insert_fix(p_node);
 					return (p_node->get_data());
 				}
-				node_pointer y = &this->_nill;
+				node_pointer y = this->_nill;
 			    node_pointer x = this->_root;
 				
-				while (x != &_nill)
+				while (x != this->_nill)
 				{
 					y = x;
-					if (this->_comp(key_value().get_first(p_node->get_data()), 
-								key_value().get_first(x->get_data())))
+					if (this->_comp(p_node->get_data(), x->get_data()))
 						x = x->right;
 					else 
 						x = x->left;
 			    }
 			    p_node->prev = y;
 				//std::cout << p_node->get_data() << "===" << y->get_data() << std::endl;
-				if (this->_comp(key_value().get_first(p_node->get_data()), 
-							key_value().get_first(y->get_data())))
+				if (this->_comp(p_node->get_data(), y->get_data()))
 					y->right = p_node;
 				else
 					y->left = p_node;
 
-				//if (p_node->prev->prev == &this->_nill)
+				//if (p_node->prev->prev == this->_nill)
 				//	return (p_node->get_data());
 
 				this->_root->black = true;
@@ -591,14 +593,14 @@ namespace ft
 
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(key_value().get_first(val), key_value().get_first(aux->get_data())))
+					if(this->_comp(val, aux->get_data()))
 						aux = aux->right;
-					else if(this->_comp(key_value().get_first(aux->get_data()), key_value().get_first(val)))
+					else if(this->_comp(aux->get_data()), val)
 						aux = aux->left;
 					else
 						return aux;
 				}
-				return &this->_nill;
+				return this->_nill;
 			}
 
 			const_node_pointer	find(const value_type& val) const
@@ -607,14 +609,14 @@ namespace ft
 				
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(key_value().get_first(val), key_value().get_first(aux->get_data())))
+					if(this->_comp(val, aux->get_data()))
 						aux = aux->right;
-					else if(this->_comp(key_value().get_first(aux->get_data()), key_value().get_first(val)))
+					else if(this->_comp(aux->get_data(), val))
 						aux = aux->left;
 					else
 						return aux;
 				}
-				return &this->_nill;
+				return this->_nill;
 			}
 
 			//size_type	count(const value_type& val) const
@@ -622,13 +624,13 @@ namespace ft
 			//}
 			void printBT(const std::string& prefix, const node_pointer node, bool isLeft)
 			{
-    			if(node != &this->_nill)
+    			if(node != this->_nill)
     			{
         			std::cout << prefix;
 			        std::cout << (isLeft ? "├──" : "└──" );
 
         			// print the value of the node
-        			std::cout << key_value().get_first(node->get_data()) << "-" << key_value().get_second(node->get_data()) << " " << node->black << std::endl;
+        			std::cout << node->get_data()->first << "-" << node->get_data()->second << " " << node->black << std::endl;
 
         			// enter the next tree level - left and right branch
         			printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
