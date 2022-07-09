@@ -30,6 +30,7 @@ namespace ft
 			typedef typename Iter::difference_type	difference_type;
 			typedef typename Iter::pointer	pointer;
 			typedef typename Iter::reference	reference;
+			//typedef typename Iter::value	pair;
 			typedef typename Iter::value_reference	value_reference;
 			typedef typename Iter::value_pointer	value_pointer;
 			/*
@@ -52,8 +53,7 @@ namespace ft
 
 			explicit reverse_tree_iterator(pointer ptr) : _ptr(ptr) {}
 
-
-			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.base()) {}
+			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.get_ptr()) {}
 
 			reverse_tree_iterator& operator = (const reverse_tree_iterator& other)
 			{
@@ -62,7 +62,8 @@ namespace ft
 				return *this;
 			}
 
-			pointer	base() const {return this->_ptr;}
+			//value_type base() const {return this->_ptr->get_data();}
+			value_pointer base() const {return &this->_ptr->get_data();}
 
 			pointer get_ptr() const {return this->_ptr;}
 

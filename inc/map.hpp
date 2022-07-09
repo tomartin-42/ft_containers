@@ -41,11 +41,11 @@ namespace ft
 		public:
 			typedef	Key														key_type;
 			typedef T														data_type;
-			typedef Compare													value_compare;
+			typedef Compare													v_compare;
 			typedef Alloc													alloc_type;
 			typedef typename ft::pair<const key_type, data_type>			value_type;
 			typedef ft::key<value_type>										key_of_value;
-			typedef typename ft::tree<value_type, value_compare, key_of_value, alloc_type> rb_tree;
+			typedef typename ft::tree<value_type, v_compare, key_of_value, alloc_type> rb_tree;
 			typedef typename alloc_type::pointer							pointer;
 			typedef typename alloc_type::const_pointer						const_pointer;
 			typedef typename alloc_type::reference							reference;
@@ -59,13 +59,13 @@ namespace ft
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
-			class	value_compareare : public std::binary_function<value_type, value_type, bool>
+			class	value_compare : public std::binary_function<value_type, value_type, bool>
 			{
 			protected:
 				value_compare	comp_t;
 
 			public:
-				value_compareare(value_compare c) : comp_t(c) {}
+				value_compare(v_compare c) : comp_t(c) {}
 
 				bool	operator()(const value_type& x, const value_type& y) const
 				{
@@ -81,13 +81,13 @@ namespace ft
 //********************************************************************************************************//	
 //********************************************constructors************************************************//
 		public:
-			explicit map(const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type()) 
-				: _alloc(alloc_t), _btree(alloc_t, comp_t) {}
+			explicit map(const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type()) 
+				: _alloc(alloc_t), _btree(comp_t, alloc_t) {}
 
 			template<class InputIterator>			
 			map(InputIterator first, InputIterator last, 
-				const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type())
-				: _alloc(alloc_t), _btree(alloc_t, comp_t)
+				const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type())
+				: _alloc(alloc_t), _btree(comp_t, alloc_t)
 				{
 					while(first != last)
 					{
@@ -239,11 +239,11 @@ namespace ft
 //===============================
 //observers
 //===============================
-			value_compare	key_comp() const {return value_compare();}
+			v_compare	key_comp() const {return v_compare();}
 
 			value_compare	value_comp() const
 			{
-				return value_compare(this->_btree.value_comp());
+				return value_compare(this->_btree.get_v_comp());
 			}
 
 //===============================

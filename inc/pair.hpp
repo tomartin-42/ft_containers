@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 19:18:34 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/08 08:14:49 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/09 14:52:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,6 @@ namespace ft
 	bool operator == (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
 	{
 		return x.first == y.first && x.second == y.second;
-	}
-
-	template <class T1, class T2>
-	bool operator != (const ft::pair<T1,T2>& x, const ft::pair<T1,T2>& y) 
-	{
-		return !(x == y);
 	}
 
 	template <class T1, class T2>
