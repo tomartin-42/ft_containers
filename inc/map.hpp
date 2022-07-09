@@ -41,30 +41,26 @@ namespace ft
 		public:
 			typedef	Key														key_type;
 			typedef T														data_type;
-			typedef Compare													value_compare;
+			typedef Compare													key_compare;
 			typedef Alloc													alloc_type;
 			typedef typename ft::pair<const key_type, data_type>			value_type;
-			typedef typename ft::tree<value_type, value_compare, alloc_type> rb_tree;
 			typedef typename alloc_type::pointer							pointer;
 			typedef typename alloc_type::const_pointer						const_pointer;
 			typedef typename alloc_type::reference							reference;
 			typedef typename alloc_type::const_reference					const_reference;
 			typedef typename alloc_type::size_type							size_type;
 			typedef typename alloc_type::difference_type					difference_type;
-			typedef typename rb_tree::iterator								iterator;
-			typedef typename rb_tree::const_iterator						const_iterator;
-			typedef typename rb_tree::reverse_iterator								reverse_iterator;
-			typedef typename rb_tree::const_reverse_iterator							const_reverse_iterator;
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
-			class	value_compareare : public std::binary_function<value_type, value_type, bool>
+			class	value_compare : public std::binary_function<value_type, value_type, bool>
 			{
-			protected:
-				value_compare	comp_t;
+				friend class map;
+				protected:
+					key_compare	comp_t;
 
-			public:
-				value_compareare(value_compare c) : comp_t(c) {}
+				public:
+					value_compare(key_compare c) : comp_t(c) {}
 
 				bool	operator()(const value_type& x, const value_type& y) const
 				{
@@ -72,6 +68,11 @@ namespace ft
 				}
 			};
 
+			typedef typename ft::tree<value_type, value_compare, alloc_type> rb_tree;
+			typedef typename rb_tree::iterator								iterator;
+			typedef typename rb_tree::const_iterator						const_iterator;
+			typedef typename rb_tree::reverse_iterator						reverse_iterator;
+			typedef typename rb_tree::const_reverse_iterator				const_reverse_iterator;
 				//***************************************************//
 		private:
 			alloc_type										_alloc;
@@ -80,13 +81,15 @@ namespace ft
 //********************************************************************************************************//	
 //********************************************constructors************************************************//
 		public:
+		//	explicit map(const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type()) 
+		//		: _alloc(alloc_t), _btree(comp_t, alloc_t) {}
 			explicit map(const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type()) 
-				: _alloc(alloc_t), _btree(alloc_t, comp_t) {}
+				: _alloc(alloc_t), _btree(comp_t) {}
 
 			template<class InputIterator>			
 			map(InputIterator first, InputIterator last, 
 				const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type())
-				: _alloc(alloc_t), _btree(alloc_t, comp_t)
+				: _alloc(alloc_t), _btree(comp_t, alloc_t)
 				{
 					while(first != last)
 					{

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/05 12:32:24 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/09 12:55:18 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ namespace ft
 
 		private:
 			//alloc_node		_alloc;
+			ft::pair<node_pointer, alloc_node>	_alloc;
 			node_pointer	_root;
 			node_pointer	_nill;
 			size_type		_size;
 			value_comp		_comp;
-			ft::pair<node_pointer, alloc_node>	_alloc;
 		
 		public:
 			/*tree(const alloc_type & alloc_t = alloc_type()) : 
@@ -71,10 +71,10 @@ namespace ft
 			{
 				this->_nill =_alloc().allocate(1);
 				_alloc().construct(this->_nill, node(value_type(), this->_nill)); 
-				this->_nill.prev = this->_nill;
-				this->_nill.left = this->_nill;
-				this->_nill.right = this->_nill;
-				this->_nill.black = true;
+				this->_nill->prev = this->_nill;
+				this->_nill->left = this->_nill;
+				this->_nill->right = this->_nill;
+				this->_nill->black = true;
 				this->_root = this->_nill;
 			}
 

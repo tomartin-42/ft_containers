@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/05 11:06:29 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/09 11:56:54 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 int		main(void)
 {
 	ft::map<int, int>	mapa;
-	ft::map<int, int>::iterator it = mapa.begin();
-	ft::map<int, int>::reverse_iterator rit = mapa.rbegin();
-	if(it == rit.base())
-		std::cout << "LO LOGRE\n";
+//	ft::map<int, int>::iterator it = mapa.begin();
+//	ft::map<int, int>::reverse_iterator rit = mapa.rbegin();
+//	if(it == rit.base())
+//		std::cout << "LO LOGRE\n";
 //	ft::map<int, int>::iterator	vita, vitb;
 
 /*
