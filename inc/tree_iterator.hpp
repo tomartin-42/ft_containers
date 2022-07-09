@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/05 12:14:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:10:46 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ namespace ft
 			}
 
 			bool	operator != (tree_iterator &b) 
-			{
+			
 				return this->get_ptr() != b.get_ptr();
 			}
 
