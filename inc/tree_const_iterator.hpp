@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/05 11:28:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:35:22 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 namespace ft
 {
-	template<class T, class V>
+	template<class T, class V, class M>
 	class tree_const_iterator
 	{
 		public:
@@ -32,6 +32,7 @@ namespace ft
 			typedef const T&														reference;
 			typedef const V*														value_pointer;
 			typedef const V&														value_reference;
+			typedef const M														mapped_type;
 
 		private:
 			pointer	_ptr;
@@ -43,7 +44,7 @@ namespace ft
 
 			tree_const_iterator(const tree_const_iterator& other) : _ptr(other.get_ptr()) {}
 			
-			tree_const_iterator(const tree_iterator<T, V>& other) : _ptr(other.get_ptr()) {}
+			tree_const_iterator(const tree_iterator<T, V, M>& other) : _ptr(other.get_ptr()) {}
 
 			tree_const_iterator& operator = (const tree_const_iterator& other)
 			{

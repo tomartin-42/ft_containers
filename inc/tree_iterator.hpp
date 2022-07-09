@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/05 12:14:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:32:29 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 namespace ft
 {
-	template<class T, class V>
+	template<class T, class V, class M>
 	class tree_iterator
 	{
 		public:
@@ -33,6 +33,7 @@ namespace ft
 			typedef V														value;
 			typedef V*														value_pointer;
 			typedef V&														value_reference;
+			typedef M														mapped_type;
 
 		private:
 			pointer	_ptr;

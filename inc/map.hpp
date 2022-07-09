@@ -40,35 +40,34 @@ namespace ft
 	{
 		public:
 			typedef	Key														key_type;
-			typedef T														data_type;
-			typedef Compare													key_compare;
+			typedef T														mapped_type;
+			typedef Compare													v_compare;
 			typedef Alloc													alloc_type;
-			typedef typename ft::pair<const key_type, data_type>			value_type;
+			typedef typename ft::pair<const key_type, mapped_type>			value_type;
 			typedef typename alloc_type::pointer							pointer;
 			typedef typename alloc_type::const_pointer						const_pointer;
 			typedef typename alloc_type::reference							reference;
 			typedef typename alloc_type::const_reference					const_reference;
 			typedef typename alloc_type::size_type							size_type;
 			typedef typename alloc_type::difference_type					difference_type;
-			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
+		//	typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
 			class	value_compare : public std::binary_function<value_type, value_type, bool>
 			{
 				friend class map;
 				protected:
-					key_compare	comp_t;
+					v_compare	comp_t;
 
 				public:
-					value_compare(key_compare c) : comp_t(c) {}
-
-				bool	operator()(const value_type& x, const value_type& y) const
+					value_compare(v_compare c) : comp_t(c) {}
+					bool	operator()(const value_type& x, const value_type& y) const
 				{
 					return comp_t(x.first, y.first);
 				}
 			};
 
-			typedef typename ft::tree<value_type, value_compare, alloc_type> rb_tree;
+			typedef typename ft::tree<value_type, value_compare, v_compare, alloc_type> rb_tree;
 			typedef typename rb_tree::iterator								iterator;
 			typedef typename rb_tree::const_iterator						const_iterator;
 			typedef typename rb_tree::reverse_iterator						reverse_iterator;
@@ -81,15 +80,14 @@ namespace ft
 //********************************************************************************************************//	
 //********************************************constructors************************************************//
 		public:
-		//	explicit map(const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type()) 
-		//		: _alloc(alloc_t), _btree(comp_t, alloc_t) {}
-			explicit map(const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type()) 
-				: _alloc(alloc_t), _btree(comp_t) {}
+			explicit map(const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type()) 
+				//: _alloc(alloc_t), _btree(comp_t, alloc_t) {}
+				: _alloc(alloc_t), _btree(comp_t, alloc_t) {}
 
 			template<class InputIterator>			
 			map(InputIterator first, InputIterator last, 
-				const value_compare& comp_t = value_compare(), const alloc_type& alloc_t = alloc_type())
-				: _alloc(alloc_t), _btree(comp_t, alloc_t)
+				const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type())
+				: _alloc(alloc_t), _btree(comp_t)
 				{
 					while(first != last)
 					{
@@ -158,12 +156,12 @@ namespace ft
 //=============================
 //element access
 //=============================
-			data_type	&operator[](const key_type& i) 
+			mapped_type	&operator[](const key_type& i) 
 			{
 				iterator it = this->find(i);
 
 				if(it == this->end())
-					this->insert(ft::make_pair(i, data_type()));
+					this->insert(ft::make_pair(i, mapped_type()));
 				return it->second;
 			}
 
@@ -205,7 +203,7 @@ namespace ft
 			{
 				if(this->find(key) != this->end())
 				{
-					this->_btree.erase(ft::make_pair(key, data_type()));
+					this->_btree.erase(ft::make_pair(key, mapped_type()));
 					return 1;
 				}
 				return 0;
@@ -241,9 +239,9 @@ namespace ft
 //===============================
 //observers
 //===============================
-			value_compare	key_comp() const {return value_compare();}
+			v_compare	key_comp() const {return value_compare();}
 
-			value_compare	value_comp() const
+			v_compare	value_comp() const
 			{
 				return value_compare(this->_btree.value_comp());
 			}
@@ -253,12 +251,12 @@ namespace ft
 //===============================
 			iterator	find(const key_type& key)
 			{
-				return iterator(this->_btree.find(ft::make_pair(key, data_type())));
+				return iterator(this->_btree.find(ft::make_pair(key, mapped_type())));
 			}
 
 			const_iterator	find(const key_type& key) const
 			{
-				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
+				return const_iterator(this->_btree.find(ft::make_pair(key, mapped_type())));
 			}
 
 			iterator lower_bound (const key_type& k)

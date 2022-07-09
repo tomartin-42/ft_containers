@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/09 12:55:18 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:39:38 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,17 @@ namespace ft
 			typedef typename alloc::template rebind<node>::other	alloc_node;
 			typedef typename alloc_node::size_type									size_type;
 			typedef typename alloc_node::difference_type							diference_type;
-			typedef typename ft::tree_iterator<node, value_type>					iterator;
-			typedef typename ft::tree_const_iterator<node, value_type>				const_iterator;
+			typedef typename ft::tree_iterator<node, value_type, mapped_type>		iterator;
+			typedef typename ft::tree_const_iterator<node, value_type, mapped_type>	const_iterator;
 			typedef ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 
 		private:
-			//alloc_node		_alloc;
-			ft::pair<node_pointer, alloc_node>	_alloc;
+			alloc_node		_alloc;
 			node_pointer	_root;
 			node_pointer	_nill;
 			size_type		_size;
-			value_comp		_comp;
+			mapped_type		_comp;
 		
 		public:
 			/*tree(const alloc_type & alloc_t = alloc_type()) : 
@@ -66,11 +65,12 @@ namespace ft
 			}*/
 			
 			//-------------default constructor---------------------------------//
-			tree(const value_comp& comp_t = value_comp(), const alloc_type & alloc_t = alloc_type()) : 
-			_alloc(ft::make_pair(ft::nullptr_t, alloc_t)), _root(_nill), _size(0), _comp(comp_t) 
+			//tree(const value_comp& comp_t = value_comp(), const alloc_type & alloc_t = alloc_type()) : 
+			tree(const mapped_type& comp_t = mapped_type(), const alloc_type & alloc_t = alloc_type()) : 
+			_alloc(alloc_t), _size(0), _comp(comp_t) 
 			{
-				this->_nill =_alloc().allocate(1);
-				_alloc().construct(this->_nill, node(value_type(), this->_nill)); 
+				this->_nill =_alloc.allocate(1);
+				_alloc.construct(this->_nill, node(value_type(), this->_nill)); 
 				this->_nill->prev = this->_nill;
 				this->_nill->left = this->_nill;
 				this->_nill->right = this->_nill;
@@ -124,7 +124,7 @@ namespace ft
  				if(this->is_nill(a->prev))
 				{
       				this->_root = b;
-					this->_nill.prev = b;
+					this->_nill->prev = b;
 				}
 				else if(a == a->prev->left) 
 					a->prev->left = b;
@@ -496,7 +496,7 @@ namespace ft
 				{
 					this->_root = p_node;
 					this->assig_to_nill(this->_root);
-					this->_nill.set_prev(p_node);
+					this->_nill->set_prev(p_node);
 					this->_size += 1;
 			    //	p_node->black = true;
 			    	insert_fix(p_node);
@@ -587,7 +587,7 @@ namespace ft
 //Operations
 //==========================
 
-			node_pointer	find(const value_type& val)
+			node_pointer	find(const value_type& val) 
 			{
 				node_pointer	aux = this->_root;
 
@@ -605,8 +605,11 @@ namespace ft
 
 			const_node_pointer	find(const value_type& val) const
 			{
-				node_pointer	aux = this->_root;
 				
+				node_pointer	aux = this->_root;
+
+				std::cout << val << std::endl;
+				/*
 				while(is_no_nill(aux))
 				{
 					if(this->_comp(val, aux->get_data()))
@@ -615,7 +618,7 @@ namespace ft
 						aux = aux->left;
 					else
 						return aux;
-				}
+				}*/
 				return this->_nill;
 			}
 
