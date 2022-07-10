@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/10 16:45:45 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/10 19:46:38 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,22 @@
 # define _TREE_ITERATOR_HPP_
 
 #include "iterator_traits.hpp"
-#include "reverse_tree_iterator.hpp"
 #include "nullptr.hpp"// to ft::nullptr
 #include "node.hpp"// to ft::nullptr
 #include <iostream>
 
 namespace ft
 {
-	template<class T, class V>
+	template<class T>
 	class tree_iterator
 	{
 		public:
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
-			typedef typename ft::Iter<ft::bidirectional_iterator_tag, V>::value_type			value_type;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::value_type			value_type;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
+			typedef T																			node;
 			typedef	T*																			pointer;
 			typedef T&																			reference;
-			typedef V																			value;
-			typedef V*																			value_pointer;
-			typedef V&																			value_reference;
 
 		private:
 			pointer	_ptr;
@@ -51,7 +48,7 @@ namespace ft
 				return *this;
 			}
 
-			value	base() const {return this->_ptr->get_data();}
+			tree_iterator	base() const {return this->_ptr;}
 
 			pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
@@ -82,8 +79,8 @@ namespace ft
 //==========================
 
 		public:
-			value_reference			operator * () const {return (this->_ptr->get_data());}
-			value_pointer		operator -> () const {return &(this->_ptr->get_data());}
+			reference			operator * () const {return (this->_ptr->get_data());}
+			pointer		operator -> () const {return &(this->_ptr->get_data());}
 
 			tree_iterator& operator ++ ()
 			{
