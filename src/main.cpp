@@ -33,14 +33,14 @@ template <typename Ite_1, typename Ite_2>
 void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 
 {
-	std::cout << "*************************\n";
-	std::cout << (first < second) << std::endl;
-	std::cout << (first <= second) << std::endl;
-	std::cout << (first > second) << std::endl;
-	std::cout << (first >= second) << std::endl;
+	ft::cout << "*************************\n";
+	ft::cout << (first < second) << ft::endl;
+	ft::cout << (first <= second) << ft::endl;
+	ft::cout << (first > second) << ft::endl;
+	ft::cout << (first >= second) << ft::endl;
 	if (redo)
 	//	ft_eq_ope(second, first, 0);
-	std::cout << "*************************\n";
+	ft::cout << "*************************\n";
 }
 
 int		main(void)
@@ -54,10 +54,10 @@ int		main(void)
 //	ft::map<int, int>::iterator it;
 //	mapa.insert(ft::make_pair(1, 2));
 //	ft::map<int, int>::iterator it = mapa.begin();
-//	std::cout << it.base().first << it.base().second << std::endl;
+//	ft::cout << it.base().first << it.base().second << ft::endl;
 //	ft::map<int, int>::reverse_iterator rit = mapa.rbegin();
 //	if(it == rit.base())
-//		std::cout << "LO LOGRE\n";
+//		ft::cout << "LO LOGRE\n";
 //	ft::map<int, int>::iterator	vita, vitb;
 
 /*
@@ -83,8 +83,8 @@ int		main(void)
 	mapa[9] = 9;
 //	mapa.insert(ft::make_pair(2, 3));
 	mapa.print();
-//	std::cout << it->first << "-" << it->second << std::endl;
-//	std::cout << "SIZE= " << mapa.size() << std::endl;
+//	ft::cout << it->first << "-" << it->second << ft::endl;
+//	ft::cout << "SIZE= " << mapa.size() << ft::endl;
 	vita = mapa.begin();
 	vitb = mapa.end();
 	ft::map<int, int>	mapb(vita, vitb);
@@ -94,8 +94,8 @@ int		main(void)
 //	mapa.find(2);
 //	mapa.find(3);
 
-	ft::tree<int, std::less<int> >	treea;
-	ft::tree<int, std::less<int> >::iterator	itt;
+	ft::tree<int, ft::less<int> >	treea;
+	ft::tree<int, ft::less<int> >::iterator	itt;
 	ft::tree_iterator<ft::node<int> >	itb(itt);
 	ft::tree_iterator<ft::node<int> >	itc = itb;
 
