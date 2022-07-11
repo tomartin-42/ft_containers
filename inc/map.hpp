@@ -179,7 +179,7 @@ namespace ft
 				iterator it = this->find(val.first);
 				return ft::make_pair(it, true);
 			}
-/*
+
 			iterator	insert(iterator pos, const value_type& val)
 			{
 				this->insert(val);
@@ -212,7 +212,7 @@ namespace ft
 				return 0;
 			}
 
-			template<typename InputIterator>
+/*			template<typename InputIterator>
 			void	erase(InputIterator first, InputIterator last)
 			{
 				while(first != last)
@@ -221,12 +221,12 @@ namespace ft
 					first++;
 				}
 			}
-
+*/
 			void swap(map& other)
 			{
 				(void)other;
 			}
-*/
+
 			void	clear()
 			{
 				iterator	it = this->begin();
@@ -256,7 +256,7 @@ namespace ft
 			{
 				return iterator(this->_btree.find(ft::make_pair(key, data_type())));
 			}
-/*
+
 			const_iterator	find(const key_type& key) const
 			{
 				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
@@ -306,7 +306,7 @@ namespace ft
 				return 0;
 			}
 
-			ft::pair<iterator, iterator>	equal_range (const key_type& k)
+			ft::pair<iterator, iterator>	equal_range(const key_type& k)
 			{
 				iterator itf, itl;
 
@@ -323,7 +323,6 @@ namespace ft
 				itl = itf;
 				return	ft::make_pair<const_iterator, const_iterator>(itf, itl);
 			}
-			*/
 //===============================
 //allocator
 //===============================

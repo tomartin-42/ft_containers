@@ -597,21 +597,21 @@ namespace ft
 				return this->_nill;
 			}
 
-		/*	const_node_pointer	find(const value_type& val) const
+			node_pointer	find(const value_type& val) const
 			{
 				node_pointer	aux = this->_root;
 				
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(key_value().get_first(val), key_value().get_first(aux->get_data())))
+					if(this->_comp(val, aux->get_data()))
 						aux = aux->right;
-					else if(this->_comp(key_value().get_first(aux->get_data()), key_value().get_first(val)))
+					else if(this->_comp(aux->get_data(), val))
 						aux = aux->left;
 					else
 						return aux;
 				}
 				return this->_nill;
-			}*/
+			}
 
 			//size_type	count(const value_type& val) const
 			//{

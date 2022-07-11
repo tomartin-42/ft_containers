@@ -46,8 +46,6 @@ namespace ft
 		typedef typename Iter::pointer				pointer;
 		typedef typename Iter::reference			reference;
 		typedef typename Iter::iterator_category	iterator_category;
-		typedef typename Iter::value_reference		value_reference;
-		typedef typename Iter::value_pointer		value_pointer;
 	};
 	
 	template<class T>
