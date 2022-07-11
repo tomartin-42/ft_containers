@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/11 11:59:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:19:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <memory>
 #include "tree_iterator.hpp"
-#include "tree_const_iterator.hpp"
+#include "const_tree_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "lexicographical_compare.hpp"
 #include "utils.hpp"
@@ -44,7 +44,7 @@ namespace ft
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
 			typedef typename ft::tree_iterator<value_type>								iterator;
-			typedef typename ft::tree_iterator<const value_type>				const_iterator;
+			typedef typename ft::const_tree_iterator<value_type>				const_iterator;
 			typedef ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 
@@ -350,6 +350,7 @@ namespace ft
 							}
 							p_node->prev->black = true;
 							p_node->prev->prev->black = false;
+			typedef const_node*																		node_pointeddr;
 							right_rotate(p_node->prev->prev);
 						}
 					}
