@@ -25,11 +25,11 @@ namespace ft
 	{
 		public:
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::iterator_category		iterator_category;
-			typedef typename ft::Iter<ft::bidirectional_iterator_tag,const T>::value_type			value_type;
+			typedef typename ft::Iter<ft::bidirectional_iterator_tag,T>::value_type			value_type;
 			typedef typename ft::Iter<ft::bidirectional_iterator_tag, T>::difference_type		difference_type;
-			typedef const ft::node<T>																	node;
-			typedef const node*																		node_pointer;
-			typedef const node&																		node_reference;
+			typedef ft::node<T>																	node;
+			typedef node*																		node_pointer;
+			typedef node&																		node_reference;
 			typedef	value_type*																	pointer;
 			typedef value_type&																	reference;
 
@@ -45,9 +45,10 @@ namespace ft
 			{
 			}
 
-			const_tree_iterator& operator = (const const_tree_iterator& other)
+			template <class Iter>
+			const_tree_iterator& operator = (const Iter other)
 			{
-				if(this != &other)
+				if(this != other)
 					this->_ptr = other.get_ptr();
 				return *this;
 			}
@@ -83,7 +84,7 @@ namespace ft
 //==========================
 
 		public:
-			reference			operator * () const {return *(this->_ptr->get_data());}
+			reference			operator * () const {return (this->_ptr->get_data());}
 			pointer				operator -> () const {return &(this->_ptr->get_data());}
 
 			const_tree_iterator& operator ++ ()

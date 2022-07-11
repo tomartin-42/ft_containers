@@ -236,8 +236,8 @@ namespace ft
 
 			void	kill_node(node_pointer& node)
 			{
-				this->_alloc.destroy(node);
-				this->_alloc.deallocate(node, 1);
+				this->_alloc_node.destroy(node);
+				this->_alloc_node.deallocate(node, 1);
 				node = ft::nullptr_t;
 				this->_size -= 1;
 			}
