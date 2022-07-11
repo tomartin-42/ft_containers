@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/10 20:14:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:59:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ namespace ft
 			typedef typename alloc_type::const_pointer								const_pointer;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			typedef typename ft::tree_iterator<node>								iterator;
-			typedef typename ft::tree_iterator<const node>				const_iterator;
+			typedef typename ft::tree_iterator<value_type>								iterator;
+			typedef typename ft::tree_iterator<const value_type>				const_iterator;
 			typedef ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 
@@ -57,18 +57,9 @@ namespace ft
 			value_comp		_comp;
 		
 		public:
-			/*tree(const alloc_type & alloc_t = alloc_type()) : 
-			_alloc(alloc_t), _root(&_nill), _nill(), _size(0), _comp(value_comp()) 
-			{
-				this->_nill.prev = this->nill;
-				this->_nill.left = this->nill;
-				this->_nill.right = this->nill;
-				this->_nill.black = true;
-			}*/
-			
 			//-------------default constructor---------------------------------//
 			tree(const value_comp& comp_t = value_comp(), const alloc_type & alloc_t = alloc_type()) : 
-			_alloc_val(alloc_t), _size(0), _comp(comp_t) 
+			_alloc_val(alloc_t), _alloc_node(alloc_node()), _size(0), _comp(comp_t) 
 			{
 				this->_nill = alloc_node().allocate(1);
 				alloc_node().construct(this->_nill, node());
@@ -82,13 +73,7 @@ namespace ft
 			tree(const tree& other) : _alloc_val(other._alloc_val), _nill(other._nill),
 				_size(other._size), _comp(other._comp)
 			{
-				const_iterator	it = other.begin();
-
-				while(it != other.end())
-				{
-					this->insert(*it);
-					it++;
-				}
+				*this = other;
 			}
 
 			~tree()
@@ -497,9 +482,9 @@ namespace ft
 //==========================
 			value_type insert(const value_type& nod)
 			{
-				node_pointer p_node = this->_alloc.allocate(1);
+				node_pointer p_node = this->_alloc_node.allocate(1);
 
-				this->_alloc.construct(p_node, ft::node<T>(nod, &_nill));
+				this->_alloc_node.construct(p_node, ft::node<T>(nod, _nill));
 				if(this->_size == 0)							//When new node is root
 				{
 					this->_root = p_node;
@@ -513,7 +498,7 @@ namespace ft
 				node_pointer y = this->_nill;
 			    node_pointer x = this->_root;
 				
-				while (x != &_nill)
+				while (x != _nill)
 				{
 					y = x;
 					if (this->_comp((p_node->get_data()), (x->get_data())))
@@ -537,7 +522,7 @@ namespace ft
 				return (p_node->get_data());
 			}
 
-			void	insert(iterator first,	iterator last)
+	/*		void	insert(iterator first,	iterator last)
 			{
 				while(first != last)
 				{
@@ -546,7 +531,7 @@ namespace ft
 					first++;
 				}
 			}
-
+*/
 			size_type	erase(const value_type& val)
 			{
 				node_pointer	d_node(this->find(val));
@@ -601,9 +586,9 @@ namespace ft
 
 				while(is_no_nill(aux))
 				{
-					if(this->_comp((val), (aux->get_data())))
+					if(this->_comp(val, aux->get_data()))
 						aux = aux->right;
-					else if(this->_comp((aux->get_data()), (val)))
+					else if(this->_comp(aux->get_data(), val))
 						aux = aux->left;
 					else
 						return aux;

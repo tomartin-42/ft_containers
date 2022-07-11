@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/10 20:23:12 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:46:55 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "random_access_iterator.hpp"
 #include <iostream>
 #include <vector>
+#include <map>
 #include <string>
 
 
@@ -45,8 +46,12 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 int		main(void)
 {
 	ft::map<int, int>	mapa;
-//	ft::map<int, int>	mapb(mapa);
-	ft::map<int, int>::iterator it;
+	ft::map<int, int>	mapb(mapa);
+	ft::map<int, int>::const_iterator	it;
+	mapa.insert(ft::make_pair(1, 10));
+	it = mapa.begin();
+	std::cout << it->first << " " << it->second << std::endl;
+//	ft::map<int, int>::iterator it;
 //	mapa.insert(ft::make_pair(1, 2));
 //	ft::map<int, int>::iterator it = mapa.begin();
 //	std::cout << it.base().first << it.base().second << std::endl;

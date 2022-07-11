@@ -44,49 +44,52 @@ namespace ft
 			typedef Compare													v_compare;
 			typedef Alloc													alloc_type;
 			typedef typename ft::pair<const key_type, data_type>			value_type;
-			typedef typename ft::tree<value_type, v_compare, alloc_type> rb_tree;
 			typedef typename alloc_type::pointer							pointer;
 			typedef typename alloc_type::const_pointer						const_pointer;
 			typedef typename alloc_type::reference							reference;
 			typedef typename alloc_type::const_reference					const_reference;
 			typedef typename alloc_type::size_type							size_type;
 			typedef typename alloc_type::difference_type					difference_type;
-			typedef typename rb_tree::iterator								iterator;
-		//	typedef typename rb_tree::const_iterator						const_iterator;
-			typedef typename rb_tree::reverse_iterator								reverse_iterator;
-		//	typedef typename rb_tree::const_reverse_iterator							const_reverse_iterator;
-			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 					//**********************************************//	
-			class	value_compare : public std::binary_function<value_type, value_type, bool>
+		private:
+			class	pair_compare 
 			{
-			protected:
-				value_compare	comp_t;
+				v_compare	comp_t;
 
-			public:
-				value_compare(v_compare c) : comp_t(c) {}
+				public:
+					pair_compare(const v_compare& c) : comp_t(c) {}
 
-				bool	operator()(const value_type& x, const value_type& y) const
-				{
-					return comp_t(x.first, y.first);
-				}
+					bool	operator()(const value_type& x, const value_type& y) const
+					{
+						return comp_t(x.first, y.first);
+					}
 			};
+		public:
+			typedef pair_compare											val_comp;
+			typedef typename ft::tree<value_type, pair_compare, alloc_type> 	rb_tree;
+			typedef typename rb_tree::iterator								iterator;
+			typedef typename rb_tree::const_iterator						const_iterator;
+			typedef typename rb_tree::reverse_iterator								reverse_iterator;
+			typedef typename rb_tree::const_reverse_iterator							const_reverse_iterator;
+			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 				//***************************************************//
 		private:
-			alloc_type										_alloc;
-			rb_tree											_btree;
+			alloc_type			_alloc;
+			rb_tree				_btree;
+			v_compare			_comp;
 
 //********************************************************************************************************//	
 //********************************************constructors************************************************//
 		public:
 			explicit map(const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type()) 
-				: _alloc(alloc_t), _btree(comp_t, alloc_t) {}
+				: _alloc(alloc_t), _btree(rb_tree(comp_t, alloc_t)), _comp(comp_t) {}
 
 			template<class InputIterator>			
 			map(InputIterator first, InputIterator last, 
 				const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type())
-				: _alloc(alloc_t), _btree(comp_t, alloc_t)
+				: _alloc(alloc_t), _btree(comp_t, alloc_t), _comp(comp_t)
 				{
 					while(first != last)
 					{
@@ -94,12 +97,13 @@ namespace ft
 						first++;
 					}
 				}
+				
 			
 			map(const map& other) : _alloc(other._alloc), _btree(other._btree)
 			{
 				*this = other;
 			}
-
+/*
 			map& operator= (const map& x)
 			{
 				this->clear();
@@ -107,7 +111,7 @@ namespace ft
 				return *this;
 			}
 
-
+*/
 //********************************************************************************************************//
 //*************************************member fuctions****************************************************//
 
@@ -116,19 +120,19 @@ namespace ft
 //==============================
 			iterator	begin() {return this->_btree.begin();}
 
-		//	const_iterator begin() const {return this->_btree.begin();}
+			const_iterator begin() const {return this->_btree.begin();}
 
 			iterator	end() {return this->_btree.end();}
 
-		//	const_iterator end() const {return this->_btree.end();}
+			const_iterator end() const {return this->_btree.end();}
 
 			reverse_iterator	rbegin() {return this->_btree.rbegin();}
 
-		//	const_reverse_iterator	rbegin() const {return this->_btree.rbegin();}
+			const_reverse_iterator	rbegin() const {return this->_btree.rbegin();}
 
 			reverse_iterator	rend() {return this->_btree.rend();}
 
-		//	const_reverse_iterator	rend() const {return this->_btree.rend();}
+			const_reverse_iterator	rend() const {return this->_btree.rend();}
 
 
 //==============================
@@ -169,13 +173,13 @@ namespace ft
 //===============================
 			ft::pair<iterator, bool>	insert(const value_type& val)
 			{
-				if(this->find(val.first) != this->end())
-					return (ft::make_pair(this->end(), false));
+			//	if(this->find(val.first) != this->end())
+		//			return (ft::make_pair(this->end(), false));
 				this->_btree.insert(val);
 				iterator it = this->find(val.first);
 				return ft::make_pair(it, true);
 			}
-
+/*
 			iterator	insert(iterator pos, const value_type& val)
 			{
 				this->insert(val);
@@ -222,7 +226,7 @@ namespace ft
 			{
 				(void)other;
 			}
-
+*/
 			void	clear()
 			{
 				iterator	it = this->begin();
@@ -238,11 +242,11 @@ namespace ft
 //===============================
 //observers
 //===============================
-			v_compare	key_comp() const {return v_compare();}
+			v_compare	key_comp() const {return this->_comp;}
 
-			value_compare	value_comp() const
+			val_comp	value_comp() const
 			{
-				return value_compare(this->_btree.get_v_comp());
+				return value_compare(this->_btree.value_comp());
 			}
 
 //===============================
@@ -252,12 +256,12 @@ namespace ft
 			{
 				return iterator(this->_btree.find(ft::make_pair(key, data_type())));
 			}
-
-		/*	const_iterator	find(const key_type& key) const
+/*
+			const_iterator	find(const key_type& key) const
 			{
 				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
 			}
-*/
+
 			iterator lower_bound (const key_type& k)
 			{
 				iterator it = this->find(k);
@@ -268,7 +272,7 @@ namespace ft
 
 			}
 
-/*			const_iterator lower_bound (const key_type& k) const
+			const_iterator lower_bound (const key_type& k) const
 			{
 				const_iterator it = this->find(k);
 
@@ -276,7 +280,7 @@ namespace ft
 					return --it;
 				return it;
 			}
-*/
+
 			iterator upper_bound (const key_type& k)
 			{
 				iterator it = this->find(k);
@@ -286,7 +290,7 @@ namespace ft
 				return it;
 			}
 
-/*			const_iterator upper_bound (const key_type& k) const
+			const_iterator upper_bound (const key_type& k) const
 			{
 				const_iterator it = this->find(k);
 
@@ -294,7 +298,7 @@ namespace ft
 					return ++it;
 				return it;
 			}
-*/
+
 			size_type count(const key_type& key) const
 			{
 				if(this->find(key) != this->end())
@@ -311,7 +315,7 @@ namespace ft
 				return	ft::make_pair<iterator, iterator>(itf, itl);
 			}
 
-	/*		ft::pair<const_iterator, const_iterator>	equal_range (const key_type& k) const
+			ft::pair<const_iterator, const_iterator>	equal_range (const key_type& k) const
 			{
 				const_iterator itf, itl;
 
