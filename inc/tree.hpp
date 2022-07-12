@@ -585,15 +585,24 @@ namespace ft
 			node_pointer	find(const value_type& val)
 			{
 				node_pointer	aux = this->_root;
-
+				std::cout << val.first << "-" << val.second << std::endl;
 				while(is_no_nill(aux))
 				{
 					if(this->_comp(val, aux->get_data()))
+					{
 						aux = aux->right;
+						std::cout << "HOLA\n";
+					}
 					else if(this->_comp(aux->get_data(), val))
+					{
 						aux = aux->left;
+						std::cout << "HOLA\n";
+					}
 					else
+					{
 						return aux;
+						std::cout << "HOLA\n";
+					}
 				}
 				return this->_nill;
 			}

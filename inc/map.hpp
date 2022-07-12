@@ -212,7 +212,7 @@ namespace ft
 				return 0;
 			}
 
-/*			template<typename InputIterator>
+			template<typename InputIterator>
 			void	erase(InputIterator first, InputIterator last)
 			{
 				while(first != last)
@@ -221,7 +221,7 @@ namespace ft
 					first++;
 				}
 			}
-*/
+
 			void swap(map& other)
 			{
 				(void)other;

@@ -47,7 +47,7 @@ namespace ft
 
 			tree_iterator& operator = (const tree_iterator& other)
 			{
-				if(this != &other)
+				if(this->_ptr != other.get_ptr())
 					this->_ptr = other.get_ptr();
 				return *this;
 			}

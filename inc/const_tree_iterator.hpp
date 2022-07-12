@@ -48,12 +48,12 @@ namespace ft
 			template <class Iter>
 			const_tree_iterator& operator = (const Iter other)
 			{
-				if(this != other)
+				//if(*this != other)
 					this->_ptr = other.get_ptr();
 				return *this;
 			}
 
-			const_tree_iterator	base() const {return this->_ptr;}
+			const_tree_iterator	base() const {return this->_ptr->data;}
 
 			node_pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++

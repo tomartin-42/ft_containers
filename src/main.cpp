@@ -32,12 +32,29 @@
 int		main(void)
 {
 	ft::map<int, int>	mapa;
-	ft::map<int, int>	mapb(mapa);
-	ft::map<int, int>::iterator	it;
-	mapa.insert(ft::make_pair(1, 10));
-	it = mapa.begin();
-	std::cout << it->first << " " << it->second << std::endl;
-//	ft::map<int, int>::iterator it;
+	ft::map<int, int>::iterator	ita, itb;
+	for(int i = 0; i <= 10; i++)
+		mapa[i] = i * 10;
+	ita = mapa.begin();
+	itb = mapa.end();
+	while(ita != itb)
+	{
+		std::cout << ita->first << " " << ita->second << std::endl;
+		std::cout << itb->first << " " << itb->second << std::endl;
+		ita++;
+	}
+	ita = mapa.begin();
+	itb--;
+	std::cout << "===============================" << std::endl;
+	while(itb != ita)
+	{
+		std::cout << itb->first << " " << itb->second << std::endl;
+		itb--;
+	}
+	itb = mapa.find(5);
+	std::cout << "===============================" << std::endl;
+	std::cout << itb->first << "-" << itb->second << std::endl;
+	
 //	mapa.insert(ft::make_pair(1, 2));
 //	ft::map<int, int>::iterator it = mapa.begin();
 //	ft::cout << it.base().first << it.base().second << ft::endl;
