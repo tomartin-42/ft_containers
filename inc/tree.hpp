@@ -62,10 +62,11 @@ namespace ft
 			_alloc_val(alloc_t), _alloc_node(alloc_node()), _size(0), _comp(comp_t) 
 			{
 				this->_nill = alloc_node().allocate(1);
-				alloc_node().construct(this->_nill, node());
+				//alloc_node().construct(this->_nill, node());
 				this->_nill->prev = this->_nill;
 				this->_nill->left = this->_nill;
 				this->_nill->right = this->_nill;
+				this->_nill->nill = true;
 				this->_nill->black = true;
 			}
 

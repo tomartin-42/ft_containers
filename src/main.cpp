@@ -29,25 +29,11 @@
 #define TEST ft
 
 
-template <typename Ite_1, typename Ite_2>
-void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
-
-{
-	ft::cout << "*************************\n";
-	ft::cout << (first < second) << ft::endl;
-	ft::cout << (first <= second) << ft::endl;
-	ft::cout << (first > second) << ft::endl;
-	ft::cout << (first >= second) << ft::endl;
-	if (redo)
-	//	ft_eq_ope(second, first, 0);
-	ft::cout << "*************************\n";
-}
-
 int		main(void)
 {
 	ft::map<int, int>	mapa;
 	ft::map<int, int>	mapb(mapa);
-	ft::map<int, int>::const_iterator	it;
+	ft::map<int, int>::iterator	it;
 	mapa.insert(ft::make_pair(1, 10));
 	it = mapa.begin();
 	std::cout << it->first << " " << it->second << std::endl;

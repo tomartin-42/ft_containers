@@ -30,9 +30,14 @@ namespace ft
 		node(const T& _data, node* _nill) 
 		: data(_data), left(_nill), right(_nill), prev(_nill), nill(false), black(false) {}
 
-		node(node const& other)
-		: data(other.data), left(other.left), right(other.right), prev(other.prev), nill(other.nill), black(other.black) {}
-
+		node(node const& other) : data(other.data)
+		{
+			left = other.left;
+			right = other.right;
+			prev = other.prev;
+			nill = other.nill;
+			black = other.black;
+		}
 		
 		value_type& get_data() 
 		{
