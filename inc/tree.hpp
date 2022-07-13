@@ -68,6 +68,7 @@ namespace ft
 				this->_nill->right = this->_nill;
 				this->_nill->nill = true;
 				this->_nill->black = true;
+				this->_root = this->_nill;
 			}
 
 			//-----------------copy constructor---------------------------------//
@@ -484,6 +485,7 @@ namespace ft
 //==========================
 			value_type insert(const value_type& nod)
 			{
+				std::cout << "KK\n";
 				node_pointer p_node = this->_alloc_node.allocate(1);
 
 				this->_alloc_node.construct(p_node, ft::node<T>(nod, _nill));
@@ -585,23 +587,20 @@ namespace ft
 			node_pointer	find(const value_type& val)
 			{
 				node_pointer	aux = this->_root;
-				std::cout << val.first << "-" << val.second << std::endl;
+
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(val, aux->get_data()))
+					if(this->_comp(val, *(aux->get_data())))
 					{
 						aux = aux->right;
-						std::cout << "HOLA\n";
 					}
-					else if(this->_comp(aux->get_data(), val))
+					else if(this->_comp(*(aux->get_data()), val))
 					{
 						aux = aux->left;
-						std::cout << "HOLA\n";
 					}
 					else
 					{
 						return aux;
-						std::cout << "HOLA\n";
 					}
 				}
 				return this->_nill;

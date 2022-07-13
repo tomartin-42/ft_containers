@@ -41,6 +41,11 @@ namespace ft
 				this->second = other.second;
 				return *this;
 			}
+
+			pair& operator * ()
+			{
+				return *this;
+			}
 	};
 
 	//creates a pair object of type, defined by the argument types
