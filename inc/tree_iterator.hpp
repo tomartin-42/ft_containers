@@ -33,7 +33,7 @@ namespace ft
 			typedef	value_type*																	pointer;
 			typedef value_type&																	reference;
 
-		private:
+		public:
 			node_pointer	_ptr;
 
 		public:
@@ -52,7 +52,7 @@ namespace ft
 				return *this;
 			}
 
-			tree_iterator	base() const {return this->_ptr;}
+			tree_iterator	base() const {return this->_ptr->get_data();}
 
 			node_pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++

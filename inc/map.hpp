@@ -70,8 +70,8 @@ namespace ft
 			typedef typename ft::tree<value_type, pair_compare, alloc_type> 	rb_tree;
 			typedef typename rb_tree::iterator								iterator;
 			typedef typename rb_tree::const_iterator						const_iterator;
-			typedef typename rb_tree::reverse_iterator								reverse_iterator;
-			typedef typename rb_tree::const_reverse_iterator							const_reverse_iterator;
+	//		typedef typename rb_tree::reverse_iterator								reverse_iterator;
+	//		typedef typename rb_tree::const_reverse_iterator							const_reverse_iterator;
 			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 				//***************************************************//
@@ -126,13 +126,13 @@ namespace ft
 
 			const_iterator end() const {return this->_btree.end();}
 
-			reverse_iterator	rbegin() {return this->_btree.rbegin();}
+//			reverse_iterator	rbegin() {return this->_btree.rbegin();}
+//
+//			const_reverse_iterator	rbegin() const {return this->_btree.rbegin();}
 
-			const_reverse_iterator	rbegin() const {return this->_btree.rbegin();}
+//			reverse_iterator	rend() {return this->_btree.rend();}
 
-			reverse_iterator	rend() {return this->_btree.rend();}
-
-			const_reverse_iterator	rend() const {return this->_btree.rend();}
+//			const_reverse_iterator	rend() const {return this->_btree.rend();}
 
 
 //==============================

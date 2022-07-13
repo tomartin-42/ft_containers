@@ -32,10 +32,12 @@
 int		main(void)
 {
 	ft::map<int, int>	mapa;
-	ft::map<int, int>::iterator	ita, itb;
+	ft::map<int, int>::iterator	ita;
 	for(int i = 0; i <= 10; i++)
 		mapa[i] = i * 10;
 	ita = mapa.begin();
+	ft::map<int, int>::const_iterator	itb(ita);
+	/*
 	itb = mapa.end();
 	while(ita != itb)
 	{
@@ -62,7 +64,7 @@ int		main(void)
 //	if(it == rit.base())
 //		ft::cout << "LO LOGRE\n";
 //	ft::map<int, int>::iterator	vita, vitb;
-
+*/
 /*
 	mapa.insert(ft::make_pair(3, 8));
 	mapa.insert(ft::make_pair(5, 8));

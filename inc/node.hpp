@@ -74,7 +74,7 @@ namespace ft
 		{
 			return this->black;
 		}
-
+		
 		void	print_pointer()
 		{
 			std::cout << "NODE========================" << std::endl;
