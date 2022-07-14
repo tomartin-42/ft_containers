@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/14 11:47:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:51:15 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ namespace ft
 
 			explicit reverse_tree_iterator(pointer ptr) : _ptr(ptr) {}
 
-			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.get_ptr()) {}
+			reverse_tree_iterator(const reverse_tree_iterator& other) : _ptr(other.base()) {}
 
 			reverse_tree_iterator& operator = (const reverse_tree_iterator& other)
 			{

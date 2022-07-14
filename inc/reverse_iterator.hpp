@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/14 11:43:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:55:37 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft
 //==========================
 			reverse_iterator() : _ptr(ft::nullptr_t) {}
 			reverse_iterator(pointer ptr) : _ptr(ptr) {}
-			reverse_iterator(iterator it) : _ptr(it.base()) {}
+			reverse_iterator(iterator it) : _ptr(it) {}
 
 			template <class U>
 			reverse_iterator(const reverse_iterator<U> &other) : _ptr(other.base()) {}
