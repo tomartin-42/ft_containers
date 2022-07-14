@@ -28,96 +28,48 @@
 #define TESTED_TYPE int
 #define TEST ft
 
-
 int		main(void)
 {
 	ft::map<int, int>	mapa;
-	ft::map<int, int>::iterator	ita;
-	for(int i = 0; i <= 10; i++)
-		mapa[i] = i * 10;
-	ita = mapa.begin();
-	ft::map<int, int>::reverse_iterator	itb(ita);
-	/*
-	itb = mapa.end();
-	while(ita != itb)
+
+	for(int i = 0; i < 10; i++)
+		mapa.insert(ft::make_pair(i, (i * 5)));
+
+	ft::map<int, int>::iterator	it = mapa.begin();
+
+	std::cout << it->first << " - " << it->second << " - " << &(*it) <<std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << " - " << &(*it) <<std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << std::endl; 
+	it++;
+	std::cout << it->first << " - " << it->second << " - " << &(*it) <<std::endl; 
+
+	it = mapa.begin();
+	while(it != mapa.end())
 	{
-		std::cout << ita->first << " " << ita->second << std::endl;
-		std::cout << itb->first << " " << itb->second << std::endl;
-		ita++;
+		std::cout << it->first << " - " << it->second << std::endl; 
+		it++;
 	}
-	ita = mapa.begin();
-	itb--;
-	std::cout << "===============================" << std::endl;
-	while(itb != ita)
-	{
-		std::cout << itb->first << " " << itb->second << std::endl;
-		itb--;
-	}
-	itb = mapa.find(5);
-	std::cout << "===============================" << std::endl;
-	std::cout << itb->first << "-" << itb->second << std::endl;
-	
-//	mapa.insert(ft::make_pair(1, 2));
-//	ft::map<int, int>::iterator it = mapa.begin();
-//	ft::cout << it.base().first << it.base().second << ft::endl;
-//	ft::map<int, int>::reverse_iterator rit = mapa.rbegin();
-//	if(it == rit.base())
-//		ft::cout << "LO LOGRE\n";
-//	ft::map<int, int>::iterator	vita, vitb;
-*/
-/*
-	mapa.insert(ft::make_pair(3, 8));
-	mapa.insert(ft::make_pair(5, 8));
-	mapa.insert(ft::make_pair(8, 8));
-	mapa.insert(ft::make_pair(1, 8));
-	mapa.insert(ft::make_pair(6, 8));
-	mapa.insert(ft::make_pair(2, 8));
-	mapa.insert(ft::make_pair(0, 7));
-	mapa.insert(ft::make_pair(4, 8));
-	mapa.insert(ft::make_pair(7, 8));
+//	ft::map<int,int>	mapb(mapa);
+//	it = mapb.begin();
+//	while(it != mapb.end())
+//	{
+//		std::cout << it->first << " - " << it->second << std::endl; 
+//		it++;
+//	}
 
-	mapa.insert(ft::make_pair(0, 8));
-	mapa.insert(ft::make_pair(1, 8));
-	mapa.insert(ft::make_pair(2, 8));
-	mapa.insert(ft::make_pair(3, 8));
-	mapa.insert(ft::make_pair(4, 8));
-	mapa.insert(ft::make_pair(5, 8));
-	mapa.insert(ft::make_pair(6, 7));
-	mapa.insert(ft::make_pair(7, 8));
-	mapa.insert(ft::make_pair(8, 8));
-	mapa[9] = 9;
-//	mapa.insert(ft::make_pair(2, 3));
-	mapa.print();
-//	ft::cout << it->first << "-" << it->second << ft::endl;
-//	ft::cout << "SIZE= " << mapa.size() << ft::endl;
-	vita = mapa.begin();
-	vitb = mapa.end();
-	ft::map<int, int>	mapb(vita, vitb);
-	mapb.print();
-	mapa.erase(9);
-	mapa.print();
-//	mapa.find(2);
-//	mapa.find(3);
 
-	ft::tree<int, ft::less<int> >	treea;
-	ft::tree<int, ft::less<int> >::iterator	itt;
-	ft::tree_iterator<ft::node<int> >	itb(itt);
-	ft::tree_iterator<ft::node<int> >	itc = itb;
-
-	itt = treea.begin();
-	treea.insert(3);
-	treea.insert(5);
-	treea.insert(8);
-	treea.insert(1);
-	treea.insert(6);
-	treea.insert(2);
-	treea.insert(0);
-	treea.insert(4);
-	treea.insert(7);
-	treea.printBT(); 
-	treea.erase(7);
-	treea.printBT(); 
-	treea.erase(5);
-	treea.printBT(); 
-	*/
 }

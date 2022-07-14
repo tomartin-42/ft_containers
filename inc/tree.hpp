@@ -485,7 +485,6 @@ namespace ft
 //==========================
 			value_type insert(const value_type& nod)
 			{
-				std::cout << "KK\n";
 				node_pointer p_node = this->_alloc_node.allocate(1);
 
 				this->_alloc_node.construct(p_node, ft::node<T>(nod, _nill));

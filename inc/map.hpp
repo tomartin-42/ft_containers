@@ -10,32 +10,8 @@
 
 namespace ft
 {
-/*	template<class Pair>
-	struct	key
-
-	{
-		typename Pair::first_t&	get_first(Pair& pair) const
-		{
-			return pair.first;
-		}
-
-		const typename Pair::first_t&	get_first(const Pair& pair) const
-		{
-			return pair.first;
-		}
-
-		typename Pair::second_t&	get_second(Pair& pair) const
-		{
-			return pair.second;
-		}
-
-		const typename Pair::second_t&	get_second(const Pair& pair) const
-		{
-			return pair.second;
-		}
-	};*/
-
-	template<class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
+	template<class Key, class T, class Compare = std::less<Key>, 
+		class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
 		public:
@@ -99,9 +75,9 @@ namespace ft
 				}
 				
 			
-			map(const map& other) : _alloc(other._alloc), _btree(other._btree)
+			map(const map& other) : _alloc(other._alloc), _btree(other._btree), _comp(other._comp)
 			{
-				*this = other;
+				this->insert(other.begin(), other.end());
 			}
 /*
 			map& operator= (const map& x)
@@ -192,6 +168,7 @@ namespace ft
 			{
 				while(first != last)
 				{
+					std::cout << &first << std::endl;
 					this->_btree.insert(*first);
 					first++;
 				}
