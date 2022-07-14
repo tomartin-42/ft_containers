@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/11 12:20:39 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/14 09:42:50 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define _CONST_TREE_ITERATOR_HPP_
 
 #include "iterator_traits.hpp"
+#include "tree_iterator.hpp"
 #include "nullptr.hpp"// to ft::nullptr
 #include "node.hpp"// to ft::nullptr
 #include <iostream>
@@ -43,9 +44,9 @@ namespace ft
 
 			const_tree_iterator(const const_tree_iterator& other) : _ptr(other._ptr) {}
 			
-			template <class Iter>
-			const_tree_iterator(const Iter other)
-				: _ptr(other->get_ptr()) {}
+			template<class I>	
+			const_tree_iterator(const tree_iterator<I>& other)
+				: _ptr(other.get_ptr()) {}
 
 			template <class Iter>
 			const_tree_iterator& operator = (const Iter other)
