@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/11 12:19:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:02:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,13 +445,13 @@ namespace ft
 			
 			const_iterator	end() const {return const_iterator(this->_nill);}
 
-//			reverse_iterator		rbegin() {return reverse_iterator(this->maximum(this->_root));}
+			reverse_iterator		rbegin() {return reverse_iterator(this->maximum(this->_root));}
 
-			//const_reverse_iterator	rbegin() const {return const_reverse_iterator(this->maximum(this->_root));}
+			const_reverse_iterator	rbegin() const {return const_reverse_iterator(this->maximum(this->_root));}
 
-//			reverse_iterator		rend() {return reverse_iterator(this->_nill);}
+			reverse_iterator		rend() {return reverse_iterator(this->_nill);}
 
-			//const_reverse_iterator		rend() const {return const_reverse_iterator(this->_nill);}
+			const_reverse_iterator		rend() const {return const_reverse_iterator(this->_nill);}
 
 //==========================
 //Capacity

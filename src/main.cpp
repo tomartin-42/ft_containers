@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/11 11:46:55 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:05:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		main(void)
 	for(int i = 0; i <= 10; i++)
 		mapa[i] = i * 10;
 	ita = mapa.begin();
-	ft::map<int, int>::const_iterator	itb(ita);
+	ft::map<int, int>::reverse_iterator	itb(ita);
 	/*
 	itb = mapa.end();
 	while(ita != itb)

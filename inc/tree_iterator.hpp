@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/14 09:38:46 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:46:55 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ namespace ft
 				return *this;
 			}
 
-			tree_iterator	base() const {return this->_ptr->get_data();}
+			//tree_iterator	base() const {return this->_ptr->get_data();}
 
 			node_pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++

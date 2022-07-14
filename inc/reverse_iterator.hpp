@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:04:37 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/15 10:24:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:43:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ namespace ft
 			typedef typename ft::iterator_traits<Iter>::reference			reference;
 
 		private:
-			pointer	_ptr;
+			iterator	_ptr;
 	
 		public:
 //==========================
@@ -55,15 +55,22 @@ namespace ft
 
 			//~reverse_iterator() {}
 
-			pointer base() const {return this->_ptr;}
+			iterator base() const {return this->_ptr;}
 
 //==========================
 //operators
 //==========================
 
-			reference	operator * () const {return *(this->_ptr - 1);}
+			reference	operator * () const 
+			{
+				iterator	aux = this->base();
+				return *(aux - 1);
+			}
 			
-			pointer		operator -> () const {return this->_ptr - 1;}
+			pointer		operator -> () const 
+			{
+				return &operator * ();
+			}
 
 			reference	operator [] (difference_type i)
 			{
