@@ -64,7 +64,7 @@ namespace ft
 			reference	operator * () const 
 			{
 				iterator	aux = this->base();
-				return *(aux - 1);
+				return *(--aux);
 			}
 			
 			pointer		operator -> () const 
