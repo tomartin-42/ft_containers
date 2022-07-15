@@ -100,6 +100,8 @@ namespace ft
 				print_nill(this->right);
 			else
 				std::cout << "RIGHT= " << this->right << std::endl;
+			std::cout << "***************************************************\n";
+			std::cout << "***************************************************\n";
 		}
 
 		void 	print_nill(node* p)

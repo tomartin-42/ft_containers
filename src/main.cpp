@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/14 11:05:08 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/15 09:34:49 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,33 @@ int		main(void)
 {
 	ft::map<int, int>	mapa;
 
-	for(int i = 0; i < 10; i++)
-		mapa.insert(ft::make_pair(i, (i * 5)));
+	mapa.insert(ft::make_pair(1, 10));
+	mapa.insert(ft::make_pair(2, 20));
+	mapa.insert(ft::make_pair(3, 30));
 
-	ft::map<int, int>::iterator	it = mapa.begin();
+	ft::map<int, int>::iterator	itb, ite;
+/*	itb = mapa.begin();
+	ite = mapa.end();
+	itb.get_ptr()->print_pointer();
+	itb++;
+	itb.get_ptr()->print_pointer();
+	itb++;
+	itb.get_ptr()->print_pointer();
+	itb++;
+	itb.get_ptr()->print_pointer();
+	std::cout << "==========================================\n";
+	ite.get_ptr()->print_pointer();
+*/
 
-	std::cout << it->first << " - " << it->second << " - " << &(*it) <<std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << " - " << &(*it) <<std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl; 
-	it++;
-	std::cout << it->first << " - " << it->second << " - " << &(*it) <<std::endl; 
-
-	it = mapa.begin();
-	while(it != mapa.end())
+	itb = mapa.begin();
+	ite = mapa.end();
+	while(itb != mapa.end())
 	{
-		std::cout << it->first << " - " << it->second << std::endl; 
-		it++;
+		itb.get_ptr()->print_pointer();
+		itb++;
 	}
-//	ft::map<int,int>	mapb(mapa);
-//	it = mapb.begin();
-//	while(it != mapb.end())
-//	{
-//		std::cout << it->first << " - " << it->second << std::endl; 
-//		it++;
-//	}
 
-
+	itb = mapa.begin();
+	ft::map<int, int>	mapb(itb, ite);
 }
+

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/14 12:29:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/15 08:44:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,8 +220,8 @@ namespace ft
 			void	assig_nill_values()
 			{
 				this->_nill->prev = this->_root; 
-				this->_nill->left = this->minimum(this->_root);
-				this->_nill->right = this->maximum(this->_root);
+				this->_nill->right = this->minimum(this->_root);
+				this->_nill->left = this->maximum(this->_root);
 			}
 
 			void	assig_to_nill(node_pointer& p_n)
@@ -299,68 +299,6 @@ namespace ft
 				}
 				this->_root->black = true;
 			}
-
-				/*while (p_node->prev->black == false)
-				{
-					if (p_node->prev == p_node->prev->prev->right)
-					{
-						if(p_node->prev != this->nill || p_node->prev->prev != this->nill)
-							p_node->prev->prev->left == p_node->prev ? u = p_node->prev->prev->right 
-								: u = p_node->prev->prev->left;
-						if (u && u->black == false)
-						{
-							if(p_node->prev != this->nill || p_node->prev->prev != this->nill)
-								p_node->prev->prev->left == p_node->prev ? p_node->prev->prev->right->black = true
-									: p_node->prev->prev->left->black = true;
-							p_node->prev->black = true;
-							p_node->prev->prev->black = false;
-							p_node = p_node->prev->prev;
-						}
-						else
-						{
-							if (p_node == p_node->prev->left)
-							{
-								p_node = p_node->prev;
-								right_rotate(p_node);
-							}
-							p_node->prev->black = true;
-							p_node->prev->prev->black = false;
-							left_rotate(p_node->prev->prev);
-						}
-					}
-					else
-					{
-						if(p_node->prev != this->nill || p_node->prev->prev != this->nill)
-							p_node->prev->prev->left == p_node->prev ? u = p_node->prev->prev->right 
-								: u = p_node->prev->prev->left;
-
-						if (u && u->black == false)
-						{
-							if(p_node->prev != this->nill || p_node->prev->prev != this->nill)
-								p_node->prev->prev->left == p_node->prev ? p_node->prev->prev->right->black = false
-									: p_node->prev->prev->left->black = false;
-							p_node->prev->black = true;
-							p_node->prev->prev->black = false;
-							p_node = p_node->prev->prev;
-						}
-						else
-						{
-							if (p_node == p_node->prev->right)
-							{
-								p_node = p_node->prev;
-								left_rotate(p_node);
-							}
-							p_node->prev->black = true;
-							p_node->prev->prev->black = false;
-			typedef const_node*																		node_pointeddr;
-							right_rotate(p_node->prev->prev);
-						}
-					}
-					if (p_node == this->_root)
-						break ;
-				}
-				this->_root->black = true;
-  			*/
 
 			void erase_fix(node_pointer x)
 			{
@@ -522,6 +460,7 @@ namespace ft
 				this->_root->black = true;
 			    insert_fix(p_node);
 				this->_size += 1;
+				this->assig_nill_values();
 				return (p_node->get_data());
 			}
 
