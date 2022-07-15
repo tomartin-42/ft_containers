@@ -80,7 +80,7 @@ namespace ft
 			{
 				this->insert(other.begin(), other.end());
 			}
-/*
+
 			map& operator= (const map& x)
 			{
 				this->clear();
@@ -88,7 +88,6 @@ namespace ft
 				return *this;
 			}
 
-*/
 //********************************************************************************************************//
 //*************************************member fuctions****************************************************//
 
@@ -111,15 +110,12 @@ namespace ft
 
 			const_reverse_iterator	rend() const {return this->begin();}
 
-
 //==============================
 //capacity
 //==============================
 			bool	empty() const
 			{
-				if(this->_btree.empty() == 0)
-					return true;
-				return false;
+				return this->_btree.empty();
 			}
 
 			size_type	size() const
@@ -131,7 +127,6 @@ namespace ft
 			{
 				return this->_alloc.max_size();
 			}
-
 
 //=============================
 //element access
@@ -150,8 +145,6 @@ namespace ft
 //===============================
 			ft::pair<iterator, bool>	insert(const value_type& val)
 			{
-			//	if(this->find(val.first) != this->end())
-		//			return (ft::make_pair(this->end(), false));
 				this->_btree.insert(val);
 				iterator it = this->find(val.first);
 				return ft::make_pair(it, true);
@@ -214,7 +207,6 @@ namespace ft
 					it++;
 				}
 			}
-
 
 //===============================
 //observers
@@ -303,13 +295,11 @@ namespace ft
 //===============================
 //allocator
 //===============================
-
 			alloc_type	get_allocator() const {return this->_alloc;}
 
 //===============================
 //debug
 //===============================
-
 			void print() {this->_btree.printBT();}
 	}; //end map class
 

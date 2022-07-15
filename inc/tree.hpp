@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/15 11:58:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:07:42 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,9 +219,14 @@ namespace ft
 
 			void	assig_nill_values()
 			{
-				this->_nill->prev = this->_root; 
-				this->_nill->right = this->minimum(this->_root);
-				this->_nill->left = this->maximum(this->_root);
+				if(this->_size != 0)
+				{
+					this->_nill->prev = this->_root; 
+					this->_nill->right = this->minimum(this->_root);
+					this->_nill->left = this->maximum(this->_root);
+				}
+				else 
+					this->assig_to_nill(this->_nill);
 			}
 
 			void	assig_to_nill(node_pointer& p_n)
@@ -397,6 +402,7 @@ namespace ft
 //==========================
 			bool	empty() const
 			{
+				//std::cout << "SIZEEEEEE= " << this->_size << std::endl;
 				if(this->_size == 0)
 					return true;
 				return false;
@@ -516,7 +522,7 @@ namespace ft
 				kill_node(aux);
 				if(save_color == true)
 					erase_fix(x);
-				this->assig_nill_values();
+				//this->assig_nill_values();
 				return (1);
 			}
 
