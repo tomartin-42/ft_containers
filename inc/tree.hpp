@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/15 08:44:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:58:50 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ namespace ft
 				this->_alloc_node.deallocate(node, 1);
 				node = ft::nullptr_t;
 				this->_size -= 1;
+				this->assig_nill_values();
 			}
 
 			void	insert_fix(node_pointer p_node)
@@ -515,6 +516,7 @@ namespace ft
 				kill_node(aux);
 				if(save_color == true)
 					erase_fix(x);
+				this->assig_nill_values();
 				return (1);
 			}
 
