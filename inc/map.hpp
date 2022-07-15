@@ -223,7 +223,7 @@ namespace ft
 
 			val_comp	value_comp() const
 			{
-				return value_compare(this->_btree.value_comp());
+				return (this->_btree.get_v_comp());
 			}
 
 //===============================
