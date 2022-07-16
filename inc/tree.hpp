@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/15 13:07:42 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/16 15:41:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,7 +402,6 @@ namespace ft
 //==========================
 			bool	empty() const
 			{
-				//std::cout << "SIZEEEEEE= " << this->_size << std::endl;
 				if(this->_size == 0)
 					return true;
 				return false;
@@ -430,6 +429,8 @@ namespace ft
 //==========================
 			value_type insert(const value_type& nod)
 			{
+				if(this->find(nod) != this->_nill)
+					return nod;
 				node_pointer p_node = this->_alloc_node.allocate(1);
 
 				this->_alloc_node.construct(p_node, ft::node<T>(nod, _nill));

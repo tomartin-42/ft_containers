@@ -48,7 +48,7 @@ namespace ft
 			typedef typename rb_tree::const_iterator						const_iterator;
 			typedef typename rb_tree::reverse_iterator						reverse_iterator;
 			typedef typename rb_tree::const_reverse_iterator				const_reverse_iterator;
-			typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
+		//	typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 				//***************************************************//
 		private:
@@ -133,11 +133,14 @@ namespace ft
 //=============================
 			data_type	&operator[](const key_type& i) 
 			{
-				iterator it = this->find(i);
+
+				return (*((this->insert(ft::make_pair(i,data_type()))).first)).second;
+				/*
+				iterator it = this->find(ft::make_pair(i, data_type()).first);
 
 				if(it == this->end())
 					this->insert(ft::make_pair(i, data_type()));
-				return it->second;
+				return it->second;*/
 			}
 
 //===============================
