@@ -188,10 +188,14 @@ namespace ft
 			template<typename InputIterator>
 			void	erase(InputIterator first, InputIterator last)
 			{
+				iterator	it;
+
 				while(first != last)
 				{
-					this->erase(first);
+					it = first;
 					first++;
+					this->erase(it);
+					this->print();
 				}
 			}
 

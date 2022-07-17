@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/17 16:45:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/17 19:21:57 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ int		main(void)
 {
 	ft::map<int, int>	mapa;
 
-	for(int i = 0; i < 42; i++) 
+	for(int i = 0; i < 20; i++) 
+	{
 		mapa[i] = i*10;
-	ft::map<int, int>::iterator it;
+		std::cout << mapa[i] << std::endl;
+	}
+	mapa.print();
+	ft::map<int, int>::iterator ita, itb;
 
-	it = --(mapa.end());
-	--it;
-	std::cout << it->first << " = " << it->second << std::endl;
-	for(;it != mapa.begin(); --it)
-		std::cout << it->first << " = " << it->second << std::endl;
+	ita = mapa.begin();
+	itb = mapa.end();
 
-
+	mapa.erase(ita, itb);
 /*
 	for(int i = 0; i < 10; i++)
 		mapa.insert(ft::make_pair(i, i * 10));

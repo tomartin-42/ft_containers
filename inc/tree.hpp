@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/17 16:43:17 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/17 19:46:39 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -385,9 +385,9 @@ namespace ft
 
 			const_iterator	begin() const {return const_iterator(this->minimum(this->_root));}
 
-			iterator		end() {return iterator(this->_nill);}
+			iterator		end() {return iterator(maximum(this->_root)->left);}
 			
-			const_iterator	end() const {return const_iterator(this->_nill);}
+			const_iterator	end() const {return const_iterator(maximum(this->_root)->left);}
 /*
 			reverse_iterator		rbegin() {return reverse_iterator(this->maximum(this->_root));}
 
@@ -582,7 +582,7 @@ namespace ft
 			        std::cout << (isLeft ? "├──" : "└──" );
 
         			// print the value of the node
-        //			std::cout << key_value().get_first(node->get_data()) << "-" << key_value().get_second(node->get_data()) << " " << node->black << std::endl;
+        			std::cout << node->get_data().first << "-" << node->get_data().second << " " << node->black << std::endl;
 
         			// enter the next tree level - left and right branch
         			printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
