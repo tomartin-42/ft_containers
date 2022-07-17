@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/14 11:46:55 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:49:58 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ namespace ft
 
 			explicit tree_iterator(node_pointer ptr) : _ptr(ptr) {}
 
-			tree_iterator(const tree_iterator& other) : _ptr(other._ptr) 
-			{
-			}
+			tree_iterator(const tree_iterator& other) : _ptr(other._ptr) {}
 
 			tree_iterator& operator = (const tree_iterator& other)
 			{
@@ -65,8 +63,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left->get_nill() != true)
-					aux = aux->left;
+				while(aux->right->get_nill() != true)
+					aux = aux->right;
 				return aux;
 			}
 
@@ -74,8 +72,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->right->get_nill() != true)
-					aux = aux->right;
+				while(aux->left->get_nill() != true)
+					aux = aux->left;
 				return aux;
 			}
 //==========================
@@ -88,6 +86,11 @@ namespace ft
 
 			tree_iterator& operator ++ ()
 			{
+				if(this->_ptr->get_nill() == true)
+				{
+					this->_ptr = this->_ptr->right;
+					return *this;
+				}
     			if (this->_ptr->left->get_nill() != true)
       			{
        				this->_ptr = this->_ptr->left;
@@ -134,6 +137,29 @@ namespace ft
 
 			tree_iterator& operator -- ()
 			{
+				if(this->_ptr->get_nill() == true)
+				{
+					this->_ptr = this->_ptr->left;
+					return *this;
+				}
+				if(this->_ptr->right->get_nill() != true)
+				{
+					this->_ptr = maximum(this->_ptr->right);
+					return *this;
+				}
+
+				node_pointer y = this->_ptr->prev;
+				while(y->get_nill() != true && this->_ptr == y->right)
+				{
+					this->_ptr = y;
+					y = y->prev;
+				}
+				this->_ptr = y;
+				return *this;
+			}
+
+/*			tree_iterator& operator -- ()
+			{
     			if (this->_ptr->right->get_nill() != true)
       			{
        				this->_ptr = this->_ptr->right;
@@ -153,8 +179,17 @@ namespace ft
 				}
   				return *this;
 			}
+*/
 
 			tree_iterator operator -- (int)
+			{
+				tree_iterator	tmp = *this;
+
+				this->operator -- ();
+				return tmp;
+			}
+
+/*			tree_iterator operator -- (int)
 			{
 				tree_iterator	tmp = *this;
 
@@ -177,7 +212,7 @@ namespace ft
 				}
 				return tmp;
 			}
-
+*/
 			bool	operator == (tree_iterator &b) 
 			{
 				return this->get_ptr() == b.get_ptr();

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/17 15:09:42 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:43:17 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -485,6 +485,8 @@ namespace ft
 			size_type	erase(const value_type& val)
 			{
 				node_pointer	d_node(this->find(val));
+				if(d_node == this->_nill)
+					return (0);
 				node_pointer	aux = d_node;
 				node_pointer	x;
 				node_pointer	y;
@@ -523,7 +525,7 @@ namespace ft
 				kill_node(aux);
 				if(save_color == true)
 					erase_fix(x);
-				//this->assig_nill_values();
+				this->assig_nill_values();
 				return (1);
 			}
 
