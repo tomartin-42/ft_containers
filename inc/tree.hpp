@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/16 15:41:08 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/17 15:09:42 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -504,20 +504,20 @@ namespace ft
 				}
 				else
 				{
-					y = minimum(aux->right);
+					y = minimum(aux->left);
 					save_color = y->black;
-					x = aux->right;
+					x = aux->left;
 					if(y->prev == aux)
 						x->prev = y;
 					else
 					{
-						this->transplant(y, y->right);
-						y->right = aux->right;
-						y->right->prev = y;
+						this->transplant(y, y->left);
+						y->left = aux->left;
+						y->left->prev = y;
 					}
 					transplant(aux, y);
-					y->left = aux->left;
-					y->left->prev = y;
+					y->right = aux->right;
+					y->right->prev = y;
 					y->black = aux->black;
 				}
 				kill_node(aux);
