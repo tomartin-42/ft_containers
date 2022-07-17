@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/17 19:46:39 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/17 20:02:20 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,38 +312,7 @@ namespace ft
 
 				while(x != this->_root && x->black == true)
 				{
-					if(x == x->prev->left)
-					{
-						s = x->prev->right;
-						if(s->black == false)
-						{
-							s->black = true;
-							x->prev->black = false;
-							left_rotate(x->prev);
-							s = x->prev->right;
-						}
-						if(s->left->black == true && s->right->black == true)
-						{
-							s->black = false;
-							x = x->prev;
-						}
-						else
-						{
-							if(s->right->black == true)
-							{
-								s->left->black = true;
-								s->black = false;
-								right_rotate(s);
-								s = x->prev->right;
-							}
-							s->black = x->prev->black;
-							x->prev->black = true;
-							s->right->black = true;
-							left_rotate(x->prev);
-							x = this->_root;
-						}
-					}
-					else
+					if(x == x->prev->right)
 					{
 						s = x->prev->left;
 						if(s->black == false)
@@ -371,6 +340,37 @@ namespace ft
 							x->prev->black = true;
 							s->left->black = true;
 							right_rotate(x->prev);
+							x = this->_root;
+						}
+					}
+					else
+					{
+						s = x->prev->right;
+						if(s->black == false)
+						{
+							s->black = true;
+							x->prev->black = false;
+							left_rotate(x->prev);
+							s = x->prev->right;
+						}
+						if(s->left->black == true && s->right->black == true)
+						{
+							s->black = false;
+							x = x->prev;
+						}
+						else
+						{
+							if(s->right->black == true)
+							{
+								s->left->black = true;
+								s->black = false;
+								right_rotate(s);
+								s = x->prev->right;
+							}
+							s->black = x->prev->black;
+							x->prev->black = true;
+							s->right->black = true;
+							left_rotate(x->prev);
 							x = this->_root;
 						}
 					}
