@@ -133,14 +133,7 @@ namespace ft
 //=============================
 			data_type	&operator[](const key_type& i) 
 			{
-
 				return (*((this->insert(ft::make_pair(i,data_type()))).first)).second;
-				/*
-				iterator it = this->find(ft::make_pair(i, data_type()).first);
-
-				if(it == this->end())
-					this->insert(ft::make_pair(i, data_type()));
-				return it->second;*/
 			}
 
 //===============================
@@ -148,8 +141,12 @@ namespace ft
 //===============================
 			ft::pair<iterator, bool>	insert(const value_type& val)
 			{
-				this->_btree.insert(val);
 				iterator it = this->find(val.first);
+
+				if(it->first == val.first)
+					return (ft::make_pair(it, false));
+				this->_btree.insert(val);
+				it = this->find(val.first);
 				return ft::make_pair(it, true);
 			}
 

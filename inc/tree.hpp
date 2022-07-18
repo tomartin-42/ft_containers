@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/18 08:30:22 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/18 08:52:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,7 +457,6 @@ namespace ft
 						x = x->left;
 			    }
 			    p_node->prev = y;
-				//std::cout << p_node->get_data() << "===" << y->get_data() << std::endl;
 				if (this->_comp((p_node->get_data()),(y->get_data())))
 					y->right = p_node;
 				else
@@ -541,17 +540,11 @@ namespace ft
 				while(is_no_nill(aux))
 				{
 					if(this->_comp(val, *(aux->get_data())))
-					{
 						aux = aux->right;
-					}
 					else if(this->_comp(*(aux->get_data()), val))
-					{
 						aux = aux->left;
-					}
 					else
-					{
 						return aux;
-					}
 				}
 				return this->_nill;
 			}
@@ -572,9 +565,6 @@ namespace ft
 				return this->_nill;
 			}
 
-			//size_type	count(const value_type& val) const
-			//{
-			//}
 			void printBT(const std::string& prefix, const node_pointer node, bool isLeft)
 			{
     			if(node != this->_nill)
