@@ -202,13 +202,7 @@ namespace ft
 
 			void	clear()
 			{
-				iterator	it = this->begin();
-
-				while(it != this->end())
-				{
-					this->_btree.erase(*it);
-					it++;
-				}
+				this->erase(this->begin(), this->end());
 			}
 
 			template<typename value_type, typename pair_compare, typename alloc_type>
