@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 17:50:07 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/08 12:01:19 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/18 11:25:25 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ namespace ft
 
 		while (it1 != it2)
 		{
-			//std::cout << "X1\n" << *it1 << "-" << *it2 << std::endl;
 			it1++;
 			i++;
 		}
@@ -37,7 +36,31 @@ namespace ft
 	{
 		for (;first1 != last1; ++first1, ++first2)
 		{
+		//	std::cout << std::endl << first1->first << " - " << first1->second << std::endl;
+		//	std::cout << first2->first << " - " << first2->second << std::endl;
 			if (!(*first1 == *first2))
+				return false;
+		}
+		return true;
+	}
+
+	template< class InputIterator_1, class InputIterator_2 >
+	bool	low(InputIterator_1 first1, InputIterator_1 last1, InputIterator_2 first2)
+	{
+		for (;first1 != last1; ++first1, ++first2)
+		{
+			if (!(*first1 < *first2))
+				return false;
+		}
+		return true;
+	}
+
+	template< class InputIterator_1, class InputIterator_2 >
+	bool	low_eq(InputIterator_1 first1, InputIterator_1 last1, InputIterator_2 first2)
+	{
+		for (;first1 != last1; ++first1, ++first2)
+		{
+			if (!(*first1 <= *first2))
 				return false;
 		}
 		return true;

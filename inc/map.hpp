@@ -314,6 +314,8 @@ namespace ft
 	bool	operator == (const map<Key, T, Key_of_Value, Alloc> mf,
 			const map<Key, T, Key_of_Value, Alloc> ml)
 	{
+		if(mf.size() != ml.size())
+			return false;
 		return ft::equal(mf.begin(), mf.end(), ml.begin());
 	}
 
@@ -321,35 +323,35 @@ namespace ft
 	bool	operator != (const map<Key, T, Key_of_Value, Alloc> mf,
 			const map<Key, T, Key_of_Value, Alloc> ml)
 	{
-		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+		return !(mf == ml);
 	}
 
 	template<class Key, class T, class Key_of_Value, class Alloc>
 	bool	operator < (const map<Key, T, Key_of_Value, Alloc> mf,
 			const map<Key, T, Key_of_Value, Alloc> ml)
 	{
-		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+		return (ft::lexicographical_compare(mf.begin(), mf.end(), ml.begin(), ml.end()));
 	}
 
 	template<class Key, class T, class Key_of_Value, class Alloc>
 	bool	operator > (const map<Key, T, Key_of_Value, Alloc> mf,
 			const map<Key, T, Key_of_Value, Alloc> ml)
 	{
-		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+		return !(mf == ml || mf < ml);
 	}
 
 	template<class Key, class T, class Key_of_Value, class Alloc>
 	bool	operator <= (const map<Key, T, Key_of_Value, Alloc> mf,
 			const map<Key, T, Key_of_Value, Alloc> ml)
 	{
-		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+		return !(mf > ml);
 	}
 
 	template<class Key, class T, class Key_of_Value, class Alloc>
 	bool	operator >= (const map<Key, T, Key_of_Value, Alloc> mf,
 			const map<Key, T, Key_of_Value, Alloc> ml)
 	{
-		return !(ft::equal(mf.begin(), mf.end(), ml.begin()));
+		return !(mf < ml);
 	}
 	
 }//end namespace ft
