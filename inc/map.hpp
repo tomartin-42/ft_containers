@@ -321,59 +321,59 @@ namespace ft
 //No member functions (vompair operators)
 //=======================================
 
-	template<class Key, class T, class Key_of_Value, class Alloc>
-	bool	operator == (const map<Key, T, Key_of_Value, Alloc> mf,
-			const map<Key, T, Key_of_Value, Alloc> ml)
+	template<class Key, class T, class Alloc>
+	bool	operator == (const map<Key, T, Alloc> m_f,
+			const map<Key, T, Alloc> m_l)
 	{
-		if(mf.size() != ml.size())
+		if(m_f.size() != m_l.size())
 			return false;
-		return ft::equal(mf.begin(), mf.end(), ml.begin());
+		return ft::equal(m_f.begin(), m_f.end(), m_l.begin());
 	}
 
-	template<class Key, class T, class Key_of_Value, class Alloc>
-	bool	operator != (const map<Key, T, Key_of_Value, Alloc> mf,
-			const map<Key, T, Key_of_Value, Alloc> ml)
+	template<class Key, class T, class Alloc>
+	bool	operator != (const map<Key, T, Alloc> m_f,
+			const map<Key, T, Alloc> m_l)
 	{
-		return !(mf == ml);
+		return !(m_f == m_l);
 	}
 
-	template<class Key, class T, class Key_of_Value, class Alloc>
-	bool	operator < (const map<Key, T, Key_of_Value, Alloc> mf,
-			const map<Key, T, Key_of_Value, Alloc> ml)
+	template<class Key, class T, class Alloc>
+	bool	operator < (const map<Key, T, Alloc> m_f,
+			const map<Key, T,  Alloc> m_l)
 	{
-		return (ft::lexicographical_compare(mf.begin(), mf.end(), ml.begin(), ml.end()));
+		return (ft::lexicographical_compare(m_f.begin(), m_f.end(), m_l.begin(), m_l.end()));
 	}
 
-	template<class Key, class T, class Key_of_Value, class Alloc>
-	bool	operator > (const map<Key, T, Key_of_Value, Alloc> mf,
-			const map<Key, T, Key_of_Value, Alloc> ml)
+	template<class Key, class T, class Alloc>
+	bool	operator > (const map<Key, T, Alloc> m_f,
+			const map<Key, T,  Alloc> m_l)
 	{
-		return !(mf == ml || mf < ml);
+		return !(m_f == m_l || m_f < m_l);
 	}
 
-	template<class Key, class T, class Key_of_Value, class Alloc>
-	bool	operator <= (const map<Key, T, Key_of_Value, Alloc> mf,
-			const map<Key, T, Key_of_Value, Alloc> ml)
+	template<class Key, class T, class Alloc>
+	bool	operator <= (const map<Key, T, Alloc> m_f,
+			const map<Key, T,  Alloc> m_l)
 	{
-		return !(mf > ml);
+		return !(m_f > m_l);
 	}
 
-	template<class Key, class T, class Key_of_Value, class Alloc>
-	bool	operator >= (const map<Key, T, Key_of_Value, Alloc> mf,
-			const map<Key, T, Key_of_Value, Alloc> ml)
+	template<class Key, class T, class Alloc>
+	bool	operator >= (const map<Key, T, Alloc> m_f,
+			const map<Key, T,  Alloc> m_l)
 	{
-		return !(mf < ml);
+		return !(m_f < m_l);
 	}
 	
 	template<class Key, class T, class Alloc>
-	void	swap(map<Key, T, Alloc> &mf,
-			map<Key, T, Alloc> &ml)
+	void	swap(map<Key, T, Alloc> &m_f,
+			map<Key, T, Alloc> &m_l)
 	{
 		map<Key, T, Alloc>	aux;
 
-		aux = mf;
-		mf = ml;
-		ml = aux;
+		aux = m_f;
+		m_f = m_l;
+		m_l = aux;
 	}
 }//end namespace ft
 
