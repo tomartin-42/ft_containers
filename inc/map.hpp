@@ -102,13 +102,13 @@ namespace ft
 
 			const_iterator end() const {return this->_btree.end();}
 
-			reverse_iterator	rbegin() {return this->end();}
+			reverse_iterator	rbegin() {return (this->end());}
 
-			const_reverse_iterator	rbegin() const {return this->end();}
+			const_reverse_iterator	rbegin() const {return (this->end());}
 
-			reverse_iterator	rend() {return this->begin();}
+			reverse_iterator	rend() {return (this->begin());}
 
-			const_reverse_iterator	rend() const {return this->begin();}
+			const_reverse_iterator	rend() const {return (this->begin());}
 
 //==============================
 //capacity
@@ -211,6 +211,23 @@ namespace ft
 				}
 			}
 
+			template<typename value_type, typename pair_compare, typename alloc_type>
+			void	swap(map& other)
+			{
+				map<value_type, pair_compare, alloc_type>	aux;
+
+				aux = other;
+				other = *this;
+				*this = aux;
+				/*aux.insert(other.begin(), other.end());
+				other.clear();
+				other.insert(this->begin(), this->end());
+				this->clear();
+				this->insert(aux.begin(), aux.end());
+				aux.clear();
+				*/
+			}
+		
 //===============================
 //observers
 //===============================
@@ -354,6 +371,16 @@ namespace ft
 		return !(mf < ml);
 	}
 	
+	template<class Key, class T, class Alloc>
+	void	swap(map<Key, T, Alloc> &mf,
+			map<Key, T, Alloc> &ml)
+	{
+		map<Key, T, Alloc>	aux;
+
+		aux = mf;
+		mf = ml;
+		ml = aux;
+	}
 }//end namespace ft
 
 	
