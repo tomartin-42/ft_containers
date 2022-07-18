@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/17 20:02:20 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/18 08:30:22 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ namespace ft
 					this->_nill->prev = this->_root; 
 					this->_nill->right = this->minimum(this->_root);
 					this->_nill->left = this->maximum(this->_root);
+					this->_nill->black = true;
 				}
 				else 
 					this->assig_to_nill(this->_nill);

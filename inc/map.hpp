@@ -195,7 +195,6 @@ namespace ft
 					it = first;
 					first++;
 					this->erase(it);
-					this->print();
 				}
 			}
 
