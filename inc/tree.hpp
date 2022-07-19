@@ -119,6 +119,7 @@ namespace ft
 				else
 					a->prev->right = b;
 				b->prev = a->prev;
+				this->assig_nill_values();
 			}
 				
 		public:
@@ -383,21 +384,38 @@ namespace ft
 //==========================
 //Iterators
 //==========================
-			iterator		begin() {return iterator(this->minimum(this->_root));}
+			iterator		begin() {
+		//		std::cout << "HOLA1\n";
+				return iterator(this->minimum(this->_root));}
 
-			const_iterator	begin() const {return const_iterator(this->minimum(this->_root));}
 
-			iterator		end() {return iterator(maximum(this->_root)->left);}
+			const_iterator	begin() const {
+		//		std::cout << "HOLA2\n";
+				return const_iterator(this->minimum(this->_root));}
+
+			iterator		end() {
+		//		std::cout << "HOLA3\n";
+				return iterator(maximum(this->_root)->left);}
 			
-			const_iterator	end() const {return const_iterator(maximum(this->_root)->left);}
+			const_iterator	end() const {
+		//		std::cout << "HOLA4\n";
+				return const_iterator(maximum(this->_root)->left);}
 
-			iterator		rbegin() {return iterator(this->maximum(this->_root));}
+			iterator		rbegin() {
+				std::cout << "HOLA5\n";
+				return iterator(this->maximum(this->_root));}
 
-			const_iterator	rbegin() const {return const_iterator(this->maximum(this->_root));}
+			const_iterator	rbegin() const {
+				std::cout << "HOLA6\n";
+				return const_iterator(this->maximum(this->_root));}
 
-			iterator		rend() {return iterator(this->minimum(this->_root)->right);}
+			iterator		rend() {
+				std::cout << "HOLA7\n";
+				return ++(iterator(this->_nill->left));}
 
-			const_iterator	rend() const {return const_iterator(this->minimum(this->_root)->right);}
+			const_iterator	rend() const {
+				std::cout << "HOLA8\n";
+				return ++(const_iterator(this->_nill->left));}
 
 //==========================
 //Capacity
