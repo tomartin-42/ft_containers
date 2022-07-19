@@ -14,6 +14,7 @@
 # define _TREE_HPP_
 
 #include <memory>
+#include <algorithm> //for std::swap
 #include "tree_iterator.hpp"
 #include "const_tree_iterator.hpp"
 #include "reverse_iterator.hpp"
@@ -527,6 +528,19 @@ namespace ft
 					erase_fix(x);
 				this->assig_nill_values();
 				return (1);
+			}
+
+			void	swap(tree<T, compare, alloc>& other)
+			{
+				std::swap(this->_root, other._root);
+				std::swap(this->_nill->prev, other._nill->prev);
+				std::swap(this->_nill->right, other._nill->right);
+				std::swap(this->_nill->left, other._nill->left);
+				std::swap(this->_nill, other._nill);
+				std::swap(this->_size, other._size);
+			//	std::swap(this->_alloc_val, other._alloc_val);
+			//	std::swap(this->_alloc_node, other._alloc_node);
+				std::swap(this->_comp, other._comp);
 			}
 
 //==========================

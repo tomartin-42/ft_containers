@@ -36,8 +36,6 @@ namespace ft
 	{
 		for (;first1 != last1; ++first1, ++first2)
 		{
-		//	std::cout << std::endl << first1->first << " - " << first1->second << std::endl;
-		//	std::cout << first2->first << " - " << first2->second << std::endl;
 			if (!(*first1 == *first2))
 				return false;
 		}
@@ -65,6 +63,17 @@ namespace ft
 		}
 		return true;
 	}
+
+	template<class S>
+	void	_swap(S& a, S& b)
+	{
+		S	aux;
+		
+		aux = a;
+		a = b;
+		b = aux;
+	}
+
 } //end namespace ft
 
 #endif

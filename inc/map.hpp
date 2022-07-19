@@ -195,31 +195,15 @@ namespace ft
 				}
 			}
 
-			void swap(map& other)
-			{
-				(void)other;
-			}
-
 			void	clear()
 			{
 				this->erase(this->begin(), this->end());
 			}
 
 			template<typename value_type, typename pair_compare, typename alloc_type>
-			void	swap(map& other)
+			void	swap(map<value_type, pair_compare, alloc_type>& other)
 			{
-				map<value_type, pair_compare, alloc_type>	aux;
-
-				aux = other;
-				other = *this;
-				*this = aux;
-				/*aux.insert(other.begin(), other.end());
-				other.clear();
-				other.insert(this->begin(), this->end());
-				this->clear();
-				this->insert(aux.begin(), aux.end());
-				aux.clear();
-				*/
+				this->_btree.swap(other._btree);
 			}
 		
 //===============================
