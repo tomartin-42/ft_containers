@@ -30,24 +30,19 @@
 
 int		main(void)
 {
-	ft::map<int, int>	mapa;
+	ft::map<int, int>					mapa;
+	ft::map<int, int>::reverse_iterator	it;
 
-	for(int i = 0; i < 20; i++) 
-	{
-		mapa[i] = i*10;
-		std::cout << mapa[i] << std::endl;
-	}
-	mapa.print();
-	ft::map<int, int>::iterator ita, itb;
 
-	ita = mapa.begin();
-	itb = mapa.end();
-
-	mapa.erase(ita, itb);
-/*
 	for(int i = 0; i < 10; i++)
 		mapa.insert(ft::make_pair(i, i * 10));
+//	it = mapa.rbegin();
+//	std::cout << it->first << std::endl;
+//	it++;
+//	std::cout << it->first << std::endl;
 
+
+/*
 	ft::map<int, int>::iterator	itb, ite;
 	itb = mapa.begin();
 	ite = mapa.end();

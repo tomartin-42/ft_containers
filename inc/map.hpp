@@ -102,13 +102,13 @@ namespace ft
 
 			const_iterator end() const {return this->_btree.end();}
 
-			reverse_iterator	rbegin() {return (this->end());}
+			reverse_iterator	rbegin() {return (this->_btree.rend());}
 
-			const_reverse_iterator	rbegin() const {return (this->end());}
+			const_reverse_iterator	rbegin() const {return (this->_btree.rend());}
 
-			reverse_iterator	rend() {return (this->begin());}
+			reverse_iterator	rend() {return (this->_btree.rbegin());}
 
-			const_reverse_iterator	rend() const {return (this->begin());}
+			const_reverse_iterator	rend() const {return (this->btree.rbegin());}
 
 //==============================
 //capacity
