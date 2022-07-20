@@ -231,39 +231,42 @@ namespace ft
 
 			iterator lower_bound (const key_type& k)
 			{
-				iterator it = this->find(k);
-
-				if(it != this->end())
-					return --it;
-				return it;
-
+				for(iterator it = this->begin(); it != this->end(); ++it)
+				{
+					if(!_comp(it->first, k))
+						return it;
+				}
+				return this->end();
 			}
 
 			const_iterator lower_bound (const key_type& k) const
 			{
-				const_iterator it = this->find(k);
-
-				if(it != this->end())
-					return --it;
-				return it;
+				for(const_iterator it = this->begin(); it != this->end(); ++it)
+				{
+					if(!_comp(it->first, k))
+						return it;
+				}
+				return this->end();
 			}
 
 			iterator upper_bound (const key_type& k)
 			{
-				iterator it = this->find(k);
-
-				if(it != this->end())
-					return ++it;
-				return it;
+				for(iterator it = this->begin(); it != this->end(); ++it)
+				{
+					if(_comp(k, it->first))
+						return it;
+				}
+				return this->end();
 			}
 
 			const_iterator upper_bound (const key_type& k) const
 			{
-				const_iterator it = this->find(k);
-
-				if(it != this->end())
-					return ++it;
-				return it;
+				for(const_iterator it = this->begin(); it != this->end(); ++it)
+				{
+					if(_comp(k, it->first))
+						return it;
+				}
+				return this->end();
 			}
 
 			size_type count(const key_type& key) const
@@ -275,20 +278,12 @@ namespace ft
 
 			ft::pair<iterator, iterator>	equal_range(const key_type& k)
 			{
-				iterator itf, itl;
-
-				itf = this->find(k);
-				itl = itf;
-				return	ft::make_pair<iterator, iterator>(itf, itl);
+				return	ft::make_pair(this->lower_bound(k), this->upper_bound(k));
 			}
 
 			ft::pair<const_iterator, const_iterator>	equal_range (const key_type& k) const
 			{
-				const_iterator itf, itl;
-
-				itf = this->find(k);
-				itl = itf;
-				return	ft::make_pair<const_iterator, const_iterator>(itf, itl);
+				return	ft::make_pair(lower_bound(k), upper_bound(k));
 			}
 //===============================
 //allocator

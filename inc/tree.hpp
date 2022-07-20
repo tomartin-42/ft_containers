@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/20 08:23:53 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/20 09:51:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -385,35 +385,27 @@ namespace ft
 //Iterators
 //==========================
 			iterator		begin() {
-	//		std::cout << "HOLA1\n";
 				return iterator(this->minimum(this->_root));}
 
 			const_iterator	begin() const {
-	//			std::cout << "HOLA2\n";
 				return const_iterator(this->minimum(this->_root));}
 
 			iterator		end() {
-	//			std::cout << "HOLA3\n";
 				return iterator(maximum(this->_root)->left);}
 			
 			const_iterator	end() const {
-	//			std::cout << "HOLA4\n";
 				return const_iterator(maximum(this->_root)->left);}
 
 			iterator		rbegin() {
-	//			std::cout << "HOLA5\n";
 				return this->end();}
 
 			const_iterator	rbegin() const {
-	//			std::cout << "HOLA6\n";
 				return this->end();}
 
 			iterator		rend() {
-	//			std::cout << "HOLA7\n";
 				return this->begin();}
 
 			const_iterator	rend() const {
-	//			std::cout << "HOLA8\n";
 				return this->begin();}
 
 //==========================
