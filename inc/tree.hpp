@@ -562,9 +562,9 @@ namespace ft
 
 				while(is_no_nill(aux))
 				{
-					if(this->_comp(val, *(aux->get_data())))
+					if(this->_comp(val, (aux->get_data())))
 						aux = aux->right;
-					else if(this->_comp(*(aux->get_data()), val))
+					else if(this->_comp((aux->get_data()), val))
 						aux = aux->left;
 					else
 						return aux;

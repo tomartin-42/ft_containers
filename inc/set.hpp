@@ -27,10 +27,10 @@ namespace ft
 			typedef typename alloc_type::size_type							size_type;
 			typedef typename alloc_type::difference_type					difference_type;
 			typedef typename ft::tree<value_type, v_compare, alloc_type>	rb_tree;
-			typedef typename rb_tree::iterator								iterator;
-			typedef typename rb_tree::const_iterator						const_iterator;
-			typedef typename rb_tree::reverse_iterator						reverse_iterator;
-			typedef typename rb_tree::const_reverse_iterator				const_reverse_iterator;
+			typedef typename ft::tree_iterator<value_type>					iterator;
+			typedef typename ft::const_tree_iterator<value_type>			const_iterator;
+			typedef typename ft::reverse_iterator<iterator>							reverse_iterator;
+			typedef typename ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
 				//***************************************************//
 		private:
@@ -42,25 +42,26 @@ namespace ft
 //********************************************constructors************************************************//
 		public:
 			explicit set(const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type()) 
-				: _alloc(alloc_t), _btree(rb_tree(comp_t, alloc_t)), _comp(comp_t) {}
+				: _alloc(alloc_t), _btree(rb_tree(comp_t, alloc_t)) {}
 
 			template<class InputIterator>			
 			set(InputIterator first, InputIterator last, 
 				const v_compare& comp_t = v_compare(), const alloc_type& alloc_t = alloc_type())
-				: _alloc(alloc_t), _btree(comp_t, alloc_t), _comp(comp_t)
+				: _alloc(alloc_t), _btree(comp_t), _comp(comp_t)
 				{
-					while(first != last)
-					{
-						this->_btree.insert(*first);
-						first++;
-					}
+					//while(first != last)
+					//{
+						this->insert(first, last);
+					//	first++;
+					//}
 				}
 				
 			
 			set(const set& other)
-				: _alloc(other._alloc), _btree(other._comp, other._alloc), _comp(other._comp)
+				//: _alloc(other._alloc), _btree(other._comp, other._alloc)
 			{
-				this->insert(other.begin(), other.end());
+				//this->insert(other.begin(), other.end());
+				*this = other;
 			}
 
 			set& operator= (const set& x)
@@ -84,13 +85,13 @@ namespace ft
 
 			const_iterator end() const {return this->_btree.end();}
 
-			reverse_iterator	rbegin() {return (this->_btree.rbegin());}
+			reverse_iterator	rbegin() {return (this->end());}
 
-			const_reverse_iterator	rbegin() const {return (this->_btree.rbegin());}
+			const_reverse_iterator	rbegin() const {return (this->end());}
 
-			reverse_iterator	rend() {return (this->_btree.rend());}
+			reverse_iterator	rend() {return (this->begin());}
 
-			const_reverse_iterator	rend() const {return (this->btree.rend());}
+			const_reverse_iterator	rend() const {return (this->begin());}
 
 //==============================
 //capacity
@@ -207,7 +208,7 @@ namespace ft
 			{
 				for(iterator it = this->begin(); it != this->end(); ++it)
 				{
-					if(!_comp(it->first, k))
+					if(!_comp(*it, k))
 						return it;
 				}
 				return this->end();
@@ -217,7 +218,7 @@ namespace ft
 			{
 				for(const_iterator it = this->begin(); it != this->end(); ++it)
 				{
-					if(!_comp(it->first, k))
+					if(!_comp(*it, k))
 						return it;
 				}
 				return this->end();
@@ -227,7 +228,7 @@ namespace ft
 			{
 				for(iterator it = this->begin(); it != this->end(); ++it)
 				{
-					if(_comp(k, it->first))
+					if(_comp(k, *it))
 						return it;
 				}
 				return this->end();
@@ -237,7 +238,7 @@ namespace ft
 			{
 				for(const_iterator it = this->begin(); it != this->end(); ++it)
 				{
-					if(_comp(k, it->first))
+					if(_comp(k, *it))
 						return it;
 				}
 				return this->end();
