@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/14 09:42:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/20 08:58:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ namespace ft
 			
 			template<class I>	
 			const_tree_iterator(const tree_iterator<I>& other)
-				: _ptr(other.get_ptr()) {}
+				: _ptr(other._ptr) {}
 
 			template <class Iter>
 			const_tree_iterator& operator = (const Iter other)
@@ -56,7 +56,7 @@ namespace ft
 				return *this;
 			}
 
-			const_tree_iterator	base() const {return this->_ptr->get_data();}
+			//const_tree_iterator	base() const {return this->_ptr->get_data();}
 
 			node_pointer get_ptr() const {return this->_ptr;}
 			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
@@ -69,8 +69,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left->get_nill() != true)
-					aux = aux->left;
+				while(aux->right->get_nill() != true)
+					aux = aux->right;
 				return aux;
 			}
 
@@ -78,8 +78,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->right->get_nill() != true)
-					aux = aux->right;
+				while(aux->left->get_nill() != true)
+					aux = aux->left;
 				return aux;
 			}
 //==========================
@@ -92,93 +92,63 @@ namespace ft
 
 			const_tree_iterator& operator ++ ()
 			{
-    			if (this->_ptr->left->get_nill() != true)
-      			{
-       				this->_ptr = this->_ptr->left;
-
-       				while (this->_ptr->right->get_nill() != true)
-       					this->_ptr = this->_ptr->right;
-   				}
-   				else
-   				{
-       				node_pointer p = this->_ptr->prev;
-       				while (p->get_nill() != true && this->_ptr == p->left)
-       				{
-          				this->_ptr = p;
-           				p = p->prev;
-       				}
-       				this->_ptr = p;
+				if(this->_ptr->get_nill() == true)
+				{
+					this->_ptr = this->_ptr->right;
+					return *this;
 				}
-  				return *this;
+				if(this->_ptr->left->get_nill() != true)
+				{
+					this->_ptr = minimum(this->_ptr->left);
+					return *this;
+				}
+
+				node_pointer y = this->_ptr->prev;
+				while(y->get_nill() != true && this->_ptr == y->left)
+				{
+					this->_ptr = y;
+					y = y->prev;
+				}
+				this->_ptr = y;
+				return *this;
 			}
 
 			const_tree_iterator operator ++ (int)
 			{
 				const_tree_iterator	tmp = *this;
 
-    			if (this->_ptr->left->get_nill() != true)
-      			{
-       				this->_ptr = this->_ptr->left;
-
-       				while (this->_ptr->right->get_nill() != true)
-       					this->_ptr = this->_ptr->right;
-   				}
-   				else
-   				{
-       				node_pointer p = this->_ptr->prev;
-       				while (p->get_nill() != true && this->_ptr == p->left)
-       				{
-          				this->_ptr = p;
-           				p = p->prev;
-       				}
-       				this->_ptr = p;
-				}
+				this->operator ++ ();
 				return tmp;
 			}
 
 			const_tree_iterator& operator -- ()
 			{
-    			if (this->_ptr->right->get_nill() != true)
-      			{
-       				this->_ptr = this->_ptr->right;
-
-       				while (this->_ptr->left->get_nill() != true)
-       					this->_ptr = this->_ptr->left;
-   				}
-   				else
-   				{
-       				node_pointer p = this->_ptr->prev;
-       				while (p->get_nill() != true && this->_ptr == p->right)
-       				{
-          				this->_ptr = p;
-           				p = p->prev;
-       				}
-       				this->_ptr = p;
+				if(this->_ptr->get_nill() == true)
+				{
+					this->_ptr = this->_ptr->left;
+					return *this;
 				}
-  				return *this;
+				if(this->_ptr->right->get_nill() != true)
+				{
+					this->_ptr = maximum(this->_ptr->right);
+					return *this;
+				}
+
+				node_pointer y = this->_ptr->prev;
+				while(y->get_nill() != true && this->_ptr == y->right)
+				{
+					this->_ptr = y;
+					y = y->prev;
+				}
+				this->_ptr = y;
+				return *this;
 			}
 
 			const_tree_iterator operator -- (int)
 			{
 				const_tree_iterator	tmp = *this;
 
-    			if (this->_ptr->right->get_nill() != true)
-      			{
-       				this->_ptr = this->_ptr->right;
-
-       				while (this->_ptr->left->get_nill() != true)
-       					this->_ptr = this->_ptr->left;
-   				}
-   				else
-   				{
-       				node_pointer p = this->_ptr->prev;
-       				while (p->get_nill() != true && this->_ptr == p->right)
-       				{
-          				this->_ptr = p;
-           				p = p->prev;
-       				}
-       				this->_ptr = p;
-				}
+				this->operator -- ();
 				return tmp;
 			}
 
