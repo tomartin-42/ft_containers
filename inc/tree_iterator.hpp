@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/18 07:48:21 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/20 08:19:27 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,30 +106,6 @@ namespace ft
 				}
 				this->_ptr = y;
 				return *this;
-				/*
-				if(this->_ptr->get_nill() == true)
-				{
-					this->_ptr = this->_ptr->right;
-					return *this;
-				}
-    			if (this->_ptr->left->get_nill() != true)
-      			{
-       				this->_ptr = this->_ptr->left;
-
-       				while (this->_ptr->right->get_nill() != true)
-       					this->_ptr = this->_ptr->right;
-   				}
-   				else
-   				{
-       				node_pointer p = this->_ptr->prev;
-       				while (p->get_nill() != true && this->_ptr == p->left)
-       				{
-          				this->_ptr = p;
-           				p = p->prev;
-       				}
-       				this->_ptr = p;
-				}
-  				return *this;*/
 			}
 
 			tree_iterator operator ++ (int)
@@ -163,29 +139,6 @@ namespace ft
 				return *this;
 			}
 
-/*			tree_iterator& operator -- ()
-			{
-    			if (this->_ptr->right->get_nill() != true)
-      			{
-       				this->_ptr = this->_ptr->right;
-
-       				while (this->_ptr->left->get_nill() != true)
-       					this->_ptr = this->_ptr->left;
-   				}
-   				else
-   				{
-       				node_pointer p = this->_ptr->prev;
-       				while (p->get_nill() != true && this->_ptr == p->right)
-       				{
-          				this->_ptr = p;
-           				p = p->prev;
-       				}
-       				this->_ptr = p;
-				}
-  				return *this;
-			}
-*/
-
 			tree_iterator operator -- (int)
 			{
 				tree_iterator	tmp = *this;
@@ -194,30 +147,6 @@ namespace ft
 				return tmp;
 			}
 
-/*			tree_iterator operator -- (int)
-			{
-				tree_iterator	tmp = *this;
-
-    			if (this->_ptr->right->get_nill() != true)
-      			{
-       				this->_ptr = this->_ptr->right;
-
-       				while (this->_ptr->left->get_nill() != true)
-       					this->_ptr = this->_ptr->left;
-   				}
-   				else
-   				{
-       				node_pointer p = this->_ptr->prev;
-       				while (p->get_nill() != true && this->_ptr == p->right)
-       				{
-          				this->_ptr = p;
-           				p = p->prev;
-       				}
-       				this->_ptr = p;
-				}
-				return tmp;
-			}
-*/
 			bool	operator == (tree_iterator &b) 
 			{
 				return this->get_ptr() == b.get_ptr();

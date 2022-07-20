@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/18 08:52:03 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/20 08:10:44 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ namespace ft
 			typedef typename alloc_type::const_pointer								const_pointer;
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
-			typedef typename ft::tree_iterator<value_type>								iterator;
+			typedef typename ft::tree_iterator<value_type>							iterator;
 			typedef typename ft::const_tree_iterator<value_type>				const_iterator;
-			typedef ft::reverse_iterator<iterator>								reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
+			typedef ft::reverse_iterator<iterator>									reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>							const_reverse_iterator;
 
 		private:
 			alloc_type		_alloc_val;
@@ -385,37 +385,36 @@ namespace ft
 //Iterators
 //==========================
 			iterator		begin() {
-		//		std::cout << "HOLA1\n";
+	//		std::cout << "HOLA1\n";
 				return iterator(this->minimum(this->_root));}
 
-
 			const_iterator	begin() const {
-		//		std::cout << "HOLA2\n";
+	//			std::cout << "HOLA2\n";
 				return const_iterator(this->minimum(this->_root));}
 
 			iterator		end() {
-		//		std::cout << "HOLA3\n";
+	//			std::cout << "HOLA3\n";
 				return iterator(maximum(this->_root)->left);}
 			
 			const_iterator	end() const {
-		//		std::cout << "HOLA4\n";
+	//			std::cout << "HOLA4\n";
 				return const_iterator(maximum(this->_root)->left);}
 
 			iterator		rbegin() {
-				std::cout << "HOLA5\n";
-				return iterator(this->maximum(this->_root));}
+	//			std::cout << "HOLA5\n";
+				return iterator(this->_nill);}
 
 			const_iterator	rbegin() const {
-				std::cout << "HOLA6\n";
-				return const_iterator(this->maximum(this->_root));}
+	//			std::cout << "HOLA6\n";
+				return const_iterator(this->_nill);}
 
 			iterator		rend() {
-				std::cout << "HOLA7\n";
-				return ++(iterator(this->_nill->left));}
+	//			std::cout << "HOLA7\n";
+				return (iterator(this->_nill->left));}
 
 			const_iterator	rend() const {
-				std::cout << "HOLA8\n";
-				return ++(const_iterator(this->_nill->left));}
+	//			std::cout << "HOLA8\n";
+				return (const_iterator(this->_nill->left));}
 
 //==========================
 //Capacity
