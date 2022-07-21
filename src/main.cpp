@@ -19,6 +19,7 @@
 #include "pair.hpp"
 #include "tree_iterator.hpp"
 #include "random_access_iterator.hpp"
+#include "set.hpp"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -30,14 +31,19 @@
 
 int		main(void)
 {
-	ft::map<int, int>					mapa;
-	ft::map<int, int>::reverse_iterator	it;
+	ft::set<int>					mapa;
+	ft::set<int>::iterator			it, it2;
 
 
 	for(int i = 0; i < 10; i++)
-		mapa.insert(ft::make_pair(i, i * 10));
-//	it = mapa.rbegin();
-//	std::cout << it->first << std::endl;
+		mapa.insert(i);
+	it = mapa.begin();
+	it2 = mapa.end();
+	ft::set<int> mapb(it, it2);
+	it = mapb.begin();
+	std::cout << *it << std::endl;
+	it++;
+	std::cout << *it << std::endl;
 //	it++;
 //	std::cout << it->first << std::endl;
 
