@@ -19,8 +19,6 @@ WHT = \033[0;37m
 ORG = \033[38;5;202m
 
 RESET = \033[0m                        
-# SO
-UNAME := $(shell uname)
 
 # Name of the program
 NAME = ft_container 
@@ -34,32 +32,14 @@ LDFLAGS = -fsanitize=address
 # Folders
 OBJ_DIR = obj/
 SRC_DIR = src/
-#STACK_DIR = stack/
-#VECTOR_DIR = vector/
 
 # Source files and includes
 SRC_FILES = main.cpp
-#STACK_FILES = stack.cpp
-#VECTOR_FILES = 
 
 # Objs
-SRC = 	$(addprefix $(SRC_DIR), $(SRC_FILES))	
-#			$(addprefix $(STACK_DIR), $(STACK_FILES)) \
-#		)
+SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))	
 OBJ = $(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.cpp=.o))
 DEP = $(OBJ:.o=.d)
-
-#OBJ_FILES = $(SRC_FILES:.cpp=.o)
-#OBJ_FILES := $(STACK_FILES:.cpp=.o)
-	
-#OBJ_FILES := $(VECTOR_FILES:.cpp=.o)
-
-# Paths
-#OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
-#SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-
-#STACK = $(addprefix $(STACK_DIR), $(STACK_FILES))
-#VECTOR = $(addprefix $(VECTOR_DIR), $(VECTOR_FILES))
 
 # all rule
 all: obj $(NAME) 
@@ -77,10 +57,6 @@ obj:
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp 
 	mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
-#$(OBJ_DIR)%.o: $(STACK_DIR)%.cpp 
-#	@$(CXX) $(CXXFLAGS) -o $@ -c $<
-#$(OBJ_DIR)%.o: $(VECTOR_DIR)%.cpp 
-#	@$(CXX) -MD -o $@ -c $<
 
 # Compiling
 $(NAME): $(OBJ)
@@ -101,8 +77,8 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "$(NAME) removed!"
 
- # re rule
+# re rule
  re: fclean all
 
- # phony
+# phony
  .PHONY: all clean fclean re

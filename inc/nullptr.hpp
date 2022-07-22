@@ -30,7 +30,7 @@ namespace ft
 			{
 				return (0);
 			}
-	
+
 		private:
 			void operator & () const;
 	
