@@ -120,13 +120,10 @@ namespace ft
 			}
 
 //destructor==================================
-			virtual ~vector ()
-			{
-			//	this->_alloc.deallocate(this->_start, ft::dist (this->_start, this->_end_capacity) + 1);
-			}
+			virtual ~vector () {}
 
-//************************************************************************************************************//	
-//*****************************************member fuctions****************************************************//	
+//********************************************************************************************************//	
+//*****************************************member fuctions************************************************//	
 			
 //==========================
 //Aux functions
@@ -224,7 +221,6 @@ namespace ft
 					this->_end = this->_start;
 					this->_end_capacity = this->_end;
 				}
-			//	if(static_cast<unsigned long>(this->capacity()) < n)
 				if(static_cast<size_type>(this->capacity()) < n)
 				{
 					_alloc.allocate(n - this->capacity(), (this->_end_capacity + 1));

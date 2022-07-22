@@ -48,7 +48,6 @@ namespace ft
 			typedef typename rb_tree::const_iterator						const_iterator;
 			typedef typename rb_tree::const_reverse_iterator						reverse_iterator;
 			typedef typename rb_tree::const_reverse_iterator				const_reverse_iterator;
-		//	typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 				//***************************************************//
 		private:
@@ -88,25 +87,23 @@ namespace ft
 				return *this;
 			}
 
+			//---------------destructor
+			~set() {}
+
 //********************************************************************************************************//
 //*************************************member fuctions****************************************************//
 
 //==============================
 //iterators
 //==============================
-			//iterator	begin() {return this->_btree.begin();}
-
 			const_iterator begin() const {return this->_btree.begin();}
 
-			//iterator	end() {return this->_btree.end();}
 
 			const_iterator end() const {return this->_btree.end();}
 
-			//reverse_iterator	rbegin() {return (this->_btree.rbegin());}
 
 			const_reverse_iterator	rbegin() const {return (this->_btree.rbegin());}
 
-			//reverse_iterator	rend() {return (this->_btree.rend());}
 
 			const_reverse_iterator	rend() const {return (this->_btree.rend());}
 
@@ -136,10 +133,7 @@ namespace ft
 				iterator it = this->find(val);
 
 				if(it != this->end())
-				{
-					//std::cout << "FAIL!!!!!!!->>>>>> " << val << " IT= " << val << std::endl;
 					return (ft::make_pair(it, false));
-				}
 				this->_btree.insert(val);
 				it = this->find(val);
 				return ft::make_pair(it, true);
@@ -288,7 +282,7 @@ namespace ft
 //===============================
 //debug
 //===============================
-			void print() {this->_btree.printBT();}
+		//	void print() {this->_btree.printBT();}
 	}; //end set class
 
 //=======================================

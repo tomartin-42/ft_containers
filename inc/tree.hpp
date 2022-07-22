@@ -63,7 +63,6 @@ namespace ft
 			_alloc_val(alloc_t), _alloc_node(alloc_node()), _size(0), _comp(comp_t) 
 			{
 				this->_nill = alloc_node().allocate(1);
-				//alloc_node().construct(this->_nill, node());
 				this->_nill->prev = this->_nill;
 				this->_nill->left = this->_nill;
 				this->_nill->right = this->_nill;
@@ -79,15 +78,11 @@ namespace ft
 				*this = other;
 			}
 
-			~tree()
-			{
-			}
-
+			~tree() {}
 
 //==========================
 //Aux functions
 //==========================
-
 		protected:
 			bool is_nill(node_pointer& check) const
 			{
@@ -189,7 +184,7 @@ namespace ft
  				if(y->left != this->_nill)
   					y->left->prev = x;
   				y->prev = x->prev;
- 				if(x->prev == this->_nill) 	//x is root
+ 				if(x->prev == this->_nill)		//x is root
   					this->_root = y;
 				else if(x == x->prev->left)		// x is left child
 					x->prev->left = y;
@@ -208,7 +203,7 @@ namespace ft
  				if(y->right != this->_nill)
   					y->right->prev = x;
   				y->prev = x->prev;
- 				if(x->prev == this->_nill) 	//x is root
+ 				if(x->prev == this->_nill)		//x is root
   					this->_root = y;
 				else if(x == x->prev->right)	// x is right child
 					x->prev->right = y;
@@ -431,11 +426,6 @@ namespace ft
 		}
 
 //==========================
-//Operations
-//==========================
-
-
-//==========================
 //Modifiers
 //==========================
 			value_type insert(const value_type& nod)
@@ -445,13 +435,12 @@ namespace ft
 				node_pointer p_node = this->_alloc_node.allocate(1);
 
 				this->_alloc_node.construct(p_node, ft::node<T>(nod, _nill));
-				if(this->_size == 0)							//When new node is root
+				if(this->_size == 0) //When the tree in empty new node is root
 				{
 					this->_root = p_node;
 					this->assig_to_nill(this->_root);
 					this->_nill->set_prev(p_node);
 					this->_size += 1;
-			    //	p_node->black = true;
 			    	insert_fix(p_node);
 					return (p_node->get_data());
 				}
@@ -471,10 +460,6 @@ namespace ft
 					y->right = p_node;
 				else
 					y->left = p_node;
-
-				//if (p_node->prev->prev == this->_nill)
-				//	return (p_node->get_data());
-
 				this->_root->black = true;
 			    insert_fix(p_node);
 				this->_size += 1;
@@ -482,16 +467,6 @@ namespace ft
 				return (p_node->get_data());
 			}
 
-	/*		void	insert(iterator first,	iterator last)
-			{
-				while(first != last)
-				{
-					this->insert(*first);
-					//std::cout << &first << std::endl;
-					first++;
-				}
-			}
-*/
 			size_type	erase(const value_type& val)
 			{
 				node_pointer	d_node(this->_find(val));
@@ -547,8 +522,6 @@ namespace ft
 				std::swap(this->_nill->left, other._nill->left);
 				std::swap(this->_nill, other._nill);
 				std::swap(this->_size, other._size);
-			//	std::swap(this->_alloc_val, other._alloc_val);
-			//	std::swap(this->_alloc_node, other._alloc_node);
 				std::swap(this->_comp, other._comp);
 			}
 
@@ -569,7 +542,6 @@ namespace ft
 					else
 						return iterator(aux);
 				}
-				//return this->_nill;
 				return this->end();
 			}
 
@@ -586,7 +558,6 @@ namespace ft
 					else
 						return const_iterator(aux);
 				}
-				//return this->_nill;
 				return this->end();
 			}
 
@@ -622,7 +593,10 @@ namespace ft
 				}
 				return this->_nill;
 			}
-
+//=============================
+//To debug
+//=============================
+/*
 			public:
 			void printBT(const std::string& prefix, const node_pointer node, bool isLeft)
 			{
@@ -649,7 +623,7 @@ namespace ft
 			{
 				printBT(this->_root);
 			}
-
+*/
 	};//end tree class
 }//end ft namespace
 

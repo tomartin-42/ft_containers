@@ -34,10 +34,10 @@ namespace ft
 		private:
 			iterator	_ptr;
 	
-		public:
 //==========================
 //constructors
 //==========================
+		public:
 			reverse_iterator() : _ptr(ft::nullptr_t) {}
 			reverse_iterator(pointer ptr) : _ptr(ptr) {}
 			reverse_iterator(iterator it) : _ptr(it) {}
@@ -53,9 +53,10 @@ namespace ft
 				return *this;
 			}
 
-			//~reverse_iterator() {}
-
 			iterator base() const {return this->_ptr;}
+
+			//---------------------------destructor
+			~reverse_iterator() {}
 
 //==========================
 //operators
@@ -108,15 +109,11 @@ namespace ft
 			reverse_iterator	operator + (difference_type i) const
 			{
 				return(this->_ptr - i);
-				//reverse_iterator	aux(this->_ptr - i);
-				//return aux;
 			}
 
 			reverse_iterator	operator - (difference_type i) const
 			{
 				return(this->_ptr + i);
-				//reverse_iterator	aux(this->_ptr + i);
-				//return aux;
 			}
 
 			reverse_iterator&	operator += (difference_type i)

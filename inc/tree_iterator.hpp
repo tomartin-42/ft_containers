@@ -50,11 +50,8 @@ namespace ft
 				return *this;
 			}
 
-			//tree_iterator	base() const {return this->_ptr->get_data();}
-
 			node_pointer get_ptr() const {return this->_ptr;}
-			//copy asignable constuctor+++++++++++++++++++++++++++++++++++
-			//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 //==========================
 //Aux fuctions			
 //==========================
@@ -168,10 +165,6 @@ namespace ft
 			}
 
 	};//end tree_iterator class
-
-//===================================
-//No member functions
-//===================================
 
 } //end namespace ft
 

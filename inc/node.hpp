@@ -25,10 +25,11 @@ namespace ft
 
 		node(const T val) : data(val), nill(false) {}
 
-		~node() {}
-
 		node(const T& _data, node* _nill) 
 		: data(_data), left(_nill), right(_nill), prev(_nill), nill(false), black(false) {}
+
+		//-------------------------destructor
+		~node() {}
 
 		node(node const& other) : data(other.data)
 		{
@@ -74,7 +75,10 @@ namespace ft
 		{
 			return this->black;
 		}
-		
+//==========================
+//debug
+//==========================
+/*
 		void	print_pointer()
 		{
 			std::cout << "NODE========================" << std::endl;
@@ -112,6 +116,7 @@ namespace ft
 			std::cout << "LEFT= " << p->left << std::endl;
 			std::cout << "RIGHT= " << p->right << std::endl;
 		}
+*/
 	}; //End node class
 
 } //end namespace ft

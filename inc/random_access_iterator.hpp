@@ -28,16 +28,14 @@ namespace ft
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::difference_type		difference_type;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::pointer				pointer;
 			typedef typename ft::Iter<ft::random_access_iterator_tag, T>::reference				reference;
-			//typedef T*		pointer;
-			//typedef T&		reference;
 
 		private:
 			pointer	_ptr;
 	
-		public:
 //==========================
 //constructors
 //==========================
+		public:
 			random_access_iterator() : _ptr(ft::nullptr_t) {}
 			random_access_iterator(pointer ptr) : _ptr(ptr) {}
 
@@ -53,7 +51,8 @@ namespace ft
 				_ptr = other.base();
 				return *this;
 			}
-
+			
+			//-----------------------destructor
 			~random_access_iterator() {}
 
 			pointer base() const {return this->_ptr;}

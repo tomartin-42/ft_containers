@@ -1,3 +1,7 @@
+#ifndef _MAP_HPP_
+# define _MAP_HPP_
+
+
 #include <memory> // to allocate
 #include <iostream>
 #include <functional>
@@ -48,7 +52,6 @@ namespace ft
 			typedef typename rb_tree::const_iterator						const_iterator;
 			typedef typename rb_tree::reverse_iterator						reverse_iterator;
 			typedef typename rb_tree::const_reverse_iterator				const_reverse_iterator;
-		//	typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
 				//***************************************************//
 		private:
@@ -73,7 +76,6 @@ namespace ft
 						first++;
 					}
 				}
-				
 			
 			map(const map& other)
 				: _alloc(other._alloc), _btree(other._comp, other._alloc), _comp(other._comp)
@@ -293,7 +295,7 @@ namespace ft
 //===============================
 //debug
 //===============================
-			void print() {this->_btree.printBT();}
+		//	void print() {this->_btree.printBT();}
 	}; //end map class
 
 //=======================================
@@ -356,4 +358,5 @@ namespace ft
 	}
 }//end namespace ft
 
+#endif
 	
