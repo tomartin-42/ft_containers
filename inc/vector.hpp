@@ -119,10 +119,10 @@ namespace ft
 			}
 
 //destructor==================================
-			virtual ~vector () 
+			virtual	~vector () 
 			{
-				this->clear();
-				this->_alloc.deallocate(this->_start, this->remained_space());
+		//		this->clear();
+		//		this->_alloc.deallocate(this->_start, this->remained_space());
 			}
 
 //********************************************************************************************************//	

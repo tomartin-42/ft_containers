@@ -118,6 +118,11 @@ namespace ft
 			}
 				
 		public:
+			void	kill_nill()
+			{
+				this->_alloc_node.deallocate(this->_nill, 1);
+			}
+
 			node_pointer get_nill() {return this->_nill;}
 
 			node_pointer minimum(const node_pointer& n) const

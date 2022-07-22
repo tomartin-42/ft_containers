@@ -43,7 +43,13 @@ int		main(void)
 	vita++;
 	vitb++;
 	std::cout << *vita << " - " << *vitb << std::endl;
-	va.clear();
-	vb.clear();
+//	va.clear();
+//	vb.clear();
+
+	NS::map<int, int>	mapa;
+
+	mapa[1] = 100;
+	mapa[2] = 200;
+	mapa[3] = 300;
 }
 

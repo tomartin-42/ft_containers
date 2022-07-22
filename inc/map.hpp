@@ -83,6 +83,12 @@ namespace ft
 				this->insert(other.begin(), other.end());
 			}
 
+			~map()
+			{
+				this->clear();
+				this->_btree.kill_nill();
+			}
+
 			map& operator= (const map& x)
 			{
 				this->clear();
