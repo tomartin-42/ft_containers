@@ -108,7 +108,7 @@ namespace ft
 
 			reverse_iterator	rend() {return (this->_btree.rend());}
 
-			const_reverse_iterator	rend() const {return (this->btree.rend());}
+			const_reverse_iterator	rend() const {return (this->_btree.rend());}
 
 //==============================
 //capacity

@@ -11,7 +11,7 @@
 namespace ft
 {
 	template<class Key, class Compare = std::less<Key>, 
-		class Alloc = std::allocator<Key> >
+		class Alloc = std::allocator<const Key> >
 	class set
 	{
 		public:
@@ -44,9 +44,9 @@ namespace ft
 		public:
 			typedef pair_compare											val_comp;
 			typedef typename ft::tree<value_type, pair_compare, alloc_type>	rb_tree;
-			typedef typename rb_tree::iterator								iterator;
+			typedef typename rb_tree::const_iterator								iterator;
 			typedef typename rb_tree::const_iterator						const_iterator;
-			typedef typename rb_tree::reverse_iterator						reverse_iterator;
+			typedef typename rb_tree::const_reverse_iterator						reverse_iterator;
 			typedef typename rb_tree::const_reverse_iterator				const_reverse_iterator;
 		//	typedef typename alloc_type::template rebind<value_type>::other	pair_alloc_type;
 
@@ -94,21 +94,21 @@ namespace ft
 //==============================
 //iterators
 //==============================
-			iterator	begin() {return this->_btree.begin();}
+			//iterator	begin() {return this->_btree.begin();}
 
 			const_iterator begin() const {return this->_btree.begin();}
 
-			iterator	end() {return this->_btree.end();}
+			//iterator	end() {return this->_btree.end();}
 
 			const_iterator end() const {return this->_btree.end();}
 
-			reverse_iterator	rbegin() {return (this->_btree.rbegin());}
+			//reverse_iterator	rbegin() {return (this->_btree.rbegin());}
 
 			const_reverse_iterator	rbegin() const {return (this->_btree.rbegin());}
 
-			reverse_iterator	rend() {return (this->_btree.rend());}
+			//reverse_iterator	rend() {return (this->_btree.rend());}
 
-			const_reverse_iterator	rend() const {return (this->btree.rend());}
+			const_reverse_iterator	rend() const {return (this->_btree.rend());}
 
 //==============================
 //capacity
@@ -136,7 +136,10 @@ namespace ft
 				iterator it = this->find(val);
 
 				if(*it == val)
+				{
+					std::cout << "FAIL!!!!!!!->>>>>> " << val << " IT= " << val << std::endl;
 					return (ft::make_pair(it, false));
+				}
 				this->_btree.insert(val);
 				it = this->find(val);
 				return ft::make_pair(it, true);
