@@ -50,7 +50,6 @@ namespace ft
 			pointer     						_start;			// where init data //
 			pointer     						_end;			// where init empty data //
 			pointer								_end_capacity;	// where end the prealocate data //
-			//difference_type					_size;			// number of alocate data //
 			size_type							_size;			// number of alocate data //
 
 
@@ -120,7 +119,11 @@ namespace ft
 			}
 
 //destructor==================================
-			virtual ~vector () {}
+			virtual ~vector () 
+			{
+				this->clear();
+				this->_alloc.deallocate(this->_start, this->remained_space());
+			}
 
 //********************************************************************************************************//	
 //*****************************************member fuctions************************************************//	

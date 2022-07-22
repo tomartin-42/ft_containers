@@ -26,9 +26,24 @@
 #include <stack>
 #include <string>
 
+#define NS ft
+
 int		main(void)
 {
 
+	NS::vector<int>				va(10, 100);
+	NS::vector<int>				vb(va);
+	NS::vector<int>::iterator	vita = vb.begin();
+	NS::vector<int>::iterator	vitb (vita);
 
+	std::cout << *vita << " - " << *vitb << std::endl;
+	vb[1] = 20;
+	va[1] = 10;
+	vita = va.begin();
+	vita++;
+	vitb++;
+	std::cout << *vita << " - " << *vitb << std::endl;
+	va.clear();
+	vb.clear();
 }
 
