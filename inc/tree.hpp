@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/20 09:51:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/22 11:33:07 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,7 +440,7 @@ namespace ft
 //==========================
 			value_type insert(const value_type& nod)
 			{
-				if(this->find(nod) != this->_nill)
+				if(this->find(nod) != this->end())
 					return nod;
 				node_pointer p_node = this->_alloc_node.allocate(1);
 
@@ -494,7 +494,7 @@ namespace ft
 */
 			size_type	erase(const value_type& val)
 			{
-				node_pointer	d_node(this->find(val));
+				node_pointer	d_node(this->_find(val));
 				if(d_node == this->_nill)
 					return (0);
 				node_pointer	aux = d_node;
@@ -556,7 +556,7 @@ namespace ft
 //Operations
 //==========================
 
-			node_pointer	find(const value_type& val)
+			iterator	find(const value_type& val)
 			{
 				node_pointer	aux = this->_root;
 
@@ -567,12 +567,13 @@ namespace ft
 					else if(this->_comp((aux->get_data()), val))
 						aux = aux->left;
 					else
-						return aux;
+						return iterator(aux);
 				}
-				return this->_nill;
+				//return this->_nill;
+				return this->end();
 			}
 
-			node_pointer	find(const value_type& val) const
+			const_iterator	find(const value_type& val) const
 			{
 				node_pointer	aux = this->_root;
 				
@@ -583,11 +584,46 @@ namespace ft
 					else if(this->_comp(aux->get_data(), val))
 						aux = aux->left;
 					else
-						return aux;
+						return const_iterator(aux);
+				}
+				//return this->_nill;
+				return this->end();
+			}
+
+			private:
+			node_pointer	_find(const value_type& val)
+			{
+				node_pointer	aux = this->_root;
+
+				while(is_no_nill(aux))
+				{
+					if(this->_comp(val, (aux->get_data())))
+						aux = aux->right;
+					else if(this->_comp((aux->get_data()), val))
+						aux = aux->left;
+					else
+						return (aux);
 				}
 				return this->_nill;
 			}
 
+			const_pointer	_find(const value_type& val) const
+			{
+				node_pointer	aux = this->_root;
+				
+				while(is_no_nill(aux))
+				{
+					if(this->_comp(val, aux->get_data()))
+						aux = aux->right;
+					else if(this->_comp(aux->get_data(), val))
+						aux = aux->left;
+					else
+						return (aux);
+				}
+				return this->_nill;
+			}
+
+			public:
 			void printBT(const std::string& prefix, const node_pointer node, bool isLeft)
 			{
     			if(node != this->_nill)

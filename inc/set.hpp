@@ -110,7 +110,7 @@ namespace ft
 
 			const_reverse_iterator	rend() const {return (this->_btree.rend());}
 
-//==============================
+//==============================/
 //capacity
 //==============================
 			bool	empty() const
@@ -135,9 +135,9 @@ namespace ft
 			{
 				iterator it = this->find(val);
 
-				if(*it == val)
+				if(it != this->end())
 				{
-					std::cout << "FAIL!!!!!!!->>>>>> " << val << " IT= " << val << std::endl;
+					//std::cout << "FAIL!!!!!!!->>>>>> " << val << " IT= " << val << std::endl;
 					return (ft::make_pair(it, false));
 				}
 				this->_btree.insert(val);

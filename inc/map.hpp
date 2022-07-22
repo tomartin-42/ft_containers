@@ -221,12 +221,12 @@ namespace ft
 //===============================
 			iterator	find(const key_type& key)
 			{
-				return iterator(this->_btree.find(ft::make_pair(key, data_type())));
+				return (this->_btree.find(ft::make_pair(key, data_type())));
 			}
 
 			const_iterator	find(const key_type& key) const
 			{
-				return const_iterator(this->_btree.find(ft::make_pair(key, data_type())));
+				return (this->_btree.find(ft::make_pair(key, data_type())));
 			}
 
 			iterator lower_bound (const key_type& k)
