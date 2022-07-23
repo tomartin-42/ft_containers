@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/23 18:46:13 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:17:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,16 @@ int		main(void)
 	b = va.begin() + 3;
 	va.erase(b);
 	print_vector(va);
+	NS::vector<long>	per;
+	for(int i = 0; i < 100000; i++)
+		per.push_back(i * 10);
+	print_vector(per);
+	for(int i = 0; i < 9999; i++)
+		per.pop_back();
+	print_vector(per);
+	per.clear();
+	print_vector(per);
+	
 
 //------------------------MAP--------------------------//
 //	NS::map<int, int>	mapa;
@@ -99,6 +109,8 @@ int		main(void)
 //	mapa[1] = 100;
 //	mapa[2] = 200;
 //	mapa[3] = 300;
+
+//	system("leaks ft_container");
 
 }
 

@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2022/07/23 18:36:24 by tomartin         ###   ########.fr        #
+#    Updated: 2022/07/23 18:56:38 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,13 +64,13 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 # Compiling
 $(NAME): $(OBJ)
 	@echo "By Tomartin in 42Madrid"
-	@$(CXX) $(OBJ) $(LDFLAGS) -D NM=ft -o $(NAME)
+	@$(CXX) $(OBJ) $(LDFLAGS) -D NS=ft -o $(NAME)
 	@echo "Compilation OK!!"
 	@echo "$(NAME) ready!".
 
 $(NAME2): $(OBJ)
 	@echo "By Tomartin in 42Madrid"
-	@$(CXX) $(OBJ) $(LDFLAGS) -D NM=std -o $(NAME2)
+	@$(CXX) $(OBJ) $(LDFLAGS) -D NS=std -o $(NAME2)
 	@echo "Compilation OK!!"
 	@echo "$(NAME2) ready!".
 
