@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2022/04/16 19:20:28 by tomartin         ###   ########.fr        #
+#    Updated: 2022/07/23 11:13:32 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ NAME2 = ft_container_std
 # Compiling and flags
 #CXX = clang++ --std=c++98
 CXX = g++ -std=c++98
-CXXFLAGS = -Wall -Wextra -Werror -Iinc -MD -O3 -g3 -fsanitize=address
-LDFLAGS = -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -Iinc -MD -O3 -g3 #-fsanitize=address
+LDFLAGS = #-fsanitize=address
 
 # Folders
 OBJ_DIR = obj/

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/22 08:24:13 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/23 11:12:53 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ int		main(void)
 	vita++;
 	vitb++;
 	std::cout << *vita << " - " << *vitb << std::endl;
-//	va.clear();
-//	vb.clear();
+	va.clear();
+	vb.clear();
 
 	NS::map<int, int>	mapa;
 
 	mapa[1] = 100;
 	mapa[2] = 200;
 	mapa[3] = 300;
+	system ("leaks ft_container");
 }
 

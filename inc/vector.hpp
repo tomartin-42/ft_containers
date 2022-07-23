@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/13 11:45:34 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/23 11:16:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,9 @@ namespace ft
 //destructor==================================
 			virtual	~vector () 
 			{
-		//		this->clear();
-		//		this->_alloc.deallocate(this->_start, this->remained_space());
+				//this->clear();
+				if(this->_size > 0)
+					this->_alloc.deallocate(this->_start, this->capacity());
 			}
 
 //********************************************************************************************************//	
@@ -138,7 +139,7 @@ namespace ft
 				{
 					size_type	i;
 					i = this->_size * 2;
-					_alloc.allocate(i, this->_end_capacity + 1); 
+					_alloc.allocate(i, this->_end_capacity); 
 					this->_end_capacity += i;
 				}
 			}
@@ -151,7 +152,7 @@ namespace ft
 				if (ft::dist(this->_start, this->_end_capacity) < n)
 				{
 					n = n * 0.2;
-					_alloc.allocate(n, this->_end_capacity + 1);
+					_alloc.allocate(n, this->_end_capacity);
 					this->_end_capacity += n;
 				}
 			}
