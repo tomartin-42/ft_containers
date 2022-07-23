@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2022/07/23 11:13:32 by tomartin         ###   ########.fr        #
+#    Updated: 2022/07/23 18:36:24 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ RESET = \033[0m
 
 # Name of the program
 NAME = ft_container 
-NAME2 = ft_container_std 
+NAME2 = ft_container_std
 
 # Compiling and flags
 #CXX = clang++ --std=c++98
@@ -72,7 +72,7 @@ $(NAME2): $(OBJ)
 	@echo "By Tomartin in 42Madrid"
 	@$(CXX) $(OBJ) $(LDFLAGS) -D NM=std -o $(NAME2)
 	@echo "Compilation OK!!"
-	@echo "$(NAME) ready!".
+	@echo "$(NAME2) ready!".
 
 bonus: all
 

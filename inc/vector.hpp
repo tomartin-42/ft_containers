@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/23 13:06:24 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:26:50 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ namespace ft
 //==========================
 //Aux functions
 //==========================	
+			private:
 			//To preasignate memory to go fast
 			void	pre_asig_memory() 
 			{
@@ -159,6 +160,7 @@ namespace ft
 //==========================
 //iterators
 //==========================	
+			public:
 			iterator begin() {return iterator(this->_start);}
 
 			const_iterator begin() const {return const_iterator(this->_start);}

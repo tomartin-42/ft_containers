@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/22 11:33:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:31:42 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ namespace ft
 //==========================
 //Aux functions
 //==========================
-		protected:
+		private:
 			bool is_nill(node_pointer& check) const
 			{
 				return (check == this->_nill ? true : false);
@@ -384,6 +384,7 @@ namespace ft
 //==========================
 //Iterators
 //==========================
+			public:
 			iterator		begin() {
 				return iterator(this->minimum(this->_root));}
 
