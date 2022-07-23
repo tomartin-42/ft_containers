@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/23 11:16:34 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/23 13:06:24 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,20 +110,16 @@ namespace ft
 //= operator===================================
 			vector& operator = (const vector& other)
 			{
-				this->_alloc = other._alloc;
-				this->_start = other._start;
-				this->_end = other._end;
-				this->_end_capacity = other._end_capacity;
-				this->_size = other._size;
+				vector	aux(other);
+
+				this->swap(aux);
 				return *this;
 			}
 
 //destructor==================================
 			virtual	~vector () 
 			{
-				//this->clear();
-				if(this->_size > 0)
-					this->_alloc.deallocate(this->_start, this->capacity());
+				this->_alloc.deallocate(this->_start, this->capacity());
 			}
 
 //********************************************************************************************************//	

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:24:43 by tomartin          #+#    #+#             */
-/*   Updated: 2022/06/08 08:15:17 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/23 13:07:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ class stack
 			this->_s = other;
 		}
 	
+		~stack() {}
+
 		//Member Functions
 		bool			empty() const {return _s.empty();}
 		size_type		size() const {return _s.size();}
