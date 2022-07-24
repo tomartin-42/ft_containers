@@ -92,15 +92,12 @@ int		main(void)
 	b = va.begin() + 3;
 	va.erase(b);
 	print_vector(va);
-	NS::vector<long>	per;
-	for(int i = 0; i < 100000; i++)
+	NS::vector<int>	per;
+	for(int i = 0; i < 10000; i++)
 		per.push_back(i * 10);
-	print_vector(per);
 	for(int i = 0; i < 9999; i++)
 		per.pop_back();
-	print_vector(per);
 	per.clear();
-	print_vector(per);
 	
 
 //------------------------MAP--------------------------//

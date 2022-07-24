@@ -22,7 +22,6 @@ RESET = \033[0m
 
 # Name of the program
 NAME = ft_container 
-NAME2 = ft_container_std
 
 # Compiling and flags
 #CXX = clang++ --std=c++98
@@ -64,15 +63,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 # Compiling
 $(NAME): $(OBJ)
 	@echo "By Tomartin in 42Madrid"
-	@$(CXX) $(OBJ) $(LDFLAGS) -D NS=ft -o $(NAME)
+	@$(CXX) $(OBJ) $(LDFLAGS) -DNS=ft -o $(NAME)
 	@echo "Compilation OK!!"
 	@echo "$(NAME) ready!".
-
-$(NAME2): $(OBJ)
-	@echo "By Tomartin in 42Madrid"
-	@$(CXX) $(OBJ) $(LDFLAGS) -D NS=std -o $(NAME2)
-	@echo "Compilation OK!!"
-	@echo "$(NAME2) ready!".
 
 bonus: all
 
@@ -84,9 +77,7 @@ clean:
 # fclean rule
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(NAME2)
 	@echo "$(NAME) removed!"
-	@echo "$(NAME2) removed!"
 
 # re rule
  re: fclean all

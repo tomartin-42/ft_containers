@@ -110,9 +110,8 @@ namespace ft
 //= operator===================================
 			vector& operator = (const vector& other)
 			{
-				vector	aux(other);
-
-				this->swap(aux);
+				if(this != &other)
+					this->assign(other.begin(), other.end());
 				return *this;
 			}
 
@@ -130,14 +129,12 @@ namespace ft
 //==========================	
 			private:
 			//To preasignate memory to go fast
-			void	pre_asig_memory() 
+			inline void	pre_asig_memory() 
 			{
 				if (this->_end == this->_end_capacity)
 				{
-					size_type	i;
-					i = this->_size * 2;
-					_alloc.allocate(i, this->_end_capacity); 
-					this->_end_capacity += i;
+					_alloc.allocate(this->size(), this->_end_capacity); 
+					this->_end_capacity += this->size();
 				}
 			}
 			
@@ -309,7 +306,7 @@ namespace ft
 			}
 		
 			//Single Element insert-------------------------------------
-			iterator    insert(iterator position, const value_type& val)
+			inline iterator    insert(iterator position, const value_type& val)
 			{
 				size_type	i = 0;
 				size_type	offset;
@@ -424,21 +421,15 @@ namespace ft
 				return ret_it;
 			}
 
-			void	swap(vector& x)
+			//srt::swap is a function to change tow values.
+			//Is in the std89 and it is very efficient
+			void	swap(vector& other)
 			{
-				pointer   	aux_start(x._start);
-				pointer   	aux_end(x._end);
-				pointer		aux_end_capacity(x._end_capacity);
-				size_type	aux_size(x.size());	
-
-				x._start = this->_start;
-				x._end = this->_end;
-				x._end_capacity = this->_end_capacity;
-				x._size = this->size();
-				this->_start = aux_start;
-				this->_end = aux_end;
-				this->_end_capacity = aux_end_capacity;
-				this->_size = aux_size;
+				std::swap(this->_start, other._start);
+				std::swap(this->_end, other._end);
+				std::swap(this->_end_capacity, other._end_capacity);
+				std::swap(this->_size, other._size);
+				std::swap(this->_alloc, other._alloc);
 			}
 
 			void	clear(void)
