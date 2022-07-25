@@ -45,6 +45,53 @@ int		main(void)
 {
 
 //------------------------VECTOR--------------------------//
+	NS::vector<int>				va(10, 100);
+	NS::vector<int>				vb(va);
+	NS::vector<int>				vc;
+	NS::vector<int>::iterator	vita = vb.begin();
+
+	vb[1] = 20;
+	va[1] = 10;
+	print_vector(va);
+	print_vector(vb);
+	vita = va.begin();
+	vc.assign(8, 800);
+	print_vector(vc);	
+	NS::vector<int>::iterator	a, b, c;
+	a = ++(++va.begin());
+	b = ++(++(++(++(++va.begin()))));
+	c = ++(++(++vc.begin()));
+	vc.insert(c, a, b);
+	print_vector(vc);	
+	va.clear();
+	va.push_back(*(vb.begin()));
+	va.push_back(999);
+	print_vector(va);	
+	bool x = va[0] == vc[0];
+	bool y = va[0] < vc[0];
+	bool z = va[0] > vc[0];
+	std::cout << x << std::endl;
+	std::cout << y << std::endl;
+	std::cout << z << std::endl;
+	a = vc.begin();
+	b = vc.end();
+	b--;
+	b--;
+	b--;
+	b--;
+	va.clear();
+	va.assign(a, b);
+	b = va.begin();
+	b++;
+	b++;
+	b++;
+	va.insert(b, 555);
+	print_vector(va);
+	b = va.begin() + 3;
+	va.erase(b);
+	b = va.begin() + 3;
+	va.erase(b);
+	print_vector(va);
 	NS::vector<int>	per;
 	for(int i = 0; i < 10000; i++)
 	{

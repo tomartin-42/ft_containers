@@ -23,6 +23,7 @@
 #include "is_integral.hpp"
 #include <memory> //to allocate
 #include <iostream>
+#include <cstring>
 
 #pragma once
 
@@ -98,13 +99,14 @@ namespace ft
 			vector(const vector& other)
 				: _alloc(other._alloc), _start(ft::nullptr_t), _end(_start), _end_capacity(_end), _size(0)
 			{
-					iterator it = other._start;
+					this->assign(other.begin(), other.end());
+					/*iterator it = other._start;
 					
 					while(it != other._end)
 					{
 						this->push_back(*it);
 						it++;
-					}
+					}*/
 			}
 
 //= operator===================================
@@ -131,11 +133,26 @@ namespace ft
 			//To preasignate memory to go fast
 			inline void	pre_asig_memory() 
 			{
+				if (ft::dist(this->_start, this->_end_capacity) == 0)
+				{
+					this->_start = _alloc.allocate(1, 0);
+					this->_end = this->_start;
+					this->_end_capacity = this->_end;
+					this->_end_capacity++;
+					return;
+				}
 				if (this->_end == this->_end_capacity)
 				{
-					_alloc.allocate(this->size(), this->_end_capacity); 
-					this->_end_capacity += this->size();
+					std::cout << "HOLAPRE" << " - " << this->size() << " - " << *(this->end() -1)  << std::endl;
+					vector	aux(this->_size * 2);
+
+					aux = *this;
+					this->swap(aux);
 				}
+					//std::cout <<_alloc.allocate(this->size(), this->_end_capacity) << std::endl; 
+					//std::cout << "PRE 1 " << this->_end << std::endl;
+					//_alloc.allocate(this->size(), this->_end_capacity); 
+					//this->_end_capacity += this->size();
 			}
 			
 			//Preasignate memory: Add n elements to asignate memory to the vector plus 20%	
@@ -286,17 +303,28 @@ namespace ft
 
 			void	assign(size_type n, const value_type& val)
 			{
-				this->clear();
+				vector	aux(n, val);
+
+				this->swap(aux);
+				/*
+				this->_end = this->_start;
+				this->_size = 0;
 				for(size_type i = 0; i < n; i++)
 				{
+					pre_asig_memory();
 					this->push_back(val);
-				}
+				}*/
 			}
 			
 			void push_back(const value_type& val)
 			{
 				pre_asig_memory();
-				this->insert(this->end(), val);
+				*this->_end = val;
+				std::cout << "que mierda es " << *this->_end << std::endl;
+				this->_end++;
+			//	this->_end_capacity++;
+				this->_size++;
+			//	this->insert(this->end(), val);
 			}
 
 			void pop_back()
