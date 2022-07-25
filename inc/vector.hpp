@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/23 16:26:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/25 21:22:21 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 #include "is_integral.hpp"
 #include <memory> //to allocate
 #include <iostream>
-#include <cstring>
 
 #pragma once
 
@@ -99,21 +98,21 @@ namespace ft
 			vector(const vector& other)
 				: _alloc(other._alloc), _start(ft::nullptr_t), _end(_start), _end_capacity(_end), _size(0)
 			{
-					this->assign(other.begin(), other.end());
-					/*iterator it = other._start;
+					iterator it = other._start;
 					
 					while(it != other._end)
 					{
 						this->push_back(*it);
 						it++;
-					}*/
+					}
 			}
 
 //= operator===================================
 			vector& operator = (const vector& other)
 			{
-				if(this != &other)
-					this->assign(other.begin(), other.end());
+				vector	aux(other);
+
+				this->swap(aux);
 				return *this;
 			}
 
@@ -131,28 +130,15 @@ namespace ft
 //==========================	
 			private:
 			//To preasignate memory to go fast
-			inline void	pre_asig_memory() 
+			void	pre_asig_memory() 
 			{
-				if (ft::dist(this->_start, this->_end_capacity) == 0)
-				{
-					this->_start = _alloc.allocate(1, 0);
-					this->_end = this->_start;
-					this->_end_capacity = this->_end;
-					this->_end_capacity++;
-					return;
-				}
 				if (this->_end == this->_end_capacity)
 				{
-					std::cout << "HOLAPRE" << " - " << this->size() << " - " << *(this->end() -1)  << std::endl;
-					vector	aux(this->_size * 2);
-
-					aux = *this;
-					this->swap(aux);
+					size_type	i;
+					i = this->_size * 2;
+					_alloc.allocate(i, this->_end_capacity); 
+					this->_end_capacity += i;
 				}
-					//std::cout <<_alloc.allocate(this->size(), this->_end_capacity) << std::endl; 
-					//std::cout << "PRE 1 " << this->_end << std::endl;
-					//_alloc.allocate(this->size(), this->_end_capacity); 
-					//this->_end_capacity += this->size();
 			}
 			
 			//Preasignate memory: Add n elements to asignate memory to the vector plus 20%	
@@ -303,28 +289,17 @@ namespace ft
 
 			void	assign(size_type n, const value_type& val)
 			{
-				vector	aux(n, val);
-
-				this->swap(aux);
-				/*
-				this->_end = this->_start;
-				this->_size = 0;
+				this->clear();
 				for(size_type i = 0; i < n; i++)
 				{
-					pre_asig_memory();
 					this->push_back(val);
-				}*/
+				}
 			}
 			
 			void push_back(const value_type& val)
 			{
 				pre_asig_memory();
-				*this->_end = val;
-				std::cout << "que mierda es " << *this->_end << std::endl;
-				this->_end++;
-			//	this->_end_capacity++;
-				this->_size++;
-			//	this->insert(this->end(), val);
+				this->insert(this->end(), val);
 			}
 
 			void pop_back()
@@ -334,7 +309,7 @@ namespace ft
 			}
 		
 			//Single Element insert-------------------------------------
-			inline iterator    insert(iterator position, const value_type& val)
+			iterator    insert(iterator position, const value_type& val)
 			{
 				size_type	i = 0;
 				size_type	offset;
@@ -449,8 +424,6 @@ namespace ft
 				return ret_it;
 			}
 
-			//srt::swap is a function to change tow values.
-			//Is in the std89 and it is very efficient
 			void	swap(vector& other)
 			{
 				std::swap(this->_start, other._start);

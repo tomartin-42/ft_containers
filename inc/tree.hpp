@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/23 16:31:42 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/25 22:00:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,20 @@ namespace ft
 					{
 						u = p_node->prev->prev->right;
 						if(u->black == false)
+				std::swap(this->_size, other._size);
+				std::swap(this->_alloc, other._alloc);
+			}
+
+			void	clear(void)
+			{
+				while (this->_size != 0)
+					this->pop_back();
+			}
+
+	};// end vector class
+	
+//=======================================
+//No member functions (vompair operators)
 						{
 							u->black = true;
 							p_node->prev->black = true;
@@ -336,6 +350,20 @@ namespace ft
 							{
 								s->right->black = true;
 								s->black = false;
+				std::swap(this->_size, other._size);
+				std::swap(this->_alloc, other._alloc);
+			}
+
+			void	clear(void)
+			{
+				while (this->_size != 0)
+					this->pop_back();
+			}
+
+	};// end vector class
+	
+//=======================================
+//No member functions (vompair operators)
 								left_rotate(s);
 								s = x->prev->left;
 							}
@@ -471,6 +499,20 @@ namespace ft
 				this->_size += 1;
 				this->assig_nill_values();
 				return (p_node->get_data());
+				std::swap(this->_size, other._size);
+				std::swap(this->_alloc, other._alloc);
+			}
+
+			void	clear(void)
+			{
+				while (this->_size != 0)
+					this->pop_back();
+			}
+
+	};// end vector class
+	
+//=======================================
+//No member functions (vompair operators)
 			}
 
 			size_type	erase(const value_type& val)
@@ -520,6 +562,20 @@ namespace ft
 				return (1);
 			}
 
+				std::swap(this->_size, other._size);
+				std::swap(this->_alloc, other._alloc);
+			}
+
+			void	clear(void)
+			{
+				while (this->_size != 0)
+					this->pop_back();
+			}
+
+	};// end vector class
+	
+//=======================================
+//No member functions (vompair operators)
 			void	swap(tree<T, compare, alloc>& other)
 			{
 				std::swap(this->_root, other._root);
