@@ -132,13 +132,13 @@ namespace ft
 			//To preasignate memory to go fast
 			void	pre_asig_memory() 
 			{
-				if (this->_end == this->_end_capacity)
+			/*	if (this->_end == this->_end_capacity)
 				{
 					size_type	i;
-					i = this->_size * 2;
+					i = this->_size;
 					_alloc.allocate(i, this->_end_capacity); 
 					this->_end_capacity += i;
-				}
+				} */
 			}
 			
 			//Preasignate memory: Add n elements to asignate memory to the vector plus 20%	

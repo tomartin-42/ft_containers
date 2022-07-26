@@ -29,16 +29,21 @@
 #define NS ft 
 
 template<class T>
-void	print_vector(T v)
+void	print_vector(T v, std::string name)
 {
 	typename T::iterator	it = v.begin();
 
-	std::cout << "===========================================" << std::endl;
+	std::cout << "==================" << name << "===================" << std::endl;
 	for(; it != v.end(); it++)
 		std::cout << "vector = " << *it << std::endl;
 	std::cout << "Size= " << v.size() << std::endl;
+	std::cout << "Max Size= " << v.max_size() << std::endl;
+	std::cout << "Capacity= " << v.capacity() << std::endl;
+	std::cout << "Empty= " << v.empty() << std::endl;
 
 	std::cout << "===========================================" << std::endl;
+	std::cout << "\n\n\n";
+
 }
 
 template<class T>
@@ -57,34 +62,48 @@ int		main(void)
 {
 
 //------------------------VECTOR--------------------------//
-	NS::vector<int>				va(10, 100);
-	NS::vector<int>				vb(va);
-	NS::vector<int>				vc;
-	NS::vector<int>::iterator	vita = vb.begin();
+	NS::vector<int>						va(10, 100);
+	NS::vector<int>						vb(va);
+	NS::vector<int>						vc;
+	NS::vector<int>						vd(++va.begin(), --(--va.end()));
+	NS::vector<int>::iterator			vita = vb.begin();
+	NS::vector<int>::reverse_iterator	rvita = vb.rbegin();
 
-	vb[1] = 20;
-	va[1] = 10;
-	print_vector(va);
-	print_vector(vb);
+	print_vector(va, "va");
+	print_vector(vb, "vb");
+	print_vector(vc, "vc");
+	print_vector(vd, "vd");
+	rvita = va.rbegin();
+	va[9] = 99;
+	va[8] = 88;
+	va[7] = 77;
+	std::cout << "reverse va begin= " << *rvita << std::endl;
+	rvita++;
+	std::cout << "reverse va begin= " << *rvita << std::endl;
+	rvita++;
+	std::cout << "reverse va begin= " << *rvita << std::endl;
+	rvita--;
+	std::cout << "reverse va begin= " << *rvita << std::endl;
 	vita = va.begin();
 	vc.assign(8, 800);
-	print_vector(vc);	
+	print_vector(vc, "vc");	
 	NS::vector<int>::iterator	a, b, c;
 	a = ++(++va.begin());
 	b = ++(++(++(++(++va.begin()))));
 	c = ++(++(++vc.begin()));
 	vc.insert(c, a, b);
-	print_vector(vc);	
+	print_vector(vc, "vc");	
 	va.clear();
 	va.push_back(*(vb.begin()));
 	va.push_back(999);
-	print_vector(va);	
+	print_vector(va, "va");	
 	bool x = va[0] == vc[0];
 	bool y = va[0] < vc[0];
 	bool z = va[0] > vc[0];
-	std::cout << x << std::endl;
-	std::cout << y << std::endl;
-	std::cout << z << std::endl;
+	std::cout << "va[0] == vc[0] " << x << std::endl;
+	std::cout << "va[0] < vc[0] " << y << std::endl;
+	std::cout << "va[0] > vc[0] " << z << std::endl;
+	std::cout << "\n\n\n";
 	a = vc.begin();
 	b = vc.end();
 	b--;
@@ -98,12 +117,14 @@ int		main(void)
 	b++;
 	b++;
 	va.insert(b, 555);
-	print_vector(va);
+	print_vector(va, "va");
 	b = va.begin() + 3;
 	va.erase(b);
 	b = va.begin() + 3;
 	va.erase(b);
-	print_vector(va);
+	print_vector(va, "va");
+	vd.reserve(2);
+	print_vector(vd, "vd");
 	NS::vector<int>	per;
 	for(int i = 0; i < 10000; i++)
 	{
@@ -126,13 +147,13 @@ int		main(void)
 
 	for(int i = 0; i < 15; i++)
 		mapa.insert(NS::make_pair(i, i * 5));
-	mapa.print();
+	//mapa.print();
 	mapa.erase(5);
 	mapa.erase(4);
 	mapa.erase(13);
 	NS::map<int, int>::iterator	mpit = mapa.find(10);
 	mapa.erase(mapa.begin(), mpit);
-	mapa.print();
+	//mapa.print();
 	mapa.clear();
 //	mapa[1] = 100;
 //	mapa[2] = 200;
