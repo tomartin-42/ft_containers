@@ -130,6 +130,8 @@ int		main(void)
 	mapa.erase(5);
 	mapa.erase(4);
 	mapa.erase(13);
+	NS::map<int, int>::iterator	mpit = mapa.find(10);
+	mapa.erase(mapa.begin(), mpit);
 	mapa.print();
 	mapa.clear();
 //	mapa[1] = 100;
