@@ -125,6 +125,8 @@ namespace ft
 
 			node_pointer get_nill() {return this->_nill;}
 
+			node_pointer get_root() {return this->_root;}
+
 			node_pointer minimum(const node_pointer& n) const
 			{
 				node_pointer aux = n;
@@ -476,6 +478,7 @@ namespace ft
 			size_type	erase(const value_type& val)
 			{
 				node_pointer	d_node(this->_find(val));
+
 				if(d_node == this->_nill)
 					return (0);
 				node_pointer	aux = d_node;
@@ -600,23 +603,24 @@ namespace ft
 				return this->_nill;
 			}
 
+			/*
 			void clear_tree(node_pointer current)
 			{
-				node_pointer	left;
+				node_pointer	right;
 
 				while (current != this->_nill)
 				{
-					this->clear_tree(current->right);
-					left = current->left;
+					this->clear_tree(current->left);
+					right = current->right;
 					this->kill_node(current);
-					current = left;
+					current = right;
 				}
 			}
 			public:
 			void clear()
 			{
 				this->clear_tree(this->_root);
-			}
+			}*/
 //=============================
 //To debug
 //=============================

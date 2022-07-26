@@ -98,7 +98,7 @@ namespace ft
 			~map()
 			{
 				this->clear();
-			//	this->_btree.kill_nill();
+				this->_btree.kill_nill();
 			}
 
 			map& operator= (const map& x)
@@ -189,6 +189,7 @@ namespace ft
 
 			void erase(iterator pos)
 			{
+				std::cout << "HOLA\n";
 				this->_btree.erase(*pos);
 			}
 
@@ -210,14 +211,19 @@ namespace ft
 				while(first != last)
 				{
 					it = first;
+					std::cout << first->first << " - " << first->second << std::endl;
 					first++;
+					std::cout << first->first << " - " << first->second << std::endl;
+					std::cout << it->first << " - " << it->second << std::endl;
+					std::cout << "************************************************\n";
 					this->erase(it);
 				}
 			}
 
 			void	clear()
 			{
-				this->_btree.clear();
+				while(this->size() != 0)
+					this->erase(iterator(this->_btree.get_root()));
 			}
 
 			template<typename value_type, typename pair_compare, typename alloc_type>

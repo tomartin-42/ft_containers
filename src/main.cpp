@@ -41,6 +41,18 @@ void	print_vector(T v)
 	std::cout << "===========================================" << std::endl;
 }
 
+template<class T>
+void	print_map(T m)
+{
+	typename T::iterator	it = m.begin();
+
+	std::cout << "===========================================" << std::endl;
+	for(; it != m.end(); it++)
+		std::cout << "map = " << it->first << " - " << it->second << std::endl;
+	std::cout << "Size= " << m.size() << std::endl;
+
+	std::cout << "===========================================" << std::endl;
+}
 int		main(void)
 {
 
@@ -115,6 +127,11 @@ int		main(void)
 	for(int i = 0; i < 15; i++)
 		mapa.insert(NS::make_pair(i, i * 5));
 	mapa.print();
+	mapa.erase(5);
+	mapa.erase(4);
+	mapa.erase(13);
+	mapa.print();
+	mapa.clear();
 //	mapa[1] = 100;
 //	mapa[2] = 200;
 //	mapa[3] = 300;

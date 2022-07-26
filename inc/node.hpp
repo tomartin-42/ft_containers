@@ -90,7 +90,6 @@ namespace ft
 //==========================
 //debug
 //==========================
-/*
 		void	print_pointer()
 		{
 			std::cout << "NODE========================" << std::endl;
@@ -128,7 +127,6 @@ namespace ft
 			std::cout << "LEFT= " << p->left << std::endl;
 			std::cout << "RIGHT= " << p->right << std::endl;
 		}
-*/
 	}; //End node class
 
 } //end namespace ft
