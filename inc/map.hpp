@@ -189,7 +189,6 @@ namespace ft
 
 			void erase(iterator pos)
 			{
-				std::cout << "HOLA\n";
 				this->_btree.erase(*pos);
 			}
 
@@ -211,11 +210,7 @@ namespace ft
 				while(first != last)
 				{
 					it = first;
-					std::cout << first->first << " - " << first->second << std::endl;
 					first++;
-					std::cout << first->first << " - " << first->second << std::endl;
-					std::cout << it->first << " - " << it->second << std::endl;
-					std::cout << "************************************************\n";
 					this->erase(it);
 				}
 			}
