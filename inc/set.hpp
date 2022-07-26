@@ -190,7 +190,8 @@ namespace ft
 
 			void	clear()
 			{
-				this->erase(this->begin(), this->end());
+				while(this->size() != 0)
+					this->erase(iterator(this->_btree.get_root()));
 			}
 
 			template<typename value_type, typename pair_compare, typename alloc_type>
