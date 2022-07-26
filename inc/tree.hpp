@@ -599,6 +599,24 @@ namespace ft
 				}
 				return this->_nill;
 			}
+
+			void clear_tree(node_pointer current)
+			{
+				node_pointer	left;
+
+				while (current != this->_nill)
+				{
+					this->clear_tree(current->right);
+					left = current->left;
+					this->kill_node(current);
+					current = left;
+				}
+			}
+			public:
+			void clear()
+			{
+				this->clear_tree(this->_root);
+			}
 //=============================
 //To debug
 //=============================

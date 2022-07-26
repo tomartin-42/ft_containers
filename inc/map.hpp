@@ -98,7 +98,7 @@ namespace ft
 			~map()
 			{
 				this->clear();
-				this->_btree.kill_nill();
+			//	this->_btree.kill_nill();
 			}
 
 			map& operator= (const map& x)
@@ -217,7 +217,7 @@ namespace ft
 
 			void	clear()
 			{
-				this->erase(this->begin(), this->end());
+				this->_btree.clear();
 			}
 
 			template<typename value_type, typename pair_compare, typename alloc_type>
