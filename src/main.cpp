@@ -26,7 +26,7 @@
 #include <stack>
 #include <string>
 
-#define NS ft 
+#define NS std 
 
 template<class T>
 void	print_vector(T v, std::string name)
@@ -103,7 +103,17 @@ int		main(void)
 	std::cout << "va[0] == vc[0] " << x << std::endl;
 	std::cout << "va[0] < vc[0] " << y << std::endl;
 	std::cout << "va[0] > vc[0] " << z << std::endl;
+	std::cout << "va.at(0) " << va.at(0) << std::endl;
+	std::cout << "va.at(1) " << va.at(1) << std::endl;
+	std::cout << "va.front " << va.front() << std::endl;
+	std::cout << "va.back " << va.back() << std::endl;
+	std::cout << "vb.front " << vb.front() << std::endl;
+	std::cout << "vb.back " << vb.back() << std::endl;
 	std::cout << "\n\n\n";
+	vb.assign(vd.begin(), vd.end());
+	print_vector(vb, "vb");
+	vb.assign(9, 99);
+	print_vector(vb, "vb");
 	a = vc.begin();
 	b = vc.end();
 	b--;
@@ -125,6 +135,8 @@ int		main(void)
 	print_vector(va, "va");
 	vd.reserve(2);
 	print_vector(vd, "vd");
+
+	//performance test--------------------------------------
 	NS::vector<int>	per;
 	for(int i = 0; i < 10000; i++)
 	{
