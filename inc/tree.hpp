@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/23 16:31:42 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:37:51 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -602,7 +602,6 @@ namespace ft
 //=============================
 //To debug
 //=============================
-/*
 			public:
 			void printBT(const std::string& prefix, const node_pointer node, bool isLeft)
 			{
@@ -629,7 +628,6 @@ namespace ft
 			{
 				printBT(this->_root);
 			}
-*/
 	};//end tree class
 }//end ft namespace
 

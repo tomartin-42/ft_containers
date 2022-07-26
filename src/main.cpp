@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/26 08:46:58 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:38:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,11 @@ int		main(void)
 
 
 //------------------------MAP--------------------------//
-//	NS::map<int, int>	mapa;
+	NS::map<int, int>	mapa;
 
+	for(int i = 0; i < 15; i++)
+		mapa.insert(NS::make_pair(i, i * 5));
+	mapa.print();
 //	mapa[1] = 100;
 //	mapa[2] = 200;
 //	mapa[3] = 300;
