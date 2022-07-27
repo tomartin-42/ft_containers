@@ -109,10 +109,10 @@ namespace ft
       				this->_root = b;
 					this->_nill->prev = b;
 				}
-				else if(a == a->prev->left) 
-					a->prev->left = b;
-				else
+				else if(a == a->prev->right) 
 					a->prev->right = b;
+				else
+					a->prev->left = b;
 				b->prev = a->prev;
 				this->assig_nill_values();
 			}
@@ -127,7 +127,7 @@ namespace ft
 
 			node_pointer get_root() {return this->_root;}
 
-			node_pointer minimum(const node_pointer& n) const
+			node_pointer minimum(const node_pointer n) const
 			{
 				node_pointer aux = n;
 
@@ -137,19 +137,17 @@ namespace ft
 				}
 				return aux;
 			}
-
-			node_pointer minimum(node_pointer& n) 
+	
+			node_pointer minimum(node_pointer n) 
 			{
-				node_pointer aux = n;
-
-				while(aux->right != this->_nill)
+				while(n->right != this->_nill)
 				{
-					aux = aux->right;
+					n = n->right;
 				}
-				return aux;
+				return n;
 			}
 
-			node_pointer maximum(const node_pointer& n) const
+			node_pointer maximum(const node_pointer n) const
 			{
 				node_pointer aux = n;
 
@@ -157,14 +155,15 @@ namespace ft
 					aux = aux->left;
 				return aux;
 			}
-
-			node_pointer maximum(node_pointer& n) 
+	
+			node_pointer maximum(node_pointer n) 
 			{
-				node_pointer aux = n;
-
-				while(aux->left != this->_nill)
-					aux = aux->left;
-				return aux;
+				while(n->left != this->_nill)
+				{
+				//	std::cout << "HOLA2\n";
+					n = n->left;
+				}
+				return n;
 			}
 
 			node_pointer	next_node(const node_pointer n) const
@@ -188,7 +187,7 @@ namespace ft
 			void	left_rotate(node_pointer x)
 			{
 				node_pointer y = x->right;
-  				
+				  				
 				x->right = y->left;
  				if(y->left != this->_nill)
   					y->left->prev = x;
@@ -233,7 +232,9 @@ namespace ft
 					this->_nill->black = true;
 				}
 				else 
+				{
 					this->assig_to_nill(this->_nill);
+				}
 			}
 
 			void	assig_to_nill(node_pointer& p_n)
@@ -360,7 +361,7 @@ namespace ft
 							left_rotate(x->prev);
 							s = x->prev->right;
 						}
-						if(s->left->black == true && s->right->black == true)
+						if(s->left->black == true && s->left->black == true)
 						{
 							s->black = false;
 							x = x->prev;
@@ -481,6 +482,7 @@ namespace ft
 			{
 				node_pointer	d_node(this->_find(val));
 
+				std::cout << "HOLA\n";
 				if(d_node == this->_nill)
 				{
 					return (0);
@@ -492,15 +494,15 @@ namespace ft
 			
 				y = aux;
 				save_color = y->black;
-				if(this->is_nill(aux->left))
-				{
-					x = aux->right;
-					this->transplant(aux, aux->right);
-				}
-				else if(this->is_nill(aux->right))
+				if(this->is_nill(aux->right))
 				{
 					x = aux->left;
 					this->transplant(aux, aux->left);
+				}
+				else if(this->is_nill(aux->left))
+				{
+					x = aux->right;
+					this->transplant(aux, aux->right);
 				}
 				else
 				{

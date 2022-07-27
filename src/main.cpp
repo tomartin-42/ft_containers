@@ -221,22 +221,21 @@ int		main(void)
 		sta.push('X');
 	while(!sta.empty())
 		sta.pop();
-*/
 //------------------------MAP--------------------------//
 
 	std::cout << "=====================================================================================" << std::endl;
 	std::cout << "MAP" << std::endl;
 	std::cout << "=====================================================================================" << std::endl;
 
+*/
 	NS::map<int, int>	mapa;
 
 	for(int i = 0; i < 100; i++)
 		mapa.insert(NS::make_pair(i, i * 10));
 	mapa.clear();	
+/*	
 	
 	
-	
-/*
 	NS::map<int, int>	mapa;
 	for(int i = 0; i < 15; i++)
 		mapa.insert(NS::make_pair(i, i * 5));
@@ -306,7 +305,6 @@ int		main(void)
 	mapb.insert(mapa.begin(), mapa.end());
 	print_map(mapb, "mapb");
 */
-
 //	system("leaks ft_container");
 
 }

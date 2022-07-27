@@ -210,9 +210,8 @@ namespace ft
 				while(first != last)
 				{
 					it = first++;
-					//std::cout << it->first << " - " << it->second << std::endl;
-					this->print();
 					this->erase(it);
+					this->print();
 				}
 			}
 
