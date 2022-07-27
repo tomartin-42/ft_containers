@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:41:05 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/25 21:22:21 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/27 09:42:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ namespace ft
 //range=======================================
 			template <class InputIterator>
 			vector(InputIterator first, InputIterator last,
-				const alloc_type& alloc_t = alloc_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+				const alloc_type& alloc_t = alloc_type(), 
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 				: _alloc(alloc_t)
 			{
 				this->_size = ft::dist(first, last);
@@ -139,19 +140,6 @@ namespace ft
 					_alloc.allocate(i, this->_end_capacity); 
 					this->_end_capacity += i;
 				} */
-			}
-			
-			//Preasignate memory: Add n elements to asignate memory to the vector plus 20%	
-			void	pre_asig_memory(size_type n)
-			{
-				size_type	aux;
-
-				if (ft::dist(this->_start, this->_end_capacity) < n)
-				{
-					n = n * 0.2;
-					_alloc.allocate(n, this->_end_capacity);
-					this->_end_capacity += n;
-				}
 			}
 
 			//Return amount prereserve free space
@@ -269,7 +257,8 @@ namespace ft
 //Modifiers
 //==========================
 			template <class InputIterator>
-			void	assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+			void	assign(InputIterator first, InputIterator last, 
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
 				size_type	long_needed;
 
@@ -344,6 +333,7 @@ namespace ft
 				vector		tmp(this->size() + n);
 				iterator	insert_it = this->begin();
 
+
 				while(insert_it != position)
 				{
 					tmp[i] = *insert_it;
@@ -368,7 +358,8 @@ namespace ft
 
 			//Range insert-------------------------------------------
 			template <class InputIterator>
-			void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+			void insert(iterator position, InputIterator first, InputIterator last, 
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
 				size_type	new_capacity = (ft::dist(first, last)) + this->_size;
 				vector		temp(new_capacity);
