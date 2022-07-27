@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/27 10:25:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:46:53 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,22 @@ void	print_stack(T st, std::string name)
 
 }
 template<class T>
-void	print_map(T m)
+void	print_map(T m, std::string name)
 {
 	typename T::iterator	it = m.begin();
 
-	std::cout << "===========================================" << std::endl;
+	std::cout << "=================" << name << "=====================" << std::endl;
 	for(; it != m.end(); it++)
 		std::cout << "map = " << it->first << " - " << it->second << std::endl;
 	std::cout << "Size= " << m.size() << std::endl;
-
+	std::cout << "Max Size= " << m.max_size() << std::endl;
+	std::cout << "Empty= " << m.empty() << std::endl;
 	std::cout << "===========================================" << std::endl;
+	std::cout << "\n\n\n";
 }
 int		main(void)
 {
-
+/*
 //------------------------VECTOR--------------------------//
 	std::cout << "=====================================================================================" << std::endl;
 	std::cout << "VECTOR" << std::endl;
@@ -105,12 +107,14 @@ int		main(void)
 	rvita--;
 	std::cout << "reverse va begin= " << *rvita << std::endl;
 	std::cout << "\n\n\n";
+
 	std::cout << "Assign-------------------------------------------------------" << std::endl;
 	vita = va.begin();
 	vc.assign(8, 800);
 	print_vector(vc, "vc");	
 	vb.assign(vd.begin(), vd.end());
 	print_vector(vb, "vb");	
+
 	std::cout << "Iterator----------------------------------------------------" << std::endl;
 	NS::vector<int>::iterator	a, b, c;
 	a = ++(++va.begin());
@@ -119,6 +123,7 @@ int		main(void)
 	vc.insert(c, a, b);
 	print_vector(vc, "vc");	
 	va.clear();
+
 	std::cout << "Comparation-------------------------------------------------" << std::endl;
 	va.push_back(*(vb.begin()));
 	va.push_back(999);
@@ -129,6 +134,7 @@ int		main(void)
 	std::cout << "va[0] == vc[0] " << x << std::endl;
 	std::cout << "va[0] < vc[0] " << y << std::endl;
 	std::cout << "va[0] > vc[0] " << z << std::endl;
+
 	std::cout << "At, Fron and Back----------------------------------------------------" << std::endl;
 	std::cout << "va.at(0) " << va.at(0) << std::endl;
 	std::cout << "va.at(1) " << va.at(1) << std::endl;
@@ -152,6 +158,7 @@ int		main(void)
 	b++;
 	b++;
 	b++;
+
 	std::cout << "Insert--------------------------------------------------------" << std::endl;
 	va.insert(b, 555);
 	print_vector(va, "va");
@@ -165,6 +172,7 @@ int		main(void)
 	print_vector(va, "va");
 	va.erase(++b, va.end());
 	print_vector(va, "va");
+
 	std::cout << "Reserve, Swap and Clear---------------------------------------------------" << std::endl;
 	vd.reserve(2);
 	print_vector(vd, "vd");
@@ -196,9 +204,11 @@ int		main(void)
 		sta.push('A');
 	print_stack(sta, "sta");
 	sta.push('B');
+
 	std::cout << "Top--------------------------------------------------------------" << std::endl;
 	std::cout << "top " << sta.top() << std::endl;
 	print_stack(sta, "sta");
+
 	std::cout << "Pop and Top----------------------------------------------------------" << std::endl;
 	while(!sta.empty())
 	{
@@ -211,19 +221,91 @@ int		main(void)
 		sta.push('X');
 	while(!sta.empty())
 		sta.pop();
-
+*/
 //------------------------MAP--------------------------//
+
 	std::cout << "=====================================================================================" << std::endl;
-	std::cout << "STACK" << std::endl;
+	std::cout << "MAP" << std::endl;
 	std::cout << "=====================================================================================" << std::endl;
+
+	NS::map<int, int>	mapa;
+
+	for(int i = 0; i < 100; i++)
+		mapa.insert(NS::make_pair(i, i * 10));
+	mapa.clear();	
+	
+	
+	
+/*
 	NS::map<int, int>	mapa;
 	for(int i = 0; i < 15; i++)
 		mapa.insert(NS::make_pair(i, i * 5));
 	NS::map<int, int>	mapb(++mapa.begin(), --mapa.end());
 	NS::map<int, int>	mapc(mapb);
-	print_map(mapa);
-	print_map(mapb);
-	print_map(mapc);
+	NS::map<int, int>	mapd;
+	mapd = mapa;
+
+	std::cout << "Constructors--------------------------------------------------------" << std::endl;
+	print_map(mapa, "mapa");
+	print_map(mapb, "mapb");
+	print_map(mapc, "mapc");
+	print_map(mapd, "mapc");
+
+	std::cout << "Iterators--------------------------------------------------------" << std::endl;
+	NS::map<int, int>::iterator mapit;
+	NS::map<int, int>::reverse_iterator maprit;
+	mapit = mapa.begin();
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	mapit++;
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	mapit++;
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	mapit++;
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	mapit++;
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	mapit++;
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	mapit--;
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	mapit--;
+	std::cout << "mapa it " << mapit->first << " - " << mapit->second << std::endl;
+	maprit = mapa.rbegin();
+
+	std::cout << "Reverse Iterators--------------------------------------------------------" << std::endl;
+	std::cout << "mapa it " << maprit->first << " - " << maprit->second << std::endl;
+	maprit++;
+	std::cout << "mapa it " << maprit->first << " - " << maprit->second << std::endl;
+	maprit++;
+	std::cout << "mapa it " << maprit->first << " - " << maprit->second << std::endl;
+	maprit++;
+	std::cout << "mapa it " << maprit->first << " - " << maprit->second << std::endl;
+	maprit++;
+	std::cout << "mapa it " << maprit->first << " - " << maprit->second << std::endl;
+	maprit--;
+	std::cout << "mapa it " << maprit->first << " - " << maprit->second << std::endl;
+	maprit--;
+
+	std::cout << "Operator []--------------------------------------------------------" << std::endl;
+	mapa[0] = 555;
+	print_map(mapa, "mapa");
+	mapa[100] = 999;
+	print_map(mapa, "mapa");
+
+	std::cout << "Insert and Pair--------------------------------------------------------" << std::endl;
+	mapb.insert(ft::make_pair(55, 555));
+	mapb.insert(ft::make_pair(66, 666));
+	mapb.insert(ft::make_pair(77, 777));
+	print_map(mapb, "mapb");
+	mapit = mapb.find(66);
+	mapb.insert(mapit, ft::make_pair(88, 888));
+	print_map(mapb, "mapb");
+	//mapa.clear();
+	for(int i = 100; i < 110; i++)
+		mapa.insert(NS::make_pair(i, i * 10));
+	mapb.insert(mapa.begin(), mapa.end());
+	print_map(mapb, "mapb");
+*/
 
 //	system("leaks ft_container");
 

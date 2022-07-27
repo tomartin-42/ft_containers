@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/26 13:37:51 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:04:13 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,9 @@ namespace ft
 				node_pointer aux = n;
 
 				while(aux->right != this->_nill)
+				{
 					aux = aux->right;
+				}
 				return aux;
 			}
 
@@ -480,12 +482,14 @@ namespace ft
 				node_pointer	d_node(this->_find(val));
 
 				if(d_node == this->_nill)
+				{
 					return (0);
+				}
 				node_pointer	aux = d_node;
 				node_pointer	x;
 				node_pointer	y;
 				bool			save_color;
-
+			
 				y = aux;
 				save_color = y->black;
 				if(this->is_nill(aux->left))
@@ -518,7 +522,9 @@ namespace ft
 				}
 				kill_node(aux);
 				if(save_color == true)
+				{
 					erase_fix(x);
+				}
 				this->assig_nill_values();
 				return (1);
 			}
