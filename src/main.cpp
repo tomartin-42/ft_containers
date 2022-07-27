@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/27 09:42:28 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/27 10:25:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,21 +213,17 @@ int		main(void)
 		sta.pop();
 
 //------------------------MAP--------------------------//
+	std::cout << "=====================================================================================" << std::endl;
+	std::cout << "STACK" << std::endl;
+	std::cout << "=====================================================================================" << std::endl;
 	NS::map<int, int>	mapa;
-
 	for(int i = 0; i < 15; i++)
 		mapa.insert(NS::make_pair(i, i * 5));
-	//mapa.print();
-	mapa.erase(5);
-	mapa.erase(4);
-	mapa.erase(13);
-	NS::map<int, int>::iterator	mpit = mapa.find(10);
-	mapa.erase(mapa.begin(), mpit);
-	//mapa.print();
-	mapa.clear();
-//	mapa[1] = 100;
-//	mapa[2] = 200;
-//	mapa[3] = 300;
+	NS::map<int, int>	mapb(++mapa.begin(), --mapa.end());
+	NS::map<int, int>	mapc(mapb);
+	print_map(mapa);
+	print_map(mapb);
+	print_map(mapc);
 
 //	system("leaks ft_container");
 
