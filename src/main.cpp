@@ -230,12 +230,11 @@ int		main(void)
 */
 	NS::map<int, int>	mapa;
 
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < 100; i++)
 		mapa.insert(NS::make_pair(i, (i * 10) + 1));
 	mapa.print();
 	mapa.clear();	
 	mapa.print();
-//	mapa.print();
 /*	
 	
 	

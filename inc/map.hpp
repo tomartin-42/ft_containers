@@ -97,7 +97,8 @@ namespace ft
 
 			~map()
 			{
-				//this->clear();
+				if(this->size() != 0)
+					this->clear();
 				this->_btree.kill_nill();
 			}
 
@@ -212,7 +213,7 @@ namespace ft
 					it = first++;
 					std::cout << it->first << "----" << it->second << std::endl;
 					this->erase(it);
-					//this->print();
+					this->print();
 				}
 			}
 

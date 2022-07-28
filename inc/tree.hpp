@@ -151,7 +151,7 @@ namespace ft
 	
 			node_pointer minimum(node_pointer n) 
 			{
-				while(n->right != this->_nill || n != this->_nill)
+				while(n->right != this->_nill)
 				{
 					n = n->right;
 				}
@@ -162,16 +162,15 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left != this->_nill || n != this->_nill)
+				while(aux->left != this->_nill)
 					aux = aux->left;
 				return aux;
 			}
 	
 			node_pointer maximum(node_pointer n) 
 			{
-				while(n->left != this->_nill || n != this->_nill)
+				while(n->left != this->_nill)
 				{
-				//	std::cout << "HOLA2\n";
 					n = n->left;
 				}
 				return n;
@@ -534,7 +533,7 @@ namespace ft
 			{
 					return n->prev->right;
 			}
-
+/*
 			size_type	erase(const value_type& val)
 			{
 				std::cout << val.first << "*" << val.second << std::endl;
@@ -543,6 +542,16 @@ namespace ft
 
 				node_pointer	d_node(this->_find(val));
 				std::cout << d_node->data.first << " - " << d_node->data.second << std::endl;
+				if(is_nill(d_node->left) && is_nill(d_node->right))
+				{
+					if(d_node == d_node->prev->left)
+						d_node->prev->left = this->_nill;
+					else
+						d_node->prev->right = this->_nill;
+					kill_node(d_node);
+					assig_nill_values();
+					return(1);
+				}
 				if(is_nill(d_node->left) || is_nill(d_node->right))
 				{
 					node_pointer	child = is_nill(d_node->left) ? d_node->right : d_node->left;
@@ -662,9 +671,9 @@ namespace ft
 			}
 
 
+*/
 
-
-	/*		size_type	erase(const value_type& val)
+			size_type	erase(const value_type& val)
 			{
 				if(this->find(val) == this->end())
 				{
@@ -713,7 +722,7 @@ namespace ft
 				}
 				this->assig_nill_values();
 				return (1);
-			}*/
+			}
 
 			void	swap(tree<T, compare, alloc>& other)
 			{
@@ -825,7 +834,8 @@ namespace ft
 			        std::cout << (isLeft ? "├──" : "└──" );
 
         			// print the value of the node
-        			std::cout << node->get_data().first << "-" << node->get_data().second << " " << node->black << std::endl;
+        			std::cout << node->get_data().first << "-" << node->get_data().second << " " << node->black;
+        			std::cout << " nill left= " << is_nill(node->left) << " - " << "nill right= " << is_nill(node->right) << std::endl;
 
         			// enter the next tree level - left and right branch
         			printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
