@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:59:28 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/27 13:59:58 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/28 11:44:49 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ namespace ft
 
 			~map()
 			{
-				this->clear();
+				//this->clear();
 				this->_btree.kill_nill();
 			}
 
@@ -210,8 +210,9 @@ namespace ft
 				while(first != last)
 				{
 					it = first++;
+					std::cout << it->first << "----" << it->second << std::endl;
 					this->erase(it);
-					this->print();
+					//this->print();
 				}
 			}
 

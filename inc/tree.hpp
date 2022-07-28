@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/27 14:04:13 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:01:22 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ namespace ft
 			typedef typename alloc_type::size_type									size_type;
 			typedef typename alloc_type::difference_type							diference_type;
 			typedef typename ft::tree_iterator<value_type>							iterator;
-			typedef typename ft::const_tree_iterator<value_type>				const_iterator;
+			typedef typename ft::const_tree_iterator<value_type>					const_iterator;
 			typedef ft::reverse_iterator<iterator>									reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>							const_reverse_iterator;
 
@@ -94,12 +94,25 @@ namespace ft
 				return (check == this->_nill ? false : true);
 			}
 
-			void	swap_nodes(node_pointer a, node_pointer b)
+			//copy values of pinters a in b
+			void 	copy_node_pointer(node_pointer& a, node_pointer& b)
 			{
-				value_type aux(a->get_data());
+			//	b->value_type = a->value_type;
+				b->left = a->left;
+				b->right = a->right;
+				b->prev = a->prev;
+				b->nill = a->nill;
+			//	b->black = a->bkack;
+			}
 
-				a->data = b->data;
-				b->data = aux;
+			void	swap_nodes(node_pointer& a, node_pointer& b)
+			{
+				std::swap(a->data, b->data);
+				std::swap(a->left, b->left);
+				std::swap(a->right, b->right);
+				std::swap(a->prevt, b->prev);
+				std::swap(a->nill, b->nill);
+				std::swap(a->black, b->bkack);
 			}
 
 			void	transplant(node_pointer& a, node_pointer& b)
@@ -123,8 +136,6 @@ namespace ft
 				this->_alloc_node.deallocate(this->_nill, 1);
 			}
 
-			node_pointer get_nill() {return this->_nill;}
-
 			node_pointer get_root() {return this->_root;}
 
 			node_pointer minimum(const node_pointer n) const
@@ -140,7 +151,7 @@ namespace ft
 	
 			node_pointer minimum(node_pointer n) 
 			{
-				while(n->right != this->_nill)
+				while(n->right != this->_nill || n != this->_nill)
 				{
 					n = n->right;
 				}
@@ -151,14 +162,14 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left != this->_nill)
+				while(aux->left != this->_nill || n != this->_nill)
 					aux = aux->left;
 				return aux;
 			}
 	
 			node_pointer maximum(node_pointer n) 
 			{
-				while(n->left != this->_nill)
+				while(n->left != this->_nill || n != this->_nill)
 				{
 				//	std::cout << "HOLA2\n";
 					n = n->left;
@@ -183,7 +194,45 @@ namespace ft
 					n = n->prev;
 				return n->prev;
 			}
+			/*
+			void	left_rotate(node_pointer p)
+			{
+				node_pointer aux = this->_root;
 
+    			if(p->prev != this->_nill && p->prev->right == p)
+        			aux = p->prev->right;
+    			else if(p->prev != this->_nill && p->prev->left == p)
+        			aux= p->prev->left;
+
+    			aux = p->left;
+    			aux->prev = p->prev;
+    			p->prev = aux;
+    			p->left = aux->right;
+    			aux->right = p;
+
+    			if(p->left != this->_nill)
+					p->left->prev = p;
+			}
+
+			void	right_rotate(node_pointer p)
+			{
+				node_pointer aux = this->_root;
+
+    			if(p->prev != this->_nill && p->prev->right == p)
+        			aux = p->prev->right;
+    			else if(p->prev != this->_nill && p->prev->left == p)
+        			aux= p->prev->left;
+
+    			aux = p->right;
+    			aux->prev = p->prev;
+    			p->prev = aux;
+    			p->right = aux->left;
+    			aux->left = p;
+
+    			if(p->right != this->_nill)
+					p->right->prev = p;
+			}
+			*/
 			void	left_rotate(node_pointer x)
 			{
 				node_pointer y = x->right;
@@ -242,11 +291,6 @@ namespace ft
 				p_n->prev = this->_nill;
 				p_n->left = this->_nill;
 				p_n->right = this->_nill;
-			}
-
-			node_pointer	get_nill_pointer()
-			{
-				return this->_nill;
 			}
 
 			void	kill_node(node_pointer& node)
@@ -478,15 +522,155 @@ namespace ft
 				return (p_node->get_data());
 			}
 
+			node_pointer	brother(node_pointer& n)
+			{
+				if(n == n->prev->left)
+					return n->prev->right;
+				else
+					return n->prev->left;
+			}
+
+			node_pointer	lower_brother(node_pointer& n)
+			{
+					return n->prev->right;
+			}
+
 			size_type	erase(const value_type& val)
 			{
-				node_pointer	d_node(this->_find(val));
+				std::cout << val.first << "*" << val.second << std::endl;
+				if(this->find(val) == this->end())
+					return (0);
 
-				std::cout << "HOLA\n";
-				if(d_node == this->_nill)
+				node_pointer	d_node(this->_find(val));
+				std::cout << d_node->data.first << " - " << d_node->data.second << std::endl;
+				if(is_nill(d_node->left) || is_nill(d_node->right))
+				{
+					node_pointer	child = is_nill(d_node->left) ? d_node->right : d_node->left;
+
+					copy_node_pointer(d_node, child);
+					if(d_node->black == true)
+					{
+						if(child->black == false)
+							child->black = true;
+						else
+							erase_case_one(child);
+					}
+					std::cout << d_node->data.first << " - " << d_node->data.second << std::endl;
+					kill_node(d_node);
+					std::cout << "HOLA\n";
+					assig_nill_values();
+				}
+				return(1);
+			}
+
+			void	erase_case_one(node_pointer n)
+			{
+				if(is_no_nill(n->prev))
+					erase_case_two(n);
+			}
+
+			void	erase_case_two(node_pointer n)
+			{
+				node_pointer	nb = brother(n);
+
+				if(nb->black == false)
+				{
+					n->prev->black = false;
+					nb->black = true;
+					if(n == n->prev->right)
+						right_rotate(n->prev);
+					else
+						left_rotate(n->prev);
+				}
+				erase_case_three(n);
+			}
+
+			void	erase_case_three(node_pointer n)
+			{
+				node_pointer	lb = lower_brother(n);
+
+				if ((n->prev->black == true) &&
+	 				(lb->black == true) &&
+					(lb->right->black == true) &&
+					(lb->left->black == true))
+				{
+					lb->black = false;
+					erase_case_one(n->prev);
+				}
+				else
+					erase_case_four(n);
+			}
+
+			void	erase_case_four(node_pointer n)
+			{
+				node_pointer	lb = lower_brother(n);
+
+				if ((n->prev->black == false) &&
+					(lb->black == true) &&
+	 				(lb->right->black == true) &&
+					(lb->left->black == true))
+				{
+						lb->black = false;
+						n->prev->black = true;
+				}
+				else
+					erase_case_five(n);
+			}
+
+			void	erase_case_five(node_pointer n)
+			{
+				node_pointer	bn = brother(n);
+
+				if ((n == n->prev->right) &&
+	 				(bn->black == true) &&
+	 				(bn->right->black == false) &&
+	 				(bn->left->black == true))
+				{
+					bn->black = false;
+					bn->right->black = true;
+					left_rotate(bn);
+				}
+				else if ((n == n->prev->left) &&
+	 				(bn->black == true) &&
+	 				(bn->left->black == false) &&
+	 				(bn->right->black == true))
+				{
+					bn->black = false;
+					bn->left->black = true;
+					right_rotate(bn);
+				}
+					erase_case_six(n);
+			}
+
+			void	erase_case_six(node_pointer n)
+			{
+				node_pointer	bn = brother(n);
+
+				bn->black = n->prev->black;
+			   	n->prev->black = true;
+				if(n == n->prev->right)
+				{
+					//OJO
+					bn->left->black = true;
+					right_rotate(n->prev);
+				}
+				else
+				{
+					bn->right->black = true;
+					left_rotate(n->prev);
+				}
+			}
+
+
+
+
+	/*		size_type	erase(const value_type& val)
+			{
+				if(this->find(val) == this->end())
 				{
 					return (0);
 				}
+				node_pointer	d_node(this->_find(val));
 				node_pointer	aux = d_node;
 				node_pointer	x;
 				node_pointer	y;
@@ -529,7 +713,7 @@ namespace ft
 				}
 				this->assig_nill_values();
 				return (1);
-			}
+			}*/
 
 			void	swap(tree<T, compare, alloc>& other)
 			{
