@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/29 10:37:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/29 13:11:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,11 @@ namespace ft
 			{
 				node_pointer y = x->left;
 				  				
+				//std::cout << "HOLA1\n";
+				//std::cout << "Values " << x->data.first << "-" << y->data.first << std::endl;
+				//std::cout << "Is X NILL " << is_nill(x->left) << "-" << is_nill(x->right) << std::endl;
+				//std::cout << "Is Y NILL " << is_nill(y->left) << "-" << is_nill(y->right) << std::endl;
+				//std::cout << "HOLA2\n";
 				x->left = y->right;
  				if(y->right != this->_nill)
   					y->right->prev = x;
@@ -259,7 +264,7 @@ namespace ft
 			void	left_rotate(node_pointer x)
 			{
 				node_pointer y = x->right;
-
+				
   				x->right = y->left;
  				if(y->left != this->_nill)
   					y->left->prev = x;
@@ -362,7 +367,7 @@ namespace ft
 				this->_root->black = true;
 			}
 
-			void erase_fix(node_pointer x)
+			void erase_fix(node_pointer& x)
 			{
 				node_pointer	s;
 
@@ -408,18 +413,15 @@ namespace ft
 							x->prev->black = false;
 							right_rotate(x->prev);
 							s = x->prev->left;
-							this->maximum(this->_root);
 						}
 						//OJO EL FALLO ESTA POR AQUí!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 						if(s->right->black == true && s->left->black == true)
 						{
-							//std::cout << "HOLA1\n";
 							s->black = false;
 							x = x->prev;
 						}
 						else
 						{
-							//std::cout << "HOLA2\n";
 							if(s->left->black == true)
 							{
 								s->right->black = true;
@@ -542,15 +544,15 @@ namespace ft
 			{
 					return n->prev->left;
 			}
-/*
+
 			size_type	erase(const value_type& val)
 			{
 				std::cout << val.first << "*" << val.second << std::endl;
 				if(this->find(val) == this->end())
 					return (0);
 
+				std::cout << val.first << "--" << val.second << std::endl;
 				node_pointer	d_node(this->_find(val));
-				std::cout << d_node->data.first << " - " << d_node->data.second << std::endl;
 				if(is_nill(d_node->right) && is_nill(d_node->left))
 				{
 					if(d_node == d_node->prev->right)
@@ -573,9 +575,7 @@ namespace ft
 						else
 							erase_case_one(child);
 					}
-					std::cout << d_node->data.first << " - " << d_node->data.second << std::endl;
 					kill_node(d_node);
-					std::cout << "HOLA\n";
 					assig_nill_values();
 				}
 				return(1);
@@ -680,7 +680,8 @@ namespace ft
 			}
 
 
-*/
+
+/*
 
 			size_type	erase(const value_type& val)
 			{
@@ -744,7 +745,7 @@ namespace ft
 				std::swap(this->_size, other._size);
 				std::swap(this->_comp, other._comp);
 			}
-
+*/
 //==========================
 //Operations
 //==========================

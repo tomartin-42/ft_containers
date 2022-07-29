@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/29 10:38:48 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/29 13:07:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,12 @@ int		main(void)
 		mapa.insert(NS::make_pair(i, (i * 10) + 1));
 	}
 	mapa.print();
-	mapa.clear();
+	mapa.erase(25);
+	mapa.erase(20);
+	mapa.erase(30);
+	mapa.erase(40);
+	mapa.erase(31);
+	mapa.erase(1);
 	mapa.print();
 //	mapa.print();
 //	mapa.clear();	
