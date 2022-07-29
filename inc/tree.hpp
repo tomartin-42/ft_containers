@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/29 09:39:34 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/29 10:37:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,8 @@ namespace ft
 					n = n->right;
 					if(n->data.first == 99)
 					{
-						//std::cout << n->data.first << " [-] " << n->data.second << std::endl;
-						//std::cout << is_nill(n->right) << " [-] " << is_nill(n->left) << std::endl;
+						std::cout << n->data.first << " [-] " << n->data.second << std::endl;
+						std::cout << is_nill(n->right) << " [-] " << is_nill(n->left) << std::endl;
 					}
 				}
 				return n;

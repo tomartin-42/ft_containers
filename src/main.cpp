@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/29 09:58:25 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/29 10:38:48 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,13 +234,9 @@ int		main(void)
 	{
 		mapa.insert(NS::make_pair(i, (i * 10) + 1));
 	}
-	NS::map<int, int>::iterator it;
-	it = mapa.begin();
-
-	std::cout << it->first << " - " << it->second << std::endl;
-	it++;
-	std::cout << it->first << " - " << it->second << std::endl;
-
+	mapa.print();
+	mapa.clear();
+	mapa.print();
 //	mapa.print();
 //	mapa.clear();	
 /*	
