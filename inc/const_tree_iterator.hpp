@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:44:56 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/20 08:58:11 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/29 10:04:53 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->right->get_nill() != true)
-					aux = aux->right;
+				while(aux->left->get_nill() != true)
+					aux = aux->left;
 				return aux;
 			}
 
@@ -77,8 +77,8 @@ namespace ft
 			{
 				node_pointer aux = n;
 
-				while(aux->left->get_nill() != true)
-					aux = aux->left;
+				while(aux->right->get_nill() != true)
+					aux = aux->right;
 				return aux;
 			}
 //==========================
@@ -93,17 +93,17 @@ namespace ft
 			{
 				if(this->_ptr->get_nill() == true)
 				{
-					this->_ptr = this->_ptr->right;
+					this->_ptr = this->_ptr->left;
 					return *this;
 				}
-				if(this->_ptr->left->get_nill() != true)
+				if(this->_ptr->right->get_nill() != true)
 				{
-					this->_ptr = minimum(this->_ptr->left);
+					this->_ptr = minimum(this->_ptr->right);
 					return *this;
 				}
 
 				node_pointer y = this->_ptr->prev;
-				while(y->get_nill() != true && this->_ptr == y->left)
+				while(y->get_nill() != true && this->_ptr == y->right)
 				{
 					this->_ptr = y;
 					y = y->prev;
@@ -124,17 +124,17 @@ namespace ft
 			{
 				if(this->_ptr->get_nill() == true)
 				{
-					this->_ptr = this->_ptr->left;
+					this->_ptr = this->_ptr->right;
 					return *this;
 				}
-				if(this->_ptr->right->get_nill() != true)
+				if(this->_ptr->left->get_nill() != true)
 				{
-					this->_ptr = maximum(this->_ptr->right);
+					this->_ptr = maximum(this->_ptr->left);
 					return *this;
 				}
 
 				node_pointer y = this->_ptr->prev;
-				while(y->get_nill() != true && this->_ptr == y->right)
+				while(y->get_nill() != true && this->_ptr == y->left)
 				{
 					this->_ptr = y;
 					y = y->prev;
