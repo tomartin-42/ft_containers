@@ -104,7 +104,7 @@ namespace ft
 
 			map& operator= (const map& x)
 			{
-				this->clear();
+				//this->clear();
 				this->insert(x.begin(), x.end());
 				return *this;
 			}

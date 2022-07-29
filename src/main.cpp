@@ -235,12 +235,7 @@ int		main(void)
 		mapa.insert(NS::make_pair(i, (i * 10) + 1));
 	}
 	mapa.print();
-	mapa.erase(25);
-	mapa.erase(20);
-	mapa.erase(30);
-	mapa.erase(40);
-	mapa.erase(31);
-	mapa.erase(1);
+	mapa.clear();
 	mapa.print();
 //	mapa.print();
 //	mapa.clear();	

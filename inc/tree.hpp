@@ -174,8 +174,8 @@ namespace ft
 					n = n->right;
 					if(n->data.first == 99)
 					{
-						std::cout << n->data.first << " [-] " << n->data.second << std::endl;
-						std::cout << is_nill(n->right) << " [-] " << is_nill(n->left) << std::endl;
+					//	std::cout << n->data.first << " [-] " << n->data.second << std::endl;
+					//	std::cout << is_nill(n->right) << " [-] " << is_nill(n->left) << std::endl;
 					}
 				}
 				return n;
@@ -532,7 +532,7 @@ namespace ft
 				return (p_node->get_data());
 			}
 
-			node_pointer	brother(node_pointer& n)
+			node_pointer	sibling(node_pointer& n)
 			{
 				if(n == n->prev->right)
 					return n->prev->left;
@@ -540,18 +540,13 @@ namespace ft
 					return n->prev->right;
 			}
 
-			node_pointer	lower_brother(node_pointer& n)
-			{
-					return n->prev->left;
-			}
-
+/*
 			size_type	erase(const value_type& val)
 			{
 				std::cout << val.first << "*" << val.second << std::endl;
 				if(this->find(val) == this->end())
 					return (0);
 
-				std::cout << val.first << "--" << val.second << std::endl;
 				node_pointer	d_node(this->_find(val));
 				if(is_nill(d_node->right) && is_nill(d_node->left))
 				{
@@ -567,6 +562,7 @@ namespace ft
 				{
 					node_pointer	child = is_nill(d_node->right) ? d_node->left : d_node->right;
 
+					std::cout << "HOLA\n";
 					copy_node_pointer(d_node, child);
 					if(d_node->black == true)
 					{
@@ -589,7 +585,7 @@ namespace ft
 
 			void	erase_case_two(node_pointer n)
 			{
-				node_pointer	nb = brother(n);
+				node_pointer	nb = sibling(n);
 
 				if(nb->black == false)
 				{
@@ -605,7 +601,7 @@ namespace ft
 
 			void	erase_case_three(node_pointer n)
 			{
-				node_pointer	lb = lower_brother(n);
+				node_pointer	lb = lower_sibling(n);
 
 				if ((n->prev->black == true) &&
 	 				(lb->black == true) &&
@@ -621,7 +617,7 @@ namespace ft
 
 			void	erase_case_four(node_pointer n)
 			{
-				node_pointer	lb = lower_brother(n);
+				node_pointer	lb = lower_sibling(n);
 
 				if ((n->prev->black == false) &&
 					(lb->black == true) &&
@@ -637,7 +633,7 @@ namespace ft
 
 			void	erase_case_five(node_pointer n)
 			{
-				node_pointer	bn = brother(n);
+				node_pointer	bn = sibling(n);
 
 				if ((n == n->prev->left) &&
 	 				(bn->black == true) &&
@@ -662,7 +658,7 @@ namespace ft
 
 			void	erase_case_six(node_pointer n)
 			{
-				node_pointer	bn = brother(n);
+				node_pointer	bn = sibling(n);
 
 				bn->black = n->prev->black;
 			   	n->prev->black = true;
@@ -679,12 +675,53 @@ namespace ft
 				}
 			}
 
-
+*/
 
 /*
 
 			size_type	erase(const value_type& val)
 			{
+
+				node_pointer	z = this->_find(val);
+				node_pointer	y = z;
+				node_pointer	x; 
+				bool			y_orignal_color = y->black;
+
+				if (z->left == this->_nill)
+				{
+					x = z->right;
+					this->transplant(z, z->right);
+				}
+				else if (z->right == this->_nill)
+				{
+					x = z->left;
+					this->transplant(z, z->left);
+				}
+				else
+				{
+					y = minimum(z->right);
+					y_orignal_color = y->black;
+					x = y->right;
+					if (y->prev == z)
+						x->prev = z;
+					else
+					{
+						this->transplant(y, y->right);
+						y->right = z->right;
+						y->right->prev = y;
+					}
+					this->transplant(z, y);
+					y->left = z->left;
+					y->left->prev = y;
+					y->black = z->black;
+				}
+				if (y_orignal_color == true)
+					this->erase_fix(x);
+				return (1);
+			}
+
+		//////////////////////////////////////////////////////////////////////////////7
+
 				if(this->find(val) == this->end())
 				{
 					return (0);
