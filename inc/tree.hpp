@@ -172,6 +172,11 @@ namespace ft
 				while(n->left != this->_nill)
 				{
 					n = n->left;
+					if(n->data.first == 99)
+					{
+						std::cout << n->data.first << " [-] " << n->data.second << std::endl;
+						std::cout << is_nill(n->left) << " [-] " << is_nill(n->right) << std::endl;
+					}
 				}
 				return n;
 			}
@@ -403,14 +408,18 @@ namespace ft
 							x->prev->black = false;
 							left_rotate(x->prev);
 							s = x->prev->right;
+							this->maximum(this->_root);
 						}
-						if(s->left->black == true && s->left->black == true)
+						//OJO EL FALLO ESTA POR AQUí!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						if(s->left->black == true && s->right->black == true)
 						{
+							std::cout << "HOLA1\n";
 							s->black = false;
 							x = x->prev;
 						}
 						else
 						{
+							std::cout << "HOLA2\n";
 							if(s->right->black == true)
 							{
 								s->left->black = true;
@@ -691,6 +700,7 @@ namespace ft
 				{
 					x = aux->left;
 					this->transplant(aux, aux->left);
+					
 				}
 				else if(this->is_nill(aux->left))
 				{
