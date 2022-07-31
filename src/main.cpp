@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 19:06:38 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:04:33 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include <stack>
 #include <string>
 
-#define NS std 
+#define NS ft
 
 template<class T>
 void	print_vector(T v, std::string name)
@@ -378,10 +378,8 @@ int		main()
 	NS::map<int, int> map_per;
 	for(int i = 0; i < 10000; i++)
 		map_per.insert(NS::pair<int, int>(i, i));
-	print_map(map_per, "mapa");
 	map_per.clear();
-	print_map(map_per, "mapa");
 
-	system("leaks ft_container");
+	//system("leaks ft_container");
 }
 

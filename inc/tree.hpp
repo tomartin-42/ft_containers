@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 18:48:53 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:04:19 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -377,17 +377,13 @@ namespace ft
 //Iterators
 //==========================
 			public:
-			iterator		begin() {
-				return iterator(this->minimum(this->_root));}
+			iterator		begin() {return iterator(this->minimum(this->_root));}
 
-			const_iterator	begin() const {
-				return const_iterator(this->minimum(this->_root));}
+			const_iterator	begin() const {return const_iterator(this->minimum(this->_root));}
 
-			iterator		end() {
-				return iterator(maximum(this->_root)->right);}
+			iterator		end() {return iterator(this->_nill);}
 			
-			const_iterator	end() const {
-				return const_iterator(maximum(this->_root)->right);}
+			const_iterator	end() const {return const_iterator(this->_nill);}
 
 			iterator		rbegin() {
 				return this->end();}
