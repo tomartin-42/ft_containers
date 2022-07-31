@@ -90,7 +90,8 @@ namespace ft
 			//---------------destructor
 			virtual	~set() 
 			{
-				this->clear();
+				if(this->size() == 0)
+					this->clear();
 				this->_btree.kill_nill();
 			}
 
@@ -180,15 +181,10 @@ namespace ft
 			{
 				iterator	it = first;
 
-				if(first == this->begin() && last == this->end())
-						this->clear();
-				else
+				while(first != last)
 				{
-					while(first != last)
-					{
-						it = first++;
-						this->erase(it);
-					}
+					it = first++;
+					this->erase(it);
 				}
 			}
 

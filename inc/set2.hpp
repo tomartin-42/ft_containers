@@ -180,15 +180,10 @@ namespace ft
 			{
 				iterator	it = first;
 
-				if(first == this->begin() && last == this->end())
-						this->clear();
-				else
+				while(first != last)
 				{
-					while(first != last)
-					{
-						it = first++;
-						this->erase(it);
-					}
+					it = first++;
+					this->erase(it);
 				}
 			}
 
