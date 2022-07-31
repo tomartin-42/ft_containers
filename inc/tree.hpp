@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/30 20:37:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:56:41 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -408,7 +408,6 @@ namespace ft
 							x->prev->black = false;
 							right_rotate(x->prev);
 							s = x->prev->left;
-							this->maximum(this->_root);
 						}
 						//OJO EL FALLO ESTA POR AQUí!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 						if(s->right->black == true && s->left->black == true)
@@ -434,8 +433,8 @@ namespace ft
 							x = this->_root;
 						}
 					}
-					x->black = true;
 				}
+				x->black = true;
 			}
 
 //==========================
