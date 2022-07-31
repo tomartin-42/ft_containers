@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 16:00:23 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/23 16:00:33 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 17:03:07 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ namespace ft
 //==========================
 //debug
 //==========================
+/*
 		void	print_pointer()
 		{
 			std::cout << "NODE========================" << std::endl;
@@ -127,6 +128,7 @@ namespace ft
 			std::cout << "LEFT= " << p->left << std::endl;
 			std::cout << "RIGHT= " << p->right << std::endl;
 		}
+*/
 	}; //End node class
 
 } //end namespace ft

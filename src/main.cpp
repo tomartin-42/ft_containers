@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 16:46:27 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 17:55:32 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,8 @@ void	print_map(T m, std::string name)
 	std::cout << "===========================================" << std::endl;
 	std::cout << "\n\n\n";
 }
-int		main(void)
+int		main()
 {
-/*
 //------------------------VECTOR--------------------------//
 	std::cout << "=====================================================================================" << std::endl;
 	std::cout << "VECTOR" << std::endl;
@@ -226,25 +225,6 @@ int		main(void)
 	std::cout << "=====================================================================================" << std::endl;
 	std::cout << "MAP" << std::endl;
 	std::cout << "=====================================================================================" << std::endl;
-
-*/
-	NS::map<int, int>	mapa;
-
-	for(int i = 0; i < 100; i++)
-	{
-		mapa.insert(NS::make_pair(i, (i * 10) + 1));
-	}
-	NS::map<int, int>::iterator ita, itb;
-	ita = mapa.begin();
-	itb = mapa.end();
-	mapa.erase(ita, itb);
-	mapa.clear();
-	std::cout << "size mapa " << mapa.size() << std::endl;
-//	mapa.print();
-//	mapa.clear();	
-/*	
-	
-	
 	NS::map<int, int>	mapa;
 	for(int i = 0; i < 15; i++)
 		mapa.insert(NS::make_pair(i, i * 5));
@@ -301,19 +281,57 @@ int		main(void)
 	print_map(mapa, "mapa");
 
 	std::cout << "Insert and Pair--------------------------------------------------------" << std::endl;
-	mapb.insert(ft::make_pair(55, 555));
-	mapb.insert(ft::make_pair(66, 666));
-	mapb.insert(ft::make_pair(77, 777));
+	mapb.insert(NS::pair<int,int>(55, 555));
+	mapb.insert(NS::pair<int,int>(66, 666));
+	mapb.insert(NS::pair<int,int>(77, 777));
 	print_map(mapb, "mapb");
 	mapit = mapb.find(66);
-	mapb.insert(mapit, ft::make_pair(88, 888));
+	mapb.insert(mapit, NS::make_pair(88, 888));
+	mapb.insert(mapit, NS::make_pair(99, 999));
 	print_map(mapb, "mapb");
-	//mapa.clear();
-	for(int i = 100; i < 110; i++)
+	mapa.clear();
+	for(int i = 100; i < 120; i++)
 		mapa.insert(NS::make_pair(i, i * 10));
 	mapb.insert(mapa.begin(), mapa.end());
 	print_map(mapb, "mapb");
-*/
+
+	std::cout << "Erase--------------------------------------------------------" << std::endl;
+	print_map(mapa, "mapa");
+	mapa.erase(100);
+	mapa.erase(100);
+	mapa.erase(101);
+	mapa.erase(102);
+	print_map(mapa, "mapa");
+	mapa.erase(mapa.begin());
+	mapa.erase(mapa.begin());
+	print_map(mapa, "mapa");
+	NS::map<int, int>::iterator j, k;
+	j = mapa.begin();
+	k = mapa.end();
+	mapa.erase(j, k);
+	print_map(mapa, "mapa");
+	j = mapb.begin();
+	k = mapb.begin();
+	for(int i = 0; i < 5; i++)
+		j++;
+	for(int i = 0; i < 10; i++)
+		k++;
+	print_map(mapb, "mapb");
+	mapb.erase(j, k);
+	print_map(mapb, "mapb");
+
+	std::cout << "Swap-------------------------------------------------------" << std::endl;
+	for(int i = 500; i > 480; i--)
+		mapa[i] = i / 2;
+	print_map(mapa, "mapa");
+	print_map(mapb, "mapb");
+	mapb.swap(mapa);
+	print_map(mapa, "mapa");
+	print_map(mapb, "mapb");
+
+	
+	std::cout << "Observers-------------------------------------------------------" << std::endl;
+	
 	//system("leaks ft_container");
 
 }

@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 16:44:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 17:01:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,27 +97,6 @@ namespace ft
 				return (check == this->_nill ? false : true);
 			}
 
-			//copy values of pinters a in b
-			void 	copy_node_pointer(node_pointer& a, node_pointer& b)
-			{
-			//	b->value_type = a->value_type;
-				b->right = a->right;
-				b->left = a->left;
-				b->prev = a->prev;
-				b->nill = a->nill;
-			//	b->black = a->bkack;
-			}
-
-			void	swap_nodes(node_pointer& a, node_pointer& b)
-			{
-				std::swap(a->data, b->data);
-				std::swap(a->right, b->right);
-				std::swap(a->left, b->left);
-				std::swap(a->prevt, b->prev);
-				std::swap(a->nill, b->nill);
-				std::swap(a->black, b->bkack);
-			}
-
 			void	transplant(node_pointer& a, node_pointer& b)
 			{
  				if(this->is_nill(a->prev))
@@ -196,45 +175,7 @@ namespace ft
 					n = n->prev;
 				return n->prev;
 			}
-			/*
-			void	right_rotate(node_pointer p)
-			{
-				node_pointer aux = this->_root;
 
-    			if(p->prev != this->_nill && p->prev->left == p)
-        			aux = p->prev->left;
-    			else if(p->prev != this->_nill && p->prev->right == p)
-        			aux= p->prev->right;
-
-    			aux = p->right;
-    			aux->prev = p->prev;
-    			p->prev = aux;
-    			p->right = aux->left;
-    			aux->left = p;
-
-    			if(p->right != this->_nill)
-					p->right->prev = p;
-			}
-
-			void	left_rotate(node_pointer p)
-			{
-				node_pointer aux = this->_root;
-
-    			if(p->prev != this->_nill && p->prev->left == p)
-        			aux = p->prev->left;
-    			else if(p->prev != this->_nill && p->prev->right == p)
-        			aux= p->prev->right;
-
-    			aux = p->left;
-    			aux->prev = p->prev;
-    			p->prev = aux;
-    			p->left = aux->right;
-    			aux->right = p;
-
-    			if(p->left != this->_nill)
-					p->left->prev = p;
-			}
-			*/
 			void	right_rotate(node_pointer x)
 			{
 				node_pointer y = x->left;
@@ -243,11 +184,11 @@ namespace ft
  				if(y->right != this->_nill)
   					y->right->prev = x;
   				y->prev = x->prev;
- 				if(x->prev == this->_nill)		//x is root
+ 				if(x->prev == this->_nill)
   					this->_root = y;
-				else if(x == x->prev->right)		// x is right child
+				else if(x == x->prev->right)
 					x->prev->right = y;
-				else							// x is left child
+				else					
  					x->prev->left = y;
 				y->right = x;
 				x->prev = y;
@@ -262,11 +203,11 @@ namespace ft
  				if(y->left != this->_nill)
   					y->left->prev = x;
   				y->prev = x->prev;
- 				if(x->prev == this->_nill)		//x is root
+ 				if(x->prev == this->_nill)
   					this->_root = y;
-				else if(x == x->prev->left)	// x is left child
+				else if(x == x->prev->left)
 					x->prev->left = y;
-				else							// x is right child
+				else					
  					x->prev->right = y;
 				y->left = x;
 				x->prev = y;
@@ -407,16 +348,13 @@ namespace ft
 							right_rotate(x->prev);
 							s = x->prev->left;
 						}
-						//OJO EL FALLO ESTA POR AQUí!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 						if(s->right->black == true && s->left->black == true)
 						{
-							//std::cout << "HOLA1\n";
 							s->black = false;
 							x = x->prev;
 						}
 						else
 						{
-							//std::cout << "HOLA2\n";
 							if(s->left->black == true)
 							{
 								s->right->black = true;
@@ -539,145 +477,6 @@ namespace ft
 			{
 					return n->prev->left;
 			}
-/*
-			size_type	erase(const value_type& val)
-			{
-				std::cout << val.first << "*" << val.second << std::endl;
-				if(this->find(val) == this->end())
-					return (0);
-
-				node_pointer	d_node(this->_find(val));
-				std::cout << d_node->data.first << " - " << d_node->data.second << std::endl;
-				if(is_nill(d_node->right) && is_nill(d_node->left))
-				{
-					if(d_node == d_node->prev->right)
-						d_node->prev->right = this->_nill;
-					else
-						d_node->prev->left = this->_nill;
-					kill_node(d_node);
-					assig_nill_values();
-					return(1);
-				}
-				if(is_nill(d_node->right) || is_nill(d_node->left))
-				{
-					node_pointer	child = is_nill(d_node->right) ? d_node->left : d_node->right;
-
-					copy_node_pointer(d_node, child);
-					if(d_node->black == true)
-					{
-						if(child->black == false)
-							child->black = true;
-						else
-							erase_case_one(child);
-					}
-					std::cout << d_node->data.first << " - " << d_node->data.second << std::endl;
-					kill_node(d_node);
-					std::cout << "HOLA\n";
-					assig_nill_values();
-				}
-				return(1);
-			}
-
-			void	erase_case_one(node_pointer n)
-			{
-				if(is_no_nill(n->prev))
-					erase_case_two(n);
-			}
-
-			void	erase_case_two(node_pointer n)
-			{
-				node_pointer	nb = brother(n);
-
-				if(nb->black == false)
-				{
-					n->prev->black = false;
-					nb->black = true;
-					if(n == n->prev->left)
-						left_rotate(n->prev);
-					else
-						right_rotate(n->prev);
-				}
-				erase_case_three(n);
-			}
-
-			void	erase_case_three(node_pointer n)
-			{
-				node_pointer	lb = lower_brother(n);
-
-				if ((n->prev->black == true) &&
-	 				(lb->black == true) &&
-					(lb->left->black == true) &&
-					(lb->right->black == true))
-				{
-					lb->black = false;
-					erase_case_one(n->prev);
-				}
-				else
-					erase_case_four(n);
-			}
-
-			void	erase_case_four(node_pointer n)
-			{
-				node_pointer	lb = lower_brother(n);
-
-				if ((n->prev->black == false) &&
-					(lb->black == true) &&
-	 				(lb->left->black == true) &&
-					(lb->right->black == true))
-				{
-						lb->black = false;
-						n->prev->black = true;
-				}
-				else
-					erase_case_five(n);
-			}
-
-			void	erase_case_five(node_pointer n)
-			{
-				node_pointer	bn = brother(n);
-
-				if ((n == n->prev->left) &&
-	 				(bn->black == true) &&
-	 				(bn->left->black == false) &&
-	 				(bn->right->black == true))
-				{
-					bn->black = false;
-					bn->left->black = true;
-					right_rotate(bn);
-				}
-				else if ((n == n->prev->right) &&
-	 				(bn->black == true) &&
-	 				(bn->right->black == false) &&
-	 				(bn->left->black == true))
-				{
-					bn->black = false;
-					bn->right->black = true;
-					left_rotate(bn);
-				}
-					erase_case_six(n);
-			}
-
-			void	erase_case_six(node_pointer n)
-			{
-				node_pointer	bn = brother(n);
-
-				bn->black = n->prev->black;
-			   	n->prev->black = true;
-				if(n == n->prev->left)
-				{
-					//OJO
-					bn->right->black = true;
-					left_rotate(n->prev);
-				}
-				else
-				{
-					bn->left->black = true;
-					right_rotate(n->prev);
-				}
-			}
-
-
-*/
 
 			size_type	erase(const value_type& val)
 			{
@@ -825,14 +624,11 @@ namespace ft
 			{
 				if (!node->nill)
 				{
-					// recursive call to both child node
 					if (node->left && !node->left->nill)
 						destroy_tree(node->left);
 					if (node->right && !node->right->nill)
 						destroy_tree(node->right);
-				
-					// delete current node and its pair
-					this->_alloc_node.deallocate(node, 1);	// node itself
+					this->_alloc_node.deallocate(node, 1);	
 				}
 			}
 
