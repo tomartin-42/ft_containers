@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:59:28 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 16:41:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:05:54 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ namespace ft
 
 			virtual	~map()
 			{
-			//	this->clear();
-			//	this->_btree.kill_nill();
 			}
 
 			map& operator= (const map& x)

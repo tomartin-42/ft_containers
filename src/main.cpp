@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 17:55:32 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:06:38 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include <stack>
 #include <string>
 
-#define NS ft 
+#define NS std 
 
 template<class T>
 void	print_vector(T v, std::string name)
@@ -69,6 +69,21 @@ void	print_map(T m, std::string name)
 	std::cout << "=================" << name << "=====================" << std::endl;
 	for(; it != m.end(); it++)
 		std::cout << "map = " << it->first << " - " << it->second << std::endl;
+	std::cout << "Size= " << m.size() << std::endl;
+	std::cout << "Max Size= " << m.max_size() << std::endl;
+	std::cout << "Empty= " << m.empty() << std::endl;
+	std::cout << "===========================================" << std::endl;
+	std::cout << "\n\n\n";
+}
+
+template<class T>
+void	print_set(T m, std::string name)
+{
+	typename T::iterator	it = m.begin();
+
+	std::cout << "=================" << name << "=====================" << std::endl;
+	for(; it != m.end(); it++)
+		std::cout << "set= " << *it << std::endl;
 	std::cout << "Size= " << m.size() << std::endl;
 	std::cout << "Max Size= " << m.max_size() << std::endl;
 	std::cout << "Empty= " << m.empty() << std::endl;
@@ -237,7 +252,7 @@ int		main()
 	print_map(mapa, "mapa");
 	print_map(mapb, "mapb");
 	print_map(mapc, "mapc");
-	print_map(mapd, "mapc");
+	print_map(mapd, "mapd");
 
 	std::cout << "Iterators--------------------------------------------------------" << std::endl;
 	NS::map<int, int>::iterator mapit;
@@ -329,10 +344,44 @@ int		main()
 	print_map(mapa, "mapa");
 	print_map(mapb, "mapb");
 
-	
-	std::cout << "Observers-------------------------------------------------------" << std::endl;
-	
-	//system("leaks ft_container");
+	std::cout << "Find-------------------------------------------------------" << std::endl;
+	k = mapb.find(490);
+	std::cout << "Find = " << k->first << " - " << k->second << std::endl;
+	k = mapa.find(88);
+	std::cout << "Find = " << k->first << " - " << k->second << std::endl;
 
+	std::cout << "Count-------------------------------------------------------" << std::endl;
+	std::cout << "mapa count " << mapa.count(88) << std::endl;
+	std::cout << "mapb count " << mapb.count(1000) << std::endl;
+
+
+	std::cout << "Lower and Uper bound-------------------------------------------------------" << std::endl;
+	k = mapa.lower_bound(88);
+	std::cout << "mapa lower bound " << k->first << std::endl;
+	k = mapa.upper_bound(88);
+	std::cout << "mapa upper bound " << k->first << std::endl;
+	k = mapb.lower_bound(490);
+	std::cout << "mapb lower bound " << k->first << std::endl;
+	k = mapb.upper_bound(490);
+	std::cout << "mapb upper bound " << k->first << std::endl;
+
+	std::cout << "Equal range---------------------------------------------------" << std::endl;
+	NS::pair<NS::map<int, int>::iterator, NS::map<int, int>::iterator>	ret;
+	ret = mapa.equal_range(88);
+	std::cout << ret.first->first << " equal range " << ret.first->second << std::endl;
+	ret = mapb.equal_range(490);
+	std::cout << ret.first->first << " equal range " << ret.first->second << std::endl;
+
+	mapa.clear();
+
+	//performance test--------------------------------------
+	NS::map<int, int> map_per;
+	for(int i = 0; i < 10000; i++)
+		map_per.insert(NS::pair<int, int>(i, i));
+	print_map(map_per, "mapa");
+	map_per.clear();
+	print_map(map_per, "mapa");
+
+	system("leaks ft_container");
 }
 
