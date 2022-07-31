@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 14:57:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:02:33 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ int		main(void)
 	ita = mapa.begin();
 	itb = mapa.end();
 	mapa.erase(ita, itb);
+	std::cout << "size mapa " << mapa.size() << std::endl;
 	mapa.print();
 //	mapa.print();
 //	mapa.clear();	

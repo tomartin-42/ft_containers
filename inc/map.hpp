@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:59:28 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/30 20:40:13 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:18:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ namespace ft
 
 			map& operator= (const map& x)
 			{
-			//	this->clear();
+				this->clear();
 				this->insert(x.begin(), x.end());
 				return *this;
 			}
@@ -211,15 +211,13 @@ namespace ft
 				while(first != last)
 				{
 					it = first++;
-					std::cout << it->first << "----" << it->second << std::endl;
 					this->erase(it);
-					this->print();
 				}
 			}
 
 			void	clear()
 			{
-				this->_btree.clear();
+				this->erase(this->begin(), this->end());
 			}
 
 			template<typename value_type, typename pair_compare, typename alloc_type>
