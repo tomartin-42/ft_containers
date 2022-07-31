@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 15:16:38 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:25:07 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>							const_reverse_iterator;
 
 		private:
-			//alloc_type		_alloc_val;
 			alloc_node		_alloc_node;
 			node_pointer	_root;
 			node_pointer	_nill;
@@ -172,11 +171,6 @@ namespace ft
 				while(n->right != this->_nill)
 				{
 					n = n->right;
-					if(n->data.first == 99)
-					{
-						//std::cout << n->data.first << " [-] " << n->data.second << std::endl;
-						//std::cout << is_nill(n->right) << " [-] " << is_nill(n->left) << std::endl;
-					}
 				}
 				return n;
 			}
