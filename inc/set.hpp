@@ -90,9 +90,9 @@ namespace ft
 			//---------------destructor
 			virtual	~set() 
 			{
-				if(this->size() == 0)
-					this->clear();
-				this->_btree.kill_nill();
+			//	if(this->size() == 0)
+			//		this->clear();
+			//	this->_btree.kill_nill();
 			}
 
 //********************************************************************************************************//

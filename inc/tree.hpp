@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:42:38 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 15:25:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:44:07 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ namespace ft
 				*this = other;
 			}
 
-			~tree() {}
+			~tree() 
+			{
+				this->clear();
+				this->kill_nill();
+			}
 
 //==========================
 //Aux functions
@@ -806,30 +810,36 @@ namespace ft
 				}
 				return this->_nill;
 			}
-
 			
-			void clear_tree(node_pointer node)
+			void	clear()
+			{
+				if(this->_size != 0)
+				{
+					this->destroy_tree(this->_root);
+					this->_size = 0;
+					assig_to_nill(this->_nill);
+				}
+			}
+			
+			void	destroy_tree(node_pointer node)
 			{
 				if (!node->nill)
-				// recursive call to both child node
-				if (node->left && !node->left->nill)
-					clear_tree(node->left);
-				if (node->right && !node->right->nill)
-					clear_tree(node->right);
+				{
+					// recursive call to both child node
+					if (node->left && !node->left->nill)
+						destroy_tree(node->left);
+					if (node->right && !node->right->nill)
+						destroy_tree(node->right);
 				
-				// delete current node and its pair
-				this->_alloc_node.deallocate(node, 1);	// node itself
+					// delete current node and its pair
+					this->_alloc_node.deallocate(node, 1);	// node itself
+				}
 			}
-			public:
-			void clear()
-			{
-				this->clear_tree(this->_root);
-				this->_size = 0;
-				this->assig_to_nill(this->_nill);
-			}
+
 //=============================
 //To debug
 //=============================
+/*
 			public:
 			void printBT(const std::string& prefix, const node_pointer node, bool isright)
 			{
@@ -857,6 +867,7 @@ namespace ft
 			{
 				printBT(this->_root);
 			}
+*/
 	};//end tree class
 }//end ft namespace
 
