@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:59:28 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 15:25:17 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:18:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ namespace ft
 
 			~map()
 			{
-				if(this->size() != 0)
-					this->clear();
+			//	if(this->size() != 0)
+			//		this->clear();
 				this->_btree.kill_nill();
 			}
 

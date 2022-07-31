@@ -190,6 +190,7 @@ namespace ft
 
 			void	clear()
 			{
+				if(this->size() != 0)
 					this->erase(this->begin(), this->end());
 			}
 
