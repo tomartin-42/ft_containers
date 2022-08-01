@@ -6,7 +6,7 @@
 /*   By: tomartin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:23:12 by tomartin          #+#    #+#             */
-/*   Updated: 2022/07/31 20:04:33 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/08/01 10:15:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -377,11 +377,7 @@ int		main()
 	for(int i = 0; i < 10000; i++)
 		map_per.insert(NS::pair<int, int>(i, i));
 	map_per.clear();
-	k = mapa.end();
-	--k;
-	--k;
-	std::cout << "End mapa " << k->first << std::cout;
 
-	//system("leaks ft_container");
+	system("leaks ft_container");
 }
 
