@@ -18,10 +18,8 @@
 #include "pair.hpp"
 #include "tree_iterator.hpp"
 #include "random_access_iterator.hpp"
-#include "set.hpp"
 #include <iostream>
 #include <vector>
-#include <set>
 #include <map>
 #include <stack>
 #include <string>
@@ -378,6 +376,6 @@ int		main()
 		map_per.insert(NS::pair<int, int>(i, i));
 	map_per.clear();
 
-	system("leaks ft_container");
+	//system("leaks ft_container");
 }
 

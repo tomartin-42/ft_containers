@@ -241,7 +241,6 @@ namespace ft
 				this->_alloc_node.destroy(node);
 				this->_alloc_node.deallocate(node, 1);
 				this->_size -= 1;
-			//	this->assig_nill_values();
 			}
 
 			void	insert_fix(node_pointer p_node)
@@ -619,7 +618,6 @@ namespace ft
 						destroy_tree(node->left);
 					if (node->right && !node->right->nill)
 						destroy_tree(node->right);
-					//this->_alloc_node.deallocate(node, 1);	
 					this->kill_node(node);
 				}
 			}

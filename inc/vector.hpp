@@ -73,7 +73,6 @@ namespace ft
 				{
 					_alloc.construct((this->_start + i), val);
 				}
-				pre_asig_memory();
 			}
 	
 //range=======================================
@@ -92,7 +91,6 @@ namespace ft
 					_alloc.construct((this->_start + i), *first);
 					first++;
 				}
-				pre_asig_memory();
 			}
 	
 //copy========================================
@@ -126,21 +124,6 @@ namespace ft
 //********************************************************************************************************//	
 //*****************************************member fuctions************************************************//	
 			
-//==========================
-//Aux functions
-//==========================	
-			private:
-			//To preasignate memory to go fast
-			void	pre_asig_memory() 
-			{
-			/*	if (this->_end == this->_end_capacity)
-				{
-					size_type	i;
-					i = this->_size;
-					_alloc.allocate(i, this->_end_capacity); 
-					this->_end_capacity += i;
-				} */
-			}
 
 			//Return amount prereserve free space
 			size_type	remained_space() {return (ft::dist(this->_end, this->_end_capacity));}
@@ -273,7 +256,6 @@ namespace ft
 					_alloc.construct((this->_start + i), *first);
 					first++;
 				}
-				pre_asig_memory();
 			}
 
 			void	assign(size_type n, const value_type& val)
@@ -287,7 +269,6 @@ namespace ft
 			
 			void push_back(const value_type& val)
 			{
-				pre_asig_memory();
 				this->insert(this->end(), val);
 			}
 
