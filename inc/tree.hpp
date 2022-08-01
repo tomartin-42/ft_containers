@@ -77,7 +77,7 @@ namespace ft
 				*this = other;
 			}
 
-			~tree() 
+			virtual ~tree() 
 			{
 				this->clear();
 				this->kill_nill();
@@ -240,9 +240,8 @@ namespace ft
 			{
 				this->_alloc_node.destroy(node);
 				this->_alloc_node.deallocate(node, 1);
-				node = ft::nullptr_t;
 				this->_size -= 1;
-				this->assig_nill_values();
+			//	this->assig_nill_values();
 			}
 
 			void	insert_fix(node_pointer p_node)
@@ -385,17 +384,13 @@ namespace ft
 			
 			const_iterator	end() const {return const_iterator(this->_nill);}
 
-			iterator		rbegin() {
-				return this->end();}
+			iterator		rbegin() {return this->end();}
 
-			const_iterator	rbegin() const {
-				return this->end();}
+			const_iterator	rbegin() const {return this->end();}
 
-			iterator		rend() {
-				return this->begin();}
+			iterator		rend() {return this->begin();}
 
-			const_iterator	rend() const {
-				return this->begin();}
+			const_iterator	rend() const {return this->begin();}
 
 //==========================
 //Capacity
@@ -433,15 +428,15 @@ namespace ft
 				{
 					this->_root = p_node;
 					this->assig_to_nill(this->_root);
-					this->_nill->set_prev(p_node);
+					this->_nill->prev = p_node;
 					this->_size += 1;
-			    	insert_fix(p_node);
+					p_node->black = true;
 					return (p_node->get_data());
 				}
 				node_pointer y = this->_nill;
 			    node_pointer x = this->_root;
 				
-				while (x != _nill)
+				while (x != this->_nill)
 				{
 					y = x;
 					if (this->_comp((p_node->get_data()), (x->get_data())))
@@ -624,7 +619,8 @@ namespace ft
 						destroy_tree(node->left);
 					if (node->right && !node->right->nill)
 						destroy_tree(node->right);
-					this->_alloc_node.deallocate(node, 1);	
+					//this->_alloc_node.deallocate(node, 1);	
+					this->kill_node(node);
 				}
 			}
 

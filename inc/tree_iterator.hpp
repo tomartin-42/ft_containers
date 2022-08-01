@@ -86,7 +86,7 @@ namespace ft
 
 				if(this->_ptr->get_nill() == true)
 				{
-					this->_ptr = this->_ptr->left;
+					this->_ptr = minimum(this->_ptr->prev);
 					return *this;
 				}
 				if(this->_ptr->right->get_nill() != true)
@@ -117,7 +117,7 @@ namespace ft
 			{
 				if(this->_ptr->get_nill() == true)
 				{
-					this->_ptr = this->_ptr->right;
+					this->_ptr = maximum(this->_ptr->prev);
 					return *this;
 				}
 				if(this->_ptr->left->get_nill() != true)

@@ -372,13 +372,15 @@ int		main()
 	ret = mapb.equal_range(490);
 	std::cout << ret.first->first << " equal range " << ret.first->second << std::endl;
 
-	mapa.clear();
-
 	//performance test--------------------------------------
 	NS::map<int, int> map_per;
 	for(int i = 0; i < 10000; i++)
 		map_per.insert(NS::pair<int, int>(i, i));
 	map_per.clear();
+	k = mapa.end();
+	--k;
+	--k;
+	std::cout << "End mapa " << k->first << std::cout;
 
 	//system("leaks ft_container");
 }
